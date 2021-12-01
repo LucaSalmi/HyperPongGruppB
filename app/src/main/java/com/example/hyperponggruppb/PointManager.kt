@@ -1,11 +1,8 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
-import android.util.Log
-
 object PointManager {
 
-    var player: PlayerPoints = initPlayerPoints()
+    var playerPoints: PlayerPoints = initPlayerPoints()
 
     private fun initPlayerPoints(): PlayerPoints {
          return PlayerPoints(0, 9999)
@@ -13,10 +10,10 @@ object PointManager {
 
     fun addPoints(newPoints: Int){
 
-        player.points += newPoints
+        playerPoints.points += newPoints
 
-        if (player.points > player.highScore){
-            player.highScore = player.points
+        if (playerPoints.points > playerPoints.highScore){
+            playerPoints.highScore = playerPoints.points
         }
 
     }

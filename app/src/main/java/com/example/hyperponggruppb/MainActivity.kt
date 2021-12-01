@@ -1,15 +1,9 @@
 package com.example.hyperponggruppb
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
-import android.os.Build
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +15,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(GameView(this))
 
-        PointManager.player
-
+        PointManager.playerPoints
+        /*
         supportFragmentManager.commit {
             add(R.id.fragment_container, PointFragment())
         }
@@ -36,9 +30,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+         */
+
 
     }
-
+/*
     fun makeCanvas(){
         val canvas: Canvas? = binding.surfaceView.holder.lockCanvas()
         val background = Paint()
@@ -62,4 +58,6 @@ class MainActivity : AppCompatActivity() {
         binding.surfaceView.holder.unlockCanvasAndPost(canvas)
         binding.surfaceView.setZOrderOnTop(true)
     }
+
+ */
 }
