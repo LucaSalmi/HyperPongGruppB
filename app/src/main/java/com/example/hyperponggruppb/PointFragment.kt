@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.hyperponggruppb.databinding.FragmentPointBinding
 
 
 class PointFragment : Fragment() {
@@ -21,8 +20,8 @@ class PointFragment : Fragment() {
 
         val pointsView = view?.findViewById<TextView>(R.id.points_view)
         val hiScoreView = view?.findViewById<TextView>(R.id.hi_score_view)
-        pointsView?.text = PointManager.player.points.toString()
-        hiScoreView?.text = PointManager.player.highScore.toString()
+        pointsView?.text = PointManager.playerPoints.points.toString()
+        hiScoreView?.text = PointManager.playerPoints.highScore.toString()
         return view
     }
 
