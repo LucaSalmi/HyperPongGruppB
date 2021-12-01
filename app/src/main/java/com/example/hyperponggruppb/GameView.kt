@@ -59,9 +59,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         canvas = mHolder!!.lockCanvas()
         canvas.drawColor(Color.WHITE)
-        repeat(10){
-            ball.draw(canvas)
-        }
+        ball.draw(canvas)
         ball.canvasHeight = canvas.height.toFloat()
         ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
