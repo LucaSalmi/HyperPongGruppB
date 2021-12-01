@@ -23,12 +23,12 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     }
 
     fun setup() {
-        ball = Ball(this.context)
-        ball.posX = 100f
-        ball.posY = 100f
-        ball.paint.color = BrickStructure.randomColor(BrickStructure.rNG(1, 5))
         player = Player(this.context)
         player.paint.color = Color.BLACK
+        ball = Ball(this.context)
+        ball.posX = 26f
+        ball.posY = 26f
+        ball.paint.color = Color.BLACK
     }
 
     fun start() {
@@ -46,7 +46,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-        
+
 
     }
 
@@ -56,9 +56,14 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     }
 
     fun draw() {
+
         canvas = mHolder!!.lockCanvas()
         canvas.drawColor(Color.WHITE)
-        ball.draw(canvas)
+        repeat(10){
+            ball.draw(canvas)
+        }
+        ball.canvasHeight = canvas.height.toFloat()
+        ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
         mHolder!!.unlockCanvasAndPost(canvas)
     }
@@ -68,7 +73,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         val sx = event?.x.toString()
 
         player.right = sx.toFloat()
-        player.left = (sx.toFloat() - player.offset)
+        player.left = sx.toFloat() - player.offset
 
         return true
     }

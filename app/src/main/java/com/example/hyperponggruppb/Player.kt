@@ -12,7 +12,7 @@ class Player(context: Context) {
     val bottom = 1800f
     var paint = Paint()
     var speed = 5f
-    val offset = right-left
+    val offset = 75f
 
     fun update(){
         left -= speed
