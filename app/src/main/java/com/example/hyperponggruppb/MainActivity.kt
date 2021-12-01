@@ -9,6 +9,7 @@ import com.example.hyperponggruppb.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    val music = MusicManager()
 
     val brickRow = mutableListOf<Bricks>()
 
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(GameView(this))
 
         PointManager.playerPoints
+
+        music.context(this)
+
         /*
         supportFragmentManager.commit {
             add(R.id.fragment_container, PointFragment())
@@ -33,6 +37,11 @@ class MainActivity : AppCompatActivity() {
          */
 
 
+    }
+
+    override fun onResume() {
+        music.start()
+        super.onResume()
     }
 /*
     fun makeCanvas(){

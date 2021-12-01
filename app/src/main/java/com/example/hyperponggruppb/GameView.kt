@@ -46,6 +46,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
+        
 
     }
 
