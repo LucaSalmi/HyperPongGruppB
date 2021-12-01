@@ -3,4 +3,6 @@
     <string name="points_text">POINTS</string>
     <string name="high_score_text">HIGH SCORE</string>
     <string name="points_placeholder">99999</string>
+    <!-- comment -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

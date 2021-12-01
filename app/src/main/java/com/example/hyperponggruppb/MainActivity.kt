@@ -10,35 +10,29 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+   private lateinit var binding: ActivityMainBinding
 
     val brickRow = mutableListOf<Bricks>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        Handler(Looper.myLooper()!!).postDelayed({
 
-        PointManager.player
+            setTheme(R.style.Theme_HyperPongGruppB)
 
-        supportFragmentManager.commit {
-            add(R.id.fragment_container, PointFragment())
-        }
-
-        binding.pointsBtn.setOnClickListener {
-            PointManager.addPoints(10)
-            supportFragmentManager.commit {
-                replace(R.id.fragment_container, PointFragment())
-            }
-        }
+            setContentView(binding.root)
+        }, 3000)
 
 
     }
-
+/*
     fun makeCanvas(){
         val canvas: Canvas? = binding.surfaceView.holder.lockCanvas()
         val background = Paint()
@@ -61,5 +55,5 @@ class MainActivity : AppCompatActivity() {
 
         binding.surfaceView.holder.unlockCanvasAndPost(canvas)
         binding.surfaceView.setZOrderOnTop(true)
-    }
+    }*/
 }
