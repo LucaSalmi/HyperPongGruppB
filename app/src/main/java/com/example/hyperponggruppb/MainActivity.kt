@@ -22,20 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         music.context(this)
 
-        /*
-        supportFragmentManager.commit {
-            add(R.id.fragment_container, PointFragment())
-        }
-
-        binding.pointsBtn.setOnClickListener {
-            PointManager.addPoints(10)
-            supportFragmentManager.commit {
-                replace(R.id.fragment_container, PointFragment())
-            }
-        }
-
-         */
-
 
     }
 
@@ -43,30 +29,5 @@ class MainActivity : AppCompatActivity() {
         music.start()
         super.onResume()
     }
-/*
-    fun makeCanvas(){
-        val canvas: Canvas? = binding.surfaceView.holder.lockCanvas()
-        val background = Paint()
-        background.color = Color.GREEN
 
-        canvas?.drawRect(0f, 0f, binding.surfaceView.width.toFloat(), binding.surfaceView.height.toFloat(), background)
-
-        if (canvas != null) {
-
-            for(obj in brickRow){
-
-                canvas.drawRect(obj.brickLeft, obj.brickTop, obj.brickRight, obj.brickBottom, obj.brickPaint)
-            }
-
-        }
-
-
-
-
-
-        binding.surfaceView.holder.unlockCanvasAndPost(canvas)
-        binding.surfaceView.setZOrderOnTop(true)
-    }
-
- */
 }
