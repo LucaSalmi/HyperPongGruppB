@@ -76,6 +76,16 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         return true
     }
 
+    fun checkCollision(){
+
+        if (ball.posX+ball.size > player.left && ball.posX+ball.size < player.right && ball.posY-ball.size == player.top){
+
+                ball.collision = true
+                //ball.speedX = - ball.speedX
+
+        }
+    }
+
 
     override fun surfaceCreated(p0: SurfaceHolder) {
         start()
@@ -91,8 +101,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     override fun run() {
         while (running) {
+
             update()
             draw()
+            checkCollision()
+
         }
     }
 
