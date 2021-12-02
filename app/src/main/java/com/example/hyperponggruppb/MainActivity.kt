@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         music.context(this)
 
+
         binding.ivNewGame.setOnClickListener {
             setContentView(GameView(this))
-
+            SoundEffectManager.menuPress(0, this)
         }
-
 
     }
 

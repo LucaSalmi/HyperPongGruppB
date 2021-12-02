@@ -26,8 +26,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player = Player(this.context)
         player.paint.color = Color.BLACK
         ball = Ball(this.context)
-        ball.posX = 26f
-        ball.posY = 26f
+        ball.posX = 550f //26f ursprungligen
+        ball.posY = 1780f  //26f ursprunligen
         ball.paint.color = Color.BLACK
     }
 
@@ -46,7 +46,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
 
     }
 
@@ -84,8 +83,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
                 //ball.speedX = - ball.speedX
 
         }
-    }
 
+    }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
         start()
@@ -101,7 +100,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     override fun run() {
         while (running) {
-
             update()
             draw()
             checkCollision()

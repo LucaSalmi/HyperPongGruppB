@@ -4,14 +4,14 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 
-class Ball(context: Context) {
+class Ball(var context: Context) {
 
-    var posX = 0f
-    var posY = 0f
+    var posX = 0f // 0f ursprungligen
+    var posY = 0f // 0f ursprungligen
     var paint = Paint()
-    var size = 25f
-    var speedX = 5f
-    var speedY = 5f
+    var size = 25f  // 25f ursprungligen
+    var speedX = 20f // 5f ursprungligen
+    var speedY = 20f // 5f ursprungligen
     var canvasHeight = 0f
     var canvasWidth = 0f
     var collision = false
@@ -24,10 +24,12 @@ class Ball(context: Context) {
 
                 if (posX + size >= canvasWidth || posX - size <= 0f) {
                     speedX = -speedX
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
                 if (posY + size >= canvasHeight || posY - size <= 0f) {
                     speedY = -speedY
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
             } else {
@@ -36,7 +38,8 @@ class Ball(context: Context) {
                 speedY = +speedY
 
             }
-        }else{
+
+        } else {
 
             speedY = -speedY
 

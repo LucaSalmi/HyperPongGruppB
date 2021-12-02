@@ -11,7 +11,6 @@ class MusicManager() : Runnable {
     var running = false
     private var thread: Thread? = null
 
-
     fun context(context: Context) {
 
         myContext = context
@@ -22,7 +21,6 @@ class MusicManager() : Runnable {
     }
 
     fun start() {
-
         running = true
         thread = Thread(this)
         thread?.start()
@@ -39,10 +37,6 @@ class MusicManager() : Runnable {
     }
 
     override fun run() {
-
-
-
-
 
     }
 }
