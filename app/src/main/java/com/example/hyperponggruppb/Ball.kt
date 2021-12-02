@@ -10,8 +10,8 @@ class Ball(context: Context) {
     var posY = 0f
     var paint = Paint()
     var size = 25f
-    var speedX = 5f
-    var speedY = 5f
+    var speedX = 0f
+    var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
     var collision = false

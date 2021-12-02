@@ -15,6 +15,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
+    var gameStart = false
     var mHolder: SurfaceHolder? = holder
 
     init {
@@ -26,8 +27,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player = Player(this.context)
         player.paint.color = Color.BLACK
         ball = Ball(this.context)
-        ball.posX = 26f
-        ball.posY = 26f
+        ball.posX = 550f
+        ball.posY = 1780f
         ball.paint.color = Color.BLACK
     }
 
@@ -69,19 +70,25 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         val sx = event?.x.toString()
+        if (gameStart){
+            player.right = sx.toFloat()
+            player.left = sx.toFloat() - player.offset
+        }else{
+            ball.speedX = 5f
+            ball.speedY = -5f
+            gameStart = true
+        }
 
-        player.right = sx.toFloat()
-        player.left = sx.toFloat() - player.offset
 
         return true
     }
 
     fun checkCollision(){
 
-        if (ball.posX+ball.size > player.left && ball.posX+ball.size < player.right && ball.posY-ball.size == player.top){
+        if (ball.posY+ball.size == player.top){
 
                 ball.collision = true
-                //ball.speedX = - ball.speedX
+                ball.speedY = - ball.speedY
 
         }
     }
