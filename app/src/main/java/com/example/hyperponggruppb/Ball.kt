@@ -15,6 +15,7 @@ class Ball(context: Context) {
     var canvasHeight = 0f
     var canvasWidth = 0f
     var collision = false
+    val downLimit = 1790f
 
     fun update() {
 

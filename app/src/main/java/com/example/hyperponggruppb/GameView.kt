@@ -17,6 +17,9 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     private lateinit var player: Player
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
+    val brickRow = mutableListOf<Bricks>()
+    val brickRow2 = mutableListOf<Bricks>()
+
 
     init {
         mHolder?.addCallback(this)
@@ -30,6 +33,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.posX = 550f
         ball.posY = 1780f
         ball.paint.color = Color.BLACK
+        BrickStructure.makeBricks(brickRow, 5f, 20f)
+        BrickStructure.makeBricks(brickRow2, 25f, 40f)
     }
 
     fun start() {
@@ -64,8 +69,19 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.canvasHeight = canvas.height.toFloat()
         ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
+
+        for(obj in brickRow){
+
+            canvas.drawRect(obj.brickLeft, obj.brickTop, obj.brickRight, obj.brickBottom, obj.brickPaint)
+        }
+        for(obj in brickRow2){
+
+            canvas.drawRect(obj.brickLeft, obj.brickTop, obj.brickRight, obj.brickBottom, obj.brickPaint)
+        }
+
         mHolder!!.unlockCanvasAndPost(canvas)
     }
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
@@ -85,7 +101,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     fun checkCollision(){
 
-        if (ball.posY+ball.size == player.top){
+        if (ball.posX+ball.size == player.top){
 
                 ball.collision = true
                 ball.speedY = - ball.speedY
