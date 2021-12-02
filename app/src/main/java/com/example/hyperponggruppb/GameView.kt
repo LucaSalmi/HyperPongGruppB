@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.content.res.ResourcesCompat
 
 class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
@@ -89,6 +90,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         if (gameStart){
             player.right = sx.toFloat()
             player.left = sx.toFloat() - player.offset
+            player.update()
         }else{
             ball.speedX = 5f
             ball.speedY = -5f

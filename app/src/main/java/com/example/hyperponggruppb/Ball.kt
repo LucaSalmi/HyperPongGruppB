@@ -1,10 +1,12 @@
 package com.example.hyperponggruppb
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 
-class Ball(context: Context) {
+class Ball(var context: Context) {
 
     var posX = 0f
     var posY = 0f
@@ -16,6 +18,7 @@ class Ball(context: Context) {
     var canvasWidth = 0f
     var collision = false
     val downLimit = 1790f
+    var ballHitbox = BitmapFactory.decodeResource(context.resources, R.drawable.ball_sprite)
 
     fun update() {
 
