@@ -1,20 +1,24 @@
 package com.example.hyperponggruppb
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 
 class Ball(var context: Context) {
 
-    var posX = 0f // 0f ursprungligen
-    var posY = 0f // 0f ursprungligen
+    var posX = 0f
+    var posY = 0f
     var paint = Paint()
-    var size = 25f  // 25f ursprungligen
-    var speedX = 20f // 5f ursprungligen
-    var speedY = 20f // 5f ursprungligen
+    var size = 25f
+    var speedX = 0f
+    var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
     var collision = false
+    val downLimit = 1790f
+    var ballHitbox = BitmapFactory.decodeResource(context.resources, R.drawable.ball_sprite)
 
     fun update() {
 
@@ -24,12 +28,10 @@ class Ball(var context: Context) {
 
                 if (posX + size >= canvasWidth || posX - size <= 0f) {
                     speedX = -speedX
-                    SoundEffectManager.playImpactSound(0, context)
                 }
 
                 if (posY + size >= canvasHeight || posY - size <= 0f) {
                     speedY = -speedY
-                    SoundEffectManager.playImpactSound(0, context)
                 }
 
             } else {
@@ -38,8 +40,7 @@ class Ball(var context: Context) {
                 speedY = +speedY
 
             }
-
-        } else {
+        }else{
 
             speedY = -speedY
 

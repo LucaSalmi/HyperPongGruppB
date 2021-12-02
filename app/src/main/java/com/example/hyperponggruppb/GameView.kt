@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.content.res.ResourcesCompat
 
 class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
@@ -15,7 +16,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
+    var gameStart = false
     var mHolder: SurfaceHolder? = holder
+    val brickRow = mutableListOf<Bricks>()
+    val brickRow2 = mutableListOf<Bricks>()
+
 
     init {
         mHolder?.addCallback(this)
@@ -26,9 +31,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player = Player(this.context)
         player.paint.color = Color.BLACK
         ball = Ball(this.context)
-        ball.posX = 550f //26f ursprungligen
-        ball.posY = 1780f  //26f ursprunligen
+        ball.posX = 550f
+        ball.posY = 1780f
         ball.paint.color = Color.BLACK
+        BrickStructure.makeBricks(brickRow, 5f, 20f)
+        BrickStructure.makeBricks(brickRow2, 25f, 40f)
     }
 
     fun start() {
@@ -47,6 +54,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             e.printStackTrace()
         }
 
+
     }
 
     fun update() {
@@ -62,29 +70,47 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.canvasHeight = canvas.height.toFloat()
         ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
+
+        for(obj in brickRow){
+
+            canvas.drawRect(obj.brickLeft, obj.brickTop, obj.brickRight, obj.brickBottom, obj.brickPaint)
+        }
+        for(obj in brickRow2){
+
+            canvas.drawRect(obj.brickLeft, obj.brickTop, obj.brickRight, obj.brickBottom, obj.brickPaint)
+        }
+
         mHolder!!.unlockCanvasAndPost(canvas)
     }
+
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         val sx = event?.x.toString()
+        if (gameStart){
+            player.right = sx.toFloat()
+            player.left = sx.toFloat() - player.offset
+            player.update()
+        }else{
+            ball.speedX = 5f
+            ball.speedY = -5f
+            gameStart = true
+        }
 
-        player.right = sx.toFloat()
-        player.left = sx.toFloat() - player.offset
 
         return true
     }
 
     fun checkCollision(){
 
-        if (ball.posX+ball.size > player.left && ball.posX+ball.size < player.right && ball.posY-ball.size == player.top){
+        if (ball.posX+ball.size == player.top){
 
                 ball.collision = true
-                //ball.speedX = - ball.speedX
+                ball.speedY = - ball.speedY
 
         }
-
     }
+
 
     override fun surfaceCreated(p0: SurfaceHolder) {
         start()
@@ -100,6 +126,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     override fun run() {
         while (running) {
+
             update()
             draw()
             checkCollision()

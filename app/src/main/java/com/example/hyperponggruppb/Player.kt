@@ -3,6 +3,7 @@ package com.example.hyperponggruppb
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 
 class Player(context: Context) {
 
@@ -13,13 +14,14 @@ class Player(context: Context) {
     var paint = Paint()
     var speed = 5f
     val offset = right-left
+    var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
     fun update(){
-        left -= speed
-        right += speed
+        playerRect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
     }
 
     fun draw(canvas: Canvas?){
-        canvas?.drawRect(left, top, right, bottom, paint)
+        canvas?.drawRect(playerRect, paint)
+        //canvas?.drawRect(left, top, right, bottom, paint)
     }
 }
