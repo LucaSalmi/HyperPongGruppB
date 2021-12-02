@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
             setContentView(binding.root)
         }, 2000)
 
-
         PointManager.playerPoints
 
         music.context(this)
 
         binding.ivNewGame.setOnClickListener {
             setContentView(GameView(this))
+
         }
 
 
