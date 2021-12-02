@@ -3,31 +3,45 @@ package com.example.hyperponggruppb
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.PointF
+import android.graphics.Rect
 
-class Ball(context: Context) {
+class Ball(var context: Context) {
 
     var posX = 0f
     var posY = 0f
     var paint = Paint()
-    var size = 25f
-    var speedX = 5f
-    var speedY = 5f
+    var hitboxPaint: Paint = Paint()
+    var radius = 25f
+    var speedX = 0f
+    var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
     var collision = false
+    val downLimit = 1790f
+    var center = PointF()
+    var ballHitbox: Rect = Rect((posX-radius).toInt(), (posY-radius).toInt(), (posX+radius).toInt(), (posY+radius).toInt())
+
+
+
 
     fun update() {
 
+        ballHitbox = Rect((posX-radius).toInt(), (posY-radius).toInt(), (posX+radius).toInt(), (posY+radius).toInt())
+
+
         if (!collision) {
 
-            if (posX + size >= canvasWidth || posX - size <= 0f || posY + size >= canvasWidth || posY - size <= 0f) {
+            if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f) {
 
-                if (posX + size >= canvasWidth || posX - size <= 0f) {
+                if (posX + radius >= canvasWidth || posX - radius <= 0f) {
                     speedX = -speedX
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
-                if (posY + size >= canvasHeight || posY - size <= 0f) {
+                if (posY + radius >= canvasHeight || posY - radius <= 0f) {
                     speedY = -speedY
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
             } else {
@@ -48,7 +62,8 @@ class Ball(context: Context) {
     }
 
     fun draw(canvas: Canvas?) {
-        canvas?.drawCircle(posX, posY, size, paint)
+        canvas?.drawCircle(posX, posY, radius, paint)
+        canvas?.drawRect(ballHitbox, hitboxPaint)
     }
 
 }
