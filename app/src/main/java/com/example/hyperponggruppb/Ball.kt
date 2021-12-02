@@ -28,10 +28,12 @@ class Ball(var context: Context) {
 
                 if (posX + size >= canvasWidth || posX - size <= 0f) {
                     speedX = -speedX
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
                 if (posY + size >= canvasHeight || posY - size <= 0f) {
                     speedY = -speedY
+                    SoundEffectManager.playImpactSound(0, context)
                 }
 
             } else {
