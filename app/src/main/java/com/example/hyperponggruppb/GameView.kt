@@ -27,7 +27,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var brickColors = mutableListOf<Int>()
     var brickColors2 = mutableListOf<Int>()
     var collisionDetected = false
-    var counter = 0
+    var counter = true
 
 
     var brickRect = Rect()
@@ -133,11 +133,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         if (ball.posY < 1500f){
             collisionDetected = false
-            counter = 0
         }
 
         if (ball.ballHitbox.intersect(player.playerRect)){
 
+            counter = true
 
             if (!collisionDetected){
                 ball.collision = true
@@ -147,9 +147,10 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         }
 
         for (rect in brickRow2){
-            if (ball.ballHitbox.intersect(rect) && counter == 0){
+
+            if (ball.ballHitbox.intersect(rect) && counter){
                 ball.collision = true
-                counter++
+                counter = false
             }
         }
     }
