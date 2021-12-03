@@ -4,26 +4,28 @@ import android.content.ContentValues.TAG
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import android.util.Log
 
 object BrickStructure {
 
-    fun makeBricks(brickRow: MutableList<Bricks>, top: Float, bottom: Float): MutableList<Bricks> {
+    fun makeBricks(brickRow: MutableList<Rect>, top: Int, bottom: Int): MutableList<Rect> {
 
-        var left = 20f
+        var left = 20
         // top 5f
-        var right = 70f
+        var right = 70
         //bottom 20f
 
 
         for (i  in 0..18){
 
-            var color = Paint()
-            color.color = (randomColor(rNG(1,5)))
-            brickRow.add(Bricks(left, top, right, bottom,color))
-            left += 55f
-            right += 55f
+            var brick = Bricks(left, top, right, bottom)
+            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            brickRow.add(brickRect)
+            left += 55
+            right += 55
         }
+
 
         return brickRow
     }
@@ -45,5 +47,14 @@ object BrickStructure {
             5 -> Color.GREEN
             else -> {Color.YELLOW}
         }
+    }
+
+    fun fillColors(colors: MutableList<Int>): MutableList<Int>{
+
+
+        for(i in 0..18){
+            colors.add(randomColor(rNG(1,5)))
+        }
+        return colors
     }
 }

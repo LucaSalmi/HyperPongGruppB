@@ -22,6 +22,5 @@ class Player(context: Context) {
 
     fun draw(canvas: Canvas?){
         canvas?.drawRect(playerRect, paint)
-        //canvas?.drawRect(left, top, right, bottom, paint)
     }
 }

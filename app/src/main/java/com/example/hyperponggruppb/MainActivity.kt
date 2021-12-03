@@ -1,9 +1,13 @@
 package com.example.hyperponggruppb
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
+import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(GameView(this))
             SoundEffectManager.menuPress(0, this)
         }
+
 
     }
 

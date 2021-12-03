@@ -19,9 +19,7 @@ class Ball(var context: Context) {
     var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
-    val downLimit = 1790f
     var collision = false
-    var center = PointF()
     var ballHitbox: Rect = Rect(
         (posX - radius).toInt(),
         (posY - radius).toInt(),
@@ -48,7 +46,7 @@ class Ball(var context: Context) {
                 SoundEffectManager.playImpactSound(0, context)
             }
 
-            if (posY + radius >= canvasHeight || posY - radius <= 0f || collision) {
+            if ( posY - radius <= 0f || collision) {
                 speedY = -speedY
                 SoundEffectManager.playImpactSound(0, context)
             }
@@ -57,19 +55,14 @@ class Ball(var context: Context) {
         }
 
 
-        Log.d(TAG, "update: speedX = $speedX, speedY = $speedY")
-            collision = false
-            posY += speedY
-            posX += speedX
-
-
-
-
+        collision = false
+        posY += speedY
+        posX += speedX
 
     }
 
     fun draw(canvas: Canvas?) {
-        canvas?.drawRect(ballHitbox, paint)
+        canvas?.drawRect(ballHitbox, hitboxPaint)
         canvas?.drawCircle(posX, posY, radius, paint)
 
     }
