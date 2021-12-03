@@ -9,7 +9,7 @@ class Player(context: Context) {
 
     var left = 500f
     val top = 1790f
-    var right = 600f
+    var right = 700f
     val bottom = 1850f
     var paint = Paint()
     var speed = 5f

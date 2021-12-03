@@ -26,6 +26,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     val brickRow = mutableListOf<Bricks>()
     val brickRow2 = mutableListOf<Bricks>()
     val surfaceView = findViewById<SurfaceView>(R.id.surfaceView)
+    var collisionDetected = false
+
 
 
     init {
@@ -38,7 +40,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player.paint.color = Color.BLACK
         ball = Ball(this.context)
         ball.posX = 550f
-        ball.posY = 1780f
+        ball.posY = 1750f
         ball.paint.color = Color.BLACK
         ball.hitboxPaint.color = Color.TRANSPARENT
         BrickStructure.makeBricks(brickRow, 5f, 20f)
@@ -99,8 +101,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             player.left = sx.toFloat() - player.offset
             player.update()
         }else{
-            ball.speedX = 5f
-            ball.speedY = -5f
+            ball.speedX = 8f
+            ball.speedY = -8f
             gameStart = true
         }
 
@@ -112,9 +114,19 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     fun checkCollision(){
 
+        if (ball.posY < 1500f){
+            collisionDetected = false
+        }
+
         if (ball.ballHitbox.intersect(player.playerRect)){
-            ball.speedY = -ball.speedY
-            Log.d(TAG, "checkCollision: porcodio")
+
+
+            if (!collisionDetected){
+                ball.collision = true
+                collisionDetected = true
+            }
+
+
         }
 
 
