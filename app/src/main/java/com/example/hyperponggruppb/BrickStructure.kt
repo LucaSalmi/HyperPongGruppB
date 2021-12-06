@@ -9,21 +9,28 @@ import android.util.Log
 
 object BrickStructure {
 
-    fun makeBricks(brickRow: MutableList<Rect>, top: Int, bottom: Int): MutableList<Rect> {
+    fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
         var left = 20
-        // top 5f
+        var top = 5
         var right = 70
-        //bottom 20f
+        var bottom = 20
 
-
-        for (i  in 0..18){
+        for (i in 0..36) {
 
             var brick = Bricks(left, top, right, bottom)
-            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
             left += 55
             right += 55
+
+            if (i == 18) {
+                top += 25
+                bottom += 25
+                left = 20
+                right = 70
+            }
         }
 
 
@@ -38,22 +45,24 @@ object BrickStructure {
     fun randomColor(id: Int): Int {
 
 
-        return when (id){
+        return when (id) {
 
             1 -> Color.BLUE
             2 -> Color.RED
             3 -> Color.GRAY
             4 -> Color.MAGENTA
             5 -> Color.GREEN
-            else -> {Color.YELLOW}
+            else -> {
+                Color.YELLOW
+            }
         }
     }
 
-    fun fillColors(colors: MutableList<Int>): MutableList<Int>{
+    fun fillColors(colors: MutableList<Int>): MutableList<Int> {
 
 
-        for(i in 0..18){
-            colors.add(randomColor(rNG(1,5)))
+        for (i in 0..36) {
+            colors.add(randomColor(rNG(1, 5)))
         }
         return colors
     }

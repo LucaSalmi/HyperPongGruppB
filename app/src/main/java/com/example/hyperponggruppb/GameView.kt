@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -18,9 +20,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var drawline = true
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
-    var brickRow2 = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
-    var brickColors2 = mutableListOf<Int>()
     var collisionDetected = false
     var counter = true
 
@@ -42,10 +42,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.posY = 1750f
         ball.paint.color = Color.BLACK
         ball.hitboxPaint.color = Color.TRANSPARENT
-        BrickStructure.makeBricks(brickRow, 5, 20)
-        BrickStructure.makeBricks(brickRow2, 25, 40)
-        BrickStructure.fillColors(brickColors)
-        BrickStructure.fillColors(brickColors2)
+        BrickStructure.makeBricks(brickRow)
+        //BrickStructure.fillColors(brickColors)
 
 
 
@@ -83,20 +81,18 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
 
+        var brickColor = Paint()
+        brickColor.color = Color.RED
         if (drawline){
+            
 
             for(obj in brickRow){
-                var brickColor = Paint()
-                brickColor.color = (brickColors[brickRow.indexOf(obj)])
-                canvas.drawRect(obj,brickColor)
-            }
-            for(obj in brickRow2){
-                var pos = 0
-                var brickColor = Paint()
-                brickColor.color = (brickColors2[brickRow2.indexOf(obj)])
-                canvas.drawRect(obj,brickColor)
 
+                //(brickColors[brickRow.indexOf(obj)])
+                canvas.drawRect(obj,brickColor)
+                Log.d(TAG, "draw: $obj")
             }
+
         }
 
         mHolder!!.unlockCanvasAndPost(canvas)
@@ -143,19 +139,21 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         var toRemove = 0
 
-        for (rect in brickRow2){
+        for (rect in brickRow){
 
             if (ball.ballHitbox.intersect(rect) && counter){
-                toRemove = brickRow2.indexOf(rect)
+                toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
                 counter = false
             }
         }
-
+/*
         if (ball.brickCollision && toRemove != 0){
-            brickRow2.removeAt(toRemove)
+            brickRow.removeAt(toRemove)
 
         }
+
+ */
 
 
 
