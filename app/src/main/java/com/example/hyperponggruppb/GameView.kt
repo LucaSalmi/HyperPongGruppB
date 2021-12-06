@@ -28,10 +28,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
     var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
 
-
-    var brickRect = Rect()
-
-
     init {
         mHolder?.addCallback(this)
 
@@ -41,21 +37,18 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.TRANSPARENT
+        player.paint.color = Color.BLACK
         ball = Ball(this.context)
-
-        ball.paint.color = Color.BLACK
-        ball.hitboxPaint.color = Color.TRANSPARENT
+        ball.paint.color = Color.TRANSPARENT
+        ball.hitboxPaint.color = Color.BLACK
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         BrickStructure.fillColors(brickColors)
     }
 
     fun start() {
-        player.left = ((screenSize.right/2)-100f)
-        player.right = ((screenSize.right/2)+100f)
-        player.top = (screenSize.bottom-230f)
-        player.bottom = (screenSize.bottom-200f)
+
+
         ball.posX = (screenSize.right/2).toFloat()
         ball.posY = (screenSize.bottom-235f)
         running = true
@@ -77,7 +70,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     }
 
     fun update() {
-        ball.update()
+        ball.update(player)
     }
 
     fun draw() {
@@ -150,6 +143,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             if (ball.ballHitbox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
+
             }
         }
 

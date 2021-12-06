@@ -22,8 +22,8 @@ object BrickStructure {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            left += 85
-            right += 85
+            left += 80
+            right += 80
 
             if (i == 11 || i == 22 || i == 33) {
                 top += 35

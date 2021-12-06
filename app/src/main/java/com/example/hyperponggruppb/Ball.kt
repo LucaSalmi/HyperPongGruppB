@@ -19,21 +19,22 @@ class Ball(var context: Context) {
     //hampus men vafaaaaaaaaaaaaannnnn
     var playerCollision = false
     var brickCollision = false
+    var brickSideCollision = false
     var ballHitbox: Rect = Rect(
-        (posX - radius).toInt(),
-        (posY - radius).toInt(),
-        (posX + radius).toInt(),
-        (posY + radius).toInt()
+        (posX-15).toInt(), //left
+        (posY-15).toInt(), //top
+        (posX+15).toInt(), //right
+        (posY+15).toInt() //bottom
     )
 
 
-    fun update() {
+    fun update(player: Player) {
 
         ballHitbox = Rect(
-            (posX - radius).toInt(), //left
-            (posY - radius).toInt(), //top
-            (posX + radius).toInt(), //right
-            (posY + radius).toInt() //bottom
+            (posX-15).toInt(), //left
+            (posY-15).toInt(), //top
+            (posX+15).toInt(), //right
+            (posY+15).toInt() //bottom
         )
 
 
@@ -46,7 +47,27 @@ class Ball(var context: Context) {
             }
 
             if ( posY - radius <= 0f || posY + radius >= canvasHeight  || playerCollision || brickCollision) {
+
+
                 speedY = -speedY
+
+                if (playerCollision){
+
+                    if (player.right - posX > 130){
+                        speedY = -7f
+                        speedX = -9f
+                    }else if (posX - player.left > 130){
+                        speedY = -7f
+                        speedX = +9f
+                    }else{
+                        speedY = -16f
+                        speedX = 0f
+                    }
+
+                }
+
+
+
                 SoundEffectManager.playImpactSound(0, context)
             }
 
@@ -55,6 +76,7 @@ class Ball(var context: Context) {
 
         brickCollision = false
         playerCollision = false
+        brickSideCollision = false
         posY += speedY
         posX += speedX
 
