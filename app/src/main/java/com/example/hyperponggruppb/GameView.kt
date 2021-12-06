@@ -1,15 +1,10 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.example.hyperponggruppb.BrickStructure.rNG
-import com.example.hyperponggruppb.BrickStructure.randomColor
 
 class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
@@ -140,19 +135,24 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             counter = true
 
             if (!collisionDetected){
-                ball.collision = true
+                ball.playerCollision = true
                 collisionDetected = true
             }
 
         }
 
+        var toRemove = 0
+
         for (rect in brickRow2){
 
             if (ball.ballHitbox.intersect(rect) && counter){
-                ball.collision = true
+                toRemove = brickRow2.indexOf(rect)
+                ball.playerCollision = true
                 counter = false
             }
         }
+
+        brickRow2.removeAt(toRemove)
     }
 
 

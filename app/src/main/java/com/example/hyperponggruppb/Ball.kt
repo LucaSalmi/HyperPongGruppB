@@ -1,12 +1,9 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.PointF
 import android.graphics.Rect
-import android.util.Log
 
 class Ball(var context: Context) {
 
@@ -19,7 +16,8 @@ class Ball(var context: Context) {
     var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
-    var collision = false
+    var playerCollision = false
+    var brickCollision = false
     var ballHitbox: Rect = Rect(
         (posX - radius).toInt(),
         (posY - radius).toInt(),
@@ -39,14 +37,14 @@ class Ball(var context: Context) {
 
 
 
-        if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f || collision) {
+        if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f || playerCollision || brickCollision) {
 
             if (posX + radius >= canvasWidth || posX - radius <= 0f) {
                 speedX = -speedX
                 SoundEffectManager.playImpactSound(0, context)
             }
 
-            if ( posY - radius <= 0f || collision) {
+            if ( posY - radius <= 0f || playerCollision || brickCollision) {
                 speedY = -speedY
                 SoundEffectManager.playImpactSound(0, context)
             }
@@ -55,7 +53,7 @@ class Ball(var context: Context) {
         }
 
 
-        collision = false
+        playerCollision = false
         posY += speedY
         posX += speedX
 
