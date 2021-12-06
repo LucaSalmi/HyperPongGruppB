@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.graphics.scale
 
 class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
-
 
     private var thread: Thread? = null
     private var running = false
@@ -23,6 +23,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var brickColors = mutableListOf<Int>()
     var collisionDetected = false
     var counter = true
+    var screenSize  = Rect()
+
+    var background: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.lava_level_background).scale(1080,1920,true)
+    var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
+    var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
 
 
     var brickRect = Rect()
@@ -31,15 +36,15 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     init {
         mHolder?.addCallback(this)
+
         setup()
     }
 
     fun setup() {
         player = Player(this.context)
-        player.paint.color = Color.BLACK
+        player.paint.color = Color.TRANSPARENT
         ball = Ball(this.context)
-        ball.posX = 550f
-        ball.posY = 1750f
+
         ball.paint.color = Color.BLACK
         ball.hitboxPaint.color = Color.TRANSPARENT
         BrickStructure.makeBricks(brickRow)
@@ -50,6 +55,12 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     }
 
     fun start() {
+        player.left = ((screenSize.right/2)-100f)
+        player.right = ((screenSize.right/2)+100f)
+        player.top = (screenSize.bottom-230f)
+        player.bottom = (screenSize.bottom-200f)
+        ball.posX = (screenSize.right/2).toFloat()
+        ball.posY = (screenSize.bottom-235f)
         running = true
         thread = Thread(this)
         thread?.start()
@@ -75,7 +86,10 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     fun draw() {
 
         canvas = mHolder!!.lockCanvas()
-        canvas.drawColor(Color.WHITE)
+        canvas.drawBitmap(background,matrix,null)
+        canvas.drawBitmap(newball,matrix,null)
+        canvas.drawBitmap(newplayer,matrix,null)
+
         ball.draw(canvas)
         ball.canvasHeight = canvas.height.toFloat()
         ball.canvasWidth = canvas.width.toFloat()
@@ -161,10 +175,12 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
 
     override fun surfaceCreated(p0: SurfaceHolder) {
-        start()
+
     }
 
-    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, right: Int, bottom: Int) {
+        screenSize = Rect(0,0,right,bottom)
+        start()
 
     }
 

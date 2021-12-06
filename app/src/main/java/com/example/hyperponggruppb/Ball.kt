@@ -27,16 +27,14 @@ class Ball(var context: Context) {
     )
 
 
-    fun update() {
+        fun update() {
 
-        ballHitbox = Rect(
-            (posX - 5f - radius).toInt(), //left
-            (posY - 5f - radius).toInt(), //top
-            (posX + 5f + radius).toInt(), //right
-            (posY + 5f + radius).toInt() //bottom
-        )
-
-
+            ballHitbox = Rect(
+                (posX - 5f - radius).toInt(), //left
+                (posY - 5f - radius).toInt(), //top
+                (posX + 5f + radius).toInt(), //right
+                (posY + 5f + radius).toInt() //bottom
+            )
 
         if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f || playerCollision || brickCollision) {
 

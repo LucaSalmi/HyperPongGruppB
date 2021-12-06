@@ -7,10 +7,12 @@ import android.graphics.Rect
 
 class Player(context: Context) {
 
+
+
     var left = 500f
-    val top = 1790f
+    var top = 1720f
     var right = 700f
-    val bottom = 1850f
+    var bottom = 1750f
     var paint = Paint()
     var speed = 5f
     val offset = right-left
