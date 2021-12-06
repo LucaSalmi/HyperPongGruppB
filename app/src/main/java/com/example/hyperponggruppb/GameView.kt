@@ -147,12 +147,18 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
             if (ball.ballHitbox.intersect(rect) && counter){
                 toRemove = brickRow2.indexOf(rect)
-                ball.playerCollision = true
+                ball.brickCollision = true
                 counter = false
             }
         }
 
-        brickRow2.removeAt(toRemove)
+        if (ball.brickCollision && toRemove != 0){
+            brickRow2.removeAt(toRemove)
+
+        }
+
+
+
     }
 
 

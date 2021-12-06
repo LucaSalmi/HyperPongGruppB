@@ -52,7 +52,7 @@ class Ball(var context: Context) {
 
         }
 
-
+        brickCollision = false
         playerCollision = false
         posY += speedY
         posX += speedX
