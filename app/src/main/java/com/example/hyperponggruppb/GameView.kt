@@ -48,7 +48,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     fun start() {
 
-
         ball.posX = (screenSize.right/2).toFloat()
         ball.posY = (screenSize.bottom-235f)
         running = true
@@ -156,11 +155,11 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
 
     override fun surfaceCreated(p0: SurfaceHolder) {
-
+        screenSize = Rect(0,0,right,bottom)
     }
 
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, right: Int, bottom: Int) {
-        screenSize = Rect(0,0,right,bottom)
+
         start()
 
     }

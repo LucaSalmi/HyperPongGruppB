@@ -100,8 +100,6 @@ class Ball(var context: Context) {
 
                 }
 
-
-
                 SoundEffectManager.playImpactSound(0, context)
             }
 
