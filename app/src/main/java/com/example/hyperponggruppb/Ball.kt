@@ -16,6 +16,7 @@ class Ball(var context: Context) {
     var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
+    //hampus men vafannnnn
     var playerCollision = false
     var brickCollision = false
     var ballHitbox: Rect = Rect(
