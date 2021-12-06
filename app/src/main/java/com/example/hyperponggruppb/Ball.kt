@@ -1,9 +1,9 @@
 package com.example.hyperponggruppb
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
+import androidx.core.graphics.scale
+import androidx.core.graphics.scaleMatrix
 
 class Ball(var context: Context) {
 
@@ -53,15 +53,49 @@ class Ball(var context: Context) {
 
                 if (playerCollision){
 
-                    if (player.right - posX > 130){
+                    if (player.right - posX > 110 && player.right - posX < 125){
+                        speedY = -7.5f
+                        speedX = -8.5f
+                    }else if (player.right - posX > 125 && player.right - posX < 140){
                         speedY = -7f
                         speedX = -9f
-                    }else if (posX - player.left > 130){
+                    }else if (player.right - posX > 140 && player.right - posX < 155){
+                        speedY = -6.5f
+                        speedX = -9.5f
+                    }else if (player.right - posX > 155 && player.right - posX < 170){
+                        speedY = -6f
+                        speedX = -10f
+                    }else if (player.right - posX > 170 && player.right - posX < 185){
+                        speedY = -5.5f
+                        speedX = -10.5f
+                    }else if (player.right - posX > 185 && player.right - posX < 201){
+                        speedY = -5f
+                        speedX = -11f
+                    }
+
+                    else if (posX - player.left > 110 && posX - player.left < 125){
+                        speedY = -7.5f
+                        speedX = +8.5f
+                    }else if (posX - player.left > 125 && posX - player.left < 140){
                         speedY = -7f
                         speedX = +9f
-                    }else{
-                        speedY = -16f
-                        speedX = 0f
+                    }else if (posX - player.left > 140 && posX - player.left < 155){
+                        speedY = -6.5f
+                        speedX = +9.5f
+                    }else if (posX - player.left > 155 && posX - player.left < 170){
+                        speedY = -6f
+                        speedX = +10f
+                    }else if (posX - player.left > 170 && posX - player.left < 185){
+                        speedY = -5.5f
+                        speedX = +10.5f
+                    }else if (posX - player.left > 185 && posX - player.left < 201){
+                        speedY = -4f
+                        speedX = +11f
+                    }else
+
+                    {
+                        speedY = -8f
+                        speedX = 8f
                     }
 
                 }
@@ -85,6 +119,7 @@ class Ball(var context: Context) {
     fun draw(canvas: Canvas?) {
         canvas?.drawRect(ballHitbox, hitboxPaint)
         canvas?.drawCircle(posX, posY, radius, paint)
+
 
     }
 }
