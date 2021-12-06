@@ -16,7 +16,7 @@ class Ball(var context: Context) {
     var speedY = 0f
     var canvasHeight = 0f
     var canvasWidth = 0f
-    //hampus men vafannnnn
+    //hampus men vafaaaaaaaaaaaaannnnn
     var playerCollision = false
     var brickCollision = false
     var ballHitbox: Rect = Rect(
@@ -27,14 +27,16 @@ class Ball(var context: Context) {
     )
 
 
-        fun update() {
+    fun update() {
 
-            ballHitbox = Rect(
-                (posX - 5f - radius).toInt(), //left
-                (posY - 5f - radius).toInt(), //top
-                (posX + 5f + radius).toInt(), //right
-                (posY + 5f + radius).toInt() //bottom
-            )
+        ballHitbox = Rect(
+            (posX - radius).toInt(), //left
+            (posY - radius).toInt(), //top
+            (posX + radius).toInt(), //right
+            (posY + radius).toInt() //bottom
+        )
+
+
 
         if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f || playerCollision || brickCollision) {
 
@@ -43,7 +45,7 @@ class Ball(var context: Context) {
                 SoundEffectManager.playImpactSound(0, context)
             }
 
-            if ( posY - radius <= 0f || playerCollision || brickCollision) {
+            if ( posY - radius <= 0f || posY + radius >= canvasHeight  || playerCollision || brickCollision) {
                 speedY = -speedY
                 SoundEffectManager.playImpactSound(0, context)
             }

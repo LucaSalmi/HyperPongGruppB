@@ -1,9 +1,7 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -21,8 +19,9 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
-    var collisionDetected = false
-    var counter = true
+    var isCollisionDetected = false
+    var isBrickHit = true
+
     var screenSize  = Rect()
 
     var background: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.lava_level_background).scale(1080,1920,true)
@@ -33,7 +32,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var brickRect = Rect()
 
 
-
     init {
         mHolder?.addCallback(this)
 
@@ -41,17 +39,16 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     }
 
     fun setup() {
+
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
         ball = Ball(this.context)
 
         ball.paint.color = Color.BLACK
         ball.hitboxPaint.color = Color.TRANSPARENT
+        ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        //BrickStructure.fillColors(brickColors)
-
-
-
+        BrickStructure.fillColors(brickColors)
     }
 
     fun start() {
@@ -95,16 +92,16 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         ball.canvasWidth = canvas.width.toFloat()
         player.draw(canvas)
 
-        var brickColor = Paint()
-        brickColor.color = Color.RED
-        if (drawline){
-            
 
-            for(obj in brickRow){
+        if (drawline) {
 
-                //(brickColors[brickRow.indexOf(obj)])
-                canvas.drawRect(obj,brickColor)
-                Log.d(TAG, "draw: $obj")
+
+            for (obj in brickRow) {
+
+
+                var brickColor = Paint()
+                brickColor.color = (brickColors[brickRow.indexOf(obj)])
+                canvas.drawRect(obj, brickColor)
             }
 
         }
@@ -117,59 +114,49 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
 
         val sx = event?.x.toString()
-        if (gameStart){
+        if (gameStart) {
             player.right = sx.toFloat()
             player.left = sx.toFloat() - player.offset
             player.update()
-        }else{
+        } else {
             ball.speedX = 8f
             ball.speedY = -8f
             gameStart = true
         }
 
-
         return true
-
-
     }
 
-    fun checkCollision(){
+    fun checkCollision() {
 
 
-        if (ball.posY < 1500f){
-            collisionDetected = false
+        if (ball.posY < 1500f) {
+            isCollisionDetected = false
         }
 
-        if (ball.ballHitbox.intersect(player.playerRect)){
+        if (ball.ballHitbox.intersect(player.playerRect)) {
 
-            counter = true
 
-            if (!collisionDetected){
+            if (!isCollisionDetected) {
                 ball.playerCollision = true
-                collisionDetected = true
+                isCollisionDetected = true
             }
-
         }
 
-        var toRemove = 0
+        var toRemove = 37
 
-        for (rect in brickRow){
+        for (rect in brickRow) {
 
-            if (ball.ballHitbox.intersect(rect) && counter){
+            if (ball.ballHitbox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
-                counter = false
             }
         }
-/*
-        if (ball.brickCollision && toRemove != 0){
+
+        if (ball.brickCollision && toRemove < 37) {
             brickRow.removeAt(toRemove)
-
+            brickColors.removeAt(toRemove)
         }
-
- */
-
-
 
     }
 
@@ -194,7 +181,6 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             checkCollision()
             update()
             draw()
-
 
         }
     }

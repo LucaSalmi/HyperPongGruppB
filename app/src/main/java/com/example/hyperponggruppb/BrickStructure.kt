@@ -11,10 +11,10 @@ object BrickStructure {
 
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
-        var left = 20
+        var left = 0
         var top = 5
-        var right = 70
-        var bottom = 20
+        var right = 80
+        var bottom = 30
 
         for (i in 0..36) {
 
@@ -22,14 +22,14 @@ object BrickStructure {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            left += 55
-            right += 55
+            left += 85
+            right += 85
 
-            if (i == 18) {
-                top += 25
-                bottom += 25
-                left = 20
-                right = 70
+            if (i == 11 || i == 22 || i == 33) {
+                top += 35
+                bottom += 35
+                left = 0
+                right = 80
             }
         }
 

@@ -7,6 +7,15 @@
     android:background="@drawable/cave_background"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_title"
+        ></FrameLayout>
+
     <ImageView
         android:id="@+id/iv_title"
         android:layout_width="wrap_content"

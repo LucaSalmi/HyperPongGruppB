@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 
@@ -24,12 +25,17 @@ class MainActivity : AppCompatActivity() {
 
             setTheme(R.style.Theme_HyperPongGruppB)
 
-            setContentView(binding.root)
+
         }, 2000)
 
+        setContentView(binding.root)
         PointManager.playerPoints
 
         music.context(this)
+
+        supportFragmentManager.commit {
+            add(R.id.frame_layout, PointFragment())
+        }
 
 
         binding.ivNewGame.setOnClickListener {
