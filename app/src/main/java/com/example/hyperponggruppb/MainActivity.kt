@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             setTheme(R.style.Theme_HyperPongGruppB)
 
 
+
         }, 2000)
 
         setContentView(binding.root)
