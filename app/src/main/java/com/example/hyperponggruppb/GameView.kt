@@ -61,8 +61,8 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     fun start() {
 
-        ball.posX = player.top
-        ball.posY = player.offset
+        ball.ballPosX = player.top
+        ball.ballPosY = player.playerSize
         running = true
         thread = Thread(this)
         thread?.start()
@@ -102,10 +102,10 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
-            ball.posX = 600f
-            ball.posY = 1500f
-            ball.speedX = 0f
-            ball.speedY = 0f
+            ball.ballPosX = 600f
+            ball.ballPosY = 1500f
+            ball.ballSpeedX = 0f
+            ball.ballSpeedY = 0f
 
         } else {
 
@@ -153,11 +153,11 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         val sx = event?.x.toString()
         if (gameStart) {
             player.right = sx.toFloat()
-            player.left = sx.toFloat() - player.offset
+            player.left = sx.toFloat() - player.playerSize
             player.update()
         } else {
-            ball.speedX = 8f
-            ball.speedY = -8f
+            ball.ballSpeedX = 7f
+            ball.ballSpeedY = -13f
             gameStart = true
         }
 
@@ -167,7 +167,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     fun checkCollision() {
 
 
-        if (ball.posY < 1500f) {
+        if (ball.ballPosY < 1500f) {
             isCollisionDetected = false
         }
 
