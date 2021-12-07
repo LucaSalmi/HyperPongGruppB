@@ -9,6 +9,10 @@ import android.util.Log
 
 object BrickStructure {
 
+    var firstBrickRow = 12
+    var rowOfBricks = 13
+    var totalSumOfBricks = firstBrickRow + (rowOfBricks*4)
+
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
         var left = 10
@@ -16,7 +20,8 @@ object BrickStructure {
         var right = 70
         var bottom = 30
 
-        for (i in 0..38) {
+
+        for (i in 0..(totalSumOfBricks)) {
 
             var brick = Bricks(left, top, right, bottom)
             var brickRect =
@@ -25,7 +30,8 @@ object BrickStructure {
             left += 85
             right += 85
 
-            if (i == 12 || i == 25 || i == 38) {
+            if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks*2
+                || i == firstBrickRow + rowOfBricks*3 || i == firstBrickRow + rowOfBricks*4 ) {
                 top += 35
                 bottom += 35
                 left = 10
@@ -61,7 +67,8 @@ object BrickStructure {
     fun fillColors(colors: MutableList<Int>): MutableList<Int> {
 
 
-        for (i in 0..38) {
+
+        for (i in 0..(totalSumOfBricks)) {
             colors.add(randomColor(rNG(1, 5)))
         }
         return colors

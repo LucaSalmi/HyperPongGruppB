@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/frame"
-            android:text="@string/points_placeholder"
+            android:text="@string/points_highscore_holder"
             android:textAlignment="center" />
 
     </LinearLayout>
