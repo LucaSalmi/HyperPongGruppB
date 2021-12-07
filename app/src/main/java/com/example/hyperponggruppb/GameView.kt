@@ -126,7 +126,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             isCollisionDetected = false
         }
 
-        if (ball.ballHitbox.intersect(player.playerRect)) {
+        if (ball.ballHitBox.intersect(player.playerRect)) {
 
 
             if (!isCollisionDetected) {
@@ -139,7 +139,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         for (rect in brickRow) {
 
-            if (ball.ballHitbox.intersect(rect)) {
+            if (ball.ballHitBox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
 

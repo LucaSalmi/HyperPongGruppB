@@ -2,6 +2,7 @@ package com.example.hyperponggruppb
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -33,14 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         music.context(this)
 
-        supportFragmentManager.commit {
-            add(R.id.frame_layout, PointFragment())
-        }
-
 
         binding.ivNewGame.setOnClickListener {
-            setContentView(GameView(this))
+            val toGameModeOne = Intent(this, GameMode1Activity::class.java)
             SoundEffectManager.menuPress(0, this)
+            startActivity(toGameModeOne)
         }
 
 

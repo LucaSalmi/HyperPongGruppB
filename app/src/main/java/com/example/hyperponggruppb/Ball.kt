@@ -2,8 +2,6 @@ package com.example.hyperponggruppb
 
 import android.content.Context
 import android.graphics.*
-import androidx.core.graphics.scale
-import androidx.core.graphics.scaleMatrix
 
 class Ball(var context: Context) {
 
@@ -19,8 +17,7 @@ class Ball(var context: Context) {
     //hampus men vafaaaaaaaaaaaaannnnn
     var playerCollision = false
     var brickCollision = false
-    var brickSideCollision = false
-    var ballHitbox: Rect = Rect(
+    var ballHitBox: Rect = Rect(
         (posX-15).toInt(), //left
         (posY-15).toInt(), //top
         (posX+15).toInt(), //right
@@ -30,7 +27,7 @@ class Ball(var context: Context) {
 
     fun update(player: Player) {
 
-        ballHitbox = Rect(
+        ballHitBox = Rect(
             (posX-15).toInt(), //left
             (posY-15).toInt(), //top
             (posX+15).toInt(), //right
@@ -100,6 +97,10 @@ class Ball(var context: Context) {
 
                 }
 
+                if(brickCollision){
+
+                }
+
                 SoundEffectManager.playImpactSound(0, context)
             }
 
@@ -108,14 +109,13 @@ class Ball(var context: Context) {
 
         brickCollision = false
         playerCollision = false
-        brickSideCollision = false
         posY += speedY
         posX += speedX
 
     }
 
     fun draw(canvas: Canvas?) {
-        canvas?.drawRect(ballHitbox, hitboxPaint)
+        canvas?.drawRect(ballHitBox, hitboxPaint)
         canvas?.drawCircle(posX, posY, radius, paint)
 
 
