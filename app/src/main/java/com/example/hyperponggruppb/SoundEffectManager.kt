@@ -6,24 +6,24 @@ import java.util.concurrent.CopyOnWriteArrayList
 
 object SoundEffectManager {
 
-    lateinit var mediaPlayer: MediaPlayer
+    fun jukebox(context: Context, id: Int){
+        var isPlaying = false
 
+        if (!isPlaying){
 
-    // ImpactSoundEffect
-    fun playImpactSound (id: Int, context: Context): Int {
+            var resID: Int = when(id){
 
-        var resID = context.resources.getIdentifier("menu_error_8bit_sound_effect", "raw", context.packageName)
-        mediaPlayer = MediaPlayer.create(context, resID)
-        mediaPlayer.start()
-        return resID
-    }
+                0 -> context.resources.getIdentifier("menu_error_8bit_sound_effect", "raw", context.packageName)
+                1 -> context.resources.getIdentifier("menu_press_pause_sound_effect3", "raw", context.packageName)
 
-    // menuPress SoundEffect
-    fun menuPress (id: Int, context: Context): Int {
+                else -> {
+                    context.resources.getIdentifier("menu_error_8bit_sound_effect", "raw", context.packageName)
+                }
+            }
 
-        var resID = context.resources.getIdentifier("menu_press_pause_sound_effect3", "raw", context.packageName)
-        mediaPlayer = MediaPlayer.create(context, resID)
-        mediaPlayer.start()
-        return resID
+            val mediaPlayer = MediaPlayer.create(context, resID).start()
+
+        }
+
     }
 }

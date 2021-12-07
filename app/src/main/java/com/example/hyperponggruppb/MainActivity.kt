@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.ivNewGame.setOnClickListener {
             val toGameModeOne = Intent(this, GameMode1Activity::class.java)
-            SoundEffectManager.menuPress(0, this)
+            SoundEffectManager.jukebox(this, 1)
             startActivity(toGameModeOne)
         }
 

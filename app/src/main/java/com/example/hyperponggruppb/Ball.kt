@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 
 class Ball(var context: Context) {
 
@@ -19,10 +21,10 @@ class Ball(var context: Context) {
     var playerCollision = false
     var brickCollision = false
     var ballHitBox: Rect = Rect(
-        (posX-20).toInt(), //left
-        (posY-20).toInt(), //top
-        (posX+20).toInt(), //right
-        (posY+20).toInt() //bottom
+        (posX-18).toInt(), //left
+        (posY-18).toInt(), //top
+        (posX+18).toInt(), //right
+        (posY+18).toInt() //bottom
     )
 
 
@@ -35,16 +37,20 @@ class Ball(var context: Context) {
             (posY+20).toInt() //bottom
         )
 
+        if(posY >= canvasHeight ) {
+            isDestroyed = true
+            return
+        }
 
 
-        if (posX + radius >= canvasWidth || posX - radius <= 0f || posY + radius >= canvasWidth || posY - radius <= 0f || playerCollision || brickCollision) {
+
+        if (posX + radius >= canvasWidth || posX - radius <= 0f || posY - radius <= 0f || playerCollision || brickCollision) {
 
             if (posX + radius >= canvasWidth || posX - radius <= 0f) {
                 speedX = -speedX
-                SoundEffectManager.playImpactSound(0, context)
             }
 
-            if ( posY - radius <= 0f || posY + radius >= canvasHeight  || playerCollision || brickCollision) {
+            if ( posY - radius <= 0f || playerCollision || brickCollision) {
 
 
                 speedY = -speedY
@@ -99,15 +105,11 @@ class Ball(var context: Context) {
 
                 }
 
-
-                SoundEffectManager.playImpactSound(0, context)
+                if (brickCollision){
+                    Log.d(TAG, "update: we are here")
+                    posY += 20f
+                }
             }
-
-            if(posY + radius == canvasHeight ) {
-                isDestroyed = true
-                player.lives -1
-            }
-
 
         }
 
@@ -116,6 +118,7 @@ class Ball(var context: Context) {
         playerCollision = false
         posY += speedY
         posX += speedX
+
 
     }
 

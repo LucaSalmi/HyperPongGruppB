@@ -52,8 +52,8 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     fun start() {
 
-        ball.posX = 800f
-        ball.posY = 800f
+        ball.posX = player.top
+        ball.posY = player.offset
         running = true
         thread = Thread(this)
         thread?.start()
@@ -85,8 +85,11 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     fun death(){
 
+        Log.d(TAG, "death: ${player.lives}")
+
         if(player.lives > 0) {
 
+            player.lives -= 1
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
@@ -160,27 +163,29 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
         if (ball.ballHitBox.intersect(player.playerRect)) {
 
-
             if (!isCollisionDetected) {
                 ball.playerCollision = true
                 isCollisionDetected = true
+                SoundEffectManager.jukebox(context, 0)
             }
         }
 
-        var toRemove = 37
+        var toRemove = 39
 
         for (rect in brickRow) {
 
             if (ball.ballHitBox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
+                SoundEffectManager.jukebox(context, 0)
 
             }
         }
 
-        if (ball.brickCollision && toRemove < 37) {
+        if (ball.brickCollision && toRemove < 36) {
             brickRow.removeAt(toRemove)
             brickColors.removeAt(toRemove)
+
             if (brickRow.isEmpty()){
                 death()
             }

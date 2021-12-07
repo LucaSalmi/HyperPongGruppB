@@ -5,7 +5,7 @@ object PointManager {
     var playerPoints: PlayerPoints = initPlayerPoints()
 
     private fun initPlayerPoints(): PlayerPoints {
-         return PlayerPoints(0, 9999)
+         return PlayerPoints(0, 0)
     }
 
     fun addPoints(newPoints: Int){
