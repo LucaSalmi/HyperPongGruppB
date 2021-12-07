@@ -28,6 +28,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
 
 
+
     var background: Bitmap =
         BitmapFactory.decodeResource(resources, R.drawable.lava_level_background)
             .scale(1080, 1920, true)
@@ -173,7 +174,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             }
         }
 
-        var toRemove = 39
+        var toRemove = BrickStructure.totalSumOfBricks+1
 
         for (rect in brickRow) {
 
@@ -181,19 +182,24 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
                 SoundEffectManager.jukebox(context, 0)
+                
 
             }
         }
 
-        if (ball.brickCollision && toRemove < 39) {
+        if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks+1) {
             brickRow.removeAt(toRemove)
+            Log.d(TAG, "checkCollision: ${brickRow.size}")
             brickColors.removeAt(toRemove)
             PointManager.addPoints(10)
+
             Log.d(TAG, "checkCollision: ${PointManager.playerPoints}")
 
             if (brickRow.isEmpty()){
-                player.lives = 0
-                death()
+                //player.lives = 0
+                //death() - LUCA's snabba lösning
+                //kekekekekekkekekekekekke HAMPUS WAS HERE
+                activity.finish()
             }
         }
 
