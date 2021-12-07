@@ -96,35 +96,41 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             ball.speedY = 0f
 
         } else {
-            player.lives = 3
+
             activity.finish()
-            stop()
+
         }
     }
 
     fun draw() {
 
-        canvas = mHolder!!.lockCanvas()
-        canvas.drawBitmap(background, matrix, null)
-        //canvas.drawBitmap(newball,matrix,null)
-        //canvas.drawBitmap(newplayer,matrix,null)
+        try {
+            canvas = mHolder!!.lockCanvas()
+            canvas.drawBitmap(background, matrix, null)
+            //canvas.drawBitmap(newball,matrix,null)
+            //canvas.drawBitmap(newplayer,matrix,null)
 
-        ball.draw(canvas)
-        ball.canvasHeight = canvas.height.toFloat()
-        ball.canvasWidth = canvas.width.toFloat()
+            ball.draw(canvas)
+            ball.canvasHeight = canvas.height.toFloat()
+            ball.canvasWidth = canvas.width.toFloat()
 
-        player.draw(canvas)
-
-
-        for (obj in brickRow) {
+            player.draw(canvas)
 
 
-            var brickColor = Paint()
-            brickColor.color = (brickColors[brickRow.indexOf(obj)])
-            canvas.drawRect(obj, brickColor)
+            for (obj in brickRow) {
+
+
+                var brickColor = Paint()
+                brickColor.color = (brickColors[brickRow.indexOf(obj)])
+                canvas.drawRect(obj, brickColor)
+            }
+
+            mHolder!!.unlockCanvasAndPost(canvas)
+        }catch (e: Exception){
+            Log.e(TAG, "draw: It's NULL")
         }
 
-        mHolder!!.unlockCanvasAndPost(canvas)
+
     }
 
 
