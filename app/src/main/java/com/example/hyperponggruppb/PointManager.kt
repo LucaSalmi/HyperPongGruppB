@@ -9,6 +9,6 @@ object PointManager {
 
         playerPoints += newPoints
 
-
     }
+
 }

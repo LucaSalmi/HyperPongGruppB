@@ -20,7 +20,6 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     private var thread: Thread? = null
     private var running = false
-    private lateinit var binding: ActivityGameMode1Binding
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
@@ -41,8 +40,6 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     init {
         mHolder?.addCallback(this)
-        val layoutInflater = LayoutInflater.from(context)
-        binding = ActivityGameMode1Binding.inflate(layoutInflater)
         setup()
     }
 
@@ -110,7 +107,6 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         } else {
 
             activity.finish()
-            stop()
 
         }
     }
@@ -120,15 +116,12 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         try {
             canvas = mHolder!!.lockCanvas()
             canvas.drawBitmap(background, matrix, null)
-            //canvas.drawBitmap(newball,matrix,null)
-            //canvas.drawBitmap(newplayer,matrix,null)
 
             ball.draw(canvas)
             ball.canvasHeight = canvas.height.toFloat()
             ball.canvasWidth = canvas.width.toFloat()
 
             player.draw(canvas)
-
 
             for (obj in brickRow) {
 
@@ -196,7 +189,6 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             brickRow.removeAt(toRemove)
             brickColors.removeAt(toRemove)
             PointManager.addPoints(10)
-            binding.scoreText.text = pointsString
             Log.d(TAG, "checkCollision: ${PointManager.playerPoints}")
 
             if (brickRow.isEmpty()){

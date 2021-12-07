@@ -91,94 +91,7 @@ class Ball(var context: Context) {
                         ballSpeedY = -5f
                         ballSpeedX = +15f
                     }
-
                 }
-                    /*
-                    if (player.right - posX > (player.offset/2)) { // equals left pad hit**
-
-                        if ((player.offset/2) - (posX - player.left) <= (0.2*player.offset)) { // 0% --> 20% of the left side
-                            speedY = -4f
-                            speedX = -12f
-                        } else if ((player.offset/2) - (posX - player.left) <= (0.4*player.offset)){ // 20% --> 40% of the left side
-                            speedY = -5f
-                            speedX = -11f
-                        } else if ((player.offset/2) - (posX - player.left) <= (0.6*player.offset)){ // 40% --> 60% of the left side
-                            speedY = -6f
-                            speedX = -10f
-                        } else if ((player.offset/2) - (posX - player.left) <= (0.8*player.offset)){ // 60% --> 80% of the left side
-                            speedY = -7f
-                            speedX = -9f
-                        } else {    //  80% --> 100% of the left side
-                            speedY = -8f
-                            speedX = -8f
-                        }
-
-                        }
-                    }else { // equals right pad hit**
-
-                    if ((player.offset/2) - (posX - player.left) <= (0.2*player.offset)) { // 0% --> 20% of the right side
-                        speedY = -4f
-                        speedX = -12f
-                    } else if ((player.offset/2) - (posX - player.left) <= (0.4*player.offset)){ // 20% --> 40% of the right side
-                        speedY = -5f
-                        speedX = -11f
-                    } else if ((player.offset/2) - (posX - player.left) <= (0.6*player.offset)){ // 40% --> 60% of the right side
-                        speedY = -6f
-                        speedX = -10f
-                    } else if ((player.offset/2) - (posX - player.left) <= (0.8*player.offset)){ // 60% --> 80% of the right side
-                        speedY = -7f
-                        speedX = -9f
-                    } else {    //  80% --> 100% of the right side
-                        speedY = -8f
-                        speedX = -8f
-                    }
-                }
-
-
-                    if (player.right - posX > 110 && player.right - posX < 125){
-                        speedY = -7.5f
-                        speedX = -8.5f
-                    }else if (player.right - posX > 125 && player.right - posX < 140){
-                        speedY = -7f
-                        speedX = -9f
-                    }else if (player.right - posX > 140 && player.right - posX < 155){
-                        speedY = -6.5f
-                        speedX = -9.5f
-                    }else if (player.right - posX > 155 && player.right - posX < 170){
-                        speedY = -6f
-                        speedX = -10f
-                    }else if (player.right - posX > 170 && player.right - posX < 185){
-                        speedY = -5.5f
-                        speedX = -10.5f
-                    }else if (player.right - posX > 185 && player.right - posX < 201){
-                        speedY = -5f
-                        speedX = -11f
-                    }else if (posX - player.left > 110 && posX - player.left < 125){
-                        speedY = -7.5f
-                        speedX = +8.5f
-                    }else if (posX - player.left > 125 && posX - player.left < 140){
-                        speedY = -7f
-                        speedX = +9f
-                    }else if (posX - player.left > 140 && posX - player.left < 155){
-                        speedY = -6.5f
-                        speedX = +9.5f
-                    }else if (posX - player.left > 155 && posX - player.left < 170){
-                        speedY = -6f
-                        speedX = +10f
-                    }else if (posX - player.left > 170 && posX - player.left < 185){
-                        speedY = -5.5f
-                        speedX = +10.5f
-                    }else if (posX - player.left > 185 && posX - player.left < 201){
-                        speedY = -4f
-                        speedX = +11f
-                    }else{
-                        speedY = -8f
-                        speedX = 8f
-                    }
-                }
-                    */
-
-
 
                 if (brickCollision){
                     Log.d(TAG, "update: we are here")
@@ -186,22 +99,18 @@ class Ball(var context: Context) {
                     ballPosX += 10f
                 }
             }
-
         }
-
 
         brickCollision = false
         playerCollision = false
         ballPosY += ballSpeedY
         ballPosX += ballSpeedX
 
-
     }
 
     fun draw(canvas: Canvas?) {
         canvas?.drawRect(ballHitBox, hitboxPaint)
         canvas?.drawCircle(ballPosX, ballPosY, radius, paint)
-
 
     }
 }
