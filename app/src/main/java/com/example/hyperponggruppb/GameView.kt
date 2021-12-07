@@ -5,26 +5,31 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
+import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
+import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
 
 class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null
     private var running = false
+    private lateinit var binding: ActivityGameMode1Binding
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
+    var pointsString = "Score : ${PointManager.playerPoints}"
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
-    val mainExecutor = ContextCompat.getMainExecutor(context)
 
 
 
@@ -36,6 +41,8 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     init {
         mHolder?.addCallback(this)
+        val layoutInflater = LayoutInflater.from(context)
+        binding = ActivityGameMode1Binding.inflate(layoutInflater)
         setup()
     }
 
@@ -189,6 +196,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             brickRow.removeAt(toRemove)
             brickColors.removeAt(toRemove)
             PointManager.addPoints(10)
+            binding.scoreText.text = pointsString
             Log.d(TAG, "checkCollision: ${PointManager.playerPoints}")
 
             if (brickRow.isEmpty()){

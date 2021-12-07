@@ -1,16 +1,10 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.DisplayMetrics
-import android.util.Log
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 
 
@@ -28,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }, 2000)
+
 
         setContentView(binding.root)
         PointManager.playerPoints

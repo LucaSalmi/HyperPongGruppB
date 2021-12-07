@@ -77,9 +77,7 @@ class Ball(var context: Context) {
                     }else if (player.right - posX > 185 && player.right - posX < 201){
                         speedY = -5f
                         speedX = -11f
-                    }
-
-                    else if (posX - player.left > 110 && posX - player.left < 125){
+                    }else if (posX - player.left > 110 && posX - player.left < 125){
                         speedY = -7.5f
                         speedX = +8.5f
                     }else if (posX - player.left > 125 && posX - player.left < 140){
@@ -97,9 +95,7 @@ class Ball(var context: Context) {
                     }else if (posX - player.left > 185 && posX - player.left < 201){
                         speedY = -4f
                         speedX = +11f
-                    }else
-
-                    {
+                    }else{
                         speedY = -8f
                         speedX = 8f
                     }
