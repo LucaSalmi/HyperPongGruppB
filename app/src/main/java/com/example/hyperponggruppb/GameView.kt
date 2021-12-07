@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
 
 class GameView(context: Context, var activity: Activity) : SurfaceView(context),
@@ -23,6 +24,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     var brickRow = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
+    val mainExecutor = ContextCompat.getMainExecutor(context)
 
 
 
@@ -101,6 +103,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         } else {
 
             activity.finish()
+            stop()
 
         }
     }
@@ -182,11 +185,14 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
             }
         }
 
-        if (ball.brickCollision && toRemove < 36) {
+        if (ball.brickCollision && toRemove < 39) {
             brickRow.removeAt(toRemove)
             brickColors.removeAt(toRemove)
+            PointManager.addPoints(10)
+            Log.d(TAG, "checkCollision: ${PointManager.playerPoints}")
 
             if (brickRow.isEmpty()){
+                player.lives = 0
                 death()
             }
         }

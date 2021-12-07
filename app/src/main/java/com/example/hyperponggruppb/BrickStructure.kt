@@ -11,25 +11,25 @@ object BrickStructure {
 
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
-        var left = 0
+        var left = 10
         var top = 5
-        var right = 60
+        var right = 70
         var bottom = 30
 
-        for (i in 0..36) {
+        for (i in 0..38) {
 
             var brick = Bricks(left, top, right, bottom)
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            left += 80
-            right += 80
+            left += 85
+            right += 85
 
-            if (i == 12 || i == 24 || i == 36) {
+            if (i == 12 || i == 25 || i == 38) {
                 top += 35
                 bottom += 35
-                left = 0
-                right = 60
+                left = 10
+                right = 70
             }
         }
 
@@ -61,7 +61,7 @@ object BrickStructure {
     fun fillColors(colors: MutableList<Int>): MutableList<Int> {
 
 
-        for (i in 0..36) {
+        for (i in 0..38) {
             colors.add(randomColor(rNG(1, 5)))
         }
         return colors

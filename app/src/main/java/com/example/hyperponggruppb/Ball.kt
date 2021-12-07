@@ -15,26 +15,27 @@ class Ball(var context: Context) {
     var radius = 25f
     var speedX = 0f
     var speedY = 0f
+    var hitBoxMargin = 18
     var canvasHeight = 0f
     var canvasWidth = 0f
     //hampus men vafaaaaaaaaaaaaannnnn
     var playerCollision = false
     var brickCollision = false
     var ballHitBox: Rect = Rect(
-        (posX-18).toInt(), //left
-        (posY-18).toInt(), //top
-        (posX+18).toInt(), //right
-        (posY+18).toInt() //bottom
+        (posX-hitBoxMargin).toInt(), //left
+        (posY-hitBoxMargin).toInt(), //top
+        (posX+hitBoxMargin).toInt(), //right
+        (posY+hitBoxMargin).toInt() //bottom
     )
 
 
     fun update(player: Player) {
 
         ballHitBox = Rect(
-            (posX-20).toInt(), //left
-            (posY-20).toInt(), //top
-            (posX+20).toInt(), //right
-            (posY+20).toInt() //bottom
+            (posX-hitBoxMargin).toInt(), //left
+            (posY-hitBoxMargin).toInt(), //top
+            (posX+hitBoxMargin).toInt(), //right
+            (posY+hitBoxMargin).toInt() //bottom
         )
 
         if(posY >= canvasHeight ) {
@@ -108,6 +109,7 @@ class Ball(var context: Context) {
                 if (brickCollision){
                     Log.d(TAG, "update: we are here")
                     posY += 20f
+                    posX += 10f
                 }
             }
 

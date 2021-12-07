@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
 
@@ -18,7 +19,7 @@ class GameMode1Activity : AppCompatActivity() {
         supportFragmentManager.commit {
             add(R.id.frame_layout, PointFragment())
         }
-
+        
         supportFragmentManager.commit {
             add(R.id.gameViewContainer,GameOneFragment())
         }

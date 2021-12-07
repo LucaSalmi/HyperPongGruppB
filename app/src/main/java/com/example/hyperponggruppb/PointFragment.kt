@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 
 
 class PointFragment : Fragment() {
@@ -17,13 +20,11 @@ class PointFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_point, container, false)
-
         val pointsView = view?.findViewById<TextView>(R.id.points_view)
-        val hiScoreView = view?.findViewById<TextView>(R.id.hi_score_view)
-        pointsView?.text = PointManager.playerPoints.points.toString()
-        hiScoreView?.text = PointManager.playerPoints.highScore.toString()
+        pointsView?.text = PointManager.playerPoints.toString()
         return view
     }
+
 
 
 
