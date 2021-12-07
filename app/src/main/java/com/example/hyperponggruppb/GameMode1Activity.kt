@@ -17,6 +17,9 @@ class GameMode1Activity : AppCompatActivity() {
             add(R.id.frame_layout, PointFragment())
         }
 
-        //setContentView(GameView(this))
+        supportFragmentManager.commit {
+            add(R.id.gameViewContainer,GameOneFragment())
+        }
+
     }
 }

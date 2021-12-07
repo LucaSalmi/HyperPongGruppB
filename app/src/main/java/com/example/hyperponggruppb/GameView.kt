@@ -21,12 +21,14 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
     var isBrickHit = true
+    var canvasVertical = 0f
+    var canvasHorizontal = 0f
 
     var screenSize  = Rect()
 
     var background: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.lava_level_background).scale(1080,1920,true)
-    var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
-    var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
+    //var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
+    //var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
 
     init {
         mHolder?.addCallback(this)
@@ -39,8 +41,8 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player = Player(this.context)
         player.paint.color = Color.BLACK
         ball = Ball(this.context)
-        ball.paint.color = Color.TRANSPARENT
-        ball.hitboxPaint.color = Color.BLACK
+        ball.paint.color = Color.BLACK
+        ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         BrickStructure.fillColors(brickColors)
@@ -76,12 +78,13 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         canvas = mHolder!!.lockCanvas()
         canvas.drawBitmap(background,matrix,null)
-        canvas.drawBitmap(newball,matrix,null)
-        canvas.drawBitmap(newplayer,matrix,null)
+        //canvas.drawBitmap(newball,matrix,null)
+        //canvas.drawBitmap(newplayer,matrix,null)
 
         ball.draw(canvas)
         ball.canvasHeight = canvas.height.toFloat()
         ball.canvasWidth = canvas.width.toFloat()
+
         player.draw(canvas)
 
 
@@ -139,7 +142,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         for (rect in brickRow) {
 
-            if (ball.ballHitBox.intersect(rect)) {
+            if (ball.ballHitBox.intersect(rect) && ball.posY+ball.speedY > (rect.top).toFloat()) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
 

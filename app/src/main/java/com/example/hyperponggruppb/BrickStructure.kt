@@ -13,7 +13,7 @@ object BrickStructure {
 
         var left = 0
         var top = 5
-        var right = 80
+        var right = 70
         var bottom = 30
 
         for (i in 0..36) {
@@ -29,7 +29,7 @@ object BrickStructure {
                 top += 35
                 bottom += 35
                 left = 0
-                right = 80
+                right = 70
             }
         }
 
