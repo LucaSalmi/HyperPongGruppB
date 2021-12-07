@@ -8,13 +8,13 @@ import android.util.Log
 class Ball(var context: Context) {
 
     var isDestroyed = false
-    var posX = 800f
-    var posY = 800f
+    var ballPosX = 800f
+    var ballPosY = 800f
     var paint = Paint()
     var hitboxPaint: Paint = Paint()
     var radius = 25f
-    var speedX = 0f
-    var speedY = 0f
+    var ballSpeedX = 0f
+    var ballSpeedY = 0f
     var hitBoxMargin = 18
     var canvasHeight = 0f
     var canvasWidth = 0f
@@ -22,42 +22,118 @@ class Ball(var context: Context) {
     var playerCollision = false
     var brickCollision = false
     var ballHitBox: Rect = Rect(
-        (posX-hitBoxMargin).toInt(), //left
-        (posY-hitBoxMargin).toInt(), //top
-        (posX+hitBoxMargin).toInt(), //right
-        (posY+hitBoxMargin).toInt() //bottom
+        (ballPosX-hitBoxMargin).toInt(), //left
+        (ballPosY-hitBoxMargin).toInt(), //top
+        (ballPosX+hitBoxMargin).toInt(), //right
+        (ballPosY+hitBoxMargin).toInt() //bottom
     )
 
 
     fun update(player: Player) {
 
+
         ballHitBox = Rect(
-            (posX-hitBoxMargin).toInt(), //left
-            (posY-hitBoxMargin).toInt(), //top
-            (posX+hitBoxMargin).toInt(), //right
-            (posY+hitBoxMargin).toInt() //bottom
+            (ballPosX-hitBoxMargin).toInt(), //left
+            (ballPosY-hitBoxMargin).toInt(), //top
+            (ballPosX+hitBoxMargin).toInt(), //right
+            (ballPosY+hitBoxMargin).toInt() //bottom
         )
 
-        if(posY >= canvasHeight ) {
+        if(ballPosY >= canvasHeight ) {
             isDestroyed = true
             return
         }
 
 
 
-        if (posX + radius >= canvasWidth || posX - radius <= 0f || posY - radius <= 0f || playerCollision || brickCollision) {
+        if (ballPosX + radius >= canvasWidth || ballPosX - radius <= 0f || ballPosY - radius <= 0f || playerCollision || brickCollision) {
 
-            if (posX + radius >= canvasWidth || posX - radius <= 0f) {
-                speedX = -speedX
+            if (ballPosX + radius >= canvasWidth || ballPosX - radius <= 0f) {
+                ballSpeedX = -ballSpeedX
             }
 
-            if ( posY - radius <= 0f || playerCollision || brickCollision) {
+            if ( ballPosY - radius <= 0f || playerCollision || brickCollision) {
 
 
-                speedY = -speedY
+                ballSpeedY = -ballSpeedY
 
 
                 if (playerCollision){
+
+                    if (player.playerSize - (player.right - ballPosX) <= 0.1 * player.playerSize) { // 0% --> 10% of the pad
+                        ballSpeedY = -5f
+                        ballSpeedX = -15f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.2 * player.playerSize) { // 10% --> 20% of the pad
+                        ballSpeedY = -6f
+                        ballSpeedX = -14f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.3 * player.playerSize) { // 20% --> 30% of the pad
+                        ballSpeedY = -7f
+                        ballSpeedX = -13f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.4 * player.playerSize) { // 30% --> 40% of the pad
+                        ballSpeedY = -8f
+                        ballSpeedX = -12f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.5 * player.playerSize) { // 40% --> 50% of the pad
+                        ballSpeedY = -9f
+                        ballSpeedX = -11f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.6 * player.playerSize) { // 50% --> 60% of the pad
+                        ballSpeedY = -9f
+                        ballSpeedX = +11f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.7 * player.playerSize) { // 60% --> 70% of the pad
+                        ballSpeedY = -8f
+                        ballSpeedX = +12f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.8 * player.playerSize) { // 70% --> 80% of the pad
+                        ballSpeedY = -7f
+                        ballSpeedX = +13f
+                    } else if (player.playerSize - (player.right - ballPosX) <= 0.9 * player.playerSize) { // 80% --> 90% of the pad
+                        ballSpeedY = -6f
+                        ballSpeedX = +14f
+                    } else {       // 90 --> 100% of the pad
+                        ballSpeedY = -5f
+                        ballSpeedX = +15f
+                    }
+
+                }
+                    /*
+                    if (player.right - posX > (player.offset/2)) { // equals left pad hit**
+
+                        if ((player.offset/2) - (posX - player.left) <= (0.2*player.offset)) { // 0% --> 20% of the left side
+                            speedY = -4f
+                            speedX = -12f
+                        } else if ((player.offset/2) - (posX - player.left) <= (0.4*player.offset)){ // 20% --> 40% of the left side
+                            speedY = -5f
+                            speedX = -11f
+                        } else if ((player.offset/2) - (posX - player.left) <= (0.6*player.offset)){ // 40% --> 60% of the left side
+                            speedY = -6f
+                            speedX = -10f
+                        } else if ((player.offset/2) - (posX - player.left) <= (0.8*player.offset)){ // 60% --> 80% of the left side
+                            speedY = -7f
+                            speedX = -9f
+                        } else {    //  80% --> 100% of the left side
+                            speedY = -8f
+                            speedX = -8f
+                        }
+
+                        }
+                    }else { // equals right pad hit**
+
+                    if ((player.offset/2) - (posX - player.left) <= (0.2*player.offset)) { // 0% --> 20% of the right side
+                        speedY = -4f
+                        speedX = -12f
+                    } else if ((player.offset/2) - (posX - player.left) <= (0.4*player.offset)){ // 20% --> 40% of the right side
+                        speedY = -5f
+                        speedX = -11f
+                    } else if ((player.offset/2) - (posX - player.left) <= (0.6*player.offset)){ // 40% --> 60% of the right side
+                        speedY = -6f
+                        speedX = -10f
+                    } else if ((player.offset/2) - (posX - player.left) <= (0.8*player.offset)){ // 60% --> 80% of the right side
+                        speedY = -7f
+                        speedX = -9f
+                    } else {    //  80% --> 100% of the right side
+                        speedY = -8f
+                        speedX = -8f
+                    }
+                }
+
 
                     if (player.right - posX > 110 && player.right - posX < 125){
                         speedY = -7.5f
@@ -103,13 +179,15 @@ class Ball(var context: Context) {
                         speedY = -8f
                         speedX = 8f
                     }
-
                 }
+                    */
+
+
 
                 if (brickCollision){
                     Log.d(TAG, "update: we are here")
-                    posY += 20f
-                    posX += 10f
+                    ballPosY += 20f
+                    ballPosX += 10f
                 }
             }
 
@@ -118,15 +196,15 @@ class Ball(var context: Context) {
 
         brickCollision = false
         playerCollision = false
-        posY += speedY
-        posX += speedX
+        ballPosY += ballSpeedY
+        ballPosX += ballSpeedX
 
 
     }
 
     fun draw(canvas: Canvas?) {
         canvas?.drawRect(ballHitBox, hitboxPaint)
-        canvas?.drawCircle(posX, posY, radius, paint)
+        canvas?.drawCircle(ballPosX, ballPosY, radius, paint)
 
 
     }
