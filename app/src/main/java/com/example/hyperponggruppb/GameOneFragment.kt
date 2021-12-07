@@ -15,7 +15,8 @@ class GameOneFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return activity?.applicationContext?.let { GameView(it) }
+
+        return activity?.applicationContext?.let { GameView(it, activity!!) }
     }
 
 

@@ -1,13 +1,17 @@
 package com.example.hyperponggruppb
 
+import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.core.graphics.scale
 
-class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
+class GameView(context: Context, var activity: Activity) : SurfaceView(context),
+    SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null
     private var running = false
@@ -15,47 +19,47 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
     private lateinit var ball: Ball
     private lateinit var player: Player
     var gameStart = false
-    var drawline = true
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
-    var isBrickHit = true
-    var canvasVertical = 0f
-    var canvasHorizontal = 0f
 
-    var screenSize  = Rect()
 
-    var background: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.lava_level_background).scale(1080,1920,true)
+
+    var background: Bitmap =
+        BitmapFactory.decodeResource(resources, R.drawable.lava_level_background)
+            .scale(1080, 1920, true)
     //var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
     //var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
 
     init {
         mHolder?.addCallback(this)
-
         setup()
     }
 
     fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.BLACK
+        player.paint.color = Color.WHITE
         ball = Ball(this.context)
-        ball.paint.color = Color.BLACK
+        ball.paint.color = Color.WHITE
         ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         BrickStructure.fillColors(brickColors)
+
     }
 
     fun start() {
 
-        ball.posX = (screenSize.right/2).toFloat()
-        ball.posY = (screenSize.bottom-235f)
+        ball.posX = 800f
+        ball.posY = 800f
         running = true
         thread = Thread(this)
         thread?.start()
     }
+
+
 
     fun stop() {
 
@@ -72,12 +76,36 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
     fun update() {
         ball.update(player)
+        if (ball.isDestroyed){
+
+            death()
+        }
+
+    }
+
+    fun death(){
+
+        if(player.lives > 0) {
+
+            ball.isDestroyed = false
+            gameStart = false
+            isCollisionDetected = false
+            ball.posX = 600f
+            ball.posY = 1500f
+            ball.speedX = 0f
+            ball.speedY = 0f
+
+        } else {
+            player.lives = 3
+            activity.finish()
+            stop()
+        }
     }
 
     fun draw() {
 
         canvas = mHolder!!.lockCanvas()
-        canvas.drawBitmap(background,matrix,null)
+        canvas.drawBitmap(background, matrix, null)
         //canvas.drawBitmap(newball,matrix,null)
         //canvas.drawBitmap(newplayer,matrix,null)
 
@@ -88,17 +116,12 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         player.draw(canvas)
 
 
-        if (drawline) {
+        for (obj in brickRow) {
 
 
-            for (obj in brickRow) {
-
-
-                var brickColor = Paint()
-                brickColor.color = (brickColors[brickRow.indexOf(obj)])
-                canvas.drawRect(obj, brickColor)
-            }
-
+            var brickColor = Paint()
+            brickColor.color = (brickColors[brickRow.indexOf(obj)])
+            canvas.drawRect(obj, brickColor)
         }
 
         mHolder!!.unlockCanvasAndPost(canvas)
@@ -142,7 +165,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
 
         for (rect in brickRow) {
 
-            if (ball.ballHitBox.intersect(rect) && ball.posY+ball.speedY > (rect.top).toFloat()) {
+            if (ball.ballHitBox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
 
@@ -152,18 +175,19 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         if (ball.brickCollision && toRemove < 37) {
             brickRow.removeAt(toRemove)
             brickColors.removeAt(toRemove)
+            if (brickRow.isEmpty()){
+                death()
+            }
         }
 
     }
 
 
     override fun surfaceCreated(p0: SurfaceHolder) {
-        screenSize = Rect(0,0,right,bottom)
+        start()
     }
 
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, right: Int, bottom: Int) {
-
-        start()
 
     }
 

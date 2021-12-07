@@ -25,7 +25,7 @@ object BrickStructure {
             left += 80
             right += 80
 
-            if (i == 11 || i == 22 || i == 33) {
+            if (i == 12 || i == 24 || i == 36) {
                 top += 35
                 bottom += 35
                 left = 0

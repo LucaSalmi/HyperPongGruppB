@@ -5,8 +5,9 @@ import android.graphics.*
 
 class Ball(var context: Context) {
 
-    var posX = 0f
-    var posY = 0f
+    var isDestroyed = false
+    var posX = 800f
+    var posY = 800f
     var paint = Paint()
     var hitboxPaint: Paint = Paint()
     var radius = 25f
@@ -18,20 +19,20 @@ class Ball(var context: Context) {
     var playerCollision = false
     var brickCollision = false
     var ballHitBox: Rect = Rect(
-        (posX-15).toInt(), //left
-        (posY-15).toInt(), //top
-        (posX+15).toInt(), //right
-        (posY+15).toInt() //bottom
+        (posX-20).toInt(), //left
+        (posY-20).toInt(), //top
+        (posX+20).toInt(), //right
+        (posY+20).toInt() //bottom
     )
 
 
     fun update(player: Player) {
 
         ballHitBox = Rect(
-            (posX-15).toInt(), //left
-            (posY-15).toInt(), //top
-            (posX+15).toInt(), //right
-            (posY+15).toInt() //bottom
+            (posX-20).toInt(), //left
+            (posY-20).toInt(), //top
+            (posX+20).toInt(), //right
+            (posY+20).toInt() //bottom
         )
 
 
@@ -47,6 +48,7 @@ class Ball(var context: Context) {
 
 
                 speedY = -speedY
+
 
                 if (playerCollision){
 
@@ -97,15 +99,18 @@ class Ball(var context: Context) {
 
                 }
 
-                if(brickCollision){
-
-                }
 
                 SoundEffectManager.playImpactSound(0, context)
             }
 
+            if(posY + radius == canvasHeight ) {
+                isDestroyed = true
+                player.lives -1
+            }
+
 
         }
+
 
         brickCollision = false
         playerCollision = false

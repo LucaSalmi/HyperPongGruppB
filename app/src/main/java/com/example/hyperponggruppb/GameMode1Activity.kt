@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
 
