@@ -9,16 +9,16 @@ import android.util.Log
 
 object BrickStructure {
 
-    var firstBrickRow = 12
-    var rowOfBricks = 13
-    var totalSumOfBricks = firstBrickRow + (rowOfBricks*4)
+    var firstBrickRow = 9
+    var rowOfBricks = 10
+    var totalSumOfBricks = firstBrickRow + (rowOfBricks * 9)
 
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
-        var left = 10
+        var left = 15
         var top = 5
-        var right = 70
-        var bottom = 30
+        var right = 115
+        var bottom = 45
 
 
         for (i in 0..(totalSumOfBricks)) {
@@ -27,15 +27,18 @@ object BrickStructure {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            left += 85
-            right += 85
+            left += 105
+            right += 105
 
-            if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks*2
-                || i == firstBrickRow + rowOfBricks*3 || i == firstBrickRow + rowOfBricks*4 ) {
-                top += 35
-                bottom += 35
-                left = 10
-                right = 70
+            if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
+                || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
+                || i == firstBrickRow + rowOfBricks * 6 || i == firstBrickRow + rowOfBricks * 7 || i == firstBrickRow + rowOfBricks * 8
+                || i == firstBrickRow + rowOfBricks * 9
+            ) {
+                top += 45
+                bottom += 45
+                left = 15
+                right = 115
             }
         }
 
@@ -64,13 +67,36 @@ object BrickStructure {
         }
     }
 
-    fun fillColors(colors: MutableList<Int>): MutableList<Int> {
+    fun fillColors(colors: MutableList<Int>, numberOfBricks: Int): MutableList<Int> {
 
 
-
-        for (i in 0..(totalSumOfBricks)) {
+        for (i in 0..(numberOfBricks)) {
             colors.add(randomColor(rNG(1, 5)))
         }
         return colors
+    }
+
+    fun createPattern(brickRow: MutableList<Rect>): MutableList<Rect> {
+
+        val patternOne = "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001"
+        var temBricks = mutableListOf<Rect>()
+        var index = 0
+
+        if(patternOne.length < brickRow.size){
+            return brickRow
+        }
+        
+        for(element in patternOne){
+
+            if ( element == '1'){
+                
+                temBricks.add(brickRow[index])
+                
+            }
+            index++
+        }
+        return temBricks
+
+
     }
 }

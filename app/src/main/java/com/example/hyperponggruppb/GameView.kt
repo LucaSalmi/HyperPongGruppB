@@ -3,17 +3,14 @@ package com.example.hyperponggruppb
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
-import androidx.fragment.app.commit
-import androidx.fragment.app.findFragment
-import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
+
 
 class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     SurfaceHolder.Callback, Runnable {
@@ -29,13 +26,14 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     var brickRow = mutableListOf<Rect>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
+    var levelCompleted = false
 
 
 
 
     var background: Bitmap =
         BitmapFactory.decodeResource(resources, R.drawable.lava_level_background)
-            .scale(1080, 1920, true)
+            .scale(getScreenWidth(), getScreenHeight(), true)
     //var newplayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(100,30,true )
     //var newball: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(15,15,true)
 
@@ -53,7 +51,8 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        BrickStructure.fillColors(brickColors)
+        brickRow = BrickStructure.createPattern(brickRow)
+        BrickStructure.fillColors(brickColors, brickRow.size)
 
     }
 
@@ -85,14 +84,19 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         ball.update(player)
         if (ball.isDestroyed){
 
-            death()
+            gameEnd()
         }
 
     }
 
-    fun death(){
+    fun gameEnd(){
 
-        Log.d(TAG, "death: ${player.lives}")
+        if (levelCompleted){
+            //player.lives = 0
+            //death() - LUCA's snabba lösning
+            //kekekekekekkekekekekekke HAMPUS WAS HERE
+            activity.finish()
+        }
 
         if(player.lives > 0) {
 
@@ -158,54 +162,6 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         return true
     }
 
-    fun checkCollision() {
-
-
-        if (ball.ballPosY < 1500f) {
-            isCollisionDetected = false
-        }
-
-        if (ball.ballHitBox.intersect(player.playerRect)) {
-
-            if (!isCollisionDetected) {
-                ball.playerCollision = true
-                isCollisionDetected = true
-                SoundEffectManager.jukebox(context, 0)
-            }
-        }
-
-        var toRemove = BrickStructure.totalSumOfBricks+1
-
-        for (rect in brickRow) {
-
-            if (ball.ballHitBox.intersect(rect)) {
-                toRemove = brickRow.indexOf(rect)
-                ball.brickCollision = true
-                SoundEffectManager.jukebox(context, 0)
-                
-
-            }
-        }
-
-        if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks+1) {
-            brickRow.removeAt(toRemove)
-            Log.d(TAG, "checkCollision: ${brickRow.size}")
-            brickColors.removeAt(toRemove)
-            PointManager.addPoints(10)
-
-            Log.d(TAG, "checkCollision: ${PointManager.playerPoints}")
-
-            if (brickRow.isEmpty()){
-                //player.lives = 0
-                //death() - LUCA's snabba lösning
-                //kekekekekekkekekekekekke HAMPUS WAS HERE
-                activity.finish()
-            }
-        }
-
-    }
-
-
     override fun surfaceCreated(p0: SurfaceHolder) {
         start()
     }
@@ -221,11 +177,26 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     override fun run() {
         while (running) {
 
-            checkCollision()
+            PhysicsEngine.playerCollision(ball, player, context)
+            PhysicsEngine.brickCollision(brickRow, brickColors,ball, context)
+
+            if (brickRow.isEmpty()){
+                levelCompleted = true
+                gameEnd()
+            }
+
             update()
             draw()
 
         }
+    }
+
+    fun getScreenWidth(): Int{
+        return Resources.getSystem().displayMetrics.widthPixels
+    }
+
+    fun getScreenHeight(): Int{
+        return Resources.getSystem().displayMetrics.heightPixels
     }
 
 
