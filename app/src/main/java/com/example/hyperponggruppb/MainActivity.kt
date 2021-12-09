@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
-        PointManager.playerPoints
+        PlayerManager.playerPoints
 
         music.context(this)
 

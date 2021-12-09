@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import org.json.JSONStringer
 
-object PointManager {
+object PlayerManager {
 
     var playerPoints = 0
     var playerHighScore = 0

@@ -9,8 +9,8 @@ import androidx.core.graphics.plus
 class Ball(var context: Context) {
 
     var isDestroyed = false
-    var ballPosX = 800f
-    var ballPosY = 800f
+    var ballPosX = 540f
+    var ballPosY = 1638f
     var paint = Paint()
     var hitboxPaint: Paint = Paint()
     var radius = 20f
@@ -19,7 +19,6 @@ class Ball(var context: Context) {
     var hitBoxMargin = 15
     var canvasHeight = 0f
     var canvasWidth = 0f
-    private val hitBoxVelModifier = 18
 
     var playerCollision = false
     var brickCollision = false

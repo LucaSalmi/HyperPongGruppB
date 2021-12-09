@@ -21,7 +21,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
-    var pointsString = "Score : ${PointManager.playerPoints}"
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
@@ -31,6 +30,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     val myActivity = context as GameMode1Activity
     val sp =
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
+    val ballHeightSpawnModifier = 650f
 
     val frameRate = 60
     val deltaTime = 0L
@@ -45,7 +45,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     init {
         mHolder?.addCallback(this)
-        PointManager.readSave(sp)
+        PlayerManager.readSave(sp)
         setup()
     }
 
@@ -55,7 +55,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         player.paint.color = Color.WHITE
         ball = Ball(this.context)
         ball.paint.color = Color.WHITE
-        ball.hitboxPaint.color = Color.BLACK
+        ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, 1)
@@ -65,8 +65,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     fun start() {
 
-        ball.ballPosX = player.top
-        ball.ballPosY = player.playerSize
+        ball.ballPosX = (getScreenWidth() / 2).toFloat()
+        ball.ballPosY = ((getScreenHeight() / 2).toFloat())+ballHeightSpawnModifier
         running = true
         thread = Thread(this)
         thread?.start()
@@ -86,37 +86,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     }
 
-    fun update() {
-        ball.update(player)
-        if (ball.isDestroyed) {
-
-            gameEnd()
-        }
-
-    }
-
     fun gameEnd() {
 
         if (levelCompleted) {
 
-            PointManager.saveHighScore(sp)
+            PlayerManager.saveHighScore(sp)
             activity.finish()
         }
 
-        if (player.lives > 0) {
+        player.lives -= 1
 
-            player.lives -= 1
+        if (player.lives > 0) {
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
-            ball.ballPosX = 600f
-            ball.ballPosY = 1500f
+            ball.ballPosX = (getScreenWidth() / 2).toFloat()
+            ball.ballPosY = (getScreenHeight() / 2).toFloat()
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
         } else {
 
-            PointManager.saveHighScore(sp)
+            PlayerManager.saveHighScore(sp)
             activity.finish()
 
         }
@@ -181,16 +172,21 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
     override fun run() {
+
         while (running) {
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                update()
+                ball.update(player)
+
+                if (ball.isDestroyed && gameStart) {
+
+                    gameEnd()
+                }
 
                 PhysicsEngine.playerCollision(ball, player, context)
                 PhysicsEngine.brickCollision(brickRow, brickColors, ball, context)
                 myActivity.updateText()
-
 
                 if (brickRow.isEmpty()) {
                     levelCompleted = true
