@@ -72,7 +72,7 @@ object PhysicsEngine {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
-            if ( ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
+            if ( ball.ballPosY - ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
                 if (ball.ballPosY - ball.radius <= 0f){
 
