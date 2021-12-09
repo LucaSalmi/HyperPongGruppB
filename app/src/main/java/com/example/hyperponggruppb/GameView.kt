@@ -88,6 +88,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     fun gameEnd() {
 
+
         if (levelCompleted) {
 
             PlayerManager.saveHighScore(sp)
@@ -96,14 +97,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         PlayerManager.lives -= 1
 
-        Log.d(TAG, "PLAYERLIVES: ${PlayerManager.lives}")
 
         if (PlayerManager.lives > 0) {
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
             ball.ballPosX = (getScreenWidth() / 2).toFloat()
-            ball.ballPosY = (getScreenHeight() / 2).toFloat()
+            ball.ballPosY = (getScreenHeight() / 2).toFloat()+ballHeightSpawnModifier
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
