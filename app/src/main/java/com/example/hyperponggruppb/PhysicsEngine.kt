@@ -1,11 +1,14 @@
 package com.example.hyperponggruppb
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Rect
+import android.util.Log
 
 object PhysicsEngine {
 
     var isCollisionDetected = false
+    var brickHit = Rect()
 
     fun brickCollision(brickRow: MutableList<Rect>, brickColors: MutableList<Int>, ball: Ball, context: Context){
 
@@ -16,6 +19,7 @@ object PhysicsEngine {
             if (ball.ballHitBox.intersect(rect)) {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
+                brickHit = rect
                 SoundEffectManager.jukebox(context, 0)
             }
         }
@@ -70,6 +74,16 @@ object PhysicsEngine {
 
                 ball.ballSpeedY *= -1f //-ballSpeedY
 
+                if (ball.brickCollision){
+
+                    if (ball.ballHitBox.left >= brickHit.left && ball.ballHitBox.right >= brickHit.right || ball.ballHitBox.left <= brickHit.left && ball.ballHitBox.right <= brickHit.right){
+                        ball.ballSpeedX *= -1
+                    }
+                    Log.d(TAG, "Ball: posX: ${ball.ballPosX} posY: ${ball.ballPosY}")
+                    Log.d(TAG, "Hitbox: top: ${ball.ballHitBox.top}, bottom: ${ball.ballHitBox.bottom}, left: ${ball.ballHitBox.left}, right: ${ball.ballHitBox.right} ")
+                    Log.d(TAG, "Brick: top: ${brickHit.top}, bottom: ${brickHit.bottom}, left: ${brickHit.left}, right: ${brickHit.right}")
+                }
+
 
                 if (ball.playerCollision){
 
@@ -106,11 +120,6 @@ object PhysicsEngine {
                     }
                 }
 
-                if (ball.brickCollision){
-
-                    ball.ballPosY += 20f
-                    ball.ballPosX += 10f
-                }
             }
         }
 
