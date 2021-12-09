@@ -21,7 +21,10 @@ class PointFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_point, container, false)
         val pointsView = view?.findViewById<TextView>(R.id.points_view)
+        val highScoreView = view?.findViewById<TextView>(R.id.hi_score_view)
         pointsView?.text = PointManager.playerPoints.toString()
+        highScoreView?.text = PointManager.playerHighScore.toString()
+
         return view
     }
 

@@ -13,7 +13,7 @@ import androidx.core.graphics.scale
 import java.lang.System.currentTimeMillis
 
 
-class GameView(context: Context, var activity: Activity) : SurfaceView(context),
+class GameView(context: Context?, var activity: Activity) : SurfaceView(context),
     SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null
@@ -30,7 +30,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     var levelCompleted = false
     val myActivity = context as GameMode1Activity
 
-    val frameRate = 30
+    val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
 

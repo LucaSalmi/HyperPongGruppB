@@ -16,7 +16,7 @@ class GameOneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return activity?.applicationContext?.let { GameView(it, activity!!) }
+        return activity?.applicationContext?.let { GameView(super.getContext(), activity!!) }
     }
 
 
