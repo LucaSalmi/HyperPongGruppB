@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.core.graphics.scale
+import java.lang.System.currentTimeMillis
 
 
 class GameView(context: Context, var activity: Activity) : SurfaceView(context),
@@ -27,6 +28,11 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
     var levelCompleted = false
+    val myActivity = context as GameMode1Activity
+
+    val frameRate = 30
+    val deltaTime = 0L
+    var timeToUpdate = currentTimeMillis()
 
 
 
@@ -51,7 +57,7 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
         ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow)
+        brickRow = BrickStructure.createPattern(brickRow,1)
         BrickStructure.fillColors(brickColors, brickRow.size)
 
     }
@@ -176,17 +182,24 @@ class GameView(context: Context, var activity: Activity) : SurfaceView(context),
 
     override fun run() {
         while (running) {
+            if (currentTimeMillis() >= timeToUpdate){
+                timeToUpdate += 1000/frameRate
 
-            PhysicsEngine.playerCollision(ball, player, context)
-            PhysicsEngine.brickCollision(brickRow, brickColors,ball, context)
+                update()
 
-            if (brickRow.isEmpty()){
-                levelCompleted = true
-                gameEnd()
+                PhysicsEngine.playerCollision(ball, player, context)
+                PhysicsEngine.brickCollision(brickRow, brickColors,ball, context)
+                myActivity.updateText()
+
+
+                if (brickRow.isEmpty()){
+                    levelCompleted = true
+                    gameEnd()
+                }
+
+                draw()
             }
 
-            update()
-            draw()
 
         }
     }

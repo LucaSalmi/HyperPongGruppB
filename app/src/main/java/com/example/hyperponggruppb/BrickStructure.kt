@@ -76,9 +76,15 @@ object BrickStructure {
         return colors
     }
 
-    fun createPattern(brickRow: MutableList<Rect>): MutableList<Rect> {
+    fun createPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect> {
 
-        val patternOne = "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001"
+        val patternOne = when(id){
+
+            0 -> "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001"
+            1 -> "1111111111100000000110000010011000011001101111100110011110011000111101100011111110001100011000100001"
+            else -> "Invalid"
+        }
+
         var temBricks = mutableListOf<Rect>()
         var index = 0
 

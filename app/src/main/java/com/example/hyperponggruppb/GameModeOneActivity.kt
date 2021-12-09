@@ -25,5 +25,12 @@ class GameMode1Activity : AppCompatActivity(){
 
     }
 
+    fun updateText(){
 
+        runOnUiThread(Runnable {
+            supportFragmentManager.commit {
+                replace(R.id.frame_layout, PointFragment())
+            }
+        })
+    }
 }
