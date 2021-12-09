@@ -18,7 +18,6 @@ class Ball(var context: Context) {
     var hitBoxMargin = 18
     var canvasHeight = 0f
     var canvasWidth = 0f
-    //hampus men vafaaaaaaaaaaaaannnnn
     var playerCollision = false
     var brickCollision = false
     var ballHitBox: Rect = Rect(

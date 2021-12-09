@@ -29,12 +29,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var isCollisionDetected = false
     var levelCompleted = false
     val myActivity = context as GameMode1Activity
+    val sp =
+        context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
 
     val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
-
-
 
 
     var background: Bitmap =
@@ -45,6 +45,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     init {
         mHolder?.addCallback(this)
+        PointManager.readSave(sp)
         setup()
     }
 
@@ -57,7 +58,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow,1)
+        brickRow = BrickStructure.createPattern(brickRow, 1)
         BrickStructure.fillColors(brickColors, brickRow.size)
 
     }
@@ -70,7 +71,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         thread = Thread(this)
         thread?.start()
     }
-
 
 
     fun stop() {
@@ -88,23 +88,22 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     fun update() {
         ball.update(player)
-        if (ball.isDestroyed){
+        if (ball.isDestroyed) {
 
             gameEnd()
         }
 
     }
 
-    fun gameEnd(){
+    fun gameEnd() {
 
-        if (levelCompleted){
-            //player.lives = 0
-            //death() - LUCA's snabba lösning
-            //kekekekekekkekekekekekke HAMPUS WAS HERE
+        if (levelCompleted) {
+
+            PointManager.saveHighScore(sp)
             activity.finish()
         }
 
-        if(player.lives > 0) {
+        if (player.lives > 0) {
 
             player.lives -= 1
             ball.isDestroyed = false
@@ -117,6 +116,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         } else {
 
+            PointManager.saveHighScore(sp)
             activity.finish()
 
         }
@@ -143,7 +143,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.e(TAG, "draw: It's NULL")
         }
 
@@ -182,17 +182,17 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     override fun run() {
         while (running) {
-            if (currentTimeMillis() >= timeToUpdate){
-                timeToUpdate += 1000/frameRate
+            if (currentTimeMillis() >= timeToUpdate) {
+                timeToUpdate += 1000 / frameRate
 
                 update()
 
                 PhysicsEngine.playerCollision(ball, player, context)
-                PhysicsEngine.brickCollision(brickRow, brickColors,ball, context)
+                PhysicsEngine.brickCollision(brickRow, brickColors, ball, context)
                 myActivity.updateText()
 
 
-                if (brickRow.isEmpty()){
+                if (brickRow.isEmpty()) {
                     levelCompleted = true
                     gameEnd()
                 }
@@ -204,11 +204,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         }
     }
 
-    fun getScreenWidth(): Int{
+    fun getScreenWidth(): Int {
         return Resources.getSystem().displayMetrics.widthPixels
     }
 
-    fun getScreenHeight(): Int{
+    fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
     }
 
