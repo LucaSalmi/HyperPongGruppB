@@ -94,9 +94,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             activity.finish()
         }
 
-        player.lives -= 1
+        PlayerManager.lives -= 1
 
-        if (player.lives > 0) {
+        Log.d(TAG, "PLAYERLIVES: ${PlayerManager.lives}")
+
+        if (PlayerManager.lives > 0) {
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false

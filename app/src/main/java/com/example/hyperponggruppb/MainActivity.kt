@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
             setTheme(R.style.Theme_HyperPongGruppB)
 
 
-
         }, 2000)
 
 
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             SoundEffectManager.jukebox(this, 1)
             startActivity(toGameModeOne)
         }
-
 
     }
 

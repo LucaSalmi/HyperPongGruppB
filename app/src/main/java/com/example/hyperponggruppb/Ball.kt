@@ -17,7 +17,7 @@ class Ball(var context: Context) {
     var ballSpeedX = 0f
     var ballSpeedY = 0f
     var hitBoxMargin = 15
-    var canvasHeight = 0f
+    var canvasHeight = 50000f
     var canvasWidth = 0f
 
     var playerCollision = false

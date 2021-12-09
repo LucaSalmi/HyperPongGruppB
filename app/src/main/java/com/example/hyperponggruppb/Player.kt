@@ -16,7 +16,6 @@ class Player(context: Context) {
     var right = 700f
     var bottom = 1750f
     var paint = Paint()
-    var lives = 3
     val playerSize = right-left
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 

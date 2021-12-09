@@ -2,6 +2,7 @@ package com.example.hyperponggruppb
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.util.Log
 import java.util.concurrent.CopyOnWriteArrayList
 
 class MusicManager() : Runnable {
@@ -23,7 +24,7 @@ class MusicManager() : Runnable {
     fun start() {
         running = true
         thread = Thread(this)
-        thread?.start()
+        thread?.start() // vad gör vi med tråden?
     }
 
     fun stop() {
@@ -37,6 +38,6 @@ class MusicManager() : Runnable {
     }
 
     override fun run() {
-
+        Log.v("fellix", "rim")
     }
 }
