@@ -18,7 +18,7 @@ object BrickStructure {
         var left = 15
         var top = 5
         var right = 115
-        var bottom = 45
+        var bottom = 65
 
 
         for (i in 0..(totalSumOfBricks)) {
@@ -35,8 +35,8 @@ object BrickStructure {
                 || i == firstBrickRow + rowOfBricks * 6 || i == firstBrickRow + rowOfBricks * 7 || i == firstBrickRow + rowOfBricks * 8
                 || i == firstBrickRow + rowOfBricks * 9
             ) {
-                top += 45
-                bottom += 45
+                top += 65
+                bottom += 65
                 left = 15
                 right = 115
             }

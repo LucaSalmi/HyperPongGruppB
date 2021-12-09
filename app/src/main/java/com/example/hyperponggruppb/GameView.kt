@@ -55,7 +55,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         player.paint.color = Color.WHITE
         ball = Ball(this.context)
         ball.paint.color = Color.WHITE
-        ball.hitboxPaint.color = Color.TRANSPARENT
+        ball.hitboxPaint.color = Color.BLACK
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, 1)

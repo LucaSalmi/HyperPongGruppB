@@ -4,11 +4,13 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Rect
 import android.util.Log
+import androidx.core.graphics.plus
 
 object PhysicsEngine {
 
     var isCollisionDetected = false
     var brickHit = Rect()
+
 
     fun brickCollision(brickRow: MutableList<Rect>, brickColors: MutableList<Int>, ball: Ball, context: Context){
 
@@ -38,6 +40,7 @@ object PhysicsEngine {
             isCollisionDetected = false
         }
 
+
         if (ball.ballHitBox.intersect(player.playerRect)) {
 
             if (!isCollisionDetected) {
@@ -63,25 +66,36 @@ object PhysicsEngine {
             return
         }
 
-        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 0f || ball.ballPosY - ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 0f || ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
             if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 0f) {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
-            if ( ball.ballPosY - ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
+            if ( ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
+                if (ball.ballPosY - ball.radius <= 0f){
 
-                ball.ballSpeedY *= -1f //-ballSpeedY
-
+                    ball.ballSpeedY *= -1f //-ballSpeedY
+                }
                 if (ball.brickCollision){
 
-                    if (ball.ballHitBox.left >= brickHit.left && ball.ballHitBox.right >= brickHit.right || ball.ballHitBox.left <= brickHit.left && ball.ballHitBox.right <= brickHit.right){
-                        ball.ballSpeedX *= -1
+                    if (ball.ballPosY + ball.radius > brickHit.top || ball.ballPosY - ball.radius < brickHit.top + brickHit.bottom){
+                        Log.d(TAG, "BallPhysics: main if is HERE!!!!!")
+                        ball.ballSpeedY *= -1f
+
                     }
+                    if (ball.ballPosX - ball.radius > brickHit.left || ball.ballPosX + ball.radius < brickHit.left + brickHit.right ){
+                        Log.d(TAG, "BallPhysics: else if is HERE!!!!!")
+                        ball.ballSpeedX *= -1f
+
+                    }
+                    /*
                     Log.d(TAG, "Ball: posX: ${ball.ballPosX} posY: ${ball.ballPosY}")
                     Log.d(TAG, "Hitbox: top: ${ball.ballHitBox.top}, bottom: ${ball.ballHitBox.bottom}, left: ${ball.ballHitBox.left}, right: ${ball.ballHitBox.right} ")
                     Log.d(TAG, "Brick: top: ${brickHit.top}, bottom: ${brickHit.bottom}, left: ${brickHit.left}, right: ${brickHit.right}")
+
+                     */
                 }
 
 
