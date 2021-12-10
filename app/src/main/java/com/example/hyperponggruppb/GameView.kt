@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.Resources
@@ -108,6 +109,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedY = 0f
 
         } else {
+
+
+
+
+
+
 
             PlayerManager.saveHighScore(sp)
             activity.finish()

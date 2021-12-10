@@ -39,7 +39,6 @@ object PhysicsEngine {
             isCollisionDetected = false
         }
 
-
         if (ball.ballHitBox.intersect(player.playerRect)) {
 
             if (!isCollisionDetected) {
