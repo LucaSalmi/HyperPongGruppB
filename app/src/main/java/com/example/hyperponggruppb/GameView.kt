@@ -51,7 +51,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         setup()
     }
 
-    val timer = object: CountDownTimer(5000, 1000) {
+    val timer = object: CountDownTimer(20000, 1000) {
 
         override fun onTick(p0: Long) {
         }
@@ -78,6 +78,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, BrickStructure.rNG(0,13))
+        BrickStructure.makeOOBBricks(brickRow)
         BrickStructure.fillColors(brickColors, brickRow.size)
 
     }
@@ -148,9 +149,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             if (spawnNewRow){
 
                 BrickStructure.moveDownRow(brickRow)
-                //BrickStructure.spawnNewRow(brickRow)
                 spawnNewRow = false
             }
+
 
             for (obj in brickRow) {
 
@@ -219,11 +220,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                     myActivity.updateText()
                 }catch (e: Exception) {
                     Log.e(TAG, "Fragment: It's NULL")
-                }
-
-                if (brickRow.isEmpty()) {
-                    levelCompleted = true
-                    gameEnd()
                 }
 
                 draw()

@@ -69,13 +69,13 @@ object PhysicsEngine {
             return
         }
 
-        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
 
             if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f) {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
-            if (ball.ballPosY - ball.radius <= 2f || ball.playerCollision || ball.brickCollision) {
+            if (ball.ballPosY - ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
 
                 if (ball.ballPosY - ball.radius <= 0f) {
 

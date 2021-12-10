@@ -1,11 +1,7 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
-import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
-import android.util.Log
 
 object BrickStructure {
 
@@ -20,9 +16,6 @@ object BrickStructure {
     var bottom = 65
 
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
-
-
-
 
         for (i in 0..(totalSumOfBricks)) {
 
@@ -42,6 +35,38 @@ object BrickStructure {
                 bottom += 65
                 left = 15
                 right = 115
+            }
+        }
+
+        return brickRow
+    }
+
+    fun makeOOBBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
+
+        var oOBLeft = 15
+        var oOBTop = -60
+        var oOBright = 115
+        var oOBBottom = 5
+
+
+        for (i in 0..(totalSumOfBricks)) {
+
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            brickRow.add(brickRect)
+            oOBLeft += 105
+            oOBright += 105
+
+            if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
+                || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
+                || i == firstBrickRow + rowOfBricks * 6 || i == firstBrickRow + rowOfBricks * 7 || i == firstBrickRow + rowOfBricks * 8
+                || i == firstBrickRow + rowOfBricks * 9
+            ) {
+                oOBTop -= 65
+                oOBBottom -= 65
+                oOBLeft = 15
+                oOBright = 115
             }
         }
 
