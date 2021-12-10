@@ -26,8 +26,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
-    var newRow = mutableListOf<Rect>()
-    var newRowColors = mutableListOf<Int>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
     var levelCompleted = false
@@ -128,12 +126,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         } else {
 
-
-
-
-
-
-
             PlayerManager.saveHighScore(sp)
             activity.finish()
 
@@ -155,12 +147,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             if (spawnNewRow){
 
-                for (obj in newRow){
-                    var brickColor = Paint()
-                    brickColor.color = (brickColors[newRow.indexOf(obj)])
-                    canvas.drawRect(obj, brickColor)
-                    Log.d(TAG, "new row: $newRow")
-                }
+                BrickStructure.moveDownRow(brickRow)
+                //BrickStructure.spawnNewRow(brickRow)
                 spawnNewRow = false
             }
 
@@ -236,13 +224,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 if (brickRow.isEmpty()) {
                     levelCompleted = true
                     gameEnd()
-                }
-
-                if (spawnNewRow){
-
-                    BrickStructure.moveDownRow(brickRow)
-                    BrickStructure.spawnNewRow(newRow)
-
                 }
 
                 draw()
