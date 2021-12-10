@@ -9,7 +9,6 @@ import android.util.Log
 
 class Player(context: Context) {
 
-// 500 -- 700
 
     var left = 500f
     var top = 1720f

@@ -13,12 +13,15 @@ object BrickStructure {
     var rowOfBricks = 10
     var totalSumOfBricks = firstBrickRow + (rowOfBricks * 9)
 
+//brick base positions
+    var left = 15
+    var top = 5
+    var right = 115
+    var bottom = 65
+
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
-        var left = 15
-        var top = 5
-        var right = 115
-        var bottom = 65
+
 
 
         for (i in 0..(totalSumOfBricks)) {
@@ -113,7 +116,29 @@ object BrickStructure {
             index++
         }
         return temBricks
+    }
+
+    fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
+        for (obj in brickRow){
+            obj.top += 65
+            obj.bottom += 65
+        }
+        return brickRow
+    }
+
+    fun spawnNewRow(newRow: MutableList<Rect>): MutableList<Rect>{
 
 
+        for (i in 0..rowOfBricks){
+
+            var brick = Bricks(left, top, right, bottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            newRow.add(brickRect)
+            left += 105
+            right += 105
+        }
+
+        return newRow
     }
 }

@@ -6,6 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -25,6 +26,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
+    var newRow = mutableListOf<Rect>()
+    var newRowColors = mutableListOf<Int>()
     var brickColors = mutableListOf<Int>()
     var isCollisionDetected = false
     var levelCompleted = false
@@ -36,7 +39,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
-
+    var spawnNewRow = false
 
     var background: Bitmap =
         BitmapFactory.decodeResource(resources, R.drawable.lava_level_background)
@@ -50,6 +53,23 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         setup()
     }
 
+    val timer = object: CountDownTimer(5000, 1000) {
+
+        override fun onTick(p0: Long) {
+        }
+
+        override fun onFinish() {
+            spawnNewRow = true
+            restartTimer()
+        }
+    }
+
+    fun restartTimer(){
+
+        timer.cancel()
+        timer.start()
+    }
+
     fun setup() {
 
         player = Player(this.context)
@@ -59,7 +79,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         ball.hitboxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, 1)
+        brickRow = BrickStructure.createPattern(brickRow, BrickStructure.rNG(0,13))
         BrickStructure.fillColors(brickColors, brickRow.size)
 
     }
@@ -84,7 +104,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             e.printStackTrace()
         }
 
-
     }
 
     fun gameEnd() {
@@ -97,14 +116,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         PlayerManager.lives -= 1
 
-        Log.d(TAG, "PLAYERLIVES: ${PlayerManager.lives}")
 
         if (PlayerManager.lives > 0) {
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
             ball.ballPosX = (getScreenWidth() / 2).toFloat()
-            ball.ballPosY = (getScreenHeight() / 2).toFloat()
+            ball.ballPosY = (getScreenHeight() / 2).toFloat()+ballHeightSpawnModifier
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
@@ -124,6 +142,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     fun draw() {
 
+
         try {
             canvas = mHolder!!.lockCanvas()
             canvas.drawBitmap(background, matrix, null)
@@ -134,8 +153,18 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             player.draw(canvas)
 
-            for (obj in brickRow) {
+            if (spawnNewRow){
 
+                for (obj in newRow){
+                    var brickColor = Paint()
+                    brickColor.color = (brickColors[newRow.indexOf(obj)])
+                    canvas.drawRect(obj, brickColor)
+                    Log.d(TAG, "new row: $newRow")
+                }
+                spawnNewRow = false
+            }
+
+            for (obj in brickRow) {
 
                 var brickColor = Paint()
                 brickColor.color = (brickColors[brickRow.indexOf(obj)])
@@ -143,6 +172,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
+
         } catch (e: Exception) {
             Log.e(TAG, "draw: It's NULL")
         }
@@ -163,6 +193,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedX = 7f
             ball.ballSpeedY = -13f
             gameStart = true
+            restartTimer()
         }
 
         return true
@@ -195,11 +226,23 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 PhysicsEngine.playerCollision(ball, player, context)
                 PhysicsEngine.brickCollision(brickRow, brickColors, ball, context)
-                myActivity.updateText()
+
+                try {
+                    myActivity.updateText()
+                }catch (e: Exception) {
+                    Log.e(TAG, "Fragment: It's NULL")
+                }
 
                 if (brickRow.isEmpty()) {
                     levelCompleted = true
                     gameEnd()
+                }
+
+                if (spawnNewRow){
+
+                    BrickStructure.moveDownRow(brickRow)
+                    BrickStructure.spawnNewRow(newRow)
+
                 }
 
                 draw()
