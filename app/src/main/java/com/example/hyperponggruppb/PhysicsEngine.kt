@@ -70,7 +70,7 @@ object PhysicsEngine {
             return
         }
 
-        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 0f || ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
             if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f) {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
