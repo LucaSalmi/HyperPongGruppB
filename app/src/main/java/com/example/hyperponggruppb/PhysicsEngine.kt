@@ -3,12 +3,16 @@ package com.example.hyperponggruppb
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Rect
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 
 object PhysicsEngine {
 
     var isCollisionDetected = false
     var brickHit = Rect()
+    var canvasHeight = 0f
+    var canvasWidth = 0f
 
 
     fun brickCollision(
@@ -64,14 +68,19 @@ object PhysicsEngine {
             (ball.ballPosY + ball.hitBoxMargin).toInt() //bottom
         )
 
-        if (ball.ballPosY > ball.canvasHeight) {
+        if (ball.ballPosY > canvasHeight) {
             ball.isDestroyed = true
             return
         }
 
-        if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
 
-            if (ball.ballPosX + ball.radius >= ball.canvasWidth || ball.ballPosX - ball.radius <= 2f) {
+            if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 2f) {
+
+                if (ball.ballPosX > canvasWidth){
+
+                    ball.ballPosX = canvasWidth + ball.radius
+                }
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
@@ -81,31 +90,24 @@ object PhysicsEngine {
 
                     ball.ballSpeedY *= -1f //-ballSpeedY
                 }
+
                 if (ball.brickCollision) {
 
-                    ball.ballSpeedY *= -1f
-
-
-                    if (ball.ballPosY - ball.radius > brickHit.left || ball.ballPosY + ball.radius > brickHit.right) {
-                        Log.d(TAG, "BallPhysics: side hit is HERE!!!!!")
+                    if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top){
+                        Log.d(TAG, "BallPhysics: sides")
                         ball.ballSpeedX *= -1f
-
+                    }else{
+                        Log.d(TAG, "BallPhysics: top/bottom")
+                        ball.ballSpeedY *= -1f
                     }
-
-                    Log.d(TAG, "Ball: posX: ${ball.ballPosX} posY: ${ball.ballPosY}")
-                    Log.d(
-                        TAG,
-                        "Hitbox: top: ${ball.ballHitBox.top}, bottom: ${ball.ballHitBox.bottom}, left: ${ball.ballHitBox.left}, right: ${ball.ballHitBox.right} "
-                    )
-                    Log.d(
-                        TAG,
-                        "Brick: top: ${brickHit.top}, bottom: ${brickHit.bottom}, left: ${brickHit.left}, right: ${brickHit.right}"
-                    )
-
                 }
 
 
                 if (ball.playerCollision) {
+
+                    Log.d(TAG, "BallPhysics: ballX ${ball.ballPosX}, ballY ${ball.ballPosY}")
+                    Log.d(TAG, "BallPhysics: ballX ${player.playerRect}")
+
 
                     if (player.playerSize - (player.right - ball.ballPosX) <= 0.1 * player.playerSize) { // 0% --> 10% of the pad
                         ball.ballSpeedY = -5f
