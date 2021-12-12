@@ -4,18 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cave_background"
+    android:background="@drawable/menu_pongtropolis"
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/title_shadow"
+        android:layout_width="0dp"
+        android:layout_height="330dp"
+        android:background="@color/faded_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
         android:id="@+id/iv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginTop="130dp"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/hyper_pong_title" />
+        app:srcCompat="@drawable/new_hyperpong_future_edition" />
+
+
 
     <LinearLayout
         android:id="@+id/btn_layout_one"
