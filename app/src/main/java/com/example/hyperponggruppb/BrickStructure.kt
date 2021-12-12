@@ -151,20 +151,4 @@ object BrickStructure {
         }
         return brickRow
     }
-
-    fun spawnNewRow(brickRow: MutableList<Rect>): MutableList<Rect>{
-
-
-        for (i in 0..rowOfBricks){
-
-            var brick = Bricks(left, top, right, bottom)
-            var brickRect =
-                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
-            brickRow.add(brickRect)
-            left += 105
-            right += 105
-        }
-
-        return brickRow
-    }
 }

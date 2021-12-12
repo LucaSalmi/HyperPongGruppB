@@ -43,7 +43,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             .scale(getScreenWidth(), getScreenHeight(), true)
     var newPlayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(200,40,true )
     var newBall: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(40,40,true)
-    var newBrick: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(40,40,true)
+    var newBrick: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.brick_v1).scale(110,70,true)
 
     init {
         mHolder?.addCallback(this)
@@ -159,6 +159,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 var brickColor = Paint()
                 brickColor.color = (brickColors[brickRow.indexOf(obj)])
                 canvas.drawRect(obj, brickColor)
+                canvas.drawBitmap(newBrick, obj.left.toFloat()-5, obj.top.toFloat()-5, null)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
