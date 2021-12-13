@@ -13,7 +13,7 @@ object PlayerManager {
 
     var playerPoints = 0
     var playerHighScore = 0
-    var lives = 3
+    var lives = 0
     private val gson = Gson()
 
 

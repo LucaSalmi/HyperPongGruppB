@@ -47,6 +47,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     init {
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
+        PlayerManager.lives = 3
         setup()
     }
 
