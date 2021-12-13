@@ -28,19 +28,23 @@ class PointFragment : Fragment() {
         val heartTwo = view?.findViewById<ImageView>(R.id.heart_two)
         val heartThree = view?.findViewById<ImageView>(R.id.heart_three)
 
-        if(PlayerManager.lives >= 3) {
+        when {
+            PlayerManager.lives >= 3 -> {
 
-            //heartOne?.setImageResource(R.drawable.ic_baseline_search_24)
+                //heartOne?.setImageResource(R.drawable.ic_baseline_search_24)
 
-        } else if (PlayerManager.lives >= 2) {
+            }
+            PlayerManager.lives >= 2 -> {
 
-            //heartOne?.setImageResource(R.drawable.ic_baseline_search_24)
-            heartThree?.isVisible = false
+                //heartOne?.setImageResource(R.drawable.ic_baseline_search_24)
+                heartThree?.isVisible = false
 
-        } else if (PlayerManager.lives >= 1) {
+            }
+            PlayerManager.lives >= 1 -> {
 
-            //heartTwo?.setImageResource(R.drawable.ic_baseline_search_24)
-            heartTwo?.isVisible = false
+                //heartTwo?.setImageResource(R.drawable.ic_baseline_search_24)
+                heartTwo?.isVisible = false
+            }
         }
         return view
     }

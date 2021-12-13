@@ -2,6 +2,7 @@ package com.example.hyperponggruppb
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Handler
 import android.os.Looper
@@ -17,7 +18,7 @@ object PhysicsEngine {
 
     fun brickCollision(
         brickRow: MutableList<Rect>,
-        brickColors: MutableList<Int>,
+        brickAssets: MutableList<Bitmap>,
         ball: Ball,
         context: Context
     ) {
@@ -36,7 +37,7 @@ object PhysicsEngine {
 
         if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks + 1) {
             brickRow.removeAt(toRemove)
-            brickColors.removeAt(toRemove)
+            brickAssets.removeAt(toRemove)
             PlayerManager.addPoints(10)
         }
 
@@ -93,7 +94,7 @@ object PhysicsEngine {
 
                 if (ball.brickCollision) {
 
-                    if (ball.ballPosY + ball.radius < brickHit.bottom && ball.ballPosY - ball.radius > brickHit.top){
+                    if (ball.ballPosY + 10f < brickHit.bottom && ball.ballPosY - 10f > brickHit.top){
                         Log.d(TAG, "BallPhysics: sides")
                         ball.ballSpeedX *= -1f
                     }else{
