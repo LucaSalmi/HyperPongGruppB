@@ -12,8 +12,10 @@ object PhysicsEngine {
 
     var isCollisionDetected = false
     var brickHit = Rect()
-    var canvasHeight = 0f
-    var canvasWidth = 0f
+    var canvasHeight = 1007f
+    var canvasWidth = 100f
+    var gameStart = false
+
 
 
     fun brickCollision(
@@ -69,7 +71,7 @@ object PhysicsEngine {
             (ball.ballPosY + ball.hitBoxMargin).toInt() //bottom
         )
 
-        if (ball.ballPosY > canvasHeight) {
+        if (ball.ballPosY - ball.radius > canvasHeight && gameStart) {
             ball.isDestroyed = true
             return
         }
@@ -103,12 +105,7 @@ object PhysicsEngine {
                     }
                 }
 
-
                 if (ball.playerCollision) {
-
-                    Log.d(TAG, "BallPhysics: ballX ${ball.ballPosX}, ballY ${ball.ballPosY}")
-                    Log.d(TAG, "BallPhysics: ballX ${player.playerRect}")
-
 
                     if (player.playerSize - (player.right - ball.ballPosX) <= 0.1 * player.playerSize) { // 0% --> 10% of the pad
                         ball.ballSpeedY = -5f

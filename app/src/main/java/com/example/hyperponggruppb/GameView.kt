@@ -10,7 +10,9 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
+import kotlin.math.log
 
 
 class GameView(context: Context?, var activity: Activity) : SurfaceView(context),
@@ -21,7 +23,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
     private lateinit var player: Player
-    var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
     var brickAssets = mutableListOf<Bitmap>()
@@ -79,8 +80,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun start() {
 
-        ball.ballPosX = (getScreenWidth() / 2).toFloat()
-        ball.ballPosY = ((getScreenHeight() / 2).toFloat())+ballHeightSpawnModifier
+        ball.ballPosX = (getScreenWidth()).toFloat()
+        ball.ballPosY = ((getScreenHeight() / 2).toFloat()) +ballHeightSpawnModifier
+
         running = true
         thread = Thread(this)
         thread?.start()
@@ -107,7 +109,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             activity.finish()
         }
 
-        if (PlayerManager.lives > 0) {
+        if (PlayerManager.lives > 0 && gameStart) {
 
             PlayerManager.lives -= 1
             ball.isDestroyed = false
@@ -131,12 +133,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         try {
             canvas = mHolder!!.lockCanvas()
+
+            PhysicsEngine.canvasHeight = canvas.height.toFloat()
+            PhysicsEngine.canvasWidth = canvas.width.toFloat()
+
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
 
             ball.draw(canvas)
             canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
-            PhysicsEngine.canvasHeight = canvas.height.toFloat()
-            PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             player.draw(canvas)
             canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
@@ -202,12 +206,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                ball.update(player)
-
                 if (ball.isDestroyed && gameStart) {
 
                     gameEnd()
                 }
+
+                ball.update(player)
 
                 PhysicsEngine.playerCollision(ball, player, context)
                 PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
@@ -216,6 +220,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     myActivity.updateText()
                 }
+
+                if (brickRow.size < 50){
+
+                    BrickStructure.makeBricks(brickRow)
+                    BrickStructure.makeOOBBricks(brickRow)
+                    AssetManager.fillAssetArray(brickAssets, brickRow.size)
+                }
+
                 draw()
             }
         }

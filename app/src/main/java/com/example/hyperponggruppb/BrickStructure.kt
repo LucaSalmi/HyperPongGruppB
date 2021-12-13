@@ -10,31 +10,36 @@ object BrickStructure {
     var totalSumOfBricks = firstBrickRow + (rowOfBricks * 9)
 
 //brick base positions
-    var left = 15
-    var top = 5
-    var right = 115
-    var bottom = 65
+    val left = 15
+    val top = 5
+    val right = 115
+    val bottom = 65
 
     fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
+        var leftInBounds = left
+        var topInBounds = top
+        var rightInBounds = right
+        var bottomInBounds = bottom
+
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(left, top, right, bottom)
+            var brick = Bricks(leftInBounds, topInBounds, rightInBounds, bottomInBounds)
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            left += 105
-            right += 105
+            leftInBounds += 105
+            rightInBounds += 105
 
             if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
                 || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
                 || i == firstBrickRow + rowOfBricks * 6 || i == firstBrickRow + rowOfBricks * 7 || i == firstBrickRow + rowOfBricks * 8
                 || i == firstBrickRow + rowOfBricks * 9
             ) {
-                top += 65
-                bottom += 65
-                left = 15
-                right = 115
+                topInBounds += 65
+                bottomInBounds += 65
+                leftInBounds = 15
+                rightInBounds = 115
             }
         }
 
@@ -43,9 +48,9 @@ object BrickStructure {
 
     fun makeOOBBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
-        var oOBLeft = 15
+        var oOBLeft = left
         var oOBTop = -60
-        var oOBright = 115
+        var oOBright = right
         var oOBBottom = 0
 
 
