@@ -73,9 +73,9 @@ object PhysicsEngine {
             return
         }
 
-        if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 2f || ball.ballPosY + ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f || ball.ballPosY - ball.radius <= 25 || ball.playerCollision || ball.brickCollision) {
 
-            if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 2f) {
+            if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f) {
 
                 if (ball.ballPosX > canvasWidth){
 
@@ -84,16 +84,16 @@ object PhysicsEngine {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
-            if (ball.ballPosY - ball.radius <= 6f || ball.playerCollision || ball.brickCollision) {
+            if (ball.ballPosY - ball.radius <= 25f || ball.playerCollision || ball.brickCollision) {
 
-                if (ball.ballPosY - ball.radius <= 0f) {
+                if (ball.ballPosY - ball.radius <= 25f) {
 
                     ball.ballSpeedY *= -1f //-ballSpeedY
                 }
 
                 if (ball.brickCollision) {
 
-                    if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top){
+                    if (ball.ballPosY + ball.radius < brickHit.bottom && ball.ballPosY - ball.radius > brickHit.top){
                         Log.d(TAG, "BallPhysics: sides")
                         ball.ballSpeedX *= -1f
                     }else{

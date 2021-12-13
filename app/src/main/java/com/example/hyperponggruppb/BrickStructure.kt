@@ -46,7 +46,7 @@ object BrickStructure {
         var oOBLeft = 15
         var oOBTop = -60
         var oOBright = 115
-        var oOBBottom = 5
+        var oOBBottom = 0
 
 
         for (i in 0..(totalSumOfBricks)) {
@@ -140,6 +140,7 @@ object BrickStructure {
             }
             index++
         }
+
         return temBricks
     }
 

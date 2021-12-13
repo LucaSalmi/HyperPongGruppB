@@ -29,8 +29,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var isCollisionDetected = false
     var levelCompleted = false
     private val myActivity = context as GameMode1Activity
-    private val sp =
-        context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
+    private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     private val ballHeightSpawnModifier = 650f
 
     private val frameRate = 60
@@ -71,9 +70,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.WHITE
+        player.paint.color = Color.TRANSPARENT
         ball = Ball(this.context)
-        ball.paint.color = Color.WHITE
+        ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
@@ -112,7 +111,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.saveHighScore(sp)
             activity.finish()
         }
-
+        
         PlayerManager.lives -= 1
 
 
@@ -219,12 +218,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 PhysicsEngine.playerCollision(ball, player, context)
                 PhysicsEngine.brickCollision(brickRow, brickColors, ball, context)
 
-                try {
-                    myActivity.updateText()
-                }catch (e: Exception) {
-                    Log.e(TAG, "Fragment: It's NULL")
-                }
+                if (PlayerManager.lives > 0){
 
+                    myActivity.updateText()
+                }
                 draw()
             }
         }
