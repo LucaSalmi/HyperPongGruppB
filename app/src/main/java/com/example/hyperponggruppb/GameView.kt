@@ -67,10 +67,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
+
         ball = Ball(this.context)
+        ball.ballPosX = (getScreenWidth()/2).toFloat()
+        ball.ballPosY = ((getScreenHeight()/2).toFloat()) +ballHeightSpawnModifier
         ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
-        ball.brickCollision = false
+
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
@@ -79,9 +82,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
     private fun start() {
-
-        ball.ballPosX = (getScreenWidth()).toFloat()
-        ball.ballPosY = ((getScreenHeight() / 2).toFloat()) +ballHeightSpawnModifier
 
         running = true
         thread = Thread(this)
