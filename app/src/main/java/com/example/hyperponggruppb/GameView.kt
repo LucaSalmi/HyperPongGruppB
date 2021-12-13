@@ -139,7 +139,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         try {
             canvas = mHolder!!.lockCanvas()
             canvas.drawBitmap(background, matrix, null)
-
             ball.draw(canvas)
             canvas.drawBitmap(newBall, ball.ballPosX-20, ball.ballPosY-20,null)
             PhysicsEngine.canvasHeight = canvas.height.toFloat()
