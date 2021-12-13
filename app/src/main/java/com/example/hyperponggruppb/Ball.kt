@@ -13,7 +13,7 @@ class Ball(var context: Context) {
     var radius = 20f
     var ballSpeedX = 0f
     var ballSpeedY = 0f
-    var hitBoxMargin = 15
+    var hitBoxMargin = 18
 
     var playerCollision = false
     var brickCollision = false

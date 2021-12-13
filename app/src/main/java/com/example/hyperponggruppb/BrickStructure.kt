@@ -46,7 +46,7 @@ object BrickStructure {
         var oOBLeft = 15
         var oOBTop = -60
         var oOBright = 115
-        var oOBBottom = 5
+        var oOBBottom = 0
 
 
         for (i in 0..(totalSumOfBricks)) {
@@ -71,36 +71,6 @@ object BrickStructure {
         }
 
         return brickRow
-    }
-
-    fun rNG(a: Int, b: Int): Int {
-
-        return (a..b).random()
-    }
-
-    fun randomColor(id: Int): Int {
-
-
-        return when (id) {
-
-            1 -> Color.BLUE
-            2 -> Color.RED
-            3 -> Color.GRAY
-            4 -> Color.MAGENTA
-            5 -> Color.GREEN
-            else -> {
-                Color.YELLOW
-            }
-        }
-    }
-
-    fun fillColors(colors: MutableList<Int>, numberOfBricks: Int): MutableList<Int> {
-
-
-        for (i in 0..(numberOfBricks)) {
-            colors.add(randomColor(rNG(1, 5)))
-        }
-        return colors
     }
 
     fun createPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect> {
@@ -140,6 +110,7 @@ object BrickStructure {
             }
             index++
         }
+
         return temBricks
     }
 

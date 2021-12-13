@@ -1,11 +1,9 @@
 package com.example.hyperponggruppb
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
-import android.util.Log
 
 class Player(context: Context) {
 

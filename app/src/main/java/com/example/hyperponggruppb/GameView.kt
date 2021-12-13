@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import androidx.core.graphics.scale
 import java.lang.System.currentTimeMillis
 
 
@@ -25,12 +24,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var gameStart = false
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
-    var brickColors = mutableListOf<Int>()
+    var brickAssets = mutableListOf<Bitmap>()
     var isCollisionDetected = false
-    var levelCompleted = false
+    private var levelCompleted = false
     private val myActivity = context as GameMode1Activity
-    private val sp =
-        context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
+    private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     private val ballHeightSpawnModifier = 650f
 
     private val frameRate = 60
@@ -38,16 +36,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
 
-    private var background: Bitmap =
-        BitmapFactory.decodeResource(resources, R.drawable.lava_level_background)
-            .scale(getScreenWidth(), getScreenHeight(), true)
-    var newPlayer: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.pong_player_mockup).scale(200,40,true )
-    var newBall: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.hyper_ball).scale(40,40,true)
-    var newBrick: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.brick_v1).scale(110,70,true)
 
     init {
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
+        PlayerManager.lives = 3
+        AssetManager.prepareAssets(this.context)
         setup()
     }
 
@@ -71,15 +65,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.WHITE
+        player.paint.color = Color.TRANSPARENT
         ball = Ball(this.context)
-        ball.paint.color = Color.WHITE
+        ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
         ball.brickCollision = false
         BrickStructure.makeBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, BrickStructure.rNG(0,13))
+        brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
-        BrickStructure.fillColors(brickColors, brickRow.size)
+        AssetManager.fillAssetArray(brickAssets, brickRow.size)
 
     }
 
@@ -113,10 +107,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             activity.finish()
         }
 
-        PlayerManager.lives -= 1
-
-
         if (PlayerManager.lives > 0) {
+
+            PlayerManager.lives -= 1
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
@@ -138,14 +131,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         try {
             canvas = mHolder!!.lockCanvas()
-            canvas.drawBitmap(background, matrix, null)
+            canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
+
             ball.draw(canvas)
-            canvas.drawBitmap(newBall, ball.ballPosX-20, ball.ballPosY-20,null)
+            canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
             PhysicsEngine.canvasHeight = canvas.height.toFloat()
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             player.draw(canvas)
-            canvas.drawBitmap(newPlayer, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
 
             if (spawnNewRow){
 
@@ -156,9 +150,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             for (obj in brickRow) {
 
                 var brickColor = Paint()
-                brickColor.color = (brickColors[brickRow.indexOf(obj)])
+                brickColor.color = Color.TRANSPARENT
                 canvas.drawRect(obj, brickColor)
-                canvas.drawBitmap(newBrick, obj.left.toFloat()-5, obj.top.toFloat()-5, null)
+                canvas.drawBitmap((brickAssets[brickRow.indexOf(obj)]), obj.left.toFloat()-5, obj.top.toFloat()-5, null)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
@@ -216,14 +210,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
 
                 PhysicsEngine.playerCollision(ball, player, context)
-                PhysicsEngine.brickCollision(brickRow, brickColors, ball, context)
+                PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
 
-                try {
+                if (PlayerManager.lives > 0){
+
                     myActivity.updateText()
-                }catch (e: Exception) {
-                    Log.e(TAG, "Fragment: It's NULL")
                 }
-
                 draw()
             }
         }
