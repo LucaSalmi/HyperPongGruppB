@@ -150,6 +150,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         if (isGameOver || PlayerManager.lives <= 0) {
 
             PlayerManager.saveHighScore(sp)
+            gameStart = false
             activity.finish()
         }
 
