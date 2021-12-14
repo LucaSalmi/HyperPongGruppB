@@ -29,7 +29,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val myActivity = context as GameMode1Activity
     private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
-    var millisTimer = 20000L
+    var millisTimer = 1000L
     var isGameOver = false
 
     private val frameRate = 60
@@ -74,13 +74,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         when(timeTicks){
 
-            1 -> millisTimer = 15000L
-            2 -> millisTimer = 10000L
-            3 -> millisTimer = 7000L
-            4 -> millisTimer = 5000L
-            5 -> millisTimer = 4000L
-            6 -> millisTimer = 3000L
-            7 -> millisTimer = 2000L
+            1 -> millisTimer = 900L
+            2 -> millisTimer = 800L
+            3 -> millisTimer = 700L
+            4 -> millisTimer = 600L
+            5 -> millisTimer = 500L
+            6 -> millisTimer = 400L
+            7 -> millisTimer = 300L
+            8 -> millisTimer = 200L
         }
     }
 
