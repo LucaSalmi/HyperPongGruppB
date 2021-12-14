@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HyperPongGruppB</string>
-    <string name="points_text">POINTS</string>
-    <string name="high_score_text">HIGH SCORE</string>
+    <string name="points_text">Score:</string>
+    <string name="high_score_text">High Score:</string>
     <string name="points_placeholder">0</string>
     <string name="points_highscore_holder">99999</string>
     <!-- comment -->
