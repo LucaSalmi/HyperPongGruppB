@@ -6,8 +6,8 @@ import android.graphics.*
 class Ball(var context: Context) {
 
     var isDestroyed = false
-    var ballPosX = 1800f
-    var ballPosY = 540f
+    var ballPosX = 0f
+    var ballPosY = 0f
     var paint = Paint()
     var hitBoxPaint: Paint = Paint()
     var radius = 20f

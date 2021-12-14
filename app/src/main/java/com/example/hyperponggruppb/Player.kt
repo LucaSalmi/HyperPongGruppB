@@ -9,14 +9,12 @@ class Player(context: Context) {
 
 
     var left = 500f
-    var top = 1720f
+    var top = 1620f
     var right = 700f
-    var bottom = 1750f
+    var bottom = 1650f
     var paint = Paint()
     val playerSize = right-left
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
-
-
 
     fun update(){
         playerRect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())

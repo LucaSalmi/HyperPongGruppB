@@ -19,14 +19,14 @@ class PointFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_point, container, false)
-        val pointsView = view?.findViewById<TextView>(R.id.points_view)
-        val highScoreView = view?.findViewById<TextView>(R.id.hi_score_view)
+        val pointsView = view?.findViewById<TextView>(R.id.tv_frag_score_points)
+        val highScoreView = view?.findViewById<TextView>(R.id.tv_fragment_hs_point)
         pointsView?.text = PlayerManager.playerPoints.toString()
         highScoreView?.text = PlayerManager.playerHighScore.toString()
 
-        val heartOne = view?.findViewById<ImageView>(R.id.heart_one)
-        val heartTwo = view?.findViewById<ImageView>(R.id.heart_two)
-        val heartThree = view?.findViewById<ImageView>(R.id.heart_three)
+        val heartOne = view?.findViewById<ImageView>(R.id.iv_frag_heart_one)
+        val heartTwo = view?.findViewById<ImageView>(R.id.iv_frag_heart_two)
+        val heartThree = view?.findViewById<ImageView>(R.id.iv_frag_heart_three)
 
         when {
             PlayerManager.lives >= 3 -> {
