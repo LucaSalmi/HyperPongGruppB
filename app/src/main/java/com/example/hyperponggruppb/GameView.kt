@@ -31,6 +31,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val myActivity = context as GameMode1Activity
     private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     private val ballHeightSpawnModifier = 650f
+    var timeTicks = 0
+    var millisTimer = 20000L
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -45,7 +47,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         setup()
     }
 
-    private val timer = object: CountDownTimer(20000, 1000) {
+    private val timer = object: CountDownTimer(millisTimer, 1000) {
 
         override fun onTick(p0: Long) {
         }
@@ -59,12 +61,22 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     fun restartTimer(){
 
         timer.cancel()
+        timeTicks ++
+        changeTimerLength()
         timer.start()
+    }
+    fun changeTimerLength(){
+        
+        when(timeTicks){
+            
+            3 -> millisTimer = 15000L
+            5 -> millisTimer = 10000L
+            7 -> millisTimer = 7000L
+            9 -> millisTimer = 5000L
+        }
     }
 
     private fun setup() {
-
-
 
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
@@ -73,15 +85,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         player.top = getScreenHeight() - (getScreenHeight()*0.2).toFloat() - player.playerHeight/2
         player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight/2
         player.update()
-
+        player.update()
 
         ball = Ball(this.context)
         ball.ballPosX = player.right-player.playerWidth/2
         ball.ballPosY = player.top-ball.radius
         ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
-        Log.d(TAG, "setup: x:${ball.ballPosX}y:${ball.ballPosY}")
-
 
         val brickwidth = (getScreenWidth()/10) - 4
         val brickheight = (brickwidth * 0.6).toInt()
@@ -97,7 +107,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
 
-
         AssetManager.prepareAssets(this.context)
 
         AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
@@ -110,7 +119,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         running = true
         thread = Thread(this)
         thread?.start()
-        Log.d(TAG, "start: x:${ball.ballPosX}y:${ball.ballPosY}")
     }
 
 
@@ -164,12 +172,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
 
-            Log.d(TAG, "draw: x:${ball.ballPosX}y:${ball.ballPosY}")
-
             ball.draw(canvas)
             canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
-
-            Log.d(TAG, "draw: x:${ball.ballPosX}y:${ball.ballPosY}")
 
             player.draw(canvas)
             canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)

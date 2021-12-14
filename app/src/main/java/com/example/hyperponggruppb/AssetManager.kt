@@ -68,10 +68,8 @@ object AssetManager {
         for (i in 0..(numberOfBricks)) {
             for (c in pattern) {
                 assets.add(randomAsset((c.toString()).toInt()))
-                Log.d(TAG, "fillAssetArray: $c")
 
             }
-            //assets.add(randomAsset(RandomNumberGenerator.rNG(1, 10)))
         }
         return assets
     }
