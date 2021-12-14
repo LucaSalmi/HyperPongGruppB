@@ -68,10 +68,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
-        player.left = getScreenWidth() - 100f
-        player.right = getScreenWidth() + 100f
+        player.left = getScreenWidth()/2 - player.playerWidth/2
+        player.right = getScreenWidth()/2 + player.playerWidth/2
         player.top = getScreenHeight() - (getScreenHeight()*0.2).toFloat() - player.playerHeight/2
         player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight/2
+        player.update()
 
 
         ball = Ball(this.context)

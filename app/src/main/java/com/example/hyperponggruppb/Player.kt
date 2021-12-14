@@ -11,10 +11,10 @@ class Player(context: Context) {
     var left = 0f
     var top = 0f
     var right = 200f
-    var bottom = 30f
+    var bottom = 40f
     var paint = Paint()
-    var playerHeight = bottom - top
     var playerWidth = right - left
+    var playerHeight = (playerWidth * 0.2).toInt()
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
     fun update(){
