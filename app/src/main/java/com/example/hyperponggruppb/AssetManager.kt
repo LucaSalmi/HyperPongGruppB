@@ -26,38 +26,30 @@ object AssetManager {
     lateinit var brickAssetHardHalfHP: Bitmap
 
 
-    fun prepareAssets(context: Context) {
-        lavaBackground =
-            BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background)
-                .scale(getScreenWidth(), getScreenHeight(), true)
-        playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup)
-            .scale(200, 40, true)
-        ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.hyper_ball)
-            .scale(40, 40, true)
-        brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1)
-            .scale(110, 70, true)
-        brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2)
-            .scale(110, 70, true)
-        brickAssetV3 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v3)
-            .scale(110, 70, true)
-        brickAssetV4 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v4)
-            .scale(110, 70, true)
-        brickAssetV5 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v5)
-            .scale(110, 70, true)
-        brickAssetBlue = BitmapFactory.decodeResource(context.resources, R.drawable.brick_blue_glow)
-            .scale(110, 70, true)
-        brickAssetGreen =
-            BitmapFactory.decodeResource(context.resources, R.drawable.brick_green_glow)
-                .scale(110, 70, true)
-        brickAssetYellow =
-            BitmapFactory.decodeResource(context.resources, R.drawable.brick_yellow_glow)
-                .scale(110, 70, true)
-        brickAssetHardFullHP =
-            BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_full_hp)
-                .scale(110, 70, true)
-        brickAssetHardHalfHP =
-            BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_half_hp)
-                .scale(110, 70, true)
+    var playerwidth = 200
+    var playerhight = 40
+
+    var ballwidth = 40
+    var ballheight = 40
+
+    var brickwidth = 110
+    var brickheight = 70
+
+
+    fun prepareAssets(context: Context){
+        lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background).scale(getScreenWidth(), getScreenHeight(), true)
+        playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth,playerhight,true )
+        ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.hyper_ball).scale(ballwidth,ballheight,true)
+        brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
+        brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2).scale(brickwidth,brickheight,true)
+        brickAssetV3 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v3).scale(brickwidth,brickheight,true)
+        brickAssetV4 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v4).scale(brickwidth,brickheight,true)
+        brickAssetV5 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v5).scale(brickwidth,brickheight,true)
+        brickAssetBlue = BitmapFactory.decodeResource(context.resources, R.drawable.brick_blue_glow).scale(brickwidth,brickheight,true)
+        brickAssetGreen = BitmapFactory.decodeResource(context.resources, R.drawable.brick_green_glow).scale(brickwidth,brickheight,true)
+        brickAssetYellow = BitmapFactory.decodeResource(context.resources, R.drawable.brick_yellow_glow).scale(brickwidth,brickheight,true)
+        brickAssetHardFullHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_full_hp).scale(brickwidth,brickheight,true)
+        brickAssetHardHalfHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_half_hp).scale(brickwidth,brickheight,true)
 
     }
 

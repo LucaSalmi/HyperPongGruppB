@@ -8,12 +8,13 @@ import android.graphics.Rect
 class Player(context: Context) {
 
 
-    var left = 500f
-    var top = 1620f
-    var right = 700f
-    var bottom = 1650f
+    var left = 0f
+    var top = 0f
+    var right = 200f
+    var bottom = 30f
     var paint = Paint()
-    val playerSize = right-left
+    var playerHeight = bottom - top
+    var playerWidth = right - left
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
     fun update(){

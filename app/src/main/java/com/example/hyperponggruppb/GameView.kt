@@ -42,7 +42,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
         PlayerManager.lives = 3
-        AssetManager.prepareAssets(this.context)
         setup()
     }
 
@@ -65,20 +64,42 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun setup() {
 
+
+
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
-        
+        player.left = getScreenWidth() - 100f
+        player.right = getScreenWidth() + 100f
+        player.top = getScreenHeight() - (getScreenHeight()*0.2).toFloat() - player.playerHeight/2
+        player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight/2
+
 
         ball = Ball(this.context)
-        ball.ballPosX = player.right-player.playerSize/2
+        ball.ballPosX = player.right-player.playerWidth/2
         ball.ballPosY = player.top-ball.radius
         ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
         Log.d(TAG, "setup: x:${ball.ballPosX}y:${ball.ballPosY}")
 
+
+        val brickwidth = (getScreenWidth()/10) - 4
+        val brickheight = (brickwidth * 0.6).toInt()
+        BrickStructure.left = 7
+        BrickStructure.top = 5
+        BrickStructure.right = brickwidth + BrickStructure.left
+        BrickStructure.bottom = brickheight + BrickStructure.top
+
+        AssetManager.brickwidth = brickwidth
+        AssetManager.brickheight = brickheight
+
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
+
+
+        AssetManager.prepareAssets(this.context)
+
+        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
         AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
 
     }
@@ -118,7 +139,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
-            ball.ballPosX = player.right-player.playerSize/2
+            ball.ballPosX = player.right-player.playerWidth/2
             ball.ballPosY = player.top-ball.radius
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
@@ -179,13 +200,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
 
         val sx = event?.x.toString()
-        player.right = sx.toFloat() + player.playerSize/2
-        player.left = sx.toFloat() - player.playerSize/2
+        player.right = sx.toFloat() + player.playerWidth/2
+        player.left = sx.toFloat() - player.playerWidth/2
         player.update()
 
         if (!gameStart){
 
-            ball.ballPosX = player.right-player.playerSize/2
+            ball.ballPosX = player.right-player.playerWidth/2
             ball.ballPosY = player.top-ball.radius
         }
 
