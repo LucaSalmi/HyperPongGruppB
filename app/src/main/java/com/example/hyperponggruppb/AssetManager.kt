@@ -42,7 +42,7 @@ object AssetManager {
         lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background).scale(getScreenWidth(), getScreenHeight(), true)
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth,playerhight,true )
         bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth +100,playerhight,true )
-        smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth+100,playerhight,true )
+        smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth-100,playerhight,true )
         ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.hyper_ball).scale(ballwidth,ballheight,true)
         brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
         brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2).scale(brickwidth,brickheight,true)

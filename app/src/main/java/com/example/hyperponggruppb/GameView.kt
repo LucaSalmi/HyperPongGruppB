@@ -181,6 +181,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
 
             player.draw(canvas)
+
             if (player.bigPaddle){
 
                 canvas.drawBitmap(AssetManager.bigPlayerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
