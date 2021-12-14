@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
+import com.example.hyperponggruppb.PhysicsEngine.powerUp
 import java.lang.System.currentTimeMillis
 
 
@@ -88,12 +89,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.TRANSPARENT
+        player.paint.color = Color.BLACK
         player.left = getScreenWidth()/2 - player.playerWidth/2
         player.right = getScreenWidth()/2 + player.playerWidth/2
         player.top = getScreenHeight() - (getScreenHeight()*0.2).toFloat() - player.playerHeight/2
         player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight/2
-        player.update()
         player.update()
 
         ball = Ball(this.context)
@@ -113,7 +113,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         AssetManager.brickheight = brickheight
 
         BrickStructure.makeInboundsBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
+        brickRow = BrickStructure.createPattern(brickRow, 0)//RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
 
         AssetManager.prepareAssets(this.context)
@@ -147,7 +147,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
      */
     private fun gameEnd() {
 
-        if (isGameOver) {
+        if (isGameOver || PlayerManager.lives <= 0) {
 
             PlayerManager.saveHighScore(sp)
             activity.finish()
@@ -155,19 +155,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         if (PlayerManager.lives > 0 && gameStart) {
 
-            PlayerManager.lives -= 1
-            ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
             ball.ballPosX = player.right-player.playerWidth/2
             ball.ballPosY = player.top-ball.radius
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
-
-        } else {
-
-            PlayerManager.saveHighScore(sp)
-            activity.finish()
 
         }
     }
@@ -187,7 +180,19 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
 
             player.draw(canvas)
-            canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+            if (player.bigPaddle){
+
+                canvas.drawBitmap(AssetManager.bigPlayerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+
+            }else if(player.smallPaddle){
+
+                canvas.drawBitmap(AssetManager.smallPlayerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+
+            }else{
+
+                canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+            }
+
 
             if (spawnNewRow){
 
@@ -202,6 +207,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 canvas.drawRect(obj, brickColor)
                 canvas.drawBitmap((brickAssets[brickRow.indexOf(obj)]), obj.left.toFloat()-5, obj.top.toFloat()-5, null)
             }
+            if (PhysicsEngine.isPowerUpLive){
+
+                PhysicsEngine.powerUp.draw(canvas)
+            }
+
 
             mHolder!!.unlockCanvasAndPost(canvas)
 
@@ -256,15 +266,40 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                if (ball.isDestroyed && gameStart) {
-
-                    gameEnd()
-                }
                 if (gameStart){
-                    ball.update(player)
+
+                    PhysicsEngine.ballPhysics(ball, player)
+
+                    if (PhysicsEngine.damageTaken){
+
+                        PhysicsEngine.damageTaken = false
+                        gameEnd()
+                    }
 
                     PhysicsEngine.playerCollision(ball, player, context)
+
                     PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
+
+                    PhysicsEngine.powerUpPhysics(player)
+
+                    if (PhysicsEngine.isPowerUpCatch){
+
+                        when(powerUp.typeID){
+
+                            0 -> timeTicks = powerUp.speedDown(timeTicks)
+                            1 -> timeTicks = powerUp.speedUp(timeTicks)
+                            2 -> {
+                                powerUp.bigPaddle(player)
+                                player.update()
+                            }
+                            3 ->{
+                                powerUp.smallPaddle(player)
+                                player.update()
+                            }
+                        }
+
+                        PhysicsEngine.isPowerUpCatch = false
+                    }
 
                     if (PlayerManager.lives > 0){
 
@@ -280,7 +315,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 draw()
 
-                if (PhysicsEngine.brickDeathZone(brickRow)) {   // BrickDeathZone condition
+                if (PhysicsEngine.brickDeathZone(brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
                     isGameOver = true
                     gameEnd()

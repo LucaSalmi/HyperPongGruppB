@@ -13,6 +13,10 @@ object PhysicsEngine {
     var canvasHeight = 1977f
     var canvasWidth = 1080f
     var gameStart = false
+    var damageTaken = false
+    var isPowerUpLive = false
+    var isPowerUpCatch = false
+    lateinit var powerUp: PowerUp
 
 
     fun brickCollision(
@@ -31,6 +35,16 @@ object PhysicsEngine {
                 ball.brickCollision = true
                 brickHit = rect
                 SoundEffectManager.jukebox(context, 0)
+            }
+        }
+
+        if (ball.brickCollision && !isPowerUpLive){
+
+            if (RandomNumberGenerator.rNG(1,6) %2 == 0){
+
+                powerUp = PowerUp(RandomNumberGenerator.rNG(0,3), brickHit.left, brickHit.top, brickHit.right, brickHit.bottom)
+                isPowerUpLive = true
+
             }
         }
 
@@ -57,10 +71,9 @@ object PhysicsEngine {
                 SoundEffectManager.jukebox(context, 0)
             }
         }
-
     }
 
-    fun BallPhysics(ball: Ball, player: Player) {
+    fun ballPhysics(ball: Ball, player: Player) {
 
         ball.ballHitBox = Rect(
             (ball.ballPosX - ball.hitBoxMargin).toInt(), //left
@@ -69,9 +82,12 @@ object PhysicsEngine {
             (ball.ballPosY + ball.hitBoxMargin).toInt() //bottom
         )
 
-        if (ball.ballPosY - ball.radius > canvasHeight && gameStart) {
-            ball.isDestroyed = true
+        if (ball.ballPosY - ball.radius > canvasHeight && gameStart && !damageTaken) {
+            damageTaken = true
+            PlayerManager.loseLife()
+            Log.d(TAG, "BallPhysics: ${PlayerManager.lives}")
             return
+
         }
 
         if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f || ball.ballPosY - ball.radius <= 20f || ball.playerCollision || ball.brickCollision) {
@@ -105,36 +121,47 @@ object PhysicsEngine {
 
                 if (ball.playerCollision) {
 
-                    if (player.playerWidth - (player.right - ball.ballPosX) <= 0.1 * player.playerWidth) { // 0% --> 10% of the pad
-                        ball.ballSpeedY = -5f
-                        ball.ballSpeedX = -15f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.2 * player.playerWidth) { // 10% --> 20% of the pad
-                        ball.ballSpeedY = -7f
-                        ball.ballSpeedX = -13f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.3 * player.playerWidth) { // 20% --> 30% of the pad
-                        ball.ballSpeedY = -9f
-                        ball.ballSpeedX = -11f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.4 * player.playerWidth) { // 30% --> 40% of the pad
-                        ball.ballSpeedY = -11f
-                        ball.ballSpeedX = -9f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.5 * player.playerWidth) { // 40% --> 50% of the pad
-                        ball.ballSpeedY = -13f
-                        ball.ballSpeedX = -7f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.6 * player.playerWidth) { // 50% --> 60% of the pad
-                        ball.ballSpeedY = -13f
-                        ball.ballSpeedX = +7f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.7 * player.playerWidth) { // 60% --> 70% of the pad
-                        ball.ballSpeedY = -11f
-                        ball.ballSpeedX = +9f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.8 * player.playerWidth) { // 70% --> 80% of the pad
-                        ball.ballSpeedY = -9f
-                        ball.ballSpeedX = +11f
-                    } else if (player.playerWidth - (player.right - ball.ballPosX) <= 0.9 * player.playerWidth) { // 80% --> 90% of the pad
-                        ball.ballSpeedY = -7f
-                        ball.ballSpeedX = +13f
-                    } else {       // 90 --> 100% of the pad
-                        ball.ballSpeedY = -5f
-                        ball.ballSpeedX = +15f
+                    when {
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.1 * player.playerWidth -> { // 0% --> 10% of the pad
+                            ball.ballSpeedY = -5f
+                            ball.ballSpeedX = -15f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.2 * player.playerWidth -> { // 10% --> 20% of the pad
+                            ball.ballSpeedY = -7f
+                            ball.ballSpeedX = -13f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.3 * player.playerWidth -> { // 20% --> 30% of the pad
+                            ball.ballSpeedY = -9f
+                            ball.ballSpeedX = -11f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.4 * player.playerWidth -> { // 30% --> 40% of the pad
+                            ball.ballSpeedY = -11f
+                            ball.ballSpeedX = -9f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.5 * player.playerWidth -> { // 40% --> 50% of the pad
+                            ball.ballSpeedY = -13f
+                            ball.ballSpeedX = -7f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.6 * player.playerWidth -> { // 50% --> 60% of the pad
+                            ball.ballSpeedY = -13f
+                            ball.ballSpeedX = +7f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.7 * player.playerWidth -> { // 60% --> 70% of the pad
+                            ball.ballSpeedY = -11f
+                            ball.ballSpeedX = +9f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.8 * player.playerWidth -> { // 70% --> 80% of the pad
+                            ball.ballSpeedY = -9f
+                            ball.ballSpeedX = +11f
+                        }
+                        player.playerWidth - (player.right - ball.ballPosX) <= 0.9 * player.playerWidth -> { // 80% --> 90% of the pad
+                            ball.ballSpeedY = -7f
+                            ball.ballSpeedX = +13f
+                        }
+                        else -> { // 90 --> 100% of the pad
+                            ball.ballSpeedY = -5f
+                            ball.ballSpeedX = +15f
+                        }
                     }
                 }
 
@@ -148,7 +175,6 @@ object PhysicsEngine {
 
     }
 
-
     fun brickDeathZone(brickRow: MutableList<Rect>): Boolean {
 
         for (rect in brickRow) {
@@ -159,6 +185,24 @@ object PhysicsEngine {
             }
         }
         return false
+    }
 
+    fun powerUpPhysics(player: Player){
+
+        if (isPowerUpLive){
+
+            powerUp.update()
+
+            if (powerUp.powerUpRect.intersect(player.playerRect)){
+                Log.d(TAG, "powerUpPhysics: type: ${powerUp.typeID}")
+                isPowerUpCatch = true
+                isPowerUpLive = false
+            }
+
+            if (powerUp.powerUpRect.bottom >= canvasHeight){
+
+                isPowerUpLive = false
+            }
+        }
     }
 }

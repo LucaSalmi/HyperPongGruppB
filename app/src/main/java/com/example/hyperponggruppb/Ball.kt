@@ -5,7 +5,6 @@ import android.graphics.*
 
 class Ball(var context: Context) {
 
-    var isDestroyed = false
     var ballPosX = 0f
     var ballPosY = 0f
     var paint = Paint()
@@ -26,7 +25,7 @@ class Ball(var context: Context) {
 
 
     fun update(player: Player) {
-        PhysicsEngine.BallPhysics(this, player)
+        PhysicsEngine.ballPhysics(this, player)
 
     }
 

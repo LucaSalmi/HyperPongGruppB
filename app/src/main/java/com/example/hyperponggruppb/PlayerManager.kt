@@ -33,8 +33,6 @@ object PlayerManager {
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
         editor?.apply()
-
-
     }
 
     fun readSave(sp : SharedPreferences?){
@@ -47,7 +45,10 @@ object PlayerManager {
             playerHighScore = loadPlayer.highScore
 
         }
+    }
 
+    fun loseLife(){
+        lives -= 1
     }
 
 }

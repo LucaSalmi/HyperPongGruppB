@@ -13,15 +13,24 @@ class Player(context: Context) {
     var right = 200f
     var bottom = 40f
     var paint = Paint()
+    var bigPaddle = false
+    var smallPaddle = false
     var playerWidth = right - left
     var playerHeight = (playerWidth * 0.2).toInt()
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
-    fun update(){
-        playerRect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+    fun update() {
+
+        playerRect = if (bigPaddle) {
+            Rect(left.toInt()-50, top.toInt(), right.toInt()+50, bottom.toInt())
+        }else if (smallPaddle){
+            Rect(left.toInt()+50, top.toInt(), right.toInt()-50, bottom.toInt())
+        }else {
+            Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+        }
     }
 
-    fun draw(canvas: Canvas?){
+    fun draw(canvas: Canvas?) {
         canvas?.drawRect(playerRect, paint)
     }
 }

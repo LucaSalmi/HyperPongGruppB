@@ -13,6 +13,8 @@ object AssetManager {
 
     lateinit var lavaBackground: Bitmap
     lateinit var playerAsset: Bitmap
+    lateinit var bigPlayerAsset: Bitmap
+    lateinit var smallPlayerAsset: Bitmap
     lateinit var ballAsset: Bitmap
     lateinit var brickAssetV1: Bitmap
     lateinit var brickAssetV2: Bitmap
@@ -39,6 +41,8 @@ object AssetManager {
     fun prepareAssets(context: Context){
         lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background).scale(getScreenWidth(), getScreenHeight(), true)
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth,playerhight,true )
+        bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth +100,playerhight,true )
+        smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth+100,playerhight,true )
         ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.hyper_ball).scale(ballwidth,ballheight,true)
         brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
         brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2).scale(brickwidth,brickheight,true)
@@ -60,7 +64,7 @@ object AssetManager {
     ): MutableList<Bitmap> {
         val pattern = when (id) {
 
-            1 -> "111111111112321155511114114111141111114116781177711876111211456111571155555555116666666611123456781"
+            1 -> "333333333323322113311221155112544554455445555555"
             else -> "111111111112321155511114114111141111114116781177711876111211456111571155555555116666666611123456781"
         }
 
