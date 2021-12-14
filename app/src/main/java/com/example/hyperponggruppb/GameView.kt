@@ -67,12 +67,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         player = Player(this.context)
         player.paint.color = Color.TRANSPARENT
+        
 
         ball = Ball(this.context)
-        ball.ballPosX = (getScreenWidth()/2).toFloat()
-        ball.ballPosY = ((getScreenHeight()/2).toFloat()) +ballHeightSpawnModifier
+        ball.ballPosX = player.right-player.playerSize/2
+        ball.ballPosY = player.top-ball.radius
         ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
+        Log.d(TAG, "setup: x:${ball.ballPosX}y:${ball.ballPosY}")
 
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
@@ -86,6 +88,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         running = true
         thread = Thread(this)
         thread?.start()
+        Log.d(TAG, "start: x:${ball.ballPosX}y:${ball.ballPosY}")
     }
 
 
@@ -115,8 +118,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.isDestroyed = false
             gameStart = false
             isCollisionDetected = false
-            ball.ballPosX = (getScreenWidth() / 2).toFloat()
-            ball.ballPosY = (getScreenHeight() / 2).toFloat()+ballHeightSpawnModifier
+            ball.ballPosX = player.right-player.playerSize/2
+            ball.ballPosY = player.top-ball.radius
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
@@ -139,8 +142,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
 
+            Log.d(TAG, "draw: x:${ball.ballPosX}y:${ball.ballPosY}")
+
             ball.draw(canvas)
             canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
+
+            Log.d(TAG, "draw: x:${ball.ballPosX}y:${ball.ballPosY}")
 
             player.draw(canvas)
             canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
@@ -167,22 +174,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
 
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
 
         val sx = event?.x.toString()
-        if (gameStart) {
+        player.right = sx.toFloat() + player.playerSize/2
+        player.left = sx.toFloat() - player.playerSize/2
+        player.update()
 
-            player.right = sx.toFloat() + player.playerSize/2
-            player.left = sx.toFloat() - player.playerSize/2
-            player.update()
+        if (!gameStart){
 
-        } else {
+            ball.ballPosX = player.right-player.playerSize/2
+            ball.ballPosY = player.top-ball.radius
+        }
+
+        if(event?.action == MotionEvent.ACTION_UP && !gameStart){
 
             ball.ballSpeedX = 7f
             ball.ballSpeedY = -13f
             gameStart = true
             restartTimer()
+
         }
 
         return true
@@ -210,22 +223,23 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     gameEnd()
                 }
+                if (gameStart){
+                    ball.update(player)
 
-                ball.update(player)
+                    PhysicsEngine.playerCollision(ball, player, context)
+                    PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
 
-                PhysicsEngine.playerCollision(ball, player, context)
-                PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
+                    if (PlayerManager.lives > 0){
 
-                if (PlayerManager.lives > 0){
+                        myActivity.updateText()
+                    }
 
-                    myActivity.updateText()
-                }
+                    if (brickRow.size < 50){
 
-                if (brickRow.size < 50){
-
-                    BrickStructure.makeBricks(brickRow)
-                    BrickStructure.makeOOBBricks(brickRow)
-                    AssetManager.fillAssetArray(brickAssets, brickRow.size)
+                        BrickStructure.makeBricks(brickRow)
+                        BrickStructure.makeOOBBricks(brickRow)
+                        AssetManager.fillAssetArray(brickAssets, brickRow.size)
+                    }
                 }
 
                 draw()

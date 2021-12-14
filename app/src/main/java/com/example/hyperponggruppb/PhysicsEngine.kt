@@ -12,8 +12,8 @@ object PhysicsEngine {
 
     var isCollisionDetected = false
     var brickHit = Rect()
-    var canvasHeight = 1007f
-    var canvasWidth = 100f
+    var canvasHeight = 1977f
+    var canvasWidth = 1080f
     var gameStart = false
 
 
