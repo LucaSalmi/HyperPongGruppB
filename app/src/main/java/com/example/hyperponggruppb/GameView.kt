@@ -79,7 +79,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         BrickStructure.makeBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
-        AssetManager.fillAssetArray(brickAssets, brickRow.size)
+        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
 
     }
 
@@ -238,7 +238,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                         BrickStructure.makeBricks(brickRow)
                         BrickStructure.makeOOBBricks(brickRow)
-                        AssetManager.fillAssetArray(brickAssets, brickRow.size)
+                        AssetManager.fillAssetArray(brickAssets, brickRow.size,1)
                     }
                 }
 
