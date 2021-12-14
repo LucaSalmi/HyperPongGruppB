@@ -2,6 +2,7 @@ package com.example.hyperponggruppb
 
 import android.graphics.Color
 import android.graphics.Rect
+import kotlin.math.floor
 
 object BrickStructure {
 
@@ -16,7 +17,10 @@ object BrickStructure {
     var right = 115
     var bottom = 65
 
-    fun makeBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
+    /**
+     * makes the first ten rows of bricks, visible to the player on startup
+     */
+    fun makeInboundsBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
         var leftInBounds = left
         var topInBounds = top
@@ -47,6 +51,9 @@ object BrickStructure {
         return brickRow
     }
 
+    /**
+     * makes ten more rows outside of the canvas (and the player's sight) that will then roll down.
+     */
     fun makeOOBBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
         var oOBLeft = left
@@ -79,6 +86,9 @@ object BrickStructure {
         return brickRow
     }
 
+    /**
+     * by eliminating some bricks from the array this function creates a recognizable pattern
+     */
     fun createPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect> {
 
         val patternOne = when(id){
@@ -123,8 +133,8 @@ object BrickStructure {
     fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
 
         for (obj in brickRow){
-            obj.top += bottom
-            obj.bottom += bottom
+            obj.top += (bottom/3).toInt()
+            obj.bottom += (bottom/3).toInt()
         }
         return brickRow
     }

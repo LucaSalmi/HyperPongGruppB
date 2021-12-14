@@ -12,7 +12,6 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
-import kotlin.math.log
 
 
 class GameView(context: Context?, var activity: Activity) : SurfaceView(context),
@@ -27,7 +26,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var brickRow = mutableListOf<Rect>()
     var brickAssets = mutableListOf<Bitmap>()
     var isCollisionDetected = false
-    private var levelCompleted = false
     private val myActivity = context as GameMode1Activity
     private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
@@ -47,9 +45,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         setup()
     }
 
+    /**
+     * timer counts down until the next row should spawn
+     * restartTimer() restarts it and updates timeTicks
+     * changeTimerLength() reduces the time between each spawn
+     */
     private val timer = object: CountDownTimer(millisTimer, 1000) {
 
         override fun onTick(p0: Long) {
+
         }
 
         override fun onFinish() {
@@ -70,10 +74,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         when(timeTicks){
 
-            3 -> millisTimer = 15000L
-            5 -> millisTimer = 10000L
-            7 -> millisTimer = 7000L
-            9 -> millisTimer = 5000L
+            1 -> millisTimer = 15000L
+            2 -> millisTimer = 10000L
+            3 -> millisTimer = 7000L
+            4 -> millisTimer = 5000L
+            5 -> millisTimer = 4000L
+            6 -> millisTimer = 3000L
+            7 -> millisTimer = 2000L
         }
     }
 
@@ -104,13 +111,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         AssetManager.brickwidth = brickwidth
         AssetManager.brickheight = brickheight
 
-        BrickStructure.makeBricks(brickRow)
+        BrickStructure.makeInboundsBricks(brickRow)
         brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,13))
         BrickStructure.makeOOBBricks(brickRow)
 
         AssetManager.prepareAssets(this.context)
 
-        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
         AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
 
     }
@@ -135,6 +141,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     }
 
+    /**
+     * manages the behavior when the player loses a life or the game
+     */
     private fun gameEnd() {
 
         if (isGameOver) {
@@ -261,9 +270,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         myActivity.updateText()
                     }
 
-                    if (brickRow.size < 50){
+                    if (brickRow.size < 30){
 
-                        BrickStructure.makeBricks(brickRow)
                         BrickStructure.makeOOBBricks(brickRow)
                         AssetManager.fillAssetArray(brickAssets, brickRow.size,1)
                     }
