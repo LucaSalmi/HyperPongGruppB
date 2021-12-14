@@ -128,4 +128,5 @@ object BrickStructure {
         }
         return brickRow
     }
+
 }

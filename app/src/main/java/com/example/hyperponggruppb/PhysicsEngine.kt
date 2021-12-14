@@ -15,7 +15,6 @@ object PhysicsEngine {
     var gameStart = false
 
 
-
     fun brickCollision(
         brickRow: MutableList<Rect>,
         brickAssets: MutableList<Bitmap>,
@@ -42,6 +41,7 @@ object PhysicsEngine {
         }
 
     }
+
 
     fun playerCollision(ball: Ball, player: Player, context: Context) {
 
@@ -78,7 +78,7 @@ object PhysicsEngine {
 
             if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f) {
 
-                if (ball.ballPosX > canvasWidth){
+                if (ball.ballPosX > canvasWidth) {
 
                     ball.ballPosX = canvasWidth + ball.radius
                 }
@@ -94,10 +94,10 @@ object PhysicsEngine {
 
                 if (ball.brickCollision) {
 
-                    if (ball.ballPosY + 10f < brickHit.bottom && ball.ballPosY - 10f > brickHit.top){
+                    if (ball.ballPosY + 10f < brickHit.bottom && ball.ballPosY - 10f > brickHit.top) {
                         Log.d(TAG, "BallPhysics: sides")
                         ball.ballSpeedX *= -1f
-                    }else{
+                    } else {
                         Log.d(TAG, "BallPhysics: top/bottom")
                         ball.ballSpeedY *= -1f
                     }
@@ -145,6 +145,20 @@ object PhysicsEngine {
         ball.playerCollision = false
         ball.ballPosY += ball.ballSpeedY
         ball.ballPosX += ball.ballSpeedX
+
+    }
+
+
+    fun brickDeathZone(brickRow: MutableList<Rect>): Boolean {
+
+        for (rect in brickRow) {
+
+            if (rect.bottom > (canvasHeight / 2)) {
+
+                return true
+            }
+        }
+        return false
 
     }
 }

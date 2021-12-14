@@ -66,9 +66,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         timer.start()
     }
     fun changeTimerLength(){
-        
+
         when(timeTicks){
-            
+
             3 -> millisTimer = 15000L
             5 -> millisTimer = 10000L
             7 -> millisTimer = 7000L
@@ -269,6 +269,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
 
                 draw()
+
+                if (PhysicsEngine.brickDeathZone(brickRow)) {   // BrickDeathZone condition
+
+                    PlayerManager.lives = 0
+                    gameEnd()
+                }
             }
         }
     }
@@ -280,6 +286,5 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
     }
-
 
 }
