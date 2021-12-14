@@ -30,9 +30,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private var levelCompleted = false
     private val myActivity = context as GameMode1Activity
     private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
-    private val ballHeightSpawnModifier = 650f
     var timeTicks = 0
     var millisTimer = 20000L
+    var isGameOver = false
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -65,6 +65,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         changeTimerLength()
         timer.start()
     }
+
     fun changeTimerLength(){
 
         when(timeTicks){
@@ -136,7 +137,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun gameEnd() {
 
-        if (levelCompleted) {
+        if (isGameOver) {
 
             PlayerManager.saveHighScore(sp)
             activity.finish()
@@ -272,7 +273,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 if (PhysicsEngine.brickDeathZone(brickRow)) {   // BrickDeathZone condition
 
-                    PlayerManager.lives = 0
+                    isGameOver = true
                     gameEnd()
                 }
             }
