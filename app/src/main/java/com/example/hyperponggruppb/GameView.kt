@@ -237,7 +237,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 PhysicsEngine.powerUp.draw(canvas)
 
-                canvas.drawBitmap(AssetManager.ballAsset, PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
+                canvas.drawBitmap(PhysicsEngine.powerUp.assignAsset(), PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
             }
 
 

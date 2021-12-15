@@ -26,18 +26,19 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         }
     }
 
-/*
-    fun assignAsset(){
 
-        when(this.typeID){
-            0 -> ""//AssetManager.speedDown
-            1 -> ""//AssetManager.speedUp
-            2 -> ""//AssetManager.BigPaddle
-            3 -> ""//AssetManager.SmallPaddle
+    fun assignAsset(): Bitmap{
+
+        return when (this.typeID) {
+
+            0 -> AssetManager.powerUpAssetSpeedDown
+            1 -> AssetManager.powerUpAssetSpeedUp
+            2 -> AssetManager.powerUpAssetBigPaddle
+            3 -> AssetManager.powerUpAssetSmallPaddle
+            else -> AssetManager.powerUpAssetBigPaddle
         }
     }
 
- */
 
     //typeID 0
     fun speedDown(timeTicks: Int): Int {
