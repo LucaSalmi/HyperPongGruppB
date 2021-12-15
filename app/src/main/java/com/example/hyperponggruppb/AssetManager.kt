@@ -62,7 +62,7 @@ object AssetManager {
         powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_faster_player).scale(brickwidth,brickheight,true)
         powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth,brickheight,true)
         powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_big_player_v2).scale(brickwidth,brickheight,true)
-        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth,brickheight,true)
+        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_small_player_v2).scale(brickwidth,brickheight,true)
 
     }
 
