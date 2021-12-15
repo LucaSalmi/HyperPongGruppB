@@ -112,9 +112,67 @@ object PhysicsEngine {
 
                     if (ball.ballPosY + 10f < brickHit.bottom && ball.ballPosY - 10f > brickHit.top) {
                         Log.d(TAG, "BallPhysics: sides")
+                        if (ball.ballSpeedX <= 0){
+                            ball.ballPosX += 9f
+                            if (ball.ballSpeedX < -13){
+                                ball.ballPosY += 3f
+                            } else if (ball.ballSpeedX < -11){
+                                ball.ballPosY += 4.8f
+                            } else if (ball.ballSpeedX < -9){
+                                ball.ballPosY += 7.4f
+                            } else if (ball.ballSpeedX < -7){
+                                ball.ballPosY += 11f
+                            } else {
+                                ball.ballPosY += 16.7f
+                            }
+                        }
+                        else{
+                            ball.ballPosX -=9f
+
+                            if (ball.ballSpeedX > 13){
+                                ball.ballPosY -= 3f
+                            } else if (ball.ballSpeedX > 11){
+                                ball.ballPosY -= 4.8f
+                            } else if (ball.ballSpeedX > 9){
+                                ball.ballPosY -= 7.4f
+                            } else if (ball.ballSpeedX > 7){
+                                ball.ballPosY -= 11f
+                            } else {
+                                ball.ballPosY -= 16.7f
+                            }
+                        }
                         ball.ballSpeedX *= -1f
                     } else {
                         Log.d(TAG, "BallPhysics: top/bottom")
+                        if (ball.ballSpeedY <= 0){
+                            ball.ballPosY += 9f
+                            if (ball.ballSpeedY < -13){
+                                ball.ballPosX += 3f
+                            } else if (ball.ballSpeedY < -11){
+                                ball.ballPosX += 4.8f
+                            } else if (ball.ballSpeedY < -9){
+                                ball.ballPosX += 7.4f
+                            } else if (ball.ballSpeedY < -7){
+                                ball.ballPosX += 11f
+                            } else {
+                                ball.ballPosX += 16.7f
+                            }
+                        }
+                        else{
+                            ball.ballPosY -= 9f
+
+                            if (ball.ballSpeedY > 13){
+                                ball.ballPosX -= 3f
+                            } else if (ball.ballSpeedY > 11){
+                                ball.ballPosX -= 4.8f
+                            } else if (ball.ballSpeedY > 9){
+                                ball.ballPosX -= 7.4f
+                            } else if (ball.ballSpeedY > 7){
+                                ball.ballPosX -= 11f
+                            } else {
+                                ball.ballPosX -= 16.7f
+                            }
+                        }
                         ball.ballSpeedY *= -1f
                     }
                 }
@@ -123,24 +181,24 @@ object PhysicsEngine {
 
                     when {
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.1 * player.playerWidth -> { // 0% --> 10% of the pad
-                            ball.ballSpeedY = -5f
-                            ball.ballSpeedX = -15f
+                            ball.ballSpeedY = -5f //  1  - 3
+                            ball.ballSpeedX = -15f // 3  - 9
                         }
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.2 * player.playerWidth -> { // 10% --> 20% of the pad
-                            ball.ballSpeedY = -7f
-                            ball.ballSpeedX = -13f
+                            ball.ballSpeedY = -7f // 1 -    4,8f
+                            ball.ballSpeedX = -13f// 1,86 - 9f
                         }
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.3 * player.playerWidth -> { // 20% --> 30% of the pad
-                            ball.ballSpeedY = -9f
-                            ball.ballSpeedX = -11f
+                            ball.ballSpeedY = -9f // 1 -    7,4f
+                            ball.ballSpeedX = -11f // 1,22 - 9f
                         }
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.4 * player.playerWidth -> { // 30% --> 40% of the pad
-                            ball.ballSpeedY = -11f
-                            ball.ballSpeedX = -9f
+                            ball.ballSpeedY = -11f //1,22 - 11f
+                            ball.ballSpeedX = -9f // 1 - 9f
                         }
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.5 * player.playerWidth -> { // 40% --> 50% of the pad
-                            ball.ballSpeedY = -13f
-                            ball.ballSpeedX = -7f
+                            ball.ballSpeedY = -13f //  1,86 - 16,74f
+                            ball.ballSpeedX = -7f // 1 - 9f
                         }
                         player.playerWidth - (player.right - ball.ballPosX) <= 0.6 * player.playerWidth -> { // 50% --> 60% of the pad
                             ball.ballSpeedY = -13f
