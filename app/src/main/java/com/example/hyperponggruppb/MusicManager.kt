@@ -15,7 +15,7 @@ class MusicManager() : Runnable {
     fun context(context: Context) {
 
         myContext = context
-        var resID = myContext.resources.getIdentifier("crystal_cave_ambience", "raw", myContext.packageName)
+        var resID = myContext.resources.getIdentifier("hyper_pong_theme", "raw", myContext.packageName)
         mediaPlayer = MediaPlayer.create(myContext, resID)
         mediaPlayer.start()
 

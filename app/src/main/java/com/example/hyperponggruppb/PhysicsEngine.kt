@@ -100,9 +100,9 @@ object PhysicsEngine {
             }
         }
 
-        if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f || ball.ballPosY - ball.radius <= 20f || ball.playerCollision || ball.brickCollision) {
+        if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 0f || ball.ballPosY - ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
-            if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f) {
+            if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 0f) {
 
                 if (ball.ballPosX > canvasWidth) {
 
@@ -111,9 +111,9 @@ object PhysicsEngine {
                 ball.ballSpeedX *= -1f //-ball.ballSpeedX
             }
 
-            if (ball.ballPosY - ball.radius <= 20f || ball.playerCollision || ball.brickCollision) {
+            if (ball.ballPosY - ball.radius <= 0f || ball.playerCollision || ball.brickCollision) {
 
-                if (ball.ballPosY - ball.radius <= 20f) {
+                if (ball.ballPosY - ball.radius <= 0f) {
 
                     ball.ballSpeedY *= -1f //-ballSpeedY
                 }
