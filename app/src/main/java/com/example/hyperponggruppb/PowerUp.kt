@@ -3,11 +3,11 @@ package com.example.hyperponggruppb
 import android.graphics.*
 import javax.security.auth.Destroyable
 
-class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int): Destroyable {
+class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int){
 
-    var color = Paint()
+    var powerUpColor = Paint()
 
-    //var powerUpImg: Bitmap = AssetManager.PowerUpType(TypeID)
+
     private val speed = 15
     var powerUpRect = Rect(left, top, right, bottom)
 
@@ -21,20 +21,33 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     fun draw(canvas: Canvas){
         if (PhysicsEngine.isPowerUpLive){
 
-            color.color = Color.BLACK
-            canvas.drawRect(this.left.toFloat(), this.top.toFloat(), this.right.toFloat(), this.bottom.toFloat(), color)
+            powerUpColor.color = Color.TRANSPARENT
+            canvas.drawRect(this.left.toFloat(), this.top.toFloat(), this.right.toFloat(), this.bottom.toFloat(), powerUpColor)
         }
+    }
 
+/*
+    fun assignAsset(){
+
+        when(this.typeID){
+            0 -> ""//AssetManager.speedDown
+            1 -> ""//AssetManager.speedUp
+            2 -> ""//AssetManager.BigPaddle
+            3 -> ""//AssetManager.SmallPaddle
+        }
+    }
+
+ */
+
+    //typeID 0
+    fun speedDown(timeTicks: Int): Int {
+
+        return timeTicks -3
     }
     //typeID 1
     fun speedUp(timeTicks: Int): Int {
 
         return timeTicks + 2
-    }
-    //typeID 0
-    fun speedDown(timeTicks: Int): Int {
-
-        return timeTicks -3
     }
     //typeID 2
     fun bigPaddle(player: Player){

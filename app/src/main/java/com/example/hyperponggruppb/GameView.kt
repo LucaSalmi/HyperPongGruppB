@@ -11,7 +11,6 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
-import com.example.hyperponggruppb.PhysicsEngine.powerUp
 import java.lang.System.currentTimeMillis
 
 
@@ -30,7 +29,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val myActivity = context as GameMode1Activity
     private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
-    var millisTimer = 1000L
+    var millisSpawnTimer = 1000L
+    var millisPowerUpTimer = 7000L
     var isGameOver = false
 
     private val frameRate = 60
@@ -43,6 +43,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
         PlayerManager.lives = 3
+        myActivity.updateText()
         setup()
     }
 
@@ -51,39 +52,61 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
      * restartTimer() restarts it and updates timeTicks
      * changeTimerLength() reduces the time between each spawn
      */
-    private val timer = object: CountDownTimer(millisTimer, 1000) {
+    private val spawnTimer = object: CountDownTimer(millisSpawnTimer, 1000) {
+
+        override fun onTick(p0: Long) {
+            
+
+        }
+
+        override fun onFinish() {
+            spawnNewRow = true
+            restartSpawnTimer()
+        }
+    }
+
+    fun restartSpawnTimer(){
+
+        spawnTimer.cancel()
+        timeTicks ++
+        changeSpawnTimerLength()
+        spawnTimer.start()
+    }
+
+    private fun changeSpawnTimerLength(){
+
+        when(timeTicks){
+
+            1 -> millisSpawnTimer = 900L
+            2 -> millisSpawnTimer = 800L
+            3 -> millisSpawnTimer = 700L
+            4 -> millisSpawnTimer = 600L
+            5 -> millisSpawnTimer = 500L
+            6 -> millisSpawnTimer = 400L
+            7 -> millisSpawnTimer = 300L
+            8 -> millisSpawnTimer = 200L
+        }
+    }
+
+    private val powerUpTimer = object: CountDownTimer(millisPowerUpTimer, 1000){
 
         override fun onTick(p0: Long) {
 
         }
 
         override fun onFinish() {
-            spawnNewRow = true
-            restartTimer()
+
+            player.bigPaddle = false
+            player.smallPaddle = false
+            PhysicsEngine.isPowerUpLive = false
         }
+
     }
 
-    fun restartTimer(){
+    private fun restartPowerUpTimer(){
 
-        timer.cancel()
-        timeTicks ++
-        changeTimerLength()
-        timer.start()
-    }
-
-    fun changeTimerLength(){
-
-        when(timeTicks){
-
-            1 -> millisTimer = 900L
-            2 -> millisTimer = 800L
-            3 -> millisTimer = 700L
-            4 -> millisTimer = 600L
-            5 -> millisTimer = 500L
-            6 -> millisTimer = 400L
-            7 -> millisTimer = 300L
-            8 -> millisTimer = 200L
-        }
+        powerUpTimer.cancel()
+        powerUpTimer.start()
     }
 
     private fun setup() {
@@ -209,9 +232,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 canvas.drawRect(obj, brickColor)
                 canvas.drawBitmap((brickAssets[brickRow.indexOf(obj)]), obj.left.toFloat()-5, obj.top.toFloat()-5, null)
             }
+
             if (PhysicsEngine.isPowerUpLive){
 
                 PhysicsEngine.powerUp.draw(canvas)
+
+                canvas.drawBitmap(AssetManager.ballAsset, PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
             }
 
 
@@ -243,7 +269,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedX = 7f
             ball.ballSpeedY = -13f
             gameStart = true
-            restartTimer()
+            restartSpawnTimer()
 
         }
 
@@ -286,20 +312,20 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     if (PhysicsEngine.isPowerUpCatch){
 
-                        when(powerUp.typeID){
+                        when(PhysicsEngine.powerUp.typeID){
 
-                            0 -> timeTicks = powerUp.speedDown(timeTicks)
-                            1 -> timeTicks = powerUp.speedUp(timeTicks)
+                            0 -> timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
+                            1 -> timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
                             2 -> {
-                                powerUp.bigPaddle(player)
+                                PhysicsEngine.powerUp.bigPaddle(player)
                                 player.update()
                             }
                             3 ->{
-                                powerUp.smallPaddle(player)
+                                PhysicsEngine.powerUp.smallPaddle(player)
                                 player.update()
                             }
                         }
-
+                        restartPowerUpTimer()
                         PhysicsEngine.isPowerUpCatch = false
                     }
 

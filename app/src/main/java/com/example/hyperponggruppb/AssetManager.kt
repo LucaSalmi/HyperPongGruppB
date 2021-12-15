@@ -39,6 +39,7 @@ object AssetManager {
 
 
     fun prepareAssets(context: Context){
+        
         lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background).scale(getScreenWidth(), getScreenHeight(), true)
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth,playerhight,true )
         bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth +100,playerhight,true )

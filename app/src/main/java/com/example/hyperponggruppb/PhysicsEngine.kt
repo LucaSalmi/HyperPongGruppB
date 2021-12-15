@@ -194,12 +194,10 @@ object PhysicsEngine {
             powerUp.update()
 
             if (powerUp.powerUpRect.intersect(player.playerRect)){
-                Log.d(TAG, "powerUpPhysics: type: ${powerUp.typeID}")
                 isPowerUpCatch = true
-                isPowerUpLive = false
             }
 
-            if (powerUp.powerUpRect.bottom >= canvasHeight){
+            if (powerUp.powerUpRect.bottom >= canvasHeight && !isPowerUpCatch){
 
                 isPowerUpLive = false
             }
