@@ -32,6 +32,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var millisSpawnTimer = 1000L
     var millisPowerUpTimer = 7000L
     var isGameOver = false
+    private var isPowerUpActive = false
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -99,6 +100,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             player.bigPaddle = false
             player.smallPaddle = false
             PhysicsEngine.isPowerUpLive = false
+            isPowerUpActive = false
         }
 
     }
@@ -237,7 +239,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 PhysicsEngine.powerUp.draw(canvas)
 
-                canvas.drawBitmap(PhysicsEngine.powerUp.assignAsset(), PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
+                if (!isPowerUpActive){
+
+                    canvas.drawBitmap(PhysicsEngine.powerUp.assignAsset(), PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
+                }
+
             }
 
 
@@ -326,6 +332,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                             }
                         }
                         restartPowerUpTimer()
+                        isPowerUpActive = true
                         PhysicsEngine.isPowerUpCatch = false
                     }
 
