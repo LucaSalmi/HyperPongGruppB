@@ -8,8 +8,8 @@ import android.util.Log
 
 object PhysicsEngine {
 
-    var isCollisionDetected = false
-    var brickHit = Rect()
+    private var isCollisionDetected = false
+    private var brickHit = Rect()
     var canvasHeight = 1977f
     var canvasWidth = 1080f
     var gameStart = false
@@ -110,7 +110,7 @@ object PhysicsEngine {
 
                 if (ball.brickCollision) {
 
-                    if (ball.ballPosY + 10f < brickHit.bottom && ball.ballPosY - 10f > brickHit.top) {
+                    if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top) {
                         Log.d(TAG, "BallPhysics: sides")
                         if (ball.ballSpeedX <= 0){
                             ball.ballPosX += 9f

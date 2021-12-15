@@ -59,10 +59,10 @@ object AssetManager {
         brickAssetYellow = BitmapFactory.decodeResource(context.resources, R.drawable.brick_yellow_glow).scale(brickwidth,brickheight,true)
         brickAssetHardFullHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_full_hp).scale(brickwidth,brickheight,true)
         brickAssetHardHalfHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_half_hp).scale(brickwidth,brickheight,true)
-        powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_faster_player).scale(brickwidth/2,brickheight,true)
-        powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth/2,brickheight,true)
-        powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_big_player_v2).scale(brickwidth/2,brickheight,true)
-        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth/2,brickheight,true)
+        powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_faster_player).scale(brickwidth,brickheight,true)
+        powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth,brickheight,true)
+        powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_big_player_v2).scale(brickwidth,brickheight,true)
+        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth,brickheight,true)
 
     }
 
