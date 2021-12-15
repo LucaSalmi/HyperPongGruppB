@@ -3,7 +3,7 @@ package com.example.hyperponggruppb
 import android.content.Context
 import android.graphics.*
 
-class Ball(var context: Context) {
+class Ball(var context: Context, val isExtra: Boolean) {
 
     var ballPosX = 0f
     var ballPosY = 0f

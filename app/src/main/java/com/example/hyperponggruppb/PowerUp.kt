@@ -35,6 +35,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             1 -> AssetManager.powerUpAssetSpeedUp
             2 -> AssetManager.powerUpAssetBigPaddle
             3 -> AssetManager.powerUpAssetSmallPaddle
+            4 -> AssetManager.ballAsset
             else -> AssetManager.powerUpAssetBigPaddle
         }
     }
@@ -62,6 +63,8 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         player.bigPaddle = false
         player.smallPaddle = true
     }
+    //TypeID 4
+
 
 
 }

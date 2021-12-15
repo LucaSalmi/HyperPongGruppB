@@ -17,7 +17,7 @@ object PhysicsEngine {
     var isPowerUpLive = false
     var isPowerUpCatch = false
     lateinit var powerUp: PowerUp
-
+    var extraBallCheck = false
 
     fun brickCollision(
         brickRow: MutableList<Rect>,
@@ -42,7 +42,7 @@ object PhysicsEngine {
 
             if (RandomNumberGenerator.rNG(1,6) %2 == 0){
 
-                powerUp = PowerUp(RandomNumberGenerator.rNG(0,3), brickHit.left, brickHit.top, brickHit.right, brickHit.bottom)
+                powerUp = PowerUp(RandomNumberGenerator.rNG(0,4), brickHit.left, brickHit.top, brickHit.right, brickHit.bottom)
                 isPowerUpLive = true
 
             }
@@ -83,11 +83,21 @@ object PhysicsEngine {
         )
 
         if (ball.ballPosY - ball.radius > canvasHeight && gameStart && !damageTaken) {
-            damageTaken = true
-            PlayerManager.loseLife()
-            Log.d(TAG, "BallPhysics: ${PlayerManager.lives}")
-            return
 
+            if (ball.isExtra){
+
+                ball.ballSpeedX = 0f
+                ball.ballSpeedY = 0f
+                extraBallCheck = false
+                return
+
+            }else{
+
+                damageTaken = true
+                PlayerManager.loseLife()
+                Log.d(TAG, "BallPhysics: ${PlayerManager.lives}")
+                return
+            }
         }
 
         if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 10f || ball.ballPosY - ball.radius <= 20f || ball.playerCollision || ball.brickCollision) {

@@ -6,6 +6,4 @@ object RandomNumberGenerator {
 
         return (a..b).random()
     }
-
-
 }

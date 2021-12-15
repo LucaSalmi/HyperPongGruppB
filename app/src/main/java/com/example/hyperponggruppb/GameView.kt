@@ -21,6 +21,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private var running = false
     private lateinit var canvas: Canvas
     private lateinit var ball: Ball
+    private lateinit var extraBall: Ball
     private lateinit var player: Player
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
@@ -33,6 +34,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var millisPowerUpTimer = 7000L
     var isGameOver = false
     private var isPowerUpActive = false
+    private var isExtraBallLive = false
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -121,7 +123,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight + 50
         player.update()
 
-        ball = Ball(this.context)
+        ball = Ball(this.context, false)
         ball.ballPosX = player.right-player.playerWidth/2
         ball.ballPosY = player.top-ball.radius
         ball.paint.color = Color.TRANSPARENT
@@ -220,7 +222,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
             }
 
-
             if (spawnNewRow){
 
                 BrickStructure.moveDownRow(brickRow)
@@ -243,7 +244,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     canvas.drawBitmap(PhysicsEngine.powerUp.assignAsset(), PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
                 }
+            }
 
+            if (isExtraBallLive){
+
+                extraBall.draw(canvas)
+                canvas.drawBitmap(AssetManager.ballAsset, extraBall.ballPosX-20, extraBall.ballPosY-20,null)
             }
 
 
@@ -316,6 +322,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     PhysicsEngine.powerUpPhysics(player)
 
+                    if (isExtraBallLive){
+
+                        PhysicsEngine.ballPhysics(extraBall, player)
+                        PhysicsEngine.playerCollision(extraBall, player, context)
+                        PhysicsEngine.brickCollision(brickRow, brickAssets, extraBall, context)
+                        checkForExtraBall()
+                    }
+
                     if (PhysicsEngine.isPowerUpCatch){
 
                         when(PhysicsEngine.powerUp.typeID){
@@ -329,6 +343,22 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                             3 ->{
                                 PhysicsEngine.powerUp.smallPaddle(player)
                                 player.update()
+                            }
+                            4 ->{
+                                if(!isExtraBallLive){
+
+                                    extraBall = Ball(this.context, true)
+                                    extraBall.ballPosX = player.right-player.playerWidth/2
+                                    extraBall.ballPosY = player.top-ball.radius
+                                    extraBall.paint.color = Color.TRANSPARENT
+                                    extraBall.hitBoxPaint.color = Color.TRANSPARENT
+                                    extraBall.ballSpeedX = 7f
+                                    extraBall.ballSpeedY = -13f
+                                    PhysicsEngine.extraBallCheck = true
+                                    isExtraBallLive = true
+
+                                }
+
                             }
                         }
                         restartPowerUpTimer()
@@ -357,6 +387,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
             }
         }
+    }
+
+    private fun checkForExtraBall(){
+        isExtraBallLive = PhysicsEngine.extraBallCheck
     }
 
     private fun getScreenWidth(): Int {
