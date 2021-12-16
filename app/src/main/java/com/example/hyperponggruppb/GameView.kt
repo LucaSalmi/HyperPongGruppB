@@ -105,6 +105,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             player.smallPaddle = false
             isPowerUpActive = false
 
+            if (context != null) {
+                SoundEffectManager.jukebox(context, 3)
+            }
+
         }
 
     }
@@ -399,7 +403,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                             }
                         }
-
+                        SoundEffectManager.jukebox(context, 2)
                         PhysicsEngine.isPowerUpLive = false
                         PhysicsEngine.isPowerUpCatch = false
                         restartPowerUpTimer()
