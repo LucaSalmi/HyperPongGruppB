@@ -3,31 +3,38 @@ package com.example.hyperponggruppb
 import android.graphics.*
 import javax.security.auth.Destroyable
 
-class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int){
+class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int) {
 
     var powerUpColor = Paint()
+    var isCatched = false
+    var isToDestroy = false
 
 
     private val speed = 10
     var powerUpRect = Rect(left, top, right, bottom)
 
-    fun update(){
+    fun update() {
 
         this.bottom += speed
         this.top += speed
         powerUpRect = Rect(left, top, right, bottom)
     }
 
-    fun draw(canvas: Canvas){
-        if (PhysicsEngine.isPowerUpLive){
+    fun draw(canvas: Canvas) {
 
-            powerUpColor.color = Color.TRANSPARENT
-            canvas.drawRect(this.left.toFloat(), this.top.toFloat(), this.right.toFloat(), this.bottom.toFloat(), powerUpColor)
-        }
+        powerUpColor.color = Color.TRANSPARENT
+        canvas.drawRect(
+            this.left.toFloat(),
+            this.top.toFloat(),
+            this.right.toFloat(),
+            this.bottom.toFloat(),
+            powerUpColor
+        )
+
     }
 
 
-    fun assignAsset(): Bitmap{
+    fun assignAsset(): Bitmap {
 
         return when (this.typeID) {
 
@@ -45,27 +52,42 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     //typeID 0
     fun speedDown(timeTicks: Int): Int {
 
-        return timeTicks -3
+        return timeTicks - 3
     }
+
     //typeID 1
     fun speedUp(timeTicks: Int): Int {
 
         return timeTicks + 2
     }
+
     //typeID 2
-    fun bigPaddle(player: Player){
+    fun bigPaddle(player: Player) {
 
-        player.smallPaddle = false
-        player.bigPaddle = true
+        if (player.smallPaddle){
+
+            player.smallPaddle = false
+
+        }else{
+
+            player.bigPaddle = true
+        }
+
     }
-    //typeID 3
-    fun smallPaddle(player: Player){
 
-        player.bigPaddle = false
-        player.smallPaddle = true
+    //typeID 3
+    fun smallPaddle(player: Player) {
+
+        if (player.bigPaddle){
+
+            player.bigPaddle = false
+
+        }else{
+
+            player.smallPaddle = true
+        }
     }
     //TypeID 4
-
 
 
 }

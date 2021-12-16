@@ -14,8 +14,6 @@ object PhysicsEngine {
     var canvasWidth = 1080f
     var gameStart = false
     var damageTaken = false
-    var isPowerUpLive = false
-    var isPowerUpCatch = false
     var ballToEliminate = 0
     lateinit var powerUp: PowerUp
 
@@ -23,6 +21,7 @@ object PhysicsEngine {
         brickRow: MutableList<Rect>,
         brickAssets: MutableList<Bitmap>,
         ball: Ball,
+        powerUpArray: MutableList<PowerUp>,
         context: Context
     ) {
 
@@ -42,9 +41,9 @@ object PhysicsEngine {
 
             if (RandomNumberGenerator.rNG(1, 7) % 2 == 0) {
 
-                var rngLimit = if (PlayerManager.lives == 3){
+                var rngLimit = if (PlayerManager.lives == 3) {
                     4
-                }else{
+                } else {
                     5
                 }
                 powerUp = PowerUp(
@@ -54,8 +53,7 @@ object PhysicsEngine {
                     brickHit.right,
                     brickHit.bottom
                 )
-                isPowerUpLive = true
-
+                powerUpArray.add(powerUp)
             }
         }
 
@@ -64,7 +62,6 @@ object PhysicsEngine {
             brickAssets.removeAt(toRemove)
             PlayerManager.addPoints(10)
         }
-
     }
 
 
@@ -99,7 +96,6 @@ object PhysicsEngine {
 
                 damageTaken = true
                 ballToEliminate = ballsArray.indexOf(ball)
-                Log.d(TAG, "BallPhysics: ${PlayerManager.lives}")
 
             }
 
@@ -253,7 +249,7 @@ object PhysicsEngine {
             ball.ballPosX += ball.ballSpeedX
         }
 
-        if (damageTaken && ballsArray.size > 1){
+        if (damageTaken && ballsArray.size > 1) {
 
             ballsArray.removeAt(ballToEliminate)
             damageTaken = false
@@ -272,19 +268,19 @@ object PhysicsEngine {
         return false
     }
 
-    fun powerUpPhysics(player: Player) {
+    fun powerUpPhysics(powerUpArray: MutableList<PowerUp>, player: Player) {
 
-        if (isPowerUpLive) {
+        for (powerUp in powerUpArray) {
 
             powerUp.update()
 
             if (powerUp.powerUpRect.intersect(player.playerRect)) {
-                isPowerUpCatch = true
+                powerUp.isCatched = true
             }
 
-            if (powerUp.powerUpRect.bottom >= canvasHeight && !isPowerUpCatch) {
+            if (powerUp.powerUpRect.bottom >= canvasHeight) {
 
-                isPowerUpLive = false
+                powerUp.isToDestroy = true
             }
         }
     }

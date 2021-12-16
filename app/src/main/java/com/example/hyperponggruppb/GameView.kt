@@ -40,7 +40,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var millisSpawnTimer = 105L
     var millisPowerUpTimer = 7000L
     var isGameOver = false
-    private var isPowerUpActive = false
+
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -108,10 +108,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             player.bigPaddle = false
             player.smallPaddle = false
-            isPowerUpActive = false
 
         }
-
     }
 
     private fun restartPowerUpTimer() {
@@ -206,7 +204,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedY = 0f
 
         }
-
     }
 
     private fun draw() {
@@ -234,6 +231,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             player.draw(canvas)
 
             when {
+
                 player.bigPaddle -> {
 
                     canvas.drawBitmap(
@@ -363,39 +361,55 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                         PhysicsEngine.playerCollision(ballObj, player, context)
 
-                        PhysicsEngine.brickCollision(brickRow, brickAssets, ballObj, context)
+                        PhysicsEngine.brickCollision(
+                            brickRow,
+                            brickAssets,
+                            ballObj,
+                            powerUpArray,
+                            context
+                        )
                     }
 
+                    if (PlayerManager.lives > 0) {
+
+                        myActivity.updateText()
+                    }
+
+                    if (brickRow.size < 30) {
+
+                        BrickStructure.makeOOBBricks(brickRow)
+                        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
+                    }
+
+                    PhysicsEngine.powerUpPhysics(powerUpArray, player)
+                    var powerUpToErase: Int? = null
                     for (powerUp in powerUpArray) {
 
-                        PhysicsEngine.powerUpPhysics(player)
+                        if (powerUp.isCatched) {
 
-                        if (PhysicsEngine.isPowerUpCatch) {
-
-                            when (PhysicsEngine.powerUp.typeID) {
+                            when (powerUp.typeID) {
 
                                 0 -> {
-                                    timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
+                                    timeTicks = powerUp.speedDown(timeTicks)
                                     SoundEffectManager.jukebox(context, 3)
                                 }
                                 1 -> {
-                                    timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
+                                    timeTicks = powerUp.speedUp(timeTicks)
                                     SoundEffectManager.jukebox(context, 2)
                                 }
                                 2 -> {
-                                    PhysicsEngine.powerUp.bigPaddle(player)
+                                    powerUp.bigPaddle(player)
                                     SoundEffectManager.jukebox(context, 2)
                                     restartPowerUpTimer()
                                     player.update()
                                 }
                                 3 -> {
-                                    PhysicsEngine.powerUp.smallPaddle(player)
+                                    powerUp.smallPaddle(player)
                                     SoundEffectManager.jukebox(context, 3)
                                     restartPowerUpTimer()
                                     player.update()
                                 }
                                 4 -> {
-
                                     extraBall = Ball(this.context)
                                     extraBall.ballPosX = player.right - player.playerWidth / 2
                                     extraBall.ballPosY = player.top - ball.radius
@@ -412,24 +426,19 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                     myActivity.updateText()
                                 }
                             }
+                        }
 
-                            PhysicsEngine.isPowerUpLive = false
-                            PhysicsEngine.isPowerUpCatch = false
-                            restartPowerUpTimer()
+                        if (powerUp.isCatched || powerUp.isToDestroy) {
+                            powerUpToErase = powerUpArray.indexOf(powerUp)
                         }
 
                     }
 
-                    if (PlayerManager.lives > 0) {
+                    if (powerUpToErase!= null) {
 
-                        myActivity.updateText()
+                        powerUpArray.removeAt(powerUpToErase)
                     }
 
-                    if (brickRow.size < 30) {
-
-                        BrickStructure.makeOOBBricks(brickRow)
-                        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
-                    }
                 }
 
                 draw()
