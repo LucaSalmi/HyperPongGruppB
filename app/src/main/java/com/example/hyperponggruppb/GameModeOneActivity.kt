@@ -57,6 +57,7 @@ class GameMode1Activity : AppCompatActivity() {
             retryBtn.setOnClickListener {
 
                 supportFragmentManager.commit {
+                    PlayerManager.resetPoints()
                     remove(GameOneFragment())
                     add(R.id.gameViewContainer, GameOneFragment())
                 }

@@ -47,6 +47,10 @@ object PlayerManager {
         }
     }
 
+    fun resetPoints(){
+        playerPoints = 0
+    }
+
     fun loseLife(){
         lives -= 1
     }
