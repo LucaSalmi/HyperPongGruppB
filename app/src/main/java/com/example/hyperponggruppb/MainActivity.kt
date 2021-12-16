@@ -11,7 +11,7 @@ import com.example.hyperponggruppb.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    val music = MusicManager()
+    //val music = MusicManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         PlayerManager.playerPoints
 
-        music.context(this)
+        SoundEffectManager.bGMusic(this)
 
 
         binding.ivNewGame.setOnClickListener {
@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        music.start()
         super.onResume()
     }
 

@@ -105,10 +105,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             player.smallPaddle = false
             isPowerUpActive = false
 
-            if (context != null) {
-                SoundEffectManager.jukebox(context, 3)
-            }
-
         }
 
     }
@@ -376,14 +372,22 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                         when (PhysicsEngine.powerUp.typeID) {
 
-                            0 -> timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
-                            1 -> timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
+                            0 -> {
+                                timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
+                                SoundEffectManager.jukebox(context, 3)
+                            }
+                            1 -> {
+                                timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
+                                SoundEffectManager.jukebox(context, 2)
+                            }
                             2 -> {
                                 PhysicsEngine.powerUp.bigPaddle(player)
+                                SoundEffectManager.jukebox(context, 2)
                                 player.update()
                             }
                             3 -> {
                                 PhysicsEngine.powerUp.smallPaddle(player)
+                                SoundEffectManager.jukebox(context, 3)
                                 player.update()
                             }
                             4 -> {
@@ -397,14 +401,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                     extraBall.ballSpeedX = 7f
                                     extraBall.ballSpeedY = -13f
                                     ballsArray.add(extraBall)
-                                    Log.d(TAG, "ball powerUP: one passage")
-                                    Log.d(TAG, "ball powerUP: ${ballsArray.size}")
                                     isPowerUpActive = true
+                                    SoundEffectManager.jukebox(context, 2)
                                 }
 
                             }
                         }
-                        SoundEffectManager.jukebox(context, 2)
+
                         PhysicsEngine.isPowerUpLive = false
                         PhysicsEngine.isPowerUpCatch = false
                         restartPowerUpTimer()
