@@ -31,12 +31,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var brickRow = mutableListOf<Rect>()
     var brickAssets = mutableListOf<Bitmap>()
     var ballsArray = mutableListOf<Ball>()
+    var powerUpArray = mutableListOf<PowerUp>()
     var isCollisionDetected = false
     private val myActivity = context as GameMode1Activity
     private val sp =
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
-    var millisSpawnTimer = 1000L
+    var millisSpawnTimer = 105L
     var millisPowerUpTimer = 7000L
     var isGameOver = false
     private var isPowerUpActive = false
@@ -48,6 +49,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
 
     init {
+
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
         PlayerManager.lives = 1
@@ -60,13 +62,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
      * restartTimer() restarts it and updates timeTicks
      * changeTimerLength() reduces the time between each spawn
      */
-    private val spawnTimer = object : CountDownTimer(millisSpawnTimer, 1000) {
+    private val spawnTimer = object : CountDownTimer(30000, millisSpawnTimer) {
 
         override fun onTick(p0: Long) {
+            spawnNewRow = true
         }
 
         override fun onFinish() {
-            spawnNewRow = true
+
             restartSpawnTimer()
         }
     }
@@ -83,14 +86,16 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         when (timeTicks) {
 
-            1 -> millisSpawnTimer = 900L
-            2 -> millisSpawnTimer = 800L
-            3 -> millisSpawnTimer = 700L
-            4 -> millisSpawnTimer = 600L
-            5 -> millisSpawnTimer = 500L
-            6 -> millisSpawnTimer = 400L
-            7 -> millisSpawnTimer = 300L
-            8 -> millisSpawnTimer = 200L
+            1 -> millisSpawnTimer = 87L
+            2 -> millisSpawnTimer = 73L
+            3 -> millisSpawnTimer = 61L
+            4 -> millisSpawnTimer = 50L
+            5 -> millisSpawnTimer = 42L
+            6 -> millisSpawnTimer = 35L
+            7 -> millisSpawnTimer = 30L
+            8 -> millisSpawnTimer = 25L
+            9 -> millisSpawnTimer = 21L
+            10 -> millisSpawnTimer = 17L
         }
     }
 
@@ -200,7 +205,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
-
         }
 
     }
@@ -280,19 +284,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 )
             }
 
-            if (PhysicsEngine.isPowerUpLive) {
+            for (powerUp in powerUpArray) {
 
-                PhysicsEngine.powerUp.draw(canvas)
-
-                if (!isPowerUpActive) {
-
-                    canvas.drawBitmap(
-                        PhysicsEngine.powerUp.assignAsset(),
-                        PhysicsEngine.powerUp.left.toFloat(),
-                        PhysicsEngine.powerUp.top.toFloat(),
-                        null
-                    )
-                }
+                powerUp.draw(canvas)
+                canvas.drawBitmap(
+                    powerUp.assignAsset(),
+                    powerUp.left.toFloat(),
+                    powerUp.top.toFloat(),
+                    null
+                )
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
@@ -366,32 +366,35 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         PhysicsEngine.brickCollision(brickRow, brickAssets, ballObj, context)
                     }
 
-                    PhysicsEngine.powerUpPhysics(player)
+                    for (powerUp in powerUpArray) {
 
-                    if (PhysicsEngine.isPowerUpCatch) {
+                        PhysicsEngine.powerUpPhysics(player)
 
-                        when (PhysicsEngine.powerUp.typeID) {
+                        if (PhysicsEngine.isPowerUpCatch) {
 
-                            0 -> {
-                                timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
-                                SoundEffectManager.jukebox(context, 3)
-                            }
-                            1 -> {
-                                timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
-                                SoundEffectManager.jukebox(context, 2)
-                            }
-                            2 -> {
-                                PhysicsEngine.powerUp.bigPaddle(player)
-                                SoundEffectManager.jukebox(context, 2)
-                                player.update()
-                            }
-                            3 -> {
-                                PhysicsEngine.powerUp.smallPaddle(player)
-                                SoundEffectManager.jukebox(context, 3)
-                                player.update()
-                            }
-                            4 -> {
-                                if (!isPowerUpActive) {
+                            when (PhysicsEngine.powerUp.typeID) {
+
+                                0 -> {
+                                    timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
+                                    SoundEffectManager.jukebox(context, 3)
+                                }
+                                1 -> {
+                                    timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
+                                    SoundEffectManager.jukebox(context, 2)
+                                }
+                                2 -> {
+                                    PhysicsEngine.powerUp.bigPaddle(player)
+                                    SoundEffectManager.jukebox(context, 2)
+                                    restartPowerUpTimer()
+                                    player.update()
+                                }
+                                3 -> {
+                                    PhysicsEngine.powerUp.smallPaddle(player)
+                                    SoundEffectManager.jukebox(context, 3)
+                                    restartPowerUpTimer()
+                                    player.update()
+                                }
+                                4 -> {
 
                                     extraBall = Ball(this.context)
                                     extraBall.ballPosX = player.right - player.playerWidth / 2
@@ -401,20 +404,20 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                     extraBall.ballSpeedX = 7f
                                     extraBall.ballSpeedY = -13f
                                     ballsArray.add(extraBall)
-                                    isPowerUpActive = true
                                     SoundEffectManager.jukebox(context, 2)
                                 }
-                            }
-                            5 -> {
+                                5 -> {
                                     PlayerManager.gainLife()
                                     SoundEffectManager.jukebox(context, 2)
                                     myActivity.updateText()
+                                }
                             }
+
+                            PhysicsEngine.isPowerUpLive = false
+                            PhysicsEngine.isPowerUpCatch = false
+                            restartPowerUpTimer()
                         }
 
-                        PhysicsEngine.isPowerUpLive = false
-                        PhysicsEngine.isPowerUpCatch = false
-                        restartPowerUpTimer()
                     }
 
                     if (PlayerManager.lives > 0) {

@@ -9,7 +9,7 @@ object SoundEffectManager {
     var backgroundPlayer: MediaPlayer? = null
 
     fun bGMusic(context: Context){
-        backgroundPlayer = MediaPlayer.create(context, context.resources.getIdentifier("hyper_pong_theme", "raw", context.packageName))
+        backgroundPlayer = MediaPlayer.create(context, context.resources.getIdentifier("hyper_pong_main_theme_3", "raw", context.packageName))
         backgroundPlayer?.start()
     }
 

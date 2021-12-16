@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        var stack = Thread.getAllStackTraces()
+        Log.d(TAG, "onResume: $stack")
         super.onResume()
     }
 

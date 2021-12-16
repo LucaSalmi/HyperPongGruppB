@@ -38,9 +38,9 @@ object PhysicsEngine {
             }
         }
 
-        if (ball.brickCollision && !isPowerUpLive) {
+        if (ball.brickCollision) {
 
-            if (RandomNumberGenerator.rNG(1, 6) % 2 == 0) {
+            if (RandomNumberGenerator.rNG(1, 7) % 2 == 0) {
 
                 var rngLimit = if (PlayerManager.lives == 3){
                     4
