@@ -43,7 +43,8 @@ object PhysicsEngine {
             if (RandomNumberGenerator.rNG(1, 6) % 2 == 0) {
 
                 powerUp = PowerUp(
-                    RandomNumberGenerator.rNG(0, 4),
+                    //RandomNumberGenerator.rNG(0, 4),
+                    4,
                     brickHit.left,
                     brickHit.top,
                     brickHit.right,

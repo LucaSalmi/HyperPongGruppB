@@ -60,8 +60,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val spawnTimer = object : CountDownTimer(millisSpawnTimer, 1000) {
 
         override fun onTick(p0: Long) {
-
-
         }
 
         override fun onFinish() {
@@ -96,7 +94,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val powerUpTimer = object : CountDownTimer(millisPowerUpTimer, 1000) {
 
         override fun onTick(p0: Long) {
-
         }
 
         override fun onFinish() {
@@ -122,9 +119,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         player.left = getScreenWidth() / 2 - player.playerWidth / 2
         player.right = getScreenWidth() / 2 + player.playerWidth / 2
         player.top =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight - 50
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight/2 - 100
         player.bottom =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight + 50
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight/2 - 100
         player.update()
 
         ball = Ball(this.context)
@@ -190,6 +187,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             gameStart = false
             isCollisionDetected = false
+            ball = Ball(this.context)
+            ball.paint.color = Color.TRANSPARENT
+            ball.hitBoxPaint.color = Color.TRANSPARENT
+            ballsArray.add(ball)
             ball.ballPosX = player.right - player.playerWidth / 2
             ball.ballPosY = player.top - ball.radius
             ball.ballSpeedX = 0f
@@ -342,6 +343,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                     if (PhysicsEngine.damageTaken) {
 
                         PhysicsEngine.damageTaken = false
+                        PlayerManager.loseLife()
                         gameEnd()
                     }
 
@@ -370,21 +372,25 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                 player.update()
                             }
                             4 -> {
+                                if (!isPowerUpActive){
 
-                                extraBall = Ball(this.context)
-                                extraBall.ballPosX = player.right - player.playerWidth / 2
-                                extraBall.ballPosY = player.top - ball.radius
-                                extraBall.paint.color = Color.TRANSPARENT
-                                extraBall.hitBoxPaint.color = Color.TRANSPARENT
-                                extraBall.ballSpeedX = 7f
-                                extraBall.ballSpeedY = -13f
-                                ballsArray.add(extraBall)
+                                    extraBall = Ball(this.context)
+                                    extraBall.ballPosX = player.right - player.playerWidth / 2
+                                    extraBall.ballPosY = player.top - ball.radius
+                                    extraBall.paint.color = Color.TRANSPARENT
+                                    extraBall.hitBoxPaint.color = Color.TRANSPARENT
+                                    extraBall.ballSpeedX = 7f
+                                    extraBall.ballSpeedY = -13f
+                                    ballsArray.add(extraBall)
+                                    Log.d(TAG, "ball powerUP: one passage")
+                                    Log.d(TAG, "ball powerUP: ${ballsArray.size}")
+                                    isPowerUpActive = true
+                                }
 
                             }
                         }
 
                         restartPowerUpTimer()
-                        isPowerUpActive = true
                         PhysicsEngine.isPowerUpCatch = false
                     }
 

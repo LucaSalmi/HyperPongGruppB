@@ -21,12 +21,17 @@ class Player(context: Context) {
 
     fun update() {
 
-        playerRect = if (bigPaddle) {
-            Rect(left.toInt()-50, top.toInt(), right.toInt()+50, bottom.toInt())
-        }else if (smallPaddle){
-            Rect(left.toInt()+50, top.toInt(), right.toInt()-50, bottom.toInt())
-        }else {
-            Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+        playerRect = when {
+
+            bigPaddle -> {
+                Rect(left.toInt()-50, top.toInt(), right.toInt()+50, bottom.toInt())
+            }
+            smallPaddle -> {
+                Rect(left.toInt()+50, top.toInt(), right.toInt()-50, bottom.toInt())
+            }
+            else -> {
+                Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+            }
         }
     }
 
