@@ -42,8 +42,13 @@ object PhysicsEngine {
 
             if (RandomNumberGenerator.rNG(1, 6) % 2 == 0) {
 
+                var rngLimit = if (PlayerManager.lives == 3){
+                    4
+                }else{
+                    5
+                }
                 powerUp = PowerUp(
-                    RandomNumberGenerator.rNG(0, 4),
+                    RandomNumberGenerator.rNG(0, rngLimit),
                     brickHit.left,
                     brickHit.top,
                     brickHit.right,

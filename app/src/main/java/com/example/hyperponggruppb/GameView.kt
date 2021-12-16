@@ -404,7 +404,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                     isPowerUpActive = true
                                     SoundEffectManager.jukebox(context, 2)
                                 }
-
+                            }
+                            5 -> {
+                                    PlayerManager.gainLife()
+                                    SoundEffectManager.jukebox(context, 2)
+                                    myActivity.updateText()
                             }
                         }
 

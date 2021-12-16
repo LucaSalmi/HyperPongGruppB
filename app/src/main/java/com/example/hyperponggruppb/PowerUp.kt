@@ -36,6 +36,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             2 -> AssetManager.powerUpAssetBigPaddle
             3 -> AssetManager.powerUpAssetSmallPaddle
             4 -> AssetManager.ballAsset
+            //5 ->
             else -> AssetManager.powerUpAssetBigPaddle
         }
     }

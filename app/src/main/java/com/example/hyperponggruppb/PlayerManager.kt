@@ -52,7 +52,11 @@ object PlayerManager {
     }
 
     fun loseLife(){
-        lives -= 1
+        lives --
+    }
+
+    fun gainLife(){
+        lives ++
     }
 
 }

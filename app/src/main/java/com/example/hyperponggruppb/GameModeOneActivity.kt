@@ -64,7 +64,6 @@ class GameMode1Activity : AppCompatActivity() {
                 dialog.dismiss()
             }
 
-
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(R.color.trans)
         })
