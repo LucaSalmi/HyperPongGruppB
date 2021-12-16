@@ -204,6 +204,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
+
         }
 
     }
