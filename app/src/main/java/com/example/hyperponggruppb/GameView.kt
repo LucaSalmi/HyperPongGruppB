@@ -50,7 +50,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     init {
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
         myActivity.updateText()
         setup()
     }
@@ -183,8 +183,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             PlayerManager.saveHighScore(sp)
             gameStart = false
-            stop()
             myActivity.scoreBoard()
+            stop()
         }
 
         if (PlayerManager.lives > 0 && gameStart) {

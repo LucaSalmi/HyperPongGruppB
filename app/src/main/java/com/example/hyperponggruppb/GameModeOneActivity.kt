@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb
 
 import android.app.Dialog
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -55,7 +56,10 @@ class GameMode1Activity : AppCompatActivity() {
             }
             retryBtn.setOnClickListener {
 
-                this.recreate()
+                supportFragmentManager.commit {
+                    remove(GameOneFragment())
+                    add(R.id.gameViewContainer, GameOneFragment())
+                }
                 dialog.dismiss()
             }
             dialog.show()
