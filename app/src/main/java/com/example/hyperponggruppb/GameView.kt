@@ -36,7 +36,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var millisPowerUpTimer = 7000L
     var isGameOver = false
     private var isPowerUpActive = false
-    private var isExtraBallLive = false
 
     private val frameRate = 60
     val deltaTime = 0L
@@ -100,8 +99,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             player.bigPaddle = false
             player.smallPaddle = false
-            PhysicsEngine.isPowerUpLive = false
             isPowerUpActive = false
+
         }
 
     }
@@ -222,32 +221,36 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             player.draw(canvas)
 
-            if (player.bigPaddle) {
+            when {
+                player.bigPaddle -> {
 
-                canvas.drawBitmap(
-                    AssetManager.bigPlayerAsset,
-                    player.playerRect.left.toFloat(),
-                    player.playerRect.top.toFloat(),
-                    null
-                )
+                    canvas.drawBitmap(
+                        AssetManager.bigPlayerAsset,
+                        player.playerRect.left.toFloat(),
+                        player.playerRect.top.toFloat(),
+                        null
+                    )
 
-            } else if (player.smallPaddle) {
+                }
+                player.smallPaddle -> {
 
-                canvas.drawBitmap(
-                    AssetManager.smallPlayerAsset,
-                    player.playerRect.left.toFloat(),
-                    player.playerRect.top.toFloat(),
-                    null
-                )
+                    canvas.drawBitmap(
+                        AssetManager.smallPlayerAsset,
+                        player.playerRect.left.toFloat(),
+                        player.playerRect.top.toFloat(),
+                        null
+                    )
 
-            } else {
+                }
+                else -> {
 
-                canvas.drawBitmap(
-                    AssetManager.playerAsset,
-                    player.playerRect.left.toFloat(),
-                    player.playerRect.top.toFloat(),
-                    null
-                )
+                    canvas.drawBitmap(
+                        AssetManager.playerAsset,
+                        player.playerRect.left.toFloat(),
+                        player.playerRect.top.toFloat(),
+                        null
+                    )
+                }
             }
 
             if (spawnNewRow) {
@@ -390,8 +393,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                             }
                         }
 
-                        restartPowerUpTimer()
+                        PhysicsEngine.isPowerUpLive = false
                         PhysicsEngine.isPowerUpCatch = false
+                        restartPowerUpTimer()
                     }
 
                     if (PlayerManager.lives > 0) {
