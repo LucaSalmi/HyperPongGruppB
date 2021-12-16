@@ -30,6 +30,8 @@ object AssetManager {
     lateinit var powerUpAssetSpeedDown: Bitmap
     lateinit var powerUpAssetBigPaddle: Bitmap
     lateinit var powerUpAssetSmallPaddle: Bitmap
+    lateinit var powerUpAssetMultiBall: Bitmap
+    lateinit var powerUpAssetHealthPlus: Bitmap
 
 
     var playerwidth = 200
@@ -41,6 +43,9 @@ object AssetManager {
     var brickwidth = 110
     var brickheight = 70
 
+    var powerUpHeight = 80
+    var powerUpWidth = 80
+
 
     fun prepareAssets(context: Context){
         
@@ -48,7 +53,7 @@ object AssetManager {
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth,playerhight,true )
         bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth +100,playerhight,true )
         smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth-100,playerhight,true )
-        ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.hyper_ball).scale(ballwidth,ballheight,true)
+        ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.ball_glow_simple).scale(ballwidth,ballheight,true)
         brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
         brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2).scale(brickwidth,brickheight,true)
         brickAssetV3 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v3).scale(brickwidth,brickheight,true)
@@ -59,10 +64,12 @@ object AssetManager {
         brickAssetYellow = BitmapFactory.decodeResource(context.resources, R.drawable.brick_yellow_glow).scale(brickwidth,brickheight,true)
         brickAssetHardFullHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_full_hp).scale(brickwidth,brickheight,true)
         brickAssetHardHalfHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_half_hp).scale(brickwidth,brickheight,true)
-        powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_faster_player).scale(brickwidth,brickheight,true)
-        powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_slower_player).scale(brickwidth,brickheight,true)
-        powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_big_player_v2).scale(brickwidth,brickheight,true)
-        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_small_player_v2).scale(brickwidth,brickheight,true)
+        powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.speed_plus_simple).scale(powerUpWidth,powerUpHeight,true)
+        powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.speed_minus_simple).scale(powerUpWidth,powerUpHeight,true)
+        powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.playersize_plus_simple).scale(powerUpWidth,powerUpHeight,true)
+        powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.playersize_minus_simple).scale(powerUpWidth,powerUpHeight,true)
+        powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
+        powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth,powerUpHeight,true)
 
     }
 

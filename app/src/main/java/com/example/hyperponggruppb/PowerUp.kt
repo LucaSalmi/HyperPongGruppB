@@ -8,7 +8,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     var powerUpColor = Paint()
 
 
-    private val speed = 15
+    private val speed = 10
     var powerUpRect = Rect(left, top, right, bottom)
 
     fun update(){
@@ -35,8 +35,8 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             1 -> AssetManager.powerUpAssetSpeedUp
             2 -> AssetManager.powerUpAssetBigPaddle
             3 -> AssetManager.powerUpAssetSmallPaddle
-            4 -> AssetManager.ballAsset
-            //5 ->
+            4 -> AssetManager.powerUpAssetMultiBall
+            5 -> AssetManager.powerUpAssetHealthPlus
             else -> AssetManager.powerUpAssetBigPaddle
         }
     }
