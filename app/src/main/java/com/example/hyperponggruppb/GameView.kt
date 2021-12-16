@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.Resources
@@ -10,6 +11,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.Window
+import android.widget.ImageView
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
 
@@ -41,6 +44,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
+
 
 
     init {
@@ -179,7 +183,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             PlayerManager.saveHighScore(sp)
             gameStart = false
-            activity.finish()
+            scoreBoard()
         }
 
         if (PlayerManager.lives > 0 && gameStart) {
@@ -196,6 +200,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             ball.ballSpeedY = 0f
 
         }
+
     }
 
     private fun draw() {
@@ -419,6 +424,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
             }
         }
+    }
+
+    private fun scoreBoard() {
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.result_view)
+        //val body = dialog.findViewById(R.id.body) as TextView
+        //body.text = title
+        val returnBtn = dialog.findViewById(R.id.iv_result_return) as ImageView
+        val retryBtn = dialog.findViewById(R.id.iv_result_next) as ImageView
+
+        returnBtn.setOnClickListener {
+            activity.finish()
+            dialog.dismiss()
+        }
+        retryBtn.setOnClickListener {
+
+            activity.recreate()
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     private fun getScreenWidth(): Int {
