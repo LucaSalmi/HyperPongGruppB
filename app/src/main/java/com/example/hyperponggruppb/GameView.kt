@@ -13,6 +13,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.Window
 import android.widget.ImageView
+import androidx.fragment.app.commit
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
 
@@ -44,7 +45,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
-
 
 
     init {
@@ -118,13 +118,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.BLACK
+        player.paint.color = Color.TRANSPARENT
         player.left = getScreenWidth() / 2 - player.playerWidth / 2
         player.right = getScreenWidth() / 2 + player.playerWidth / 2
         player.top =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight/2 - 100
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight / 2 - 100
         player.bottom =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight/2 - 100
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight / 2 - 100
         player.update()
 
         ball = Ball(this.context)
@@ -183,7 +183,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             PlayerManager.saveHighScore(sp)
             gameStart = false
-            scoreBoard()
+            stop()
+            myActivity.scoreBoard()
         }
 
         if (PlayerManager.lives > 0 && gameStart) {
@@ -213,6 +214,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
+
             for (ballObj in ballsArray) {
 
                 ballObj.draw(canvas)
@@ -341,6 +343,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     override fun run() {
 
         while (running) {
+
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
@@ -362,7 +365,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         PhysicsEngine.brickCollision(brickRow, brickAssets, ballObj, context)
                     }
 
-
                     PhysicsEngine.powerUpPhysics(player)
 
                     if (PhysicsEngine.isPowerUpCatch) {
@@ -380,7 +382,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                 player.update()
                             }
                             4 -> {
-                                if (!isPowerUpActive){
+                                if (!isPowerUpActive) {
 
                                     extraBall = Ball(this.context)
                                     extraBall.ballPosX = player.right - player.playerWidth / 2
@@ -424,28 +426,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
             }
         }
-    }
-
-    private fun scoreBoard() {
-        val dialog = Dialog(activity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.result_view)
-        //val body = dialog.findViewById(R.id.body) as TextView
-        //body.text = title
-        val returnBtn = dialog.findViewById(R.id.iv_result_return) as ImageView
-        val retryBtn = dialog.findViewById(R.id.iv_result_next) as ImageView
-
-        returnBtn.setOnClickListener {
-            activity.finish()
-            dialog.dismiss()
-        }
-        retryBtn.setOnClickListener {
-
-            activity.recreate()
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 
     private fun getScreenWidth(): Int {
