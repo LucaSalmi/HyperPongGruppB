@@ -3,7 +3,7 @@ package com.example.hyperponggruppb
 import android.content.Context
 import android.graphics.*
 
-class Ball(var context: Context, val isExtra: Boolean) {
+class Ball(var context: Context) {
 
     var ballPosX = 0f
     var ballPosY = 0f
@@ -23,11 +23,6 @@ class Ball(var context: Context, val isExtra: Boolean) {
         (ballPosY+hitBoxMargin).toInt() //bottom
     )
 
-
-    fun update(player: Player) {
-        PhysicsEngine.ballPhysics(this, player)
-
-    }
 
     fun draw(canvas: Canvas?) {
         canvas?.drawRect(ballHitBox, hitBoxPaint)

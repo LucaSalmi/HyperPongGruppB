@@ -26,9 +26,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var mHolder: SurfaceHolder? = holder
     var brickRow = mutableListOf<Rect>()
     var brickAssets = mutableListOf<Bitmap>()
+    var ballsArray = mutableListOf<Ball>()
     var isCollisionDetected = false
     private val myActivity = context as GameMode1Activity
-    private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
+    private val sp =
+        context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
     var millisSpawnTimer = 1000L
     var millisPowerUpTimer = 7000L
@@ -55,10 +57,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
      * restartTimer() restarts it and updates timeTicks
      * changeTimerLength() reduces the time between each spawn
      */
-    private val spawnTimer = object: CountDownTimer(millisSpawnTimer, 1000) {
+    private val spawnTimer = object : CountDownTimer(millisSpawnTimer, 1000) {
 
         override fun onTick(p0: Long) {
-            
+
 
         }
 
@@ -68,17 +70,17 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         }
     }
 
-    fun restartSpawnTimer(){
+    fun restartSpawnTimer() {
 
         spawnTimer.cancel()
-        timeTicks ++
+        timeTicks++
         changeSpawnTimerLength()
         spawnTimer.start()
     }
 
-    private fun changeSpawnTimerLength(){
+    private fun changeSpawnTimerLength() {
 
-        when(timeTicks){
+        when (timeTicks) {
 
             1 -> millisSpawnTimer = 900L
             2 -> millisSpawnTimer = 800L
@@ -91,7 +93,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         }
     }
 
-    private val powerUpTimer = object: CountDownTimer(millisPowerUpTimer, 1000){
+    private val powerUpTimer = object : CountDownTimer(millisPowerUpTimer, 1000) {
 
         override fun onTick(p0: Long) {
 
@@ -107,7 +109,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     }
 
-    private fun restartPowerUpTimer(){
+    private fun restartPowerUpTimer() {
 
         powerUpTimer.cancel()
         powerUpTimer.start()
@@ -116,20 +118,23 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private fun setup() {
 
         player = Player(this.context)
-        player.paint.color = Color.TRANSPARENT
-        player.left = getScreenWidth()/2 - player.playerWidth/2
-        player.right = getScreenWidth()/2 + player.playerWidth/2
-        player.top = getScreenHeight() - (getScreenHeight()*0.2).toFloat() - player.playerHeight - 50
-        player.bottom = getScreenHeight() - (getScreenHeight()*0.2).toFloat() + player.playerHeight + 50
+        player.paint.color = Color.BLACK
+        player.left = getScreenWidth() / 2 - player.playerWidth / 2
+        player.right = getScreenWidth() / 2 + player.playerWidth / 2
+        player.top =
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight - 50
+        player.bottom =
+            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight + 50
         player.update()
 
-        ball = Ball(this.context, false)
-        ball.ballPosX = player.right-player.playerWidth/2
-        ball.ballPosY = player.top-ball.radius
+        ball = Ball(this.context)
+        ball.ballPosX = player.right - player.playerWidth / 2
+        ball.ballPosY = player.top - ball.radius
         ball.paint.color = Color.TRANSPARENT
         ball.hitBoxPaint.color = Color.TRANSPARENT
+        ballsArray.add(ball)
 
-        val brickwidth = (getScreenWidth()/10) - 4
+        val brickwidth = (getScreenWidth() / 10) - 4
         val brickheight = (brickwidth * 0.6).toInt()
         BrickStructure.left = 7
         BrickStructure.top = 5
@@ -185,8 +190,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             gameStart = false
             isCollisionDetected = false
-            ball.ballPosX = player.right-player.playerWidth/2
-            ball.ballPosY = player.top-ball.radius
+            ball.ballPosX = player.right - player.playerWidth / 2
+            ball.ballPosY = player.top - ball.radius
             ball.ballSpeedX = 0f
             ball.ballSpeedY = 0f
 
@@ -203,26 +208,48 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
+            for (ballObj in ballsArray) {
 
-            ball.draw(canvas)
-            canvas.drawBitmap(AssetManager.ballAsset, ball.ballPosX-20, ball.ballPosY-20,null)
+                ballObj.draw(canvas)
+                canvas.drawBitmap(
+                    AssetManager.ballAsset,
+                    ballObj.ballPosX - 20,
+                    ballObj.ballPosY - 20,
+                    null
+                )
+            }
 
             player.draw(canvas)
 
-            if (player.bigPaddle){
+            if (player.bigPaddle) {
 
-                canvas.drawBitmap(AssetManager.bigPlayerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+                canvas.drawBitmap(
+                    AssetManager.bigPlayerAsset,
+                    player.playerRect.left.toFloat(),
+                    player.playerRect.top.toFloat(),
+                    null
+                )
 
-            }else if(player.smallPaddle){
+            } else if (player.smallPaddle) {
 
-                canvas.drawBitmap(AssetManager.smallPlayerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+                canvas.drawBitmap(
+                    AssetManager.smallPlayerAsset,
+                    player.playerRect.left.toFloat(),
+                    player.playerRect.top.toFloat(),
+                    null
+                )
 
-            }else{
+            } else {
 
-                canvas.drawBitmap(AssetManager.playerAsset, player.playerRect.left.toFloat(), player.playerRect.top.toFloat(), null)
+                canvas.drawBitmap(
+                    AssetManager.playerAsset,
+                    player.playerRect.left.toFloat(),
+                    player.playerRect.top.toFloat(),
+                    null
+                )
             }
 
-            if (spawnNewRow){
+            if (spawnNewRow) {
 
                 BrickStructure.moveDownRow(brickRow)
                 spawnNewRow = false
@@ -233,25 +260,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 var brickColor = Paint()
                 brickColor.color = Color.TRANSPARENT
                 canvas.drawRect(obj, brickColor)
-                canvas.drawBitmap((brickAssets[brickRow.indexOf(obj)]), obj.left.toFloat()-5, obj.top.toFloat()-5, null)
+                canvas.drawBitmap(
+                    (brickAssets[brickRow.indexOf(obj)]),
+                    obj.left.toFloat() - 5,
+                    obj.top.toFloat() - 5,
+                    null
+                )
             }
 
-            if (PhysicsEngine.isPowerUpLive){
+            if (PhysicsEngine.isPowerUpLive) {
 
                 PhysicsEngine.powerUp.draw(canvas)
 
-                if (!isPowerUpActive){
+                if (!isPowerUpActive) {
 
-                    canvas.drawBitmap(PhysicsEngine.powerUp.assignAsset(), PhysicsEngine.powerUp.left.toFloat(), PhysicsEngine.powerUp.top.toFloat(), null)
+                    canvas.drawBitmap(
+                        PhysicsEngine.powerUp.assignAsset(),
+                        PhysicsEngine.powerUp.left.toFloat(),
+                        PhysicsEngine.powerUp.top.toFloat(),
+                        null
+                    )
                 }
             }
-
-            if (isExtraBallLive){
-
-                extraBall.draw(canvas)
-                canvas.drawBitmap(AssetManager.ballAsset, extraBall.ballPosX-20, extraBall.ballPosY-20,null)
-            }
-
 
             mHolder!!.unlockCanvasAndPost(canvas)
 
@@ -261,22 +291,21 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
 
-
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
 
         val sx = event?.x.toString()
-        player.right = sx.toFloat() + player.playerWidth/2
-        player.left = sx.toFloat() - player.playerWidth/2
+        player.right = sx.toFloat() + player.playerWidth / 2
+        player.left = sx.toFloat() - player.playerWidth / 2
         player.update()
 
-        if (!gameStart){
+        if (!gameStart) {
 
-            ball.ballPosX = player.right-player.playerWidth/2
-            ball.ballPosY = player.top-ball.radius
+            ball.ballPosX = player.right - player.playerWidth / 2
+            ball.ballPosY = player.top - ball.radius
         }
 
-        if(event?.action == MotionEvent.ACTION_UP && !gameStart){
+        if (event?.action == MotionEvent.ACTION_UP && !gameStart) {
 
             ball.ballSpeedX = 7f
             ball.ballSpeedY = -13f
@@ -306,33 +335,29 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                if (gameStart){
+                if (gameStart) {
 
-                    PhysicsEngine.ballPhysics(ball, player)
+                    PhysicsEngine.ballPhysics(ballsArray, player)
 
-                    if (PhysicsEngine.damageTaken){
+                    if (PhysicsEngine.damageTaken) {
 
                         PhysicsEngine.damageTaken = false
                         gameEnd()
                     }
 
-                    PhysicsEngine.playerCollision(ball, player, context)
+                    for (ballObj in ballsArray) {
 
-                    PhysicsEngine.brickCollision(brickRow, brickAssets, ball, context)
+                        PhysicsEngine.playerCollision(ballObj, player, context)
+
+                        PhysicsEngine.brickCollision(brickRow, brickAssets, ballObj, context)
+                    }
+
 
                     PhysicsEngine.powerUpPhysics(player)
 
-                    if (isExtraBallLive){
+                    if (PhysicsEngine.isPowerUpCatch) {
 
-                        PhysicsEngine.ballPhysics(extraBall, player)
-                        PhysicsEngine.playerCollision(extraBall, player, context)
-                        PhysicsEngine.brickCollision(brickRow, brickAssets, extraBall, context)
-                        checkForExtraBall()
-                    }
-
-                    if (PhysicsEngine.isPowerUpCatch){
-
-                        when(PhysicsEngine.powerUp.typeID){
+                        when (PhysicsEngine.powerUp.typeID) {
 
                             0 -> timeTicks = PhysicsEngine.powerUp.speedDown(timeTicks)
                             1 -> timeTicks = PhysicsEngine.powerUp.speedUp(timeTicks)
@@ -340,41 +365,38 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                 PhysicsEngine.powerUp.bigPaddle(player)
                                 player.update()
                             }
-                            3 ->{
+                            3 -> {
                                 PhysicsEngine.powerUp.smallPaddle(player)
                                 player.update()
                             }
-                            4 ->{
-                                if(!isExtraBallLive){
+                            4 -> {
 
-                                    extraBall = Ball(this.context, true)
-                                    extraBall.ballPosX = player.right-player.playerWidth/2
-                                    extraBall.ballPosY = player.top-ball.radius
-                                    extraBall.paint.color = Color.TRANSPARENT
-                                    extraBall.hitBoxPaint.color = Color.TRANSPARENT
-                                    extraBall.ballSpeedX = 7f
-                                    extraBall.ballSpeedY = -13f
-                                    PhysicsEngine.extraBallCheck = true
-                                    isExtraBallLive = true
-
-                                }
+                                extraBall = Ball(this.context)
+                                extraBall.ballPosX = player.right - player.playerWidth / 2
+                                extraBall.ballPosY = player.top - ball.radius
+                                extraBall.paint.color = Color.TRANSPARENT
+                                extraBall.hitBoxPaint.color = Color.TRANSPARENT
+                                extraBall.ballSpeedX = 7f
+                                extraBall.ballSpeedY = -13f
+                                ballsArray.add(extraBall)
 
                             }
                         }
+
                         restartPowerUpTimer()
                         isPowerUpActive = true
                         PhysicsEngine.isPowerUpCatch = false
                     }
 
-                    if (PlayerManager.lives > 0){
+                    if (PlayerManager.lives > 0) {
 
                         myActivity.updateText()
                     }
 
-                    if (brickRow.size < 30){
+                    if (brickRow.size < 30) {
 
                         BrickStructure.makeOOBBricks(brickRow)
-                        AssetManager.fillAssetArray(brickAssets, brickRow.size,1)
+                        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
                     }
                 }
 
@@ -387,10 +409,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
             }
         }
-    }
-
-    private fun checkForExtraBall(){
-        isExtraBallLive = PhysicsEngine.extraBallCheck
     }
 
     private fun getScreenWidth(): Int {
