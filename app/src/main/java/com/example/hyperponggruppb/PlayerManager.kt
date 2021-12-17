@@ -7,6 +7,7 @@ import android.util.JsonWriter
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.json.JSONStringer
 
 object PlayerManager {
@@ -14,6 +15,8 @@ object PlayerManager {
     var playerPoints = 0
     var playerHighScore = 0
     var lives = 0
+    var name = "AAA"
+    private var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
 
 
@@ -28,22 +31,33 @@ object PlayerManager {
 
     fun saveHighScore(sp : SharedPreferences?){
 
-        val save = PlayerData(playerPoints, playerHighScore)
-        var saveString = gson.toJson(save)
+        val save = PlayerData(name, playerPoints, playerHighScore)
+        highScoreArray.add(save)
+        var saveString = gson.toJson(highScoreArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
         editor?.apply()
+        highScoreArray.clear()
     }
 
     fun readSave(sp : SharedPreferences?){
         
         val load = sp?.getString("playerData", "null")
-        Log.d(TAG, "readSave: $load")
         if (load != "null"){
 
-            val loadPlayer = gson.fromJson(load, PlayerData::class.java)
-            playerHighScore = loadPlayer.highScore
+            val mutableListPlayerDataType = object : TypeToken<MutableList<PlayerData>>() {}.type
+            highScoreArray = gson.fromJson(load, mutableListPlayerDataType)
+            setHighScore()
 
+        }
+    }
+
+    private fun setHighScore(){
+
+        for (obj in highScoreArray){
+            if (obj.highScore > playerHighScore){
+                playerHighScore = obj.highScore
+            }
         }
     }
 
