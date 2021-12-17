@@ -50,12 +50,14 @@ object PlayerManager {
             setHighScore()
 
         }
+        Log.d(TAG, "readSave: $highScoreArray")
     }
 
     private fun setHighScore(){
 
         for (obj in highScoreArray){
-            if (obj.highScore > playerHighScore){
+
+            if (obj.highScore > playerHighScore && obj.name == name){
                 playerHighScore = obj.highScore
             }
         }

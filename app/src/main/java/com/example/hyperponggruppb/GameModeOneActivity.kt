@@ -25,8 +25,6 @@ class GameMode1Activity : AppCompatActivity() {
         supportFragmentManager.commit {
             add(R.id.gameViewContainer, GameOneFragment())
         }
-
-
     }
 
     fun updateText() {
