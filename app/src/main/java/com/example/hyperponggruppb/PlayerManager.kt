@@ -16,6 +16,7 @@ object PlayerManager {
     var playerHighScore = 0
     var lives = 0
     var name = "AAA"
+    var playTime = 0
     private var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
 

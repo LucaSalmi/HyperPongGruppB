@@ -82,8 +82,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     fun restartSpawnTimer() {
 
         spawnTimer.cancel()
-        timeTicks++
-        changeSpawnTimerLength()
+        if (timeTicks < 10){
+
+            timeTicks++
+            changeSpawnTimerLength()
+        }
+
+        PlayerManager.playTime = timeTicks
+        myActivity.updateText()
         spawnTimer.start()
     }
 
