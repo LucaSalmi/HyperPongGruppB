@@ -52,6 +52,9 @@ object PlayerManager {
 
         }
         Log.d(TAG, "readSave: $highScoreArray")
+        highScoreArray.sortBy { it.highScore}
+        highScoreArray.reverse()
+        Log.d(TAG, "seriamente: $highScoreArray")
     }
 
     private fun setHighScore(){
