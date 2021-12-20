@@ -41,7 +41,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var millisPowerUpTimer = 7000L
     var isGameOver = false
 
-
     private val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
@@ -51,7 +50,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.readSave(sp)
+        //PlayerManager.readSave(sp)
         PlayerManager.lives = 1
         myActivity.updateText()
         ballsArray.clear()
@@ -220,6 +219,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
+            canvas.drawBitmap(AssetManager.darkRectangleDeathZone, matrix, null)
 
             for (ballObj in ballsArray) {
 
