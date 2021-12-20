@@ -11,15 +11,15 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.commit
-import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
+import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 
-class GameMode1Activity : AppCompatActivity() {
+class GameModeOneActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityGameMode1Binding
+    private lateinit var binding: ActivityGameModeOneBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGameMode1Binding.inflate(layoutInflater)
+        binding = ActivityGameModeOneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportFragmentManager.commit {
@@ -57,12 +57,7 @@ class GameMode1Activity : AppCompatActivity() {
             val resultMessage= dialog.findViewById(R.id.tv_result_message) as TextView
 
             val playerScore = PlayerManager.playerPoints
-
-
-
-            val playerPlacement = PlayerManager.resultPlacement
-
-
+            val playerPlacement = PlayerManager.setPlacement()
 
             when (playerPlacement) {
                 1 -> {
@@ -97,8 +92,6 @@ class GameMode1Activity : AppCompatActivity() {
                     this.finish()
 
                 }, 500)
-
-
 
             }
             retryBtn.setOnClickListener {

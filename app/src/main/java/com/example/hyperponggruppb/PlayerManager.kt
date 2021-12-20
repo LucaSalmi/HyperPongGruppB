@@ -17,7 +17,6 @@ object PlayerManager {
     var lives = 0
     var name = "AAA"
     var playTime = 0
-    var resultPlacement = 1
     private var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
 
@@ -34,12 +33,27 @@ object PlayerManager {
     fun saveHighScore(sp: SharedPreferences?) {
 
         val save = PlayerData(name, playerPoints, playerHighScore)
-        highScoreArray.add(save)
+        var isNew = true
+
+        for (obj in highScoreArray){
+
+            if (obj.name == save.name){
+
+                if (obj.highScore < save.highScore){
+                    obj.highScore = save.highScore
+                }
+                isNew = false
+            }
+        }
+
+        if (isNew){
+            highScoreArray.add(save)
+        }
+
         var saveString = gson.toJson(highScoreArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
         editor?.apply()
-        highScoreArray.clear()
     }
 
     fun readSave(sp: SharedPreferences?) {
@@ -52,10 +66,6 @@ object PlayerManager {
             setHighScore()
 
         }
-        Log.d(TAG, "readSave: $highScoreArray")
-        highScoreArray.sortBy { it.highScore}
-        highScoreArray.reverse()
-        Log.d(TAG, "seriamente: $highScoreArray")
     }
 
     private fun setHighScore() {
@@ -68,14 +78,22 @@ object PlayerManager {
         }
     }
 
-    fun setPlacement() {
-        for (obj in highScoreArray) {
-            if (playerPoints < obj.highScore) {
+    fun setPlacement(): Int {
+
+        var resultPlacement = 1
+        highScoreArray.sortBy { it.highScore}
+        highScoreArray.reverse()
+
+        Log.d(TAG, "setPlacement: $highScoreArray")
+        
+        for (obj in highScoreArray){
+            
+            if (playerPoints < obj.highScore){
                 resultPlacement++
-                Log.d(TAG, "setPlacement: $resultPlacement")
             }
         }
-
+        Log.d(TAG, "setPlacement: $resultPlacement")
+        return resultPlacement
     }
 
     fun resetPoints() {

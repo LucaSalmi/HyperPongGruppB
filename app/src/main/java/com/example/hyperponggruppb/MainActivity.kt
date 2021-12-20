@@ -1,13 +1,11 @@
 package com.example.hyperponggruppb
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (nameField.text != null && nameField.text.length == 3){
                     PlayerManager.name = nameField.text.toString()
-                    val toGameModeOne = Intent(this, GameMode1Activity::class.java)
+                    val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
                     SoundEffectManager.jukebox(this, 1)
                     dialog.dismiss()
                     startActivity(toGameModeOne)

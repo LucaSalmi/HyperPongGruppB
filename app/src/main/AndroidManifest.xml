@@ -11,7 +11,7 @@
         android:largeHeap="true"
         android:theme="@style/splashScreenTheme">
         <activity
-            android:name=".GameMode1Activity"
+            android:name=".GameModeOneActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

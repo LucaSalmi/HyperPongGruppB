@@ -1,7 +1,6 @@
 package com.example.hyperponggruppb
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.Resources
@@ -11,9 +10,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.Window
-import android.widget.ImageView
-import androidx.fragment.app.commit
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
 
@@ -35,7 +31,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var ballsArray = mutableListOf<Ball>()
     var powerUpArray = mutableListOf<PowerUp>()
     var isCollisionDetected = false
-    private val myActivity = context as GameMode1Activity
+    private val myActivity = context as GameModeOneActivity
     private val sp =
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
