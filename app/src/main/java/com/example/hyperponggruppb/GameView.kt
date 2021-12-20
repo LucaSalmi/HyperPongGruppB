@@ -21,6 +21,8 @@ import java.lang.System.currentTimeMillis
 class GameView(context: Context?, var activity: Activity) : SurfaceView(context),
     SurfaceHolder.Callback, Runnable {
 
+
+    var deathZoneTop : Float = 1200f
     private var thread: Thread? = null
     private var running = false
     private lateinit var canvas: Canvas
@@ -50,7 +52,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     init {
 
         mHolder?.addCallback(this)
-        //PlayerManager.readSave(sp)
+        PlayerManager.readSave(sp)
         PlayerManager.lives = 1
         myActivity.updateText()
         ballsArray.clear()
@@ -219,7 +221,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
-            canvas.drawBitmap(AssetManager.darkRectangleDeathZone, matrix, null)
+            canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
             for (ballObj in ballsArray) {
 

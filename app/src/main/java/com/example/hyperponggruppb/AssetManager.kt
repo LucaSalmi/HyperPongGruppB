@@ -71,7 +71,8 @@ object AssetManager {
         powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.playersize_minus_simple).scale(powerUpWidth,powerUpHeight,true)
         powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth,powerUpHeight,true)
-        darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dark_rectangle).scale(playerwidth +100, playerhight, true)
+        darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone)
+            .scale(getScreenWidth(),  100, true)
     }
 
     fun fillAssetArray(

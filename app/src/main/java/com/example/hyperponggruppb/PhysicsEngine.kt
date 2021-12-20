@@ -260,7 +260,7 @@ object PhysicsEngine {
 
         for (rect in brickRow) {
 
-            if (rect.bottom > (canvasHeight / 2)) {
+            if (rect.bottom > (1200f)) {
 
                 return true
             }

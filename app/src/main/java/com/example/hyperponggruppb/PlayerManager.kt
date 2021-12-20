@@ -39,7 +39,7 @@ object PlayerManager {
         editor?.apply()
         highScoreArray.clear()
     }
-/*
+
     fun readSave(sp : SharedPreferences?){
         
         val load = sp?.getString("playerData", "null")
@@ -52,7 +52,7 @@ object PlayerManager {
         }
         Log.d(TAG, "readSave: $highScoreArray")
     }
-*/
+
     private fun setHighScore(){
 
         for (obj in highScoreArray){
