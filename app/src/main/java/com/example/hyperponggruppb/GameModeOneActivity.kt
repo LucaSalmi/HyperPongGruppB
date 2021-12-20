@@ -58,28 +58,36 @@ class GameModeOneActivity : AppCompatActivity() {
 
             val playerScore = PlayerManager.playerPoints
             val playerPlacement = PlayerManager.setPlacement()
+            var PlayerPlacementEnding = ""
 
             when (playerPlacement) {
                 1 -> {
                     resultMessage.setText(R.string.result_message_one)
+                    PlayerPlacementEnding = getString(R.string.result_placement_one)
                 }
                 2 -> {
                     resultMessage.setText(R.string.result_message_two)
+                    PlayerPlacementEnding = getString(R.string.result_placement_two)
                 }
                 3 -> {
                     resultMessage.setText(R.string.result_message_three)
+                    PlayerPlacementEnding = getString(R.string.result_placement_three)
                 }
                 in 4..10 -> {
                     resultMessage.setText(R.string.result_message_four)
+                    PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
                 }
                 else -> {
                     resultMessage.setText(R.string.result_message_five)
+                    PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
                 }
             }
-            resultPlacement.text = (playerPlacement.toString())
-            resultScore.text = playerScore.toString()
 
-            returnBtn.setOnClickListener {
+            resultPlacement.text = (playerPlacement.toString() + PlayerPlacementEnding)
+            var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
+            resultScore.text = resultScoreWithSign
+
+                returnBtn.setOnClickListener {
 
                 supportFragmentManager.commit {
                     remove(PointFragment())

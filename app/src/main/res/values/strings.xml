@@ -15,12 +15,12 @@
     <string name="result_message_five">One word. BAD!</string>
 
     <!-- result placement Strings -->
-    <string name="result_placement_one">st</string>
-    <string name="result_placement_two">nd</string>
-    <string name="result_placement_three">rd</string>
-    <string name="result_placement_four_plus">th</string>
+    <string name="result_placement_one">st place</string>
+    <string name="result_placement_two">nd place</string>
+    <string name="result_placement_three">rd place</string>
+    <string name="result_placement_four_plus">th place</string>
 
     <!-- result points Strings -->
-    <string name="result_points">P</string>
+    <string name="result_p_sign">P</string>
 
     </resources>
