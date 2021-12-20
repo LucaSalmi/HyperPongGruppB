@@ -39,7 +39,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private val sp =
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
     var timeTicks = 0
-    var millisSpawnTimer = 105L
+    var millisSpawnTimer = 176L
     var millisPowerUpTimer = 7000L
     var isGameOver = false
 
@@ -97,16 +97,16 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         when (timeTicks) {
 
-            1 -> millisSpawnTimer = 87L
-            2 -> millisSpawnTimer = 73L
-            3 -> millisSpawnTimer = 61L
-            4 -> millisSpawnTimer = 50L
-            5 -> millisSpawnTimer = 42L
-            6 -> millisSpawnTimer = 35L
-            7 -> millisSpawnTimer = 30L
-            8 -> millisSpawnTimer = 25L
-            9 -> millisSpawnTimer = 21L
-            10 -> millisSpawnTimer = 17L
+            1 -> millisSpawnTimer = 160L
+            2 -> millisSpawnTimer = 144L
+            3 -> millisSpawnTimer = 128L
+            4 -> millisSpawnTimer = 112L
+            5 -> millisSpawnTimer = 96L
+            6 -> millisSpawnTimer = 80L
+            7 -> millisSpawnTimer = 64L
+            8 -> millisSpawnTimer = 48L
+            9 -> millisSpawnTimer = 32L
+            10 -> millisSpawnTimer = 16L
         }
     }
 
@@ -196,7 +196,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         if (isGameOver || PlayerManager.lives <= 0) {
 
             PlayerManager.saveHighScore(sp)
+            PlayerManager.setPlacement()
             gameStart = false
+
             myActivity.scoreBoard()
             stop()
         }

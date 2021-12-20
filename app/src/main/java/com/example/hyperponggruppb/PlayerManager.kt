@@ -17,20 +17,21 @@ object PlayerManager {
     var lives = 0
     var name = "AAA"
     var playTime = 0
+    var resultPlacement = 1
     private var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
 
 
-    fun addPoints(newPoints: Int){
+    fun addPoints(newPoints: Int) {
 
         playerPoints += newPoints
 
-        if (playerPoints > playerHighScore){
+        if (playerPoints > playerHighScore) {
             playerHighScore = playerPoints
         }
     }
 
-    fun saveHighScore(sp : SharedPreferences?){
+    fun saveHighScore(sp: SharedPreferences?) {
 
         val save = PlayerData(name, playerPoints, playerHighScore)
         highScoreArray.add(save)
@@ -41,10 +42,10 @@ object PlayerManager {
         highScoreArray.clear()
     }
 
-    fun readSave(sp : SharedPreferences?){
-        
+    fun readSave(sp: SharedPreferences?) {
+
         val load = sp?.getString("playerData", "null")
-        if (load != "null"){
+        if (load != "null") {
 
             val mutableListPlayerDataType = object : TypeToken<MutableList<PlayerData>>() {}.type
             highScoreArray = gson.fromJson(load, mutableListPlayerDataType)
@@ -57,29 +58,40 @@ object PlayerManager {
         Log.d(TAG, "seriamente: $highScoreArray")
     }
 
-    private fun setHighScore(){
+    private fun setHighScore() {
 
-        for (obj in highScoreArray){
+        for (obj in highScoreArray) {
 
-            if (obj.highScore > playerHighScore && obj.name == name){
+            if (obj.highScore > playerHighScore && obj.name == name) {
                 playerHighScore = obj.highScore
             }
         }
     }
 
-    fun resetPoints(){
+    fun setPlacement() {
+        for (obj in highScoreArray) {
+            if (playerPoints < obj.highScore) {
+                resultPlacement++
+                Log.d(TAG, "setPlacement: $resultPlacement")
+            }
+        }
+
+    }
+
+    fun resetPoints() {
         playerPoints = 0
     }
 
-    fun loseLife(){
-        lives --
+    fun loseLife() {
+        lives--
     }
 
-    fun gainLife(){
-        if (lives < 3){
-            lives ++
-        }else playerPoints += 10
+    fun gainLife() {
+        if (lives < 3) {
+            lives++
+        } else playerPoints += 10
 
     }
+
 
 }
