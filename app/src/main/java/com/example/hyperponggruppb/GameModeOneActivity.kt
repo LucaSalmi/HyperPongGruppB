@@ -52,6 +52,38 @@ class GameMode1Activity : AppCompatActivity() {
             val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
             val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
 
+            val resultScore = dialog.findViewById(R.id.tv_result_score) as TextView
+            val resultPlacement = dialog.findViewById(R.id.tv_result_placement) as TextView
+            val resultMessage= dialog.findViewById(R.id.tv_result_message) as TextView
+
+            val playerScore = PlayerManager.playerPoints
+
+
+
+            val playerPlacement = PlayerManager.resultPlacement
+
+
+
+            when (playerPlacement) {
+                1 -> {
+                    resultMessage.setText(R.string.result_message_one)
+                }
+                2 -> {
+                    resultMessage.setText(R.string.result_message_two)
+                }
+                3 -> {
+                    resultMessage.setText(R.string.result_message_three)
+                }
+                in 4..10 -> {
+                    resultMessage.setText(R.string.result_message_four)
+                }
+                else -> {
+                    resultMessage.setText(R.string.result_message_five)
+                }
+            }
+            resultPlacement.text = (playerPlacement.toString())
+            resultScore.text = playerScore.toString()
+
             returnBtn.setOnClickListener {
 
                 supportFragmentManager.commit {
@@ -79,6 +111,9 @@ class GameMode1Activity : AppCompatActivity() {
 
                 dialog.dismiss()
             }
+
+
+
 
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(R.color.trans)

@@ -133,8 +133,8 @@ object BrickStructure {
     fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
 
         for (obj in brickRow){
-            obj.top += (bottom/65).toInt()
-            obj.bottom += (bottom/65).toInt()
+            obj.top += (bottom/32.5).toInt()
+            obj.bottom += (bottom/32.5).toInt()
         }
         return brickRow
     }
