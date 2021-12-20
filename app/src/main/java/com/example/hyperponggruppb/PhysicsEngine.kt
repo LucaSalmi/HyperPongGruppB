@@ -41,7 +41,7 @@ object PhysicsEngine {
 
             if (RandomNumberGenerator.rNG(1, 7) % 2 == 0) {
 
-                var rngLimit = if (PlayerManager.lives == 3) {
+                var rngLimit = if (PlayerManager.lives >= 3) {
                     4
                 } else {
                     5

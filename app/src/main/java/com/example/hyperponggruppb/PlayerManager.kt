@@ -73,7 +73,10 @@ object PlayerManager {
     }
 
     fun gainLife(){
-        lives ++
+        if (lives < 3){
+            lives ++
+        }else playerPoints += 10
+
     }
 
 }
