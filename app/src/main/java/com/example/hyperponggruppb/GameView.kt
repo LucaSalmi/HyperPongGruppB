@@ -383,11 +383,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         )
                     }
 
-                    if (PlayerManager.lives > 0) {
-
-                        myActivity.updateText()
-                    }
-
                     if (brickRow.size < 30) {
 
                         BrickStructure.makeOOBBricks(brickRow)
@@ -452,6 +447,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         powerUpArray.removeAt(powerUpToErase)
                     }
 
+                }
+
+                if (PlayerManager.lives > 0) {
+
+                    myActivity.updateText()
                 }
 
                 draw()

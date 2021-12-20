@@ -51,13 +51,13 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
 
     //typeID 0
     fun speedDown(timeTicks: Int): Int {
-
+        PlayerManager.playTime - 3
         return timeTicks - 3
     }
 
     //typeID 1
     fun speedUp(timeTicks: Int): Int {
-
+        PlayerManager.playTime + 2
         return timeTicks + 2
     }
 
