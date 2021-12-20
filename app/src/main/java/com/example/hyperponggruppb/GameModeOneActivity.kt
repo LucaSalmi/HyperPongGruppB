@@ -1,10 +1,12 @@
 package com.example.hyperponggruppb
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
@@ -51,16 +53,20 @@ class GameMode1Activity : AppCompatActivity() {
             val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
 
             returnBtn.setOnClickListener {
+
                 supportFragmentManager.commit {
+                    remove(PointFragment())
                     remove(GameOneFragment())
                 }
+                dialog.dismiss()
+
                 Handler(Looper.myLooper()!!).postDelayed({
 
-                    dialog.dismiss()
                     this.finish()
 
-
                 }, 500)
+
+
 
             }
             retryBtn.setOnClickListener {
@@ -70,6 +76,7 @@ class GameMode1Activity : AppCompatActivity() {
                     remove(GameOneFragment())
                     add(R.id.gameViewContainer, GameOneFragment())
                 }
+
                 dialog.dismiss()
             }
 
