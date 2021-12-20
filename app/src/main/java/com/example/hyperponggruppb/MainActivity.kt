@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                     PlayerManager.name = nameField.text.toString()
                     val toGameModeOne = Intent(this, GameMode1Activity::class.java)
                     SoundEffectManager.jukebox(this, 1)
+                    dialog.dismiss()
                     startActivity(toGameModeOne)
                 }
             }

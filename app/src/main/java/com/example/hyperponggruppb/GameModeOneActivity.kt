@@ -60,7 +60,7 @@ class GameMode1Activity : AppCompatActivity() {
                     this.finish()
 
 
-                }, 200)
+                }, 500)
 
             }
             retryBtn.setOnClickListener {

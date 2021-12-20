@@ -348,6 +348,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
+        Log.d(TAG, "surfaceDestroyed: we here")
         stop()
     }
 
