@@ -39,7 +39,7 @@ object PhysicsEngine {
 
         if (ball.brickCollision) {
 
-            if (RandomNumberGenerator.rNG(1, 7) % 2 == 0) {
+            if (RandomNumberGenerator.rNG(1, 8) == 2 || RandomNumberGenerator.rNG(1, 8) == 4) {
 
                 var rngLimit = if (PlayerManager.lives >= 3) {
                     4

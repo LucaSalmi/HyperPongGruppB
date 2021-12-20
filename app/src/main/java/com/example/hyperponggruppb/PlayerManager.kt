@@ -92,6 +92,7 @@ object PlayerManager {
                 resultPlacement++
             }
         }
+
         Log.d(TAG, "setPlacement: $resultPlacement")
         return resultPlacement
     }
