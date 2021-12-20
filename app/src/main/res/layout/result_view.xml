@@ -8,6 +8,18 @@
     android:background="@drawable/result_board_future">
 
     <TextView
+        android:id="@+id/tv_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:text="RESULT"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tv_result_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,19 +28,18 @@
         android:text="back"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/powerup_slower_player" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <ImageView
         android:id="@+id/iv_result_leaderboard"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/powerup_small_player_v2" />
+        app:srcCompat="@drawable/leaderrboard_icon" />
 
     <TextView
         android:id="@+id/tv_result_next"
@@ -46,10 +57,10 @@
         android:id="@+id/tv_result_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:text="CONGRATULATION!!!"
-        android:layout_marginTop="130dp"
-        android:textSize="30sp"
         android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
