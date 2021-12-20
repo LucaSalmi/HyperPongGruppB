@@ -15,16 +15,10 @@
     <string name="result_message_five">One word. BAD!</string>
 
     <!-- result placement Strings -->
-    <string name="result_placement_one">1</string>
-    <string name="result_placement_two">2</string>
-    <string name="result_placement_three">3</string>
-    <string name="result_placement_four">4</string>
-    <string name="result_placement_five">5</string>
-    <string name="result_placement_six">6</string>
-    <string name="result_placement_seven">7</string>
-    <string name="result_placement_eight">8</string>
-    <string name="result_placement_nine">9</string>
-    <string name="result_placement_ten">10</string>
+    <string name="result_placement_one">st</string>
+    <string name="result_placement_two">nd</string>
+    <string name="result_placement_three">rd</string>
+    <string name="result_placement_four_plus">th</string>
 
     <!-- result points Strings -->
     <string name="result_points">P</string>
