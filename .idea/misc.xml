@@ -3,12 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.2962962962962963" />
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/activity_game_mode1.xml" value="0.36666666666666664" />
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.32592592592592595" />
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/enter_name_dialog.xml" value="0.36666666666666664" />
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.32592592592592595" />
-        <entry key="..\:/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21927083333333333" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/drawable/frame.xml" value="0.21927083333333333" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/drawable/ic_golden_item_frame.xml" value="1.0" />
@@ -22,7 +16,7 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_splash.xml" value="0.10648148148148148" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
-        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.33" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.75" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/splash_activity.xml" value="0.10648148148148148" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/drawable/ball_sprite.xml" value="0.1787037037037037" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.36666666666666664" />

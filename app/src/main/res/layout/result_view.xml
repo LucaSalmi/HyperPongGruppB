@@ -7,12 +7,14 @@
     android:layout_gravity="center"
     android:background="@drawable/result_board_future">
 
-    <ImageView
-        android:id="@+id/iv_result_return"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="90dp"
+    <TextView
+        android:id="@+id/tv_result_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="100dp"
+        android:text="back"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/powerup_slower_player" />
@@ -28,12 +30,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/powerup_small_player_v2" />
 
-    <ImageView
-        android:id="@+id/iv_result_next"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="90dp"
+    <TextView
+        android:id="@+id/tv_result_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="100dp"
+        android:text="retry"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/powerup_faster_player" />
