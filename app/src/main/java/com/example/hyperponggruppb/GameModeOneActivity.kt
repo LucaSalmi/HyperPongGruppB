@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Window
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityGameMode1Binding
 
@@ -46,8 +47,8 @@ class GameMode1Activity : AppCompatActivity() {
             dialog.setContentView(R.layout.result_view)
             //val body = dialog.findViewById(R.id.body) as TextView
             //body.text = title
-            val returnBtn = dialog.findViewById(R.id.tv_result_return) as ImageView
-            val retryBtn = dialog.findViewById(R.id.tv_result_next) as ImageView
+            val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
+            val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
 
             returnBtn.setOnClickListener {
                 supportFragmentManager.commit {

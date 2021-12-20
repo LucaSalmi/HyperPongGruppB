@@ -145,7 +145,7 @@ object PhysicsEngine {
                                     ball.ballPosY += 16.7f
                                 }
                             } else {
-                                ball.ballPosX -= 9f
+                                ball.ballPosX -= 9
 
                                 if (ball.ballSpeedX > 13) {
                                     ball.ballPosY -= 3f

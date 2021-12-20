@@ -21,10 +21,11 @@
 
     <TextView
         android:id="@+id/tv_result_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="60dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="90dp"
+        android:gravity="center_vertical"
         android:text="back"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +34,7 @@
 
     <ImageView
         android:id="@+id/iv_result_leaderboard"
-        android:layout_width="30dp"
+        android:layout_width="60dp"
         android:layout_height="26dp"
         android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,15 +44,18 @@
 
     <TextView
         android:id="@+id/tv_result_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="90dp"
+        android:gravity="center_vertical"
+        android:textAlignment="textEnd"
         android:text="retry"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/powerup_faster_player" />
+        app:srcCompat="@drawable/powerup_faster_player"
+        tools:ignore="RtlCompat" />
 
     <TextView
         android:id="@+id/tv_result_message"
