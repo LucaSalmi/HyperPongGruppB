@@ -52,8 +52,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
         myActivity.updateText()
+        ballsArray.clear()
+        brickRow.clear()
+        powerUpArray.clear()
+        brickAssets.clear()
         setup()
     }
 
