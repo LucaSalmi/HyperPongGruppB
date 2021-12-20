@@ -103,11 +103,11 @@ object PhysicsEngine {
 
                 if (ball.ballPosX + ball.radius >= canvasWidth || ball.ballPosX - ball.radius <= 0f) {
 
-                    if (ball.ballPosX - ball.radius > canvasWidth) {
+                    if (ball.ballPosX + ball.radius > canvasWidth) {
 
                         ball.ballPosX = canvasWidth - ball.radius
                     }
-                    if (ball.ballPosX + ball.radius < 0f) {
+                    if (ball.ballPosX - ball.radius < 0f) {
 
                         ball.ballPosX = 0f + ball.radius
                     }
