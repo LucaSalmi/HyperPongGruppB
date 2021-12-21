@@ -75,7 +75,7 @@ class GameManager(var context: Context?){
         AssetManager.brickheight = brickheight
 
         BrickStructure.makeInboundsBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, 0)//RandomNumberGenerator.rNG(0,13))
+        brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,2))
         BrickStructure.makeOOBBricks(brickRow)
     }
 
