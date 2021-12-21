@@ -1,14 +1,9 @@
 package com.example.hyperponggruppb
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.Window
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
@@ -16,6 +11,7 @@ import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 class GameModeOneActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameModeOneBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,19 +83,19 @@ class GameModeOneActivity : AppCompatActivity() {
             var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
             resultScore.text = resultScoreWithSign
 
-            resultScore.text = resultScoreWithSign
             returnBtn.setOnClickListener {
 
-                var asd = supportFragmentManager.findFragmentById(R.id.point_fragment)
-                var asd2 = supportFragmentManager.findFragmentById(R.id.sv_game_view)
+                val pointFragment = supportFragmentManager.findFragmentById(R.id.point_fragment)
+                val gameView = supportFragmentManager.findFragmentById(R.id.sv_game_view)
 
                 supportFragmentManager.commit {
-                    remove(asd!!)
-                    remove(asd2!!)
+
+                    remove(pointFragment!!)
+                    remove(gameView!!)
                 }
+
                 dialog.dismiss()
                 finish()
-
             }
 
             retryBtn.setOnClickListener {
@@ -112,9 +108,6 @@ class GameModeOneActivity : AppCompatActivity() {
 
                 dialog.dismiss()
             }
-
-
-
 
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(R.color.trans)

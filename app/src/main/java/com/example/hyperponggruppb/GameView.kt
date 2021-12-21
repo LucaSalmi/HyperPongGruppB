@@ -147,7 +147,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             gameStart = false
             infiniteMode.clearArrays()
             myActivity.scoreBoard()
-            myActivity.finish()
             stop()
         }
 
