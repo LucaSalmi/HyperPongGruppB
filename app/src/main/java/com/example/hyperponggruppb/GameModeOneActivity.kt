@@ -30,11 +30,12 @@ class GameModeOneActivity : AppCompatActivity() {
             add(R.id.gameViewContainer, GameOneFragment())
         }
     }
-
+/*
     fun updateText() {
 
         runOnUiThread(Runnable {
             supportFragmentManager.commit {
+                disallowAddToBackStack()
                 replace(R.id.frame_layout, PointFragment())
             }
         })
@@ -92,16 +93,13 @@ class GameModeOneActivity : AppCompatActivity() {
                 supportFragmentManager.commit {
                     remove(PointFragment())
                     remove(GameOneFragment())
+                    commitAllowingStateLoss()
                 }
+
                 dialog.dismiss()
-
-                Handler(Looper.myLooper()!!).postDelayed({
-
                     this.finish()
+                }
 
-                }, 500)
-
-            }
             retryBtn.setOnClickListener {
 
                 supportFragmentManager.commit {
@@ -120,5 +118,7 @@ class GameModeOneActivity : AppCompatActivity() {
             dialog.window?.setBackgroundDrawableResource(R.color.trans)
         })
     }
+
+ */
 
 }
