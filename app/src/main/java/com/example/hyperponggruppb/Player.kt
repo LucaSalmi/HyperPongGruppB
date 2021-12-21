@@ -2,10 +2,11 @@ package com.example.hyperponggruppb
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 
-class Player(context: Context) {
+class Player() {
 
 
     var left = 0f
@@ -18,6 +19,10 @@ class Player(context: Context) {
     var playerWidth = right - left
     var playerHeight = (playerWidth * 0.2).toInt()
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
+
+    init {
+        paint.color = Color.TRANSPARENT
+    }
 
     fun update() {
 

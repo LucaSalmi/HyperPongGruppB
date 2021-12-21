@@ -118,11 +118,11 @@ object AssetManager {
         }
     }
 
-    private fun getScreenWidth(): Int {
+    fun getScreenWidth(): Int {
         return Resources.getSystem().displayMetrics.widthPixels
     }
 
-    private fun getScreenHeight(): Int {
+    fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
     }
 }

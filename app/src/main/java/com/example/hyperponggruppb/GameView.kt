@@ -3,7 +3,6 @@ package com.example.hyperponggruppb
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.*
 import android.os.CountDownTimer
 import android.util.Log
@@ -22,14 +21,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private var thread: Thread? = null
     private var running = false
     private lateinit var canvas: Canvas
-    private lateinit var ball: Ball
-    private lateinit var extraBall: Ball
-    private lateinit var player: Player
+    private var infiniteMode: GameManager
     var mHolder: SurfaceHolder? = holder
-    var brickRow = mutableListOf<Rect>()
-    var brickAssets = mutableListOf<Bitmap>()
-    var ballsArray = mutableListOf<Ball>()
-    var powerUpArray = mutableListOf<PowerUp>()
     var isCollisionDetected = false
     private val myActivity = context as GameModeOneActivity
     private val sp =
@@ -44,7 +37,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
 
-    val ballRadius = 20f
 
 
     init {
@@ -53,11 +45,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         PlayerManager.readSave(sp)
         PlayerManager.lives = 1
         myActivity.updateText()
-        ballsArray.clear()
-        brickRow.clear()
-        powerUpArray.clear()
-        brickAssets.clear()
-        setup()
+        infiniteMode = GameManager(context)
     }
 
     /**
@@ -115,8 +103,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         override fun onFinish() {
 
-            player.bigPaddle = false
-            player.smallPaddle = false
+            infiniteMode.player.bigPaddle = false
+            infiniteMode.player.smallPaddle = false
 
         }
     }
@@ -127,48 +115,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         powerUpTimer.start()
     }
 
-    private fun setup() {
-
-        player = Player(this.context)
-        player.paint.color = Color.TRANSPARENT
-        player.left = getScreenWidth() / 2 - player.playerWidth / 2
-        player.right = getScreenWidth() / 2 + player.playerWidth / 2
-        player.top =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() - player.playerHeight / 2 - 100
-        player.bottom =
-            getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight / 2 - 100
-        player.update()
-
-        ball = Ball(this.context,player.right - player.playerWidth / 2, player.top - ballRadius)
-        ballsArray.add(ball)
-
-        val brickwidth = (getScreenWidth() / 10) - 4
-        val brickheight = (brickwidth * 0.6).toInt()
-        BrickStructure.left = 7
-        BrickStructure.top = 5
-        BrickStructure.right = brickwidth + BrickStructure.left
-        BrickStructure.bottom = brickheight + BrickStructure.top
-
-        AssetManager.brickwidth = brickwidth
-        AssetManager.brickheight = brickheight
-
-        BrickStructure.makeInboundsBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, 0)//RandomNumberGenerator.rNG(0,13))
-        BrickStructure.makeOOBBricks(brickRow)
-
-        AssetManager.prepareAssets(this.context)
-
-        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
-
-    }
-
     private fun start() {
 
         running = true
         thread = Thread(this)
         thread?.start()
     }
-
 
     private fun stop() {
 
@@ -192,7 +144,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.saveHighScore(sp)
             PlayerManager.setPlacement()
             gameStart = false
-
+            infiniteMode.clearArrays()
             myActivity.scoreBoard()
             stop()
         }
@@ -201,14 +153,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             gameStart = false
             isCollisionDetected = false
-            ball = Ball(this.context, (player.right - player.playerWidth / 2), (player.top - ball.radius))
-            ball.paint.color = Color.TRANSPARENT
-            ball.hitBoxPaint.color = Color.TRANSPARENT
-            ballsArray.add(ball)
-            ball.ballPosX = player.right - player.playerWidth / 2
-            ball.ballPosY = player.top - ball.radius
-            ball.ballSpeedX = 0f
-            ball.ballSpeedY = 0f
+            infiniteMode.respawnBall()
 
         }
     }
@@ -225,7 +170,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
-            for (ballObj in ballsArray) {
+            for (ballObj in infiniteMode.ballsArray) {
 
                 ballObj.draw(canvas)
                 canvas.drawBitmap(
@@ -236,26 +181,26 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 )
             }
 
-            player.draw(canvas)
+            infiniteMode.player.draw(canvas)
 
             when {
 
-                player.bigPaddle -> {
+                infiniteMode.player.bigPaddle -> {
 
                     canvas.drawBitmap(
                         AssetManager.bigPlayerAsset,
-                        player.playerRect.left.toFloat(),
-                        player.playerRect.top.toFloat(),
+                        infiniteMode.player.playerRect.left.toFloat(),
+                        infiniteMode.player.playerRect.top.toFloat(),
                         null
                     )
 
                 }
-                player.smallPaddle -> {
+                infiniteMode.player.smallPaddle -> {
 
                     canvas.drawBitmap(
                         AssetManager.smallPlayerAsset,
-                        player.playerRect.left.toFloat(),
-                        player.playerRect.top.toFloat(),
+                        infiniteMode.player.playerRect.left.toFloat(),
+                        infiniteMode.player.playerRect.top.toFloat(),
                         null
                     )
 
@@ -264,8 +209,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     canvas.drawBitmap(
                         AssetManager.playerAsset,
-                        player.playerRect.left.toFloat(),
-                        player.playerRect.top.toFloat(),
+                        infiniteMode.player.playerRect.left.toFloat(),
+                        infiniteMode.player.playerRect.top.toFloat(),
                         null
                     )
                 }
@@ -273,24 +218,24 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             if (spawnNewRow) {
 
-                BrickStructure.moveDownRow(brickRow)
+                BrickStructure.moveDownRow(infiniteMode.brickRow)
                 spawnNewRow = false
             }
 
-            for (obj in brickRow) {
+            for (obj in infiniteMode.brickRow) {
 
                 var brickColor = Paint()
                 brickColor.color = Color.TRANSPARENT
                 canvas.drawRect(obj, brickColor)
                 canvas.drawBitmap(
-                    (brickAssets[brickRow.indexOf(obj)]),
+                    (infiniteMode.brickAssets[infiniteMode.brickRow.indexOf(obj)]),
                     obj.left.toFloat() - 5,
                     obj.top.toFloat() - 5,
                     null
                 )
             }
 
-            for (powerUp in powerUpArray) {
+            for (powerUp in infiniteMode.powerUpArray) {
 
                 powerUp.draw(canvas)
                 canvas.drawBitmap(
@@ -313,20 +258,20 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
 
         val sx = event?.x.toString()
-        player.right = sx.toFloat() + player.playerWidth / 2
-        player.left = sx.toFloat() - player.playerWidth / 2
-        player.update()
+        infiniteMode.player.right = sx.toFloat() + infiniteMode.player.playerWidth / 2
+        infiniteMode.player.left = sx.toFloat() - infiniteMode.player.playerWidth / 2
+        infiniteMode.player.update()
 
         if (!gameStart) {
 
-            ball.ballPosX = player.right - player.playerWidth / 2
-            ball.ballPosY = player.top - ball.radius
+            infiniteMode.ball.ballPosX = infiniteMode.player.right - infiniteMode.player.playerWidth / 2
+            infiniteMode.ball.ballPosY = infiniteMode.player.top - infiniteMode.ball.radius
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !gameStart) {
 
-            ball.ballSpeedX = 7f
-            ball.ballSpeedY = -13f
+            infiniteMode.ball.ballSpeedX = 7f
+            infiniteMode.ball.ballSpeedY = -13f
             gameStart = true
             restartSpawnTimer()
 
@@ -357,7 +302,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 if (gameStart) {
 
-                    PhysicsEngine.ballPhysics(ballsArray, player)
+                    PhysicsEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
 
                     if (PhysicsEngine.damageTaken) {
 
@@ -366,28 +311,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         gameEnd()
                     }
 
-                    for (ballObj in ballsArray) {
+                    for (ballObj in infiniteMode.ballsArray) {
 
-                        PhysicsEngine.playerCollision(ballObj, player, context)
+                        PhysicsEngine.playerCollision(ballObj, infiniteMode.player, context)
 
                         PhysicsEngine.brickCollision(
-                            brickRow,
-                            brickAssets,
+                            infiniteMode.brickRow,
+                            infiniteMode.brickAssets,
                             ballObj,
-                            powerUpArray,
+                            infiniteMode.powerUpArray,
                             context
                         )
                     }
 
-                    if (brickRow.size < 30) {
+                    if (infiniteMode.brickRow.size < 30) {
 
-                        BrickStructure.makeOOBBricks(brickRow)
-                        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
+                        BrickStructure.makeOOBBricks(infiniteMode.brickRow)
+                        AssetManager.fillAssetArray(infiniteMode.brickAssets, infiniteMode.brickRow.size, 1)
                     }
 
-                    PhysicsEngine.powerUpPhysics(powerUpArray, player)
+                    PhysicsEngine.powerUpPhysics(infiniteMode.powerUpArray, infiniteMode.player)
                     var powerUpToErase: Int? = null
-                    for (powerUp in powerUpArray) {
+                    for (powerUp in infiniteMode.powerUpArray) {
 
                         if (powerUp.isCatched) {
 
@@ -395,29 +340,28 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                                 0 -> {
                                     timeTicks = powerUp.speedDown(timeTicks)
+                                    restartSpawnTimer()
                                     SoundEffectManager.jukebox(context, 3)
                                 }
                                 1 -> {
                                     timeTicks = powerUp.speedUp(timeTicks)
+                                    restartSpawnTimer()
                                     SoundEffectManager.jukebox(context, 2)
                                 }
                                 2 -> {
-                                    powerUp.bigPaddle(player)
+                                    powerUp.bigPaddle(infiniteMode.player)
                                     SoundEffectManager.jukebox(context, 2)
                                     restartPowerUpTimer()
-                                    player.update()
+                                    infiniteMode.player.update()
                                 }
                                 3 -> {
-                                    powerUp.smallPaddle(player)
+                                    powerUp.smallPaddle(infiniteMode.player)
                                     SoundEffectManager.jukebox(context, 3)
                                     restartPowerUpTimer()
-                                    player.update()
+                                    infiniteMode.player.update()
                                 }
                                 4 -> {
-                                    extraBall = Ball(this.context, (player.right - player.playerWidth / 2), (player.top - ball.radius))
-                                    extraBall.ballSpeedX = 7f
-                                    extraBall.ballSpeedY = -13f
-                                    ballsArray.add(extraBall)
+                                    infiniteMode.spawnExtraBall()
                                     SoundEffectManager.jukebox(context, 2)
                                 }
                                 5 -> {
@@ -429,14 +373,14 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                         }
 
                         if (powerUp.isCatched || powerUp.isToDestroy) {
-                            powerUpToErase = powerUpArray.indexOf(powerUp)
+                            powerUpToErase = infiniteMode.powerUpArray.indexOf(powerUp)
                         }
 
                     }
 
                     if (powerUpToErase!= null) {
 
-                        powerUpArray.removeAt(powerUpToErase)
+                        infiniteMode.powerUpArray.removeAt(powerUpToErase)
                     }
 
                 }
@@ -448,7 +392,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 draw()
 
-                if (PhysicsEngine.brickDeathZone(brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
+                if (PhysicsEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
                     isGameOver = true
                     gameEnd()
@@ -456,13 +400,4 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             }
         }
     }
-
-    private fun getScreenWidth(): Int {
-        return Resources.getSystem().displayMetrics.widthPixels
-    }
-
-    private fun getScreenHeight(): Int {
-        return Resources.getSystem().displayMetrics.heightPixels
-    }
-
 }
