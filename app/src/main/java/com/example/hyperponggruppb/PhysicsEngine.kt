@@ -127,10 +127,10 @@ object PhysicsEngine {
                         ball.ballSpeedY *= -1f //-ballSpeedY
                     }
 
-                    if (ball.brickCollision) {
+                    if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
 
-                        if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top) {
-                            Log.d(TAG, "BallPhysics: sides")
+                        if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top) { // om bollens y-axel är mindre än botten
+                            Log.d(TAG, "BallPhysics: sides") // och större än top, dvs att bollen befinner sig MELLAN brickens TOP och BOTTEN.
                             if (ball.ballSpeedX <= 0) {
                                 ball.ballPosX += 9f
                                 if (ball.ballSpeedX < -13) {
