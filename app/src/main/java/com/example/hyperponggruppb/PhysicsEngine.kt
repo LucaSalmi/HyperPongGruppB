@@ -33,7 +33,7 @@ object PhysicsEngine {
                 toRemove = brickRow.indexOf(rect)
                 ball.brickCollision = true
                 brickHit = rect
-                SoundEffectManager.jukebox(context, 0)
+                //SoundEffectManager.jukebox(context, 0)
             }
         }
 
@@ -76,7 +76,7 @@ object PhysicsEngine {
             if (!isCollisionDetected) {
                 ball.playerCollision = true
                 isCollisionDetected = true
-                SoundEffectManager.jukebox(context, 0)
+                //SoundEffectManager.jukebox(context, 0)
             }
         }
     }

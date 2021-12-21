@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.fragment.app.commit
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
 import java.lang.System.currentTimeMillis
 
@@ -44,7 +45,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
         PlayerManager.lives = 1
-        myActivity.updateText()
+        //myActivity.updateText()
         infiniteMode = GameManager(context)
     }
 
@@ -75,7 +76,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         }
 
         PlayerManager.playTime = timeTicks
-        myActivity.updateText()
+        //myActivity.updateText()
         spawnTimer.start()
     }
 
@@ -145,7 +146,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.setPlacement()
             gameStart = false
             infiniteMode.clearArrays()
-            myActivity.scoreBoard()
+            //myActivity.scoreBoard()
+            myActivity.finish()
             stop()
         }
 
@@ -341,33 +343,33 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                 0 -> {
                                     timeTicks = powerUp.speedDown(timeTicks)
                                     restartSpawnTimer()
-                                    SoundEffectManager.jukebox(context, 3)
+                                    //SoundEffectManager.jukebox(context, 3)
                                 }
                                 1 -> {
                                     timeTicks = powerUp.speedUp(timeTicks)
                                     restartSpawnTimer()
-                                    SoundEffectManager.jukebox(context, 2)
+                                    //SoundEffectManager.jukebox(context, 2)
                                 }
                                 2 -> {
                                     powerUp.bigPaddle(infiniteMode.player)
-                                    SoundEffectManager.jukebox(context, 2)
+                                    //SoundEffectManager.jukebox(context, 2)
                                     restartPowerUpTimer()
                                     infiniteMode.player.update()
                                 }
                                 3 -> {
                                     powerUp.smallPaddle(infiniteMode.player)
-                                    SoundEffectManager.jukebox(context, 3)
+                                    //SoundEffectManager.jukebox(context, 3)
                                     restartPowerUpTimer()
                                     infiniteMode.player.update()
                                 }
                                 4 -> {
                                     infiniteMode.spawnExtraBall()
-                                    SoundEffectManager.jukebox(context, 2)
+                                    //SoundEffectManager.jukebox(context, 2)
                                 }
                                 5 -> {
                                     PlayerManager.gainLife()
-                                    SoundEffectManager.jukebox(context, 2)
-                                    myActivity.updateText()
+                                    //SoundEffectManager.jukebox(context, 2)
+                                    //myActivity.updateText()
                                 }
                             }
                         }
@@ -387,7 +389,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 if (PlayerManager.lives > 0) {
 
-                    myActivity.updateText()
+                    //myActivity.updateText()
                 }
 
                 draw()

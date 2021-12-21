@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 
 
@@ -27,9 +28,7 @@ class MainActivity : AppCompatActivity() {
         }, 2000)
 
         setContentView(binding.root)
-        PlayerManager.playerPoints
-
-        SoundEffectManager.bGMusic(this)
+        //SoundEffectManager.bGMusic(this)
 
 
         binding.ivNewGame.setOnClickListener {
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 if (nameField.text != null && nameField.text.length == 3){
                     PlayerManager.name = nameField.text.toString()
                     val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-                    SoundEffectManager.jukebox(this, 1)
+                    //SoundEffectManager.jukebox(this, 1)
                     dialog.dismiss()
                     startActivity(toGameModeOne)
                 }
