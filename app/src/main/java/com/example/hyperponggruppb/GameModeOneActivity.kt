@@ -92,6 +92,7 @@ class GameModeOneActivity : AppCompatActivity() {
 
                 var asd = supportFragmentManager.findFragmentById(R.id.point_fragment)
                 var asd2 = supportFragmentManager.findFragmentById(R.id.sv_game_view)
+
                 supportFragmentManager.commit {
                     remove(asd!!)
                     remove(asd2!!)
