@@ -87,21 +87,20 @@ class GameModeOneActivity : AppCompatActivity() {
             var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
             resultScore.text = resultScoreWithSign
 
-                returnBtn.setOnClickListener {
+            resultScore.text = resultScoreWithSign
+            returnBtn.setOnClickListener {
 
+                var asd = supportFragmentManager.findFragmentById(R.id.point_fragment)
+                var asd2 = supportFragmentManager.findFragmentById(R.id.sv_game_view)
                 supportFragmentManager.commit {
-                    remove(PointFragment())
-                    remove(GameOneFragment())
+                    remove(asd!!)
+                    remove(asd2!!)
                 }
                 dialog.dismiss()
-
-                Handler(Looper.myLooper()!!).postDelayed({
-
-                    this.finish()
-
-                }, 500)
+                finish()
 
             }
+
             retryBtn.setOnClickListener {
 
                 supportFragmentManager.commit {
