@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }, 2000)
 
         setContentView(binding.root)
-        //SoundEffectManager.bGMusic(this)
+        SoundEffectManager.bGMusic(this)
 
 
         binding.ivNewGame.setOnClickListener {
@@ -58,13 +58,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-/*
-    override fun onResume() {
-        var stack = Thread.getAllStackTraces()
-        Log.d(TAG, "onResume: $stack")
-        super.onResume()
-    }
-
- */
-
 }
