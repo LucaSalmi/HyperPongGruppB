@@ -1,4 +1,4 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.view
 
 import android.app.Dialog
 import android.content.Intent
@@ -9,7 +9,10 @@ import android.os.Looper
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.SoundEffectManager
+import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 
 

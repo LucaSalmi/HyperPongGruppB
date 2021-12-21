@@ -1,8 +1,7 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.controller
 
-import android.graphics.Color
 import android.graphics.Rect
-import kotlin.math.floor
+import com.example.hyperponggruppb.model.Bricks
 
 object BrickStructure {
 
@@ -33,8 +32,8 @@ object BrickStructure {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            leftInBounds += right- left + 4
-            rightInBounds += right- left + 4
+            leftInBounds += right - left + 4
+            rightInBounds += right - left + 4
 
             if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
                 || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
@@ -57,7 +56,7 @@ object BrickStructure {
     fun makeOOBBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
 
         var oOBLeft = left
-        var oOBTop = -(bottom- top)
+        var oOBTop = -(bottom - top)
         var oOBright = right
         var oOBBottom = 0
 
@@ -68,8 +67,8 @@ object BrickStructure {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             brickRow.add(brickRect)
-            oOBLeft += right- left + 4
-            oOBright += right- left + 4
+            oOBLeft += right - left + 4
+            oOBright += right - left + 4
 
             if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
                 || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
@@ -133,8 +132,8 @@ object BrickStructure {
     fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
 
         for (obj in brickRow){
-            obj.top += (bottom/32.5).toInt()
-            obj.bottom += (bottom/32.5).toInt()
+            obj.top += (bottom /32.5).toInt()
+            obj.bottom += (bottom /32.5).toInt()
         }
         return brickRow
     }

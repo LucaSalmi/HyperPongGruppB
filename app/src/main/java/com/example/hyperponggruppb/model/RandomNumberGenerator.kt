@@ -1,4 +1,4 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.model
 
 object RandomNumberGenerator {
 

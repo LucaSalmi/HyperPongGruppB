@@ -1,4 +1,4 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.controller
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.TextView
 import androidx.fragment.app.commit
+import com.example.hyperponggruppb.view.fragment.GameOneFragment
+import com.example.hyperponggruppb.view.fragment.PointFragment
+import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 
 class GameModeOneActivity : AppCompatActivity() {

@@ -1,10 +1,12 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.model
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Rect
-import com.example.hyperponggruppb.model.AssetManager
+import com.example.hyperponggruppb.controller.Player
+import com.example.hyperponggruppb.controller.PowerUp
+import com.example.hyperponggruppb.controller.BrickStructure
 
 class GameManager(var context: Context?){
 

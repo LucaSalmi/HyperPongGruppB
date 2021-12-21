@@ -1,4 +1,4 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.model
 
 import android.content.Context
 import android.graphics.*

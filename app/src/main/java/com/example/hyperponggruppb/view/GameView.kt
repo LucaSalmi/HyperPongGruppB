@@ -1,4 +1,4 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.view
 
 import android.app.Activity
 import android.content.ContentValues.TAG
@@ -9,8 +9,14 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.example.hyperponggruppb.PhysicsEngine.gameStart
+import com.example.hyperponggruppb.controller.PhysicsEngine
+import com.example.hyperponggruppb.controller.PhysicsEngine.gameStart
+import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.SoundEffectManager
+import com.example.hyperponggruppb.controller.BrickStructure
+import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.model.AssetManager
+import com.example.hyperponggruppb.model.GameManager
 import java.lang.System.currentTimeMillis
 
 
@@ -94,6 +100,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             8 -> millisSpawnTimer = 48L
             9 -> millisSpawnTimer = 32L
             10 -> millisSpawnTimer = 16L
+
+
         }
     }
 

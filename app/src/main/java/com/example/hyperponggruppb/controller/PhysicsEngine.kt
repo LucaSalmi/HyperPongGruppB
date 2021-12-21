@@ -1,10 +1,12 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.controller
 
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.util.Log
+import com.example.hyperponggruppb.model.Ball
+import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object PhysicsEngine {
 

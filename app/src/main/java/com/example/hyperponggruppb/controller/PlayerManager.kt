@@ -1,14 +1,11 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.controller
 
 import android.content.ContentValues.TAG
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.util.JsonWriter
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import com.example.hyperponggruppb.model.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.json.JSONStringer
 
 object PlayerManager {
 

@@ -11,10 +11,10 @@
         android:largeHeap="true"
         android:theme="@style/splashScreenTheme">
         <activity
-            android:name=".GameModeOneActivity"
+            android:name=".controller.GameModeOneActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
