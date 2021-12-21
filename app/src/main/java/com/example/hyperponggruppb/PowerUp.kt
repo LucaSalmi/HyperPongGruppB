@@ -1,7 +1,7 @@
 package com.example.hyperponggruppb
 
 import android.graphics.*
-import javax.security.auth.Destroyable
+import com.example.hyperponggruppb.model.AssetManager
 
 class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int) {
 

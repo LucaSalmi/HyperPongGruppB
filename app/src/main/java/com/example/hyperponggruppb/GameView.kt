@@ -9,8 +9,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import androidx.fragment.app.commit
 import com.example.hyperponggruppb.PhysicsEngine.gameStart
+import com.example.hyperponggruppb.model.AssetManager
 import java.lang.System.currentTimeMillis
 
 
