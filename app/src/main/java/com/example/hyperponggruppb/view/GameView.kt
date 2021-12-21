@@ -310,89 +310,18 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             if (currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                if (gameStart) {
+                if (gameStart){
 
-                    PhysicsEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
+                    ballInteractions()
+                    checkDamage()
 
-                    if (PhysicsEngine.damageTaken) {
+                    playerAndBrickInteractions()
 
-                        PhysicsEngine.damageTaken = false
-                        PlayerManager.loseLife()
-                        gameEnd()
-                    }
-
-                    for (ballObj in infiniteMode.ballsArray) {
-
-                        PhysicsEngine.playerCollision(ballObj, infiniteMode.player, context)
-
-                        PhysicsEngine.brickCollision(
-                            infiniteMode.brickRow,
-                            infiniteMode.brickAssets,
-                            ballObj,
-                            infiniteMode.powerUpArray,
-                            context
-                        )
-                    }
 
                     if (infiniteMode.brickRow.size < 30) {
-
-                        BrickStructure.makeOOBBricks(infiniteMode.brickRow)
-                        AssetManager.fillAssetArray(infiniteMode.brickAssets, infiniteMode.brickRow.size, 1)
+                        produceExtraBricks()
                     }
-
-                    PhysicsEngine.powerUpPhysics(infiniteMode.powerUpArray, infiniteMode.player)
-                    var powerUpToErase: Int? = null
-                    for (powerUp in infiniteMode.powerUpArray) {
-
-                        if (powerUp.isCatched) {
-
-                            when (powerUp.typeID) {
-
-                                0 -> {
-                                    timeTicks = powerUp.speedDown(timeTicks)
-                                    restartSpawnTimer()
-                                    SoundEffectManager.jukebox(context, 3)
-                                }
-                                1 -> {
-                                    timeTicks = powerUp.speedUp(timeTicks)
-                                    restartSpawnTimer()
-                                    SoundEffectManager.jukebox(context, 2)
-                                }
-                                2 -> {
-                                    powerUp.bigPaddle(infiniteMode.player)
-                                    SoundEffectManager.jukebox(context, 2)
-                                    restartPowerUpTimer()
-                                    infiniteMode.player.update()
-                                }
-                                3 -> {
-                                    powerUp.smallPaddle(infiniteMode.player)
-                                    SoundEffectManager.jukebox(context, 3)
-                                    restartPowerUpTimer()
-                                    infiniteMode.player.update()
-                                }
-                                4 -> {
-                                    infiniteMode.spawnExtraBall()
-                                    SoundEffectManager.jukebox(context, 2)
-                                }
-                                5 -> {
-                                    PlayerManager.gainLife()
-                                    SoundEffectManager.jukebox(context, 2)
-                                    myActivity.updateText()
-                                }
-                            }
-                        }
-
-                        if (powerUp.isCatched || powerUp.isToDestroy) {
-                            powerUpToErase = infiniteMode.powerUpArray.indexOf(powerUp)
-                        }
-
-                    }
-
-                    if (powerUpToErase!= null) {
-
-                        infiniteMode.powerUpArray.removeAt(powerUpToErase)
-                    }
-
+                    powerUpInteractions()
                 }
 
                 if (PlayerManager.lives > 0) {
@@ -401,13 +330,112 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
 
                 draw()
-
-                if (PhysicsEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
-
-                    isGameOver = true
-                    gameEnd()
-                }
+                checkDeath()
             }
         }
     }
+
+    private fun ballInteractions(){
+
+        PhysicsEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
+    }
+
+    private fun checkDamage(){
+
+        if (PhysicsEngine.damageTaken) {
+
+            PhysicsEngine.damageTaken = false
+            PlayerManager.loseLife()
+            gameEnd()
+        }
+    }
+
+    private fun playerAndBrickInteractions(){
+
+        for (ballObj in infiniteMode.ballsArray) {
+
+            PhysicsEngine.playerCollision(ballObj, infiniteMode.player, context)
+
+            PhysicsEngine.brickCollision(
+                infiniteMode.brickRow,
+                infiniteMode.brickAssets,
+                ballObj,
+                infiniteMode.powerUpArray,
+                context
+            )
+        }
+    }
+
+    private fun produceExtraBricks(){
+
+        BrickStructure.makeOOBBricks(infiniteMode.brickRow)
+        AssetManager.fillAssetArray(infiniteMode.brickAssets, infiniteMode.brickRow.size, 1)
+    }
+
+    private fun powerUpInteractions(){
+
+        PhysicsEngine.powerUpPhysics(infiniteMode.powerUpArray, infiniteMode.player)
+        var powerUpToErase: Int? = null
+        for (powerUp in infiniteMode.powerUpArray) {
+
+            if (powerUp.isCatched) {
+
+                when (powerUp.typeID) {
+
+                    0 -> {
+                        timeTicks = powerUp.speedDown(timeTicks)
+                        restartSpawnTimer()
+                        SoundEffectManager.jukebox(context, 3)
+                    }
+                    1 -> {
+                        timeTicks = powerUp.speedUp(timeTicks)
+                        restartSpawnTimer()
+                        SoundEffectManager.jukebox(context, 2)
+                    }
+                    2 -> {
+                        powerUp.bigPaddle(infiniteMode.player)
+                        SoundEffectManager.jukebox(context, 2)
+                        restartPowerUpTimer()
+                        infiniteMode.player.update()
+                    }
+                    3 -> {
+                        powerUp.smallPaddle(infiniteMode.player)
+                        SoundEffectManager.jukebox(context, 3)
+                        restartPowerUpTimer()
+                        infiniteMode.player.update()
+                    }
+                    4 -> {
+                        infiniteMode.spawnExtraBall()
+                        SoundEffectManager.jukebox(context, 2)
+                    }
+                    5 -> {
+                        PlayerManager.gainLife()
+                        SoundEffectManager.jukebox(context, 2)
+                        myActivity.updateText()
+                    }
+                }
+            }
+
+            if (powerUp.isCatched || powerUp.isToDestroy) {
+
+                powerUpToErase = infiniteMode.powerUpArray.indexOf(powerUp)
+            }
+
+        }
+
+        if (powerUpToErase != null) {
+
+            infiniteMode.powerUpArray.removeAt(powerUpToErase)
+        }
+    }
+
+    private fun checkDeath(){
+
+        if (PhysicsEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
+
+            isGameOver = true
+            gameEnd()
+        }
+    }
+
 }
