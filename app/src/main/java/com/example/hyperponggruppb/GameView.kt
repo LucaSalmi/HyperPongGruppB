@@ -44,6 +44,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
 
+    val ballRadius = 20f
+
 
     init {
 
@@ -137,11 +139,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             getScreenHeight() - (getScreenHeight() * 0.2).toFloat() + player.playerHeight / 2 - 100
         player.update()
 
-        ball = Ball(this.context)
-        ball.ballPosX = player.right - player.playerWidth / 2
-        ball.ballPosY = player.top - ball.radius
-        ball.paint.color = Color.TRANSPARENT
-        ball.hitBoxPaint.color = Color.TRANSPARENT
+        ball = Ball(this.context,player.right - player.playerWidth / 2, player.top - ballRadius)
         ballsArray.add(ball)
 
         val brickwidth = (getScreenWidth() / 10) - 4
@@ -203,7 +201,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             gameStart = false
             isCollisionDetected = false
-            ball = Ball(this.context)
+            ball = Ball(this.context, (player.right - player.playerWidth / 2), (player.top - ball.radius))
             ball.paint.color = Color.TRANSPARENT
             ball.hitBoxPaint.color = Color.TRANSPARENT
             ballsArray.add(ball)
@@ -416,11 +414,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                                     player.update()
                                 }
                                 4 -> {
-                                    extraBall = Ball(this.context)
-                                    extraBall.ballPosX = player.right - player.playerWidth / 2
-                                    extraBall.ballPosY = player.top - ball.radius
-                                    extraBall.paint.color = Color.TRANSPARENT
-                                    extraBall.hitBoxPaint.color = Color.TRANSPARENT
+                                    extraBall = Ball(this.context, (player.right - player.playerWidth / 2), (player.top - ball.radius))
                                     extraBall.ballSpeedX = 7f
                                     extraBall.ballSpeedY = -13f
                                     ballsArray.add(extraBall)
