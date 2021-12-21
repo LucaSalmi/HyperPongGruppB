@@ -50,7 +50,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
-        PlayerManager.lives = 1
+        PlayerManager.lives = 3
         myActivity.updateText()
         infiniteMode = GameManager(context)
     }
@@ -100,11 +100,12 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             8 -> millisSpawnTimer = 48L
             9 -> millisSpawnTimer = 32L
             10 -> millisSpawnTimer = 16L
-
-
         }
     }
 
+    /**
+     * manages the lenght of the effects of powerups
+     */
     private val powerUpTimer = object : CountDownTimer(millisPowerUpTimer, 1000) {
 
         override fun onTick(p0: Long) {
