@@ -20,6 +20,7 @@ class GameManager(var context: Context?){
     lateinit var player: Player
 
     init {
+        clearArrays()
         makePlayer()
         makeBall()
         makeBricks()

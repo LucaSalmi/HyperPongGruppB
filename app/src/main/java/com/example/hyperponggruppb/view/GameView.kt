@@ -437,5 +437,4 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             gameEnd()
         }
     }
-
 }
