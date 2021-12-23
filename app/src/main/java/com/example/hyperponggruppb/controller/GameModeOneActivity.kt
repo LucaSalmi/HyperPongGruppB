@@ -123,15 +123,13 @@ class GameModeOneActivity : AppCompatActivity() {
 
                 supportFragmentManager.commit {
 
-                    //remove(pointFragment!!)
-                    //remove(gameView!!)
+                    remove(pointFragment!!)
+                    remove(gameView!!)
                 }
                 val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
                 startActivity(toLeaderboard)
                 finish()
             }
-
-
 
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(R.color.trans)
