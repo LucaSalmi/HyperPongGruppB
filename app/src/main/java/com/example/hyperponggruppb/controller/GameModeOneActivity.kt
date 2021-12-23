@@ -118,8 +118,17 @@ class GameModeOneActivity : AppCompatActivity() {
 
             leaderboardBtn.setOnClickListener {
 
+                val pointFragment = supportFragmentManager.findFragmentById(R.id.point_fragment)
+                val gameView = supportFragmentManager.findFragmentById(R.id.sv_game_view)
+
+                supportFragmentManager.commit {
+
+                    //remove(pointFragment!!)
+                    //remove(gameView!!)
+                }
                 val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
                 startActivity(toLeaderboard)
+                finish()
             }
 
 

@@ -27,13 +27,4 @@ class LeaderBoardActivity : AppCompatActivity() {
         val adapter = LeaderboardAdapter(PlayerManager.highScoreArray)
         binding.leaderboard.adapter = adapter
     }
-
-    override fun onBackPressed() {
-
-        val intent = Intent()
-        intent.action = Intent.ACTION_MAIN
-        intent.addCategory(Intent.CATEGORY_HOME)
-        startActivity(intent)
-        super.onBackPressed()
-    }
 }
