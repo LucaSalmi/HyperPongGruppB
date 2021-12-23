@@ -14,7 +14,7 @@ object PlayerManager {
     var lives = 0
     var name = "AAA"
     var playTime = 0
-    private var highScoreArray = mutableListOf<PlayerData>()
+    var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var thread: Thread? = null
 
@@ -48,6 +48,8 @@ object PlayerManager {
             highScoreArray.add(save)
         }
 
+        orderArray()
+
         var saveString = gson.toJson(highScoreArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
@@ -64,6 +66,8 @@ object PlayerManager {
             setHighScore()
 
         }
+
+        orderArray()
     }
 
     private fun setHighScore() {
@@ -74,13 +78,15 @@ object PlayerManager {
                 playerHighScore = obj.highScore
             }
         }
+
+        orderArray()
     }
 
     fun setPlacement(): Int {
 
         var resultPlacement = 1
-        highScoreArray.sortBy { it.highScore}
-        highScoreArray.reverse()
+
+        orderArray()
 
         Log.d(TAG, "setPlacement: $highScoreArray")
         
@@ -108,6 +114,12 @@ object PlayerManager {
             lives++
         } else playerPoints += 10
 
+    }
+
+    fun orderArray(){
+
+        highScoreArray.sortBy { it.highScore}
+        highScoreArray.reverse()
     }
 
 

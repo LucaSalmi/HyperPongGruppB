@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import com.example.hyperponggruppb.LeaderBoardActivity
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.SoundEffectManager
@@ -58,6 +59,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             dialog.show()
+        }
+
+        binding.ivLeaderboard.setOnClickListener {
+            val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
+            startActivity(toLeaderboard)
         }
 
     }
