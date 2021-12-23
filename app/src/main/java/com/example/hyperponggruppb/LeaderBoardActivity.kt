@@ -7,6 +7,10 @@ import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.databinding.ActivityLeaderBoardBinding
+import android.content.Intent
+
+
+
 
 private lateinit var binding: ActivityLeaderBoardBinding
 
@@ -22,5 +26,14 @@ class LeaderBoardActivity : AppCompatActivity() {
         binding.leaderboard.layoutManager = LinearLayoutManager(this)
         val adapter = LeaderboardAdapter(PlayerManager.highScoreArray)
         binding.leaderboard.adapter = adapter
+    }
+
+    override fun onBackPressed() {
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_MAIN
+        intent.addCategory(Intent.CATEGORY_HOME)
+        startActivity(intent)
+        super.onBackPressed()
     }
 }

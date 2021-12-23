@@ -1,11 +1,14 @@
 package com.example.hyperponggruppb.controller
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.commit
+import com.example.hyperponggruppb.LeaderBoardActivity
 import com.example.hyperponggruppb.view.fragment.GameOneFragment
 import com.example.hyperponggruppb.view.fragment.PointFragment
 import com.example.hyperponggruppb.R
@@ -50,6 +53,7 @@ class GameModeOneActivity : AppCompatActivity() {
             //body.text = title
             val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
             val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
+            val leaderboardBtn = dialog.findViewById(R.id.iv_result_leaderboard) as ImageView
 
             val resultScore = dialog.findViewById(R.id.tv_result_score) as TextView
             val resultPlacement = dialog.findViewById(R.id.tv_result_placement) as TextView
@@ -111,6 +115,14 @@ class GameModeOneActivity : AppCompatActivity() {
 
                 dialog.dismiss()
             }
+
+            leaderboardBtn.setOnClickListener {
+
+                val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
+                startActivity(toLeaderboard)
+            }
+
+
 
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(R.color.trans)
