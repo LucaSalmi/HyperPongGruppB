@@ -315,6 +315,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         stop()
     }
 
+
     override fun run() {
 
         while (running) {
