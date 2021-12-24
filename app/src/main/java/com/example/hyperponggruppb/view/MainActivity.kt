@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
 
         if (PlayerManager.isGameEnded){
+
             PlayerManager.isGameEnded = false
             PlayerManager.resetPoints()
             scoreBoard()
