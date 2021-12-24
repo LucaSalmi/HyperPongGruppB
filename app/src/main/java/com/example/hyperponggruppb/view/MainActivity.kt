@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import com.example.hyperponggruppb.LeaderBoardActivity
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
@@ -67,4 +66,85 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+    fun scoreBoard() {
+
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result_view)
+            //val body = dialog.findViewById(R.id.body) as TextView
+            //body.text = title
+            val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
+            val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
+            val leaderboardBtn = dialog.findViewById(R.id.iv_result_leaderboard) as ImageView
+
+            val resultScore = dialog.findViewById(R.id.tv_result_score) as TextView
+            val resultPlacement = dialog.findViewById(R.id.tv_result_placement) as TextView
+            val resultMessage= dialog.findViewById(R.id.tv_result_message) as TextView
+
+            val playerScore = PlayerManager.playerPoints
+            val playerPlacement = PlayerManager.setPlacement()
+            var PlayerPlacementEnding = ""
+
+            when (playerPlacement) {
+                1 -> {
+                    resultMessage.setText(R.string.result_message_one)
+                    PlayerPlacementEnding = getString(R.string.result_placement_one)
+                }
+                2 -> {
+                    resultMessage.setText(R.string.result_message_two)
+                    PlayerPlacementEnding = getString(R.string.result_placement_two)
+                }
+                3 -> {
+                    resultMessage.setText(R.string.result_message_three)
+                    PlayerPlacementEnding = getString(R.string.result_placement_three)
+                }
+                in 4..10 -> {
+                    resultMessage.setText(R.string.result_message_four)
+                    PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                }
+                else -> {
+                    resultMessage.setText(R.string.result_message_five)
+                    PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                }
+            }
+
+            resultPlacement.text = (playerPlacement.toString() + PlayerPlacementEnding)
+            var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
+            resultScore.text = resultScoreWithSign
+
+            returnBtn.setOnClickListener {
+
+                dialog.dismiss()
+            }
+
+            retryBtn.setOnClickListener {
+
+                val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
+                startActivity(toGameModeOne)
+                dialog.dismiss()
+            }
+
+            leaderboardBtn.setOnClickListener {
+
+                val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
+                startActivity(toLeaderboard)
+            }
+
+            dialog.show()
+            dialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
+    override fun onResume() {
+
+        if (PlayerManager.isGameEnded){
+            PlayerManager.isGameEnded = false
+            PlayerManager.resetPoints()
+            scoreBoard()
+        }
+        super.onResume()
+    }
+
 }

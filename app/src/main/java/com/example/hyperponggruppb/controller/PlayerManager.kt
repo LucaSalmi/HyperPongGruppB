@@ -16,7 +16,7 @@ object PlayerManager {
     var playTime = 0
     var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
-    var thread: Thread? = null
+    var isGameEnded = false
 
 
     fun addPoints(newPoints: Int) {

@@ -1,14 +1,25 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.os.CountDownTimer
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.Window
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.commit
+import com.example.hyperponggruppb.LeaderBoardActivity
+import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PhysicsEngine
 import com.example.hyperponggruppb.controller.PhysicsEngine.gameStart
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -17,6 +28,7 @@ import com.example.hyperponggruppb.controller.BrickStructure
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+import com.example.hyperponggruppb.view.fragment.GameOneFragment
 import java.lang.System.currentTimeMillis
 
 
@@ -50,7 +62,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         mHolder?.addCallback(this)
         PlayerManager.readSave(sp)
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
         myActivity.updateText()
         infiniteMode = GameManager(context)
     }
@@ -129,7 +141,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         running = true
         thread = Thread(this)
-        PlayerManager.thread = thread
         thread?.start()
     }
 
@@ -156,8 +167,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.setPlacement()
             gameStart = false
             infiniteMode.clearArrays()
-            myActivity.scoreBoard()
-            stop()
+            PlayerManager.isGameEnded = true
+            myActivity.finish()
         }
 
         if (PlayerManager.lives > 0 && gameStart) {
@@ -438,4 +449,5 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             gameEnd()
         }
     }
+
 }
