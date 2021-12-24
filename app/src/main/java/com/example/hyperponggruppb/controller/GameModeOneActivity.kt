@@ -42,6 +42,7 @@ class GameModeOneActivity : AppCompatActivity() {
         })
     }
 
+
     fun scoreBoard() {
 
         runOnUiThread(Runnable {
