@@ -27,6 +27,9 @@ class LeaderboardAdapter(private val highScoreArray: MutableList<PlayerData>): R
 
         holder.playerName.text = playerHiScore.name
         holder.playerHiScore.text = playerHiScore.highScore.toString()
+        if (position < 3){
+            holder.trophyImage.setImageResource(R.drawable.leaderrboard_icon)
+        }
 
     }
 

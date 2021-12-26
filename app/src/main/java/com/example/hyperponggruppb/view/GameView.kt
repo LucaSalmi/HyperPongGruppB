@@ -168,6 +168,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             gameStart = false
             infiniteMode.clearArrays()
             PlayerManager.isGameEnded = true
+            spawnTimer.cancel()
+            powerUpTimer.cancel()
             myActivity.finish()
         }
 
@@ -337,11 +339,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                     powerUpInteractions()
                 }
 
-                if (PlayerManager.lives > 0) {
-
-                    myActivity.updateText()
-                }
-
                 draw()
                 checkDeath()
             }
@@ -354,6 +351,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     }
 
     private fun checkDamage(){
+
+        myActivity.updateText()
 
         if (PhysicsEngine.damageTaken) {
 
