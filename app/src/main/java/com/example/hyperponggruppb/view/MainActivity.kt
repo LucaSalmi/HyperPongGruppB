@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         SoundEffectManager.bGMusic(this)
+
+        val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
+        PlayerManager.readSave(sp)
 
 
         binding.ivNewGame.setOnClickListener {
