@@ -1,11 +1,13 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.LeaderBoardActivity
@@ -20,14 +22,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var accountText: String = ""
+    private var isStoryMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         Handler(Looper.myLooper()!!).postDelayed({
 
             setTheme(R.style.Theme_HyperPongGruppB)
-
 
         }, 2000)
 
@@ -37,20 +40,33 @@ class MainActivity : AppCompatActivity() {
         val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
 
+        if (PlayerManager.name == "null") {
+
+            nameInput()
+        }
+
         setAccount()
+        onClick()
+    }
 
-        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
+    private fun onClick(){
 
-        binding.ivNewGame.setOnClickListener {
-            if (PlayerManager.name == "null") {
-
-                nameInput()
-                startActivity(toGameModeOne)
-
-            } else {
-
-                startActivity(toGameModeOne)
+        binding.ivGameMode.setOnClickListener {
+            if (isStoryMode){
+                startStoryMode()
+            }else{
+                startInfinityMode()
             }
+        }
+
+        binding.btnModeForward.setOnClickListener {
+            isStoryMode = !isStoryMode
+            changeButtonText()
+        }
+
+        binding.btnModeBack.setOnClickListener {
+            isStoryMode = !isStoryMode
+            changeButtonText()
         }
 
         binding.ivLeaderboard.setOnClickListener {
@@ -61,7 +77,24 @@ class MainActivity : AppCompatActivity() {
         binding.btnChangeAccount.setOnClickListener {
             nameInput()
         }
+    }
 
+    private fun changeButtonText(){
+        if (isStoryMode){
+            binding.tvGameMode.text = getString(R.string.txt_story_mode)
+        }else{
+            binding.tvGameMode.text = getText(R.string.txt_infinite_mode)
+        }
+    }
+
+    private fun startStoryMode(){
+        Log.d(TAG, "startStoryMode: working on it")
+    }
+
+    private fun startInfinityMode(){
+
+        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
+        startActivity(toGameModeOne)
     }
 
     private fun setAccount(){
@@ -114,8 +147,6 @@ class MainActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.result_view)
-        //val body = dialog.findViewById(R.id.body) as TextView
-        //body.text = title
         val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
         val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
         val leaderboardBtn = dialog.findViewById(R.id.iv_result_leaderboard) as ImageView
@@ -126,32 +157,32 @@ class MainActivity : AppCompatActivity() {
 
         val playerScore = PlayerManager.playerPoints
         val playerPlacement = PlayerManager.setPlacement()
-        var PlayerPlacementEnding = ""
+        var playerPlacementEnding = ""
 
         when (playerPlacement) {
             1 -> {
                 resultMessage.setText(R.string.result_message_one)
-                PlayerPlacementEnding = getString(R.string.result_placement_one)
+                playerPlacementEnding = getString(R.string.result_placement_one)
             }
             2 -> {
                 resultMessage.setText(R.string.result_message_two)
-                PlayerPlacementEnding = getString(R.string.result_placement_two)
+                playerPlacementEnding = getString(R.string.result_placement_two)
             }
             3 -> {
                 resultMessage.setText(R.string.result_message_three)
-                PlayerPlacementEnding = getString(R.string.result_placement_three)
+                playerPlacementEnding = getString(R.string.result_placement_three)
             }
             in 4..10 -> {
                 resultMessage.setText(R.string.result_message_four)
-                PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                playerPlacementEnding = getString(R.string.result_placement_four_plus)
             }
             else -> {
                 resultMessage.setText(R.string.result_message_five)
-                PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                playerPlacementEnding = getString(R.string.result_placement_four_plus)
             }
         }
 
-        resultPlacement.text = (playerPlacement.toString() + PlayerPlacementEnding)
+        resultPlacement.text = (playerPlacement.toString() + playerPlacementEnding)
         var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
         resultScore.text = resultScoreWithSign
 
@@ -162,8 +193,7 @@ class MainActivity : AppCompatActivity() {
 
         retryBtn.setOnClickListener {
 
-            val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-            startActivity(toGameModeOne)
+            startInfinityMode()
             dialog.dismiss()
         }
 

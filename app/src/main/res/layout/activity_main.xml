@@ -41,25 +41,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_title">
 
-
         <ImageView
-            android:id="@+id/iv_new_game"
+            android:id="@+id/iv_game_mode"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:src="@drawable/golden_item_frame"
-            android:text="Load Game"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_load_game"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:src="@drawable/golden_item_frame"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </LinearLayout>
 
@@ -80,8 +69,7 @@
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/golden_item_frame"
-            android:text="Load Game" />
+            android:src="@drawable/golden_item_frame" />
 
         <ImageView
             android:id="@+id/iv_leaderboard"
@@ -122,7 +110,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/change_account_btn" />
+            android:text="@string/change_account_btn"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/gold"/>
 
 
     </LinearLayout>
@@ -148,29 +138,35 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <TextView
-                android:id="@+id/tv_new_game"
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/btn_mode_back"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="1"
-                android:textSize="@dimen/txt_button_size"
-                android:gravity="center"
-                android:src="@drawable/golden_item_frame"
-                android:text="New Game" />
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@color/gold"/>
 
             <TextView
-                android:id="@+id/tv_load_game"
-                android:layout_width="0dp"
+                android:id="@+id/tv_game_mode"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:textSize="@dimen/txt_button_size"
                 android:gravity="center"
                 android:src="@drawable/golden_item_frame"
-                android:text="Load Game" />
+                android:text="@string/txt_story_mode" />
+
+            <ImageButton
+                android:id="@+id/btn_mode_forward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@color/gold"/>
+
 
         </LinearLayout>
 
