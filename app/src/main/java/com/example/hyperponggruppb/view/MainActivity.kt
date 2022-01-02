@@ -22,15 +22,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var accountText: String = ""
-    var isStoryMode = true
+    private var isStoryMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         Handler(Looper.myLooper()!!).postDelayed({
 
             setTheme(R.style.Theme_HyperPongGruppB)
-
 
         }, 2000)
 
@@ -147,8 +147,6 @@ class MainActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.result_view)
-        //val body = dialog.findViewById(R.id.body) as TextView
-        //body.text = title
         val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
         val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
         val leaderboardBtn = dialog.findViewById(R.id.iv_result_leaderboard) as ImageView
@@ -159,32 +157,32 @@ class MainActivity : AppCompatActivity() {
 
         val playerScore = PlayerManager.playerPoints
         val playerPlacement = PlayerManager.setPlacement()
-        var PlayerPlacementEnding = ""
+        var playerPlacementEnding = ""
 
         when (playerPlacement) {
             1 -> {
                 resultMessage.setText(R.string.result_message_one)
-                PlayerPlacementEnding = getString(R.string.result_placement_one)
+                playerPlacementEnding = getString(R.string.result_placement_one)
             }
             2 -> {
                 resultMessage.setText(R.string.result_message_two)
-                PlayerPlacementEnding = getString(R.string.result_placement_two)
+                playerPlacementEnding = getString(R.string.result_placement_two)
             }
             3 -> {
                 resultMessage.setText(R.string.result_message_three)
-                PlayerPlacementEnding = getString(R.string.result_placement_three)
+                playerPlacementEnding = getString(R.string.result_placement_three)
             }
             in 4..10 -> {
                 resultMessage.setText(R.string.result_message_four)
-                PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                playerPlacementEnding = getString(R.string.result_placement_four_plus)
             }
             else -> {
                 resultMessage.setText(R.string.result_message_five)
-                PlayerPlacementEnding = getString(R.string.result_placement_four_plus)
+                playerPlacementEnding = getString(R.string.result_placement_four_plus)
             }
         }
 
-        resultPlacement.text = (playerPlacement.toString() + PlayerPlacementEnding)
+        resultPlacement.text = (playerPlacement.toString() + playerPlacementEnding)
         var resultScoreWithSign = playerScore.toString() + getString(R.string.result_p_sign)
         resultScore.text = resultScoreWithSign
 
