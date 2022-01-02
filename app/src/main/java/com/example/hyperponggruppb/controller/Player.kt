@@ -12,12 +12,12 @@ class Player() {
     var left = 0f
     var top = 0f
     var right = 200f
-    var bottom = 40f
+    var bottom = 60f
     var paint = Paint()
     var bigPaddle = false
     var smallPaddle = false
     var playerWidth = right - left
-    var playerHeight = (playerWidth * 0.2).toInt()
+    var playerHeight = bottom
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
     init {

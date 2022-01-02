@@ -49,15 +49,21 @@ object AssetManager {
 
 
     fun prepareAssets(context: Context){
-        //backgrounds
-        lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_level_background).scale(getScreenWidth(), getScreenHeight(), true)
-        //player
-        playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth, playerhight,true )
-        bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth + playerwidth/2, playerhight,true )
-        smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.pong_player_mockup).scale(playerwidth - playerwidth/2, playerhight,true )
-        //ball
+
+        lavaBackground = BitmapFactory.decodeResource(context.resources,
+            R.drawable.lava_level_background
+        ).scale(getScreenWidth(), getScreenHeight(), true)
+        playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_normal).scale(
+            playerwidth,
+            playerhight,true )
+        bigPlayerAsset = BitmapFactory.decodeResource(context.resources,
+            R.drawable.player_pad_wide
+        ).scale(playerwidth + playerwidth/2, playerhight,true )
+        smallPlayerAsset = BitmapFactory.decodeResource(context.resources,
+            R.drawable.player_pad_small
+        ).scale(playerwidth - playerwidth/2, playerhight,true )
+
         ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.ball_glow_simple).scale(ballwidth, ballheight,true)
-        //bricks
         brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
         brickAssetV2 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v2).scale(brickwidth, brickheight,true)
         brickAssetV3 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v3).scale(brickwidth, brickheight,true)
@@ -68,14 +74,12 @@ object AssetManager {
         brickAssetYellow = BitmapFactory.decodeResource(context.resources, R.drawable.brick_yellow_glow).scale(brickwidth, brickheight,true)
         brickAssetHardFullHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_full_hp).scale(brickwidth, brickheight,true)
         brickAssetHardHalfHP = BitmapFactory.decodeResource(context.resources, R.drawable.brick_hard_half_hp).scale(brickwidth, brickheight,true)
-        //powerUps
         powerUpAssetSpeedUp = BitmapFactory.decodeResource(context.resources, R.drawable.speed_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetSpeedDown = BitmapFactory.decodeResource(context.resources, R.drawable.speed_minus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetBigPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.playersize_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetSmallPaddle = BitmapFactory.decodeResource(context.resources, R.drawable.playersize_minus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth, powerUpHeight,true)
-        //deathZone
         darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone).scale(getScreenWidth(), dangerZoneHeight, true)
     }
 

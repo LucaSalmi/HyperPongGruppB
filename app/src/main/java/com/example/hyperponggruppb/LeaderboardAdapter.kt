@@ -29,9 +29,9 @@ class LeaderboardAdapter(private val highScoreArray: MutableList<PlayerData>): R
         holder.playerHiScore.text = playerHiScore.highScore.toString()
         when (position){
 
-            0 -> holder.trophyImage.setImageResource(R.drawable.leaderrboard_icon)
-            1 -> holder.trophyImage.setImageResource(R.drawable.leaderrboard_icon)
-            2 -> holder.trophyImage.setImageResource(R.drawable.leaderrboard_icon)
+            0 -> holder.trophyImage.setImageResource(R.drawable.gold_trophy)
+            1 -> holder.trophyImage.setImageResource(R.drawable.silver_trophy)
+            2 -> holder.trophyImage.setImageResource(R.drawable.bronze_trophy)
         }
 
     }
