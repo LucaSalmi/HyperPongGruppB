@@ -22,7 +22,7 @@
 
     <!-- result points Strings -->
     <string name="result_p_sign">P</string>
-    <string name="active_account_string">Currently playing: </string>
+    <string name="active_account_string">"Currently playing: "</string>
     <string name="change_account_btn">Change User</string>
 
 </resources>
