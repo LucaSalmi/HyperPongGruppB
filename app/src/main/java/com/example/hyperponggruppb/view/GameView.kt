@@ -300,7 +300,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             restartSpawnTimer()
 
         }
-
+        Log.d(TAG, "onTouchEvent: $gameStart")
         return true
     }
 
@@ -314,6 +314,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
         Log.d(TAG, "surfaceDestroyed: we here")
+        gameStart = false
         stop()
     }
 

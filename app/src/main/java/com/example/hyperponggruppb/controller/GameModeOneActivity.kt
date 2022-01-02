@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb.controller
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,11 @@ import com.example.hyperponggruppb.view.fragment.GameOneFragment
 import com.example.hyperponggruppb.view.fragment.PointFragment
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
+import android.os.Build
+import android.util.Log
+import android.view.View
+import java.lang.Exception
+
 
 class GameModeOneActivity : AppCompatActivity() {
 
@@ -23,6 +29,7 @@ class GameModeOneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameModeOneBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         supportFragmentManager.commit {
             add(R.id.frame_layout, PointFragment())
@@ -36,10 +43,14 @@ class GameModeOneActivity : AppCompatActivity() {
     fun updateText() {
 
         runOnUiThread(Runnable {
-            supportFragmentManager.commit {
-                replace(R.id.frame_layout, PointFragment())
+            try {
+                supportFragmentManager.commit {
+                    replace(R.id.frame_layout, PointFragment())
+                }
+            }catch (e: Exception){
+                Log.e(TAG, "updateText: caught")
             }
+
         })
     }
-
 }

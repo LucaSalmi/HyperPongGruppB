@@ -10,7 +10,7 @@
     <!-- POINTS -->
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutPoints"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/new_ui_bar"

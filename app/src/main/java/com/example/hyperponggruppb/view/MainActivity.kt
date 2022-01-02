@@ -74,6 +74,9 @@ class MainActivity : AppCompatActivity() {
         binding.tvActiveAccount.text = accountText
     }
 
+    /**
+     * if no Account is loaded, or the user wants to change the account he is playing on, the dialog prompts for a name and loads, if present, all the necessary data coupled with the user
+     */
     private fun nameInput(){
 
         val dialog = Dialog(this)
@@ -102,6 +105,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    /**
+     * creates the scoreboard to show the player their high score and their position in the leaderboard, it also links directly to the full scoreboard, the main menu and restarts the game.
+     */
     private fun scoreBoard() {
 
         val dialog = Dialog(this)
