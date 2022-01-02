@@ -12,7 +12,7 @@ object PlayerManager {
     var playerPoints = 0
     var playerHighScore = 0
     var lives = 0
-    var name = "AAA"
+    var name = "null"
     var playTime = 0
     var highScoreArray = mutableListOf<PlayerData>()
     private val gson = Gson()
@@ -53,6 +53,7 @@ object PlayerManager {
         var saveString = gson.toJson(highScoreArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
+        editor?.putString("activeAccount",save.name)
         editor?.apply()
     }
 
@@ -63,8 +64,8 @@ object PlayerManager {
 
             val mutableListPlayerDataType = object : TypeToken<MutableList<PlayerData>>() {}.type
             highScoreArray = gson.fromJson(load, mutableListPlayerDataType)
+            name = sp?.getString("activeAccount", "null")!!
             setHighScore()
-
         }
 
         orderArray()
