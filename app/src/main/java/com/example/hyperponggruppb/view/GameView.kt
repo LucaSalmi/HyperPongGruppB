@@ -62,6 +62,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         mHolder?.addCallback(this)
         PlayerManager.lives = 1
+        PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context)
     }

@@ -146,7 +146,6 @@ class MainActivity : AppCompatActivity() {
         if (PlayerManager.isGameEnded){
 
             PlayerManager.isGameEnded = false
-            PlayerManager.resetPoints()
             scoreBoard()
         }
         super.onResume()
