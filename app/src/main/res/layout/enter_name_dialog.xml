@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="3"
-            android:inputType="textCapCharacters"></com.google.android.material.textfield.TextInputEditText>
+            android:inputType="textCapCharacters"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,20 +31,19 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/start_btn"
+            android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_5"
-            android:text="start"
-            ></Button>
+            android:text="Save"
+            />
 
         <Button
             android:id="@+id/cancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_5"
-            android:text="Cancel"
-            ></Button>
+            android:text="Cancel"/>
     </LinearLayout>
 
 

@@ -1,7 +1,6 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +19,7 @@ import com.example.hyperponggruppb.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var accountText: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,52 +37,72 @@ class MainActivity : AppCompatActivity() {
         val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
 
+        setAccount()
+
+        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
 
         binding.ivNewGame.setOnClickListener {
             if (PlayerManager.name == "null") {
 
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setContentView(R.layout.enter_name_dialog)
-                val nameField = dialog.findViewById<EditText>(R.id.et_enter_name_field)
-                val startBtn = dialog.findViewById<Button>(R.id.start_btn)
-                val cancelBtn = dialog.findViewById<Button>(R.id.cancel_btn)
-
-                startBtn.setOnClickListener {
-
-                    if (nameField.text != null && nameField.text.length == 3) {
-                        PlayerManager.name = nameField.text.toString()
-                        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-                        SoundEffectManager.jukebox(this, 1)
-                        dialog.dismiss()
-                        startActivity(toGameModeOne)
-                    }
-                }
-
-                cancelBtn.setOnClickListener {
-                    dialog.dismiss()
-                }
-
-                dialog.show()
+                nameInput()
+                startActivity(toGameModeOne)
 
             } else {
 
-                val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-                SoundEffectManager.jukebox(this, 1)
                 startActivity(toGameModeOne)
             }
         }
-
 
         binding.ivLeaderboard.setOnClickListener {
             val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
             startActivity(toLeaderboard)
         }
 
+        binding.btnChangeAccount.setOnClickListener {
+            nameInput()
+        }
+
     }
 
+    private fun setAccount(){
 
-    fun scoreBoard() {
+        accountText = if (PlayerManager.name != "null"){
+            getString(R.string.active_account_string) + PlayerManager.name
+        }else{
+            getString(R.string.active_account_string) + "None"
+        }
+        binding.tvActiveAccount.text = accountText
+    }
+
+    private fun nameInput(){
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.enter_name_dialog)
+        val nameField = dialog.findViewById<EditText>(R.id.et_enter_name_field)
+        val saveBtn = dialog.findViewById<Button>(R.id.save_btn)
+        val cancelBtn = dialog.findViewById<Button>(R.id.cancel_btn)
+
+        saveBtn.setOnClickListener {
+
+            if (nameField.text != null && nameField.text.length == 3) {
+                PlayerManager.name = nameField.text.toString()
+                SoundEffectManager.jukebox(this, 1)
+                setAccount()
+                PlayerManager.resetHighScore()
+                PlayerManager.setHighScore()
+                dialog.dismiss()
+            }
+        }
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun scoreBoard() {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

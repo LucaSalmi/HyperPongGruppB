@@ -71,7 +71,7 @@ object PlayerManager {
         orderArray()
     }
 
-    private fun setHighScore() {
+    fun setHighScore() {
 
         for (obj in highScoreArray) {
 
@@ -104,6 +104,10 @@ object PlayerManager {
 
     fun resetPoints() {
         playerPoints = 0
+    }
+
+    fun resetHighScore(){
+        playerHighScore = 0
     }
 
     fun loseLife() {
