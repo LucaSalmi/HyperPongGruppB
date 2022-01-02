@@ -37,20 +37,15 @@ class MainActivity : AppCompatActivity() {
         val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
 
+        if (PlayerManager.name == "null") {
+
+            nameInput()
+        }
+
         setAccount()
 
-        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-
         binding.ivNewGame.setOnClickListener {
-            if (PlayerManager.name == "null") {
-
-                nameInput()
-                startActivity(toGameModeOne)
-
-            } else {
-
-                startActivity(toGameModeOne)
-            }
+           startGame()
         }
 
         binding.ivLeaderboard.setOnClickListener {
@@ -62,6 +57,12 @@ class MainActivity : AppCompatActivity() {
             nameInput()
         }
 
+    }
+
+    private fun startGame(){
+
+        val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
+        startActivity(toGameModeOne)
     }
 
     private fun setAccount(){
@@ -162,8 +163,7 @@ class MainActivity : AppCompatActivity() {
 
         retryBtn.setOnClickListener {
 
-            val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
-            startActivity(toGameModeOne)
+            startGame()
             dialog.dismiss()
         }
 
