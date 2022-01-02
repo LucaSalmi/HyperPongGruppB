@@ -26,6 +26,8 @@ object AssetManager {
     lateinit var brickAssetHardHalfHP: Bitmap
     lateinit var powerUpAssetSpeedUp: Bitmap
     lateinit var powerUpAssetSpeedDown: Bitmap
+    lateinit var powerUpAssetForceUp: Bitmap
+    lateinit var powerUpAssetForceDown: Bitmap
     lateinit var powerUpAssetBigPaddle: Bitmap
     lateinit var powerUpAssetSmallPaddle: Bitmap
     lateinit var powerUpAssetMultiBall: Bitmap

@@ -394,12 +394,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 when (powerUp.typeID) {
 
                     0 -> {
-                        timeTicks = powerUp.speedDown(timeTicks)
+
+                        /*timeTicks = powerUp.speedDown(timeTicks)*/
+                        powerUp.forceBrickDown(infiniteMode.brickRow)
                         restartSpawnTimer()
                         SoundEffectManager.jukebox(context, 3)
                     }
                     1 -> {
-                        timeTicks = powerUp.speedUp(timeTicks)
+                        /*timeTicks = powerUp.speedUp(timeTicks)*/
+                        powerUp.forceBrickUp(infiniteMode.brickRow)
                         restartSpawnTimer()
                         SoundEffectManager.jukebox(context, 2)
                     }
