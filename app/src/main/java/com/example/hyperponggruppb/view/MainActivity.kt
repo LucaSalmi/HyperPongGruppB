@@ -1,11 +1,13 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.LeaderBoardActivity
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var accountText: String = ""
+    var isStoryMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +46,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         setAccount()
+        onClick()
+    }
 
-        binding.ivNewGame.setOnClickListener {
-           startGame()
+    private fun onClick(){
+
+        binding.ivGameMode.setOnClickListener {
+            if (isStoryMode){
+                startStoryMode()
+            }else{
+                startInfinityMode()
+            }
+        }
+
+        binding.btnModeForward.setOnClickListener {
+            isStoryMode = !isStoryMode
+            changeButtonText()
+        }
+
+        binding.btnModeBack.setOnClickListener {
+            isStoryMode = !isStoryMode
+            changeButtonText()
         }
 
         binding.ivLeaderboard.setOnClickListener {
@@ -56,10 +77,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnChangeAccount.setOnClickListener {
             nameInput()
         }
-
     }
 
-    private fun startGame(){
+    private fun changeButtonText(){
+        if (isStoryMode){
+            binding.tvGameMode.text = getString(R.string.txt_story_mode)
+        }else{
+            binding.tvGameMode.text = getText(R.string.txt_infinite_mode)
+        }
+    }
+
+    private fun startStoryMode(){
+        Log.d(TAG, "startStoryMode: working on it")
+    }
+
+    private fun startInfinityMode(){
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         startActivity(toGameModeOne)
@@ -163,7 +195,7 @@ class MainActivity : AppCompatActivity() {
 
         retryBtn.setOnClickListener {
 
-            startGame()
+            startInfinityMode()
             dialog.dismiss()
         }
 
