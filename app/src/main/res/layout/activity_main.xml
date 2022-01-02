@@ -110,7 +110,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/change_account_btn" />
+            android:text="@string/change_account_btn"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/gold"/>
 
 
     </LinearLayout>
