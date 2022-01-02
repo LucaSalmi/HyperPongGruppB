@@ -53,7 +53,7 @@ object AssetManager {
     fun prepareAssets(context: Context){
 
         lavaBackground = BitmapFactory.decodeResource(context.resources,
-            R.drawable.lava_level_background
+            R.drawable.lava_story_bg
         ).scale(getScreenWidth(), getScreenHeight(), true)
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_normal).scale(
             playerwidth,
