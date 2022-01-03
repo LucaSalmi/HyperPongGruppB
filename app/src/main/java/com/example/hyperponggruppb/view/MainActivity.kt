@@ -200,6 +200,7 @@ class MainActivity : AppCompatActivity() {
         leaderboardBtn.setOnClickListener {
 
             val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
+            dialog.dismiss()
             startActivity(toLeaderboard)
         }
 
