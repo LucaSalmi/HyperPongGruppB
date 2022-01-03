@@ -1,25 +1,14 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
 import android.graphics.*
 import android.os.CountDownTimer
-import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.commit
-import com.example.hyperponggruppb.LeaderBoardActivity
-import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PhysicsEngine
 import com.example.hyperponggruppb.controller.PhysicsEngine.gameStart
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -28,7 +17,6 @@ import com.example.hyperponggruppb.controller.BrickStructure
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
-import com.example.hyperponggruppb.view.fragment.GameOneFragment
 import java.lang.System.currentTimeMillis
 
 
@@ -57,11 +45,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var spawnNewRow = false
 
 
-
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.lives = 1
+        PlayerManager.lives = 99
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context)
@@ -76,6 +63,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         override fun onTick(p0: Long) {
             spawnNewRow = true
+            AssetManager.moveBackGround()
         }
 
         override fun onFinish() {
@@ -191,7 +179,11 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasHeight = canvas.height.toFloat()
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
-            canvas.drawBitmap(AssetManager.lavaBackground, matrix, null)
+            canvas.drawBitmap(AssetManager.lavaBackground, AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.iceBackground, AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
+
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
             for (ballObj in infiniteMode.ballsArray) {
@@ -341,8 +333,31 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 }
 
                 draw()
+                checkBackGroundPosition()
                 checkDeath()
             }
+        }
+    }
+
+    private fun checkBackGroundPosition(){
+
+        if (AssetManager.bgRectOne.top > AssetManager.bGHeight){
+
+            AssetManager.bgRectOne.bottom = AssetManager.bgRectTransTwo.top
+            AssetManager.bgRectOne.top = AssetManager.bgRectOne.bottom - AssetManager.bGHeight
+        }
+        if (AssetManager.bgRectTransOne.top > AssetManager.bGHeight){
+            AssetManager.bgRectTransOne.bottom = AssetManager.bgRectOne.top
+            AssetManager.bgRectTransOne.top = AssetManager.bgRectOne.top - AssetManager.transHeight
+        }
+        if (AssetManager.bgRectTwo.top > AssetManager.bGHeight){
+
+            AssetManager.bgRectTwo.bottom = AssetManager.bgRectTransOne.top
+            AssetManager.bgRectTwo.top = AssetManager.bgRectTwo.bottom - AssetManager.bGHeight
+        }
+        if (AssetManager.bgRectTransTwo.top > AssetManager.bGHeight){
+            AssetManager.bgRectTransTwo.bottom = AssetManager.bgRectTwo.top
+            AssetManager.bgRectTransTwo.top = AssetManager.bgRectTwo.top - AssetManager.transHeight
         }
     }
 

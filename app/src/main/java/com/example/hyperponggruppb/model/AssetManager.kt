@@ -4,12 +4,17 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Rect
 import androidx.core.graphics.scale
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.BrickStructure
 
 object AssetManager {
 
     lateinit var lavaBackground: Bitmap
+    lateinit var lavaBackgroundTrans: Bitmap
+    lateinit var iceBackground: Bitmap
+    lateinit var stoneBackground: Bitmap
     lateinit var playerAsset: Bitmap
     lateinit var bigPlayerAsset: Bitmap
     lateinit var smallPlayerAsset: Bitmap
@@ -33,6 +38,12 @@ object AssetManager {
     lateinit var powerUpAssetMultiBall: Bitmap
     lateinit var powerUpAssetHealthPlus: Bitmap
     lateinit var darkRectangleDeathZone: Bitmap
+    val bGHeight = getScreenHeight()
+    val transHeight = getScreenHeight()/2
+    var bgRectOne = Rect(0, 0, getScreenWidth(), bGHeight)
+    var bgRectTransOne = Rect(0, bgRectOne.top - transHeight, getScreenWidth(), bgRectOne.top)
+    var bgRectTwo = Rect(0, bgRectTransOne.top - bGHeight, getScreenWidth(), bgRectTransOne.top)
+    var bgRectTransTwo = Rect(0, bgRectTwo.top - transHeight, getScreenWidth(), bgRectTwo.top)
 
 
     var playerwidth = 200
@@ -55,6 +66,17 @@ object AssetManager {
         lavaBackground = BitmapFactory.decodeResource(context.resources,
             R.drawable.lava_story_bg
         ).scale(getScreenWidth(), getScreenHeight(), true)
+        iceBackground = BitmapFactory.decodeResource(context.resources,
+            R.drawable.ice_level_background
+        ).scale(getScreenWidth(), getScreenHeight(), true)
+        stoneBackground = BitmapFactory.decodeResource(context.resources,
+            R.drawable.cave_background
+        ).scale(getScreenWidth(), getScreenHeight(), true)
+
+        lavaBackgroundTrans = BitmapFactory.decodeResource(context.resources,
+            R.drawable.lava_story_bg
+        ).scale(getScreenWidth(), getScreenHeight()/2, true)
+
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_normal).scale(
             playerwidth,
             playerhight,true )
@@ -134,5 +156,17 @@ object AssetManager {
 
     fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
+    }
+
+    fun moveBackGround(){
+
+        bgRectOne.top += (BrickStructure.bottom /32.5).toInt()
+        bgRectOne.bottom += (BrickStructure.bottom /32.5).toInt()
+        bgRectTransOne.top += (BrickStructure.bottom /32.5).toInt()
+        bgRectTransOne.bottom += (BrickStructure.bottom /32.5).toInt()
+        bgRectTwo.top += (BrickStructure.bottom /32.5).toInt()
+        bgRectTwo.bottom += (BrickStructure.bottom /32.5).toInt()
+        bgRectTransTwo.top += (BrickStructure.bottom /32.5).toInt()
+        bgRectTransTwo.bottom += (BrickStructure.bottom /32.5).toInt()
     }
 }
