@@ -169,4 +169,15 @@ object AssetManager {
         bgRectTransTwo.top += (BrickStructure.bottom /32.5).toInt()
         bgRectTransTwo.bottom += (BrickStructure.bottom /32.5).toInt()
     }
+
+    fun getBackground(id: Int): Bitmap{
+
+        return when (id) {
+
+            1 -> lavaBackground
+            2 -> stoneBackground
+            3 -> iceBackground
+            else -> lavaBackground
+        }
+    }
 }

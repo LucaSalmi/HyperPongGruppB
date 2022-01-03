@@ -44,11 +44,16 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
 
+    var backgroundIdOne = 1
+    var backgroundIdTwo = 2
+
 
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.lives = 99
+        backgroundIdOne = 1
+        backgroundIdTwo = 2
+        PlayerManager.lives = 3
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context)
@@ -179,9 +184,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PhysicsEngine.canvasHeight = canvas.height.toFloat()
             PhysicsEngine.canvasWidth = canvas.width.toFloat()
 
-            canvas.drawBitmap(AssetManager.lavaBackground, AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.getBackground(backgroundIdOne), AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
-            canvas.drawBitmap(AssetManager.iceBackground, AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.getBackground(backgroundIdTwo), AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
 
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
@@ -345,6 +350,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             AssetManager.bgRectOne.bottom = AssetManager.bgRectTransTwo.top
             AssetManager.bgRectOne.top = AssetManager.bgRectOne.bottom - AssetManager.bGHeight
+
+            when (backgroundIdOne){
+                1 -> backgroundIdOne = 3
+                2 -> backgroundIdOne = 1
+                3 -> backgroundIdOne = 2
+            }
+
         }
         if (AssetManager.bgRectTransOne.top > AssetManager.bGHeight){
             AssetManager.bgRectTransOne.bottom = AssetManager.bgRectOne.top
@@ -354,6 +366,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             AssetManager.bgRectTwo.bottom = AssetManager.bgRectTransOne.top
             AssetManager.bgRectTwo.top = AssetManager.bgRectTwo.bottom - AssetManager.bGHeight
+
+            when(backgroundIdTwo){
+                1-> backgroundIdTwo = 3
+                2-> backgroundIdTwo = 1
+                3-> backgroundIdTwo = 2
+            }
+
         }
         if (AssetManager.bgRectTransTwo.top > AssetManager.bGHeight){
             AssetManager.bgRectTransTwo.bottom = AssetManager.bgRectTwo.top
