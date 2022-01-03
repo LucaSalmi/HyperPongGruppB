@@ -11,6 +11,8 @@ object PlayerManager {
 
     var playerPoints = 0
     var playerHighScore = 0
+    var currentLevel = 0
+    var nextLevel = 1
     var lives = 0
     var name = "null"
     var playTime = 0
@@ -125,6 +127,16 @@ object PlayerManager {
 
         highScoreArray.sortBy { it.highScore}
         highScoreArray.reverse()
+    }
+
+    fun setLevel(levelId: Int): Boolean {
+        return if (levelId > nextLevel){
+            false
+        }else{
+            currentLevel = levelId
+            true
+        }
+
     }
 
 
