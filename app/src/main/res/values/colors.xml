@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00F44336</color>
 
-    <color name="faded_black">#33000000</color>
+    <color name="faded_black">#1A000000</color>
     <color name="trans">#00000000</color>
     <color name="gold">#c59508</color>
 </resources>

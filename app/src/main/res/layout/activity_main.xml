@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_pongtropolis"
+    android:background="@drawable/menu_pongtropolis_upgraded"
     tools:context=".view.MainActivity">
 
     <ImageView
         android:id="@+id/title_shadow"
         android:layout_width="0dp"
-        android:layout_height="330dp"
+        android:layout_height="430dp"
         android:background="@color/faded_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

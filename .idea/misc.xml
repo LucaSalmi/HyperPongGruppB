@@ -12,8 +12,11 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/drawable/ic_white_break_logo.xml" value="1.0" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/drawable/splash_logo.xml" value="0.5" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.2" />
-        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_one.xml" value="0.225" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_leader_board.xml" value="0.225" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_splash.xml" value="0.10648148148148148" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_story_mode.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.25" />
@@ -22,14 +25,10 @@
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game_mode1.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_one.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_story_mode.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/enter_name_dialog.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_blank.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_first_world.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_game.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_overworld.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.1721014492753623" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.26721014492753625" />
