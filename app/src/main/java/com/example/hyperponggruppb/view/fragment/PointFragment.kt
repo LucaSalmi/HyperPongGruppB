@@ -13,8 +13,6 @@ import com.example.hyperponggruppb.controller.PlayerManager
 
 class PointFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -16,6 +16,7 @@ import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
+import com.example.hyperponggruppb.model.AssetManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         SoundEffectManager.bGMusic(this)
+        AssetManager.prepareAssets(this)
 
         val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
@@ -90,7 +92,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startStoryMode(){
-        Log.d(TAG, "startStoryMode: working on it")
+
+        val toStoryMode = Intent(this, StoryModeActivity::class.java)
+        startActivity(toStoryMode)
     }
 
     private fun startInfinityMode(){

@@ -82,7 +82,7 @@ class GameManager(var context: Context?){
 
     fun makeAssets(){
 
-        AssetManager.prepareAssets(context!!)
+        //AssetManager.prepareAssets(context!!)
         AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
     }
 
