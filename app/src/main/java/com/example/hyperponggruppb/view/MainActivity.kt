@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var accountText: String = ""
     private var isStoryMode = true
+    var isFirstAccount = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         PlayerManager.readSave(sp)
 
         if (PlayerManager.name == "null") {
-
+            isFirstAccount = true
             nameInput()
         }
 
@@ -130,10 +132,16 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }
+            cancelBtn.setOnClickListener {
 
-        cancelBtn.setOnClickListener {
-            dialog.dismiss()
-        }
+                if (isFirstAccount){
+
+                    PlayerManager.name = "Guest"
+                }
+                dialog.dismiss()
+            }
+
+
 
         dialog.show()
     }
