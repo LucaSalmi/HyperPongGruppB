@@ -16,9 +16,11 @@ object PlayerManager {
     var lives = 0
     var name = "null"
     var playTime = 0
-    var highScoreArray = mutableListOf<PlayerData>()
+    var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
+    var levelScoresArray = mutableListOf(0)
+    var isInfiniteMode = false
 
 
     fun addPoints(newPoints: Int) {
@@ -32,30 +34,32 @@ object PlayerManager {
 
     fun saveHighScore(sp: SharedPreferences?) {
 
-        val save = PlayerData(name, playerPoints, playerHighScore)
+        levelScoresArray.add(currentLevel, playerPoints)
+
+        val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray)
         var isNew = true
 
-        for (obj in highScoreArray){
+        for (obj in usersArray) {
 
-            if (obj.name == save.name){
+            if (obj.name == save.name) {
 
-                if (obj.highScore < save.highScore){
+                if (obj.highScore < save.highScore) {
                     obj.highScore = save.highScore
                 }
                 isNew = false
             }
         }
 
-        if (isNew){
-            highScoreArray.add(save)
+        if (isNew) {
+            usersArray.add(save)
         }
 
         orderArray()
 
-        var saveString = gson.toJson(highScoreArray)
+        var saveString = gson.toJson(usersArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
-        editor?.putString("activeAccount",save.name)
+        editor?.putString("activeAccount", save.name)
         editor?.apply()
     }
 
@@ -65,8 +69,15 @@ object PlayerManager {
         if (load != "null") {
 
             val mutableListPlayerDataType = object : TypeToken<MutableList<PlayerData>>() {}.type
-            highScoreArray = gson.fromJson(load, mutableListPlayerDataType)
+            usersArray = gson.fromJson(load, mutableListPlayerDataType)
             name = sp?.getString("activeAccount", "null")!!
+
+            for (obj in usersArray) {
+                if (obj.name == name) {
+                    levelScoresArray = obj.levelScoresArray
+                    currentLevel = obj.currentLevel
+                }
+            }
             setHighScore()
         }
 
@@ -75,10 +86,16 @@ object PlayerManager {
 
     fun setHighScore() {
 
-        for (obj in highScoreArray) {
+        for (obj in usersArray) {
 
             if (obj.highScore > playerHighScore && obj.name == name) {
-                playerHighScore = obj.highScore
+
+                playerHighScore = if (isInfiniteMode) {
+                    obj.highScore
+                } else {
+                    levelScoresArray[currentLevel]
+
+                }
             }
         }
 
@@ -91,11 +108,11 @@ object PlayerManager {
 
         orderArray()
 
-        Log.d(TAG, "setPlacement: $highScoreArray")
-        
-        for (obj in highScoreArray){
-            
-            if (playerPoints < obj.highScore){
+        Log.d(TAG, "setPlacement: $usersArray")
+
+        for (obj in usersArray) {
+
+            if (playerPoints < obj.highScore) {
                 resultPlacement++
             }
         }
@@ -108,7 +125,7 @@ object PlayerManager {
         playerPoints = 0
     }
 
-    fun resetHighScore(){
+    fun resetHighScore() {
         playerHighScore = 0
     }
 
@@ -123,18 +140,26 @@ object PlayerManager {
 
     }
 
-    fun orderArray(){
+    fun orderArray() {
 
-        highScoreArray.sortBy { it.highScore}
-        highScoreArray.reverse()
+        usersArray.sortBy { it.highScore }
+        usersArray.reverse()
     }
 
     fun setLevel(levelId: Int): Boolean {
-        return if (levelId > nextLevel){
+        return if (levelId > nextLevel) {
             false
-        }else{
+        } else {
             currentLevel = levelId
             true
+        }
+    }
+
+    fun setLevelScore() {
+
+        if (levelScoresArray[nextLevel] < playerPoints) {
+
+            levelScoresArray.add(nextLevel, playerPoints)
         }
 
     }

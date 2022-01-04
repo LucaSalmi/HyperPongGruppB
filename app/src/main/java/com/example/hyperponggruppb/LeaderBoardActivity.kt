@@ -1,15 +1,10 @@
 package com.example.hyperponggruppb
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.databinding.ActivityLeaderBoardBinding
-import android.content.Intent
-
-
 
 
 private lateinit var binding: ActivityLeaderBoardBinding
@@ -22,7 +17,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.leaderboard.layoutManager = LinearLayoutManager(this)
-        val adapter = LeaderboardAdapter(PlayerManager.highScoreArray)
+        val adapter = LeaderboardAdapter(PlayerManager.usersArray)
         binding.leaderboard.adapter = adapter
     }
 }

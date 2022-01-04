@@ -53,8 +53,8 @@ SurfaceHolder.Callback, Runnable {
 
                     ballInteractions()
                     checkDamage()
-
                     playerAndBrickInteractions()
+                    checkLevelCompleted()
                 }
 
                 draw()
@@ -235,6 +235,16 @@ SurfaceHolder.Callback, Runnable {
             PhysicsEngine.gameStart = false
             storyMode.respawnBall()
 
+        }
+    }
+
+    private fun checkLevelCompleted(){
+
+        if (storyMode.brickRow.isEmpty()){
+            //level cleared
+            PlayerManager.saveHighScore(sp)
+            PhysicsEngine.gameStart = false
+            storyMode.clearArrays()
         }
     }
 

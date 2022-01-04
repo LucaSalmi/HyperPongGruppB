@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.model.GameManager
 
 
 class PointFragment : Fragment() {
@@ -22,10 +23,10 @@ class PointFragment : Fragment() {
         val highScoreView = view?.findViewById<TextView>(R.id.tv_frag_hs_points)
         val speedMeterView = view?.findViewById<ImageView>(R.id.iv_frag_speed)
         pointsView?.text = PlayerManager.playerPoints.toString()
+
         highScoreView?.text = PlayerManager.playerHighScore.toString()
 
         var lifes = view?.findViewById<ImageView>(R.id.iv_frag_coolant)
-
 
         when {
             PlayerManager.lives >= 3 -> {

@@ -92,12 +92,14 @@ class MainActivity : AppCompatActivity() {
     private fun startStoryMode(){
 
         val toStoryMode = Intent(this, StoryModeActivity::class.java)
+        PlayerManager.isInfiniteMode = false
         startActivity(toStoryMode)
     }
 
     private fun startInfinityMode(){
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
+        PlayerManager.isInfiniteMode = true
         startActivity(toGameModeOne)
     }
 

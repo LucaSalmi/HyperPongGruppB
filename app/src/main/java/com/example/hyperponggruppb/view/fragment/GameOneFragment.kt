@@ -10,8 +10,6 @@ import com.example.hyperponggruppb.view.GameView
 
 class GameOneFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,6 +17,4 @@ class GameOneFragment : Fragment() {
 
         return activity?.applicationContext?.let { GameView(super.getContext(), activity!!) }
     }
-
-
 }
