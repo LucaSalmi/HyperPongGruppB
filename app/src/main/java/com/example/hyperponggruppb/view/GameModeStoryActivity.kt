@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.databinding.ActivityGameModeStoryBinding
 import com.example.hyperponggruppb.view.fragment.PointFragment
 import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
 
 class GameModeStoryActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityGameModeStoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_mode_story)
+        binding = ActivityGameModeStoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setFragments()
 
     }
@@ -20,8 +24,8 @@ class GameModeStoryActivity : AppCompatActivity() {
     private fun setFragments(){
 
         supportFragmentManager.commit {
-            add(R.id.score_fragment_container, PointFragment())
-            add(R.id.gameViewContainer, StoryLevelFragment())
+            add(R.id.score_fragment_container_story, PointFragment())
+            add(R.id.story_view_container, StoryLevelFragment())
         }
     }
 
@@ -32,7 +36,7 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
 
                 supportFragmentManager.commit {
-                    replace(R.id.frame_layout, PointFragment())
+                    replace(R.id.score_fragment_container_story, PointFragment())
                 }
 
             }catch (e: Exception){

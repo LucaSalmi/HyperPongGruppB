@@ -7,8 +7,9 @@ import android.graphics.Rect
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
+import com.example.hyperponggruppb.controller.PlayerManager
 
-class GameManager(var context: Context?){
+class GameManager(var context: Context?, var isStoryMode: Boolean){
 
     var brickRow = mutableListOf<Rect>()
     var brickAssets = mutableListOf<Bitmap>()
@@ -16,8 +17,9 @@ class GameManager(var context: Context?){
     var powerUpArray = mutableListOf<PowerUp>()
     lateinit var ball: Ball
     lateinit var extraBall: Ball
-    val ballRadius = 20f
+    private val ballRadius = 20f
     lateinit var player: Player
+    var patternId = 0
 
     init {
         clearArrays()
@@ -63,7 +65,7 @@ class GameManager(var context: Context?){
         ballsArray.add(extraBall)
     }
 
-    fun makeBricks(){
+    private fun makeBricks() {
 
         val brickwidth = (AssetManager.getScreenWidth() / 10) - 4
         val brickheight = (brickwidth * 0.6).toInt()
@@ -76,14 +78,23 @@ class GameManager(var context: Context?){
         AssetManager.brickheight = brickheight
 
         BrickStructure.makeInboundsBricks(brickRow)
-        brickRow = BrickStructure.createPattern(brickRow, RandomNumberGenerator.rNG(0,2))
-        BrickStructure.makeOOBBricks(brickRow)
+
+        patternId = if (!isStoryMode){
+            RandomNumberGenerator.rNG(0,13)
+        }else{
+            PlayerManager.currentLevel - 1
+        }
+        brickRow = BrickStructure.createPattern(brickRow, patternId)
+
+        if(!isStoryMode){
+            BrickStructure.makeOOBBricks(brickRow)
+        }
+
     }
 
-    fun makeAssets(){
+    private fun makeAssets(){
 
-        //AssetManager.prepareAssets(context!!)
-        AssetManager.fillAssetArray(brickAssets, brickRow.size, 1)
+        AssetManager.fillAssetArray(brickAssets, brickRow.size, patternId)
     }
 
     fun clearArrays(){

@@ -30,7 +30,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     private lateinit var canvas: Canvas
     private var infiniteMode: GameManager
     var mHolder: SurfaceHolder? = holder
-    var isCollisionDetected = false
     private val myActivity = context as GameModeOneActivity
     private val sp =
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
@@ -56,7 +55,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         PlayerManager.lives = 3
         PlayerManager.resetPoints()
         myActivity.updateText()
-        infiniteMode = GameManager(context)
+        infiniteMode = GameManager(context, false)
     }
 
     /**
@@ -169,7 +168,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         if (PlayerManager.lives > 0 && gameStart) {
 
             gameStart = false
-            isCollisionDetected = false
             infiniteMode.respawnBall()
 
         }
@@ -408,7 +406,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 infiniteMode.brickAssets,
                 ballObj,
                 infiniteMode.powerUpArray,
-                context
+                context,
+                infiniteMode
             )
         }
     }

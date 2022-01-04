@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Rect
 import android.util.Log
 import com.example.hyperponggruppb.model.Ball
+import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object PhysicsEngine {
@@ -24,7 +25,8 @@ object PhysicsEngine {
         brickAssets: MutableList<Bitmap>,
         ball: Ball,
         powerUpArray: MutableList<PowerUp>,
-        context: Context
+        context: Context,
+        gameManager: GameManager
     ) {
 
         var toRemove = BrickStructure.totalSumOfBricks + 1
@@ -39,7 +41,7 @@ object PhysicsEngine {
             }
         }
 
-        if (ball.brickCollision) {
+        if (ball.brickCollision && !gameManager.isStoryMode) {
 
             if (RandomNumberGenerator.rNG(1, 8) == 2) {
 
@@ -132,7 +134,10 @@ object PhysicsEngine {
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
 
                         if (ball.ballPosY < brickHit.bottom && ball.ballPosY > brickHit.top) { // om bollens y-axel är mindre än botten
-                            Log.d(TAG, "BallPhysics: sides") // och större än top, dvs att bollen befinner sig MELLAN brickens TOP och BOTTEN.
+                            Log.d(
+                                TAG,
+                                "BallPhysics: sides"
+                            ) // och större än top, dvs att bollen befinner sig MELLAN brickens TOP och BOTTEN.
                             if (ball.ballSpeedX <= 0) {
                                 ball.ballPosX += 9f
                                 if (ball.ballSpeedX < -13) {
