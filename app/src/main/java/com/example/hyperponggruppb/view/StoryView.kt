@@ -234,17 +234,17 @@ SurfaceHolder.Callback, Runnable {
 
             PhysicsEngine.gameStart = false
             storyMode.respawnBall()
-
         }
     }
 
     private fun checkLevelCompleted(){
 
         if (storyMode.brickRow.isEmpty()){
-            //level cleared
+            PlayerManager.setLevelScore()
             PlayerManager.saveHighScore(sp)
             PhysicsEngine.gameStart = false
             storyMode.clearArrays()
+            myActivity.finish()
         }
     }
 

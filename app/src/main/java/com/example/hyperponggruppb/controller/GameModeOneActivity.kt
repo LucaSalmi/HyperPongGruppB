@@ -53,4 +53,9 @@ class GameModeOneActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onBackPressed() {
+        PhysicsEngine.gameStart = false
+        super.onBackPressed()
+    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.PhysicsEngine
 import com.example.hyperponggruppb.databinding.ActivityGameModeStoryBinding
 import com.example.hyperponggruppb.view.fragment.PointFragment
 import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
@@ -44,5 +45,10 @@ class GameModeStoryActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onBackPressed() {
+        PhysicsEngine.gameStart = false
+        super.onBackPressed()
     }
 }

@@ -19,7 +19,7 @@ object PlayerManager {
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
-    var levelScoresArray = mutableListOf(0)
+    private var levelScoresArray = mutableListOf<Int>()
     var isInfiniteMode = false
 
 
@@ -90,8 +90,12 @@ object PlayerManager {
 
             if (obj.highScore > playerHighScore && obj.name == name) {
 
-                playerHighScore = obj.highScore
+                playerHighScore = if (isInfiniteMode) {
+                    obj.highScore
+                } else {
+                    levelScoresArray[levelScoresArray.size-1]
 
+                }
             }
         }
 
@@ -152,8 +156,10 @@ object PlayerManager {
     }
 
     fun setLevelScore() {
+        if (levelScoresArray.isEmpty()){
+            levelScoresArray.add(playerPoints)
 
-        if (levelScoresArray[nextLevel] < playerPoints) {
+        }else if (levelScoresArray[currentLevel-1] < playerPoints) {
 
             levelScoresArray.add(nextLevel, playerPoints)
         }
