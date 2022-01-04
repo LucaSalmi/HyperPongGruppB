@@ -240,6 +240,9 @@ SurfaceHolder.Callback, Runnable {
     private fun checkLevelCompleted(){
 
         if (storyMode.brickRow.isEmpty()){
+            PlayerManager.unlockNextLevel()
+            Log.d(TAG, "${PlayerManager.nextLevel}")
+            Log.d(TAG, "${PlayerManager.currentLevel}")
             PlayerManager.setLevelScore()
             PlayerManager.saveHighScore(sp)
             PhysicsEngine.gameStart = false
@@ -249,7 +252,8 @@ SurfaceHolder.Callback, Runnable {
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
-        Log.d(TAG, "start: storyView works")
+        Log.d(TAG, "${PlayerManager.nextLevel}")
+        Log.d(TAG, "${PlayerManager.currentLevel}")
         start()
     }
 

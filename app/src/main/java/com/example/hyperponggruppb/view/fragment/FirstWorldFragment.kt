@@ -35,14 +35,14 @@ class FirstWorldFragment : Fragment() {
 
         levelOne?.setOnClickListener {
             if (checkUnlock(1)){
-                enterLevelScreen()
+                enterLevelScreen(1)
 
                 //startLevel()
             }
         }
         levelTwo?.setOnClickListener {
             if (checkUnlock(2)){
-                enterLevelScreen()
+                enterLevelScreen(2)
                 //startLevel()
             }else{
                 toaster()
@@ -50,7 +50,7 @@ class FirstWorldFragment : Fragment() {
         }
         levelThree?.setOnClickListener {
             if (checkUnlock(3)){
-                enterLevelScreen()
+                enterLevelScreen(3)
                 //startLevel()
             }else{
                 toaster()
@@ -58,7 +58,7 @@ class FirstWorldFragment : Fragment() {
         }
         levelFour?.setOnClickListener {
             if (checkUnlock(4)){
-                enterLevelScreen()
+                enterLevelScreen(4)
                 //startLevel()
             }else{
                 toaster()
@@ -66,7 +66,7 @@ class FirstWorldFragment : Fragment() {
         }
         levelFive?.setOnClickListener {
             if (checkUnlock(5)){
-                enterLevelScreen()
+                enterLevelScreen(5)
                 //startLevel()
             }else{
                 toaster()
@@ -77,7 +77,7 @@ class FirstWorldFragment : Fragment() {
     /**
      * creates the scoreboard to show the player their high score and their position in the leaderboard, it also links directly to the full scoreboard, the main menu and restarts the game.
      */
-    private fun enterLevelScreen() {
+    private fun enterLevelScreen(levelId: Int) {
         val dialog = activity?.applicationContext.let { super.getContext()
             ?.let { it1 -> Dialog(it1) } }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -102,7 +102,7 @@ class FirstWorldFragment : Fragment() {
 
                         // HÄR ÄR JAG HUEHUEHUEHUEHUEH
 
-        when (PlayerManager.currentLevel) {
+        when (levelId) {
             1 -> {
                 screenLevelID.setText(R.string.level_one)
                 screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln

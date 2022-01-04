@@ -21,6 +21,7 @@ object PlayerManager {
     var isGameEnded = false
     private var levelScoresArray = mutableListOf<Int>()
     var isInfiniteMode = false
+    var isReplaying = false
 
 
     fun addPoints(newPoints: Int) {
@@ -34,8 +35,6 @@ object PlayerManager {
 
     fun saveHighScore(sp: SharedPreferences?) {
 
-        //levelScoresArray.add(currentLevel, playerPoints)
-
         val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray)
         var isNew = true
 
@@ -46,6 +45,12 @@ object PlayerManager {
                 if (obj.highScore < save.highScore) {
                     obj.highScore = save.highScore
                 }
+                if (currentLevel> obj.currentLevel){
+
+                    obj.currentLevel = currentLevel
+                }
+
+                obj.levelScoresArray = levelScoresArray
                 isNew = false
             }
         }
@@ -73,11 +78,16 @@ object PlayerManager {
             name = sp?.getString("activeAccount", "null")!!
 
             for (obj in usersArray) {
+
                 if (obj.name == name) {
                     levelScoresArray = obj.levelScoresArray
                     currentLevel = obj.currentLevel
+                    nextLevel = obj.currentLevel + 1
                 }
             }
+            Log.d(TAG, "users: $usersArray")
+            Log.d(TAG, "current: $currentLevel")
+            Log.d(TAG, "next: $nextLevel")
             setHighScore()
         }
 
@@ -94,11 +104,9 @@ object PlayerManager {
                     obj.highScore
                 } else {
                     levelScoresArray[levelScoresArray.size-1]
-
                 }
             }
         }
-
         orderArray()
     }
 
@@ -147,24 +155,46 @@ object PlayerManager {
     }
 
     fun setLevel(levelId: Int): Boolean {
+
         return if (levelId > nextLevel) {
+
             false
+
         } else {
-            currentLevel = levelId
+
+            if (currentLevel < levelId){
+                currentLevel = levelId
+
+            }else{
+
+                isReplaying = true
+            }
             true
         }
     }
 
     fun setLevelScore() {
-        if (levelScoresArray.isEmpty()){
+
+        if (levelScoresArray.isEmpty() || levelScoresArray.size < nextLevel){
             levelScoresArray.add(playerPoints)
 
         }else if (levelScoresArray[currentLevel-1] < playerPoints) {
 
             levelScoresArray.add(nextLevel, playerPoints)
         }
-
     }
 
+    fun unlockNextLevel(){
+
+        if (isReplaying){
+
+            isReplaying = false
+
+        }else{
+
+            nextLevel++
+        }
+
+    }
 
 }
