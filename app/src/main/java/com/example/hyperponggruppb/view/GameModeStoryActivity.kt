@@ -25,6 +25,7 @@ class GameModeStoryActivity : AppCompatActivity() {
         }
     }
 
+
     fun updateText() {
 
         runOnUiThread(Runnable {
