@@ -9,6 +9,7 @@ import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityStoryModeBinding
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.example.hyperponggruppb.view.fragment.PointFragment
+import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
 import java.lang.Exception
 
 class StoryModeActivity : AppCompatActivity() {
@@ -25,24 +26,4 @@ class StoryModeActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPointsFragment(){
-
-        supportFragmentManager.commit {
-            add(R.id.score_fragment_container,PointFragment())
-        }
-    }
-
-    fun updateText() {
-
-        runOnUiThread(Runnable {
-            try {
-                supportFragmentManager.commit {
-                    replace(R.id.frame_layout, PointFragment())
-                }
-            }catch (e: Exception){
-                Log.e(ContentValues.TAG, "updateText: caught")
-            }
-
-        })
-    }
 }

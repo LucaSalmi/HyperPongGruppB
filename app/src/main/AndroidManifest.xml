@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
         <activity
+            android:name=".view.GameModeStoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.StoryModeActivity"
             android:exported="false" />
         <activity

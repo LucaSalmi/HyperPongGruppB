@@ -1,20 +1,16 @@
 package com.example.hyperponggruppb.view.fragment
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.view.GameView
-import com.example.hyperponggruppb.view.MainActivity
+import com.example.hyperponggruppb.view.GameModeStoryActivity
 
 class FirstWorldFragment : Fragment() {
 
@@ -71,7 +67,7 @@ class FirstWorldFragment : Fragment() {
     }
 
     private fun startLevel(){
-        val toLevel = Intent(super.getContext(), MainActivity::class.java)
+        val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
         startActivity(toLevel)
     }
 
