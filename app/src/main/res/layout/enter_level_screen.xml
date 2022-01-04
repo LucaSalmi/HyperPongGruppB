@@ -5,7 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@color/white">
+    android:background="@drawable/enter_level_bg">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/character_black_bg_fade"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/score_layout"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -20,24 +29,28 @@
             android:id="@+id/iv_level_return"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/speed_minus_simple" />
+            android:layout_weight="2"
+            android:padding="22dp"
+            app:srcCompat="@drawable/exit_symbol"/>
 
         <TextView
             android:id="@+id/tv_level_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:gravity="center"
+            android:gravity="center_horizontal"
+            android:paddingTop="33dp"
             android:text="Level 1"
+            android:textColor="@color/white"
             android:textSize="50sp" />
 
         <ImageView
             android:id="@+id/iv_level_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/speed_plus_simple" />
+            android:layout_weight="2"
+            android:padding="22dp"
+            app:srcCompat="@drawable/play_symbol" />
     </LinearLayout>
 
     <ImageView
@@ -47,40 +60,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/two_coolant" />
+        app:srcCompat="@drawable/starframe" />
 
     <LinearLayout
         android:id="@+id/score_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
+        android:background="@drawable/character_black_bg_fade"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_star_progress">
 
         <TextView
             android:id="@+id/tv_level_score"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Your Score:"
+            android:textColor="@color/white"
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/tv_level_score_result"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="999 points"
+            android:text="999 P"
+            android:textColor="@color/white"
             android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/score_layout">
 
@@ -89,13 +107,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:padding="15dp"
             app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <ImageView
             android:id="@+id/iv_level_character"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="2"
             app:srcCompat="@drawable/player_pad_normal" />
 
         <ImageView
@@ -103,6 +122,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:padding="15dp"
             app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
     </LinearLayout>
 
@@ -111,6 +131,9 @@
         android:layout_height="100dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <ImageView
@@ -118,27 +141,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/multiball_plus_simple" />
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/multiball_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/hyper_ball" />
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/locked_gun_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/hp_plus_simple" />
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/locked_shield_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/heart" />
+            app:srcCompat="@drawable/locked_button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
