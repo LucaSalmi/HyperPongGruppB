@@ -170,6 +170,14 @@ object AssetManager {
         bgRectTransTwo.bottom += (BrickStructure.bottom /32.5).toInt()
     }
 
+    fun resetBackGround(){
+
+        bgRectOne = Rect(0, 0, getScreenWidth(), bGHeight)
+        bgRectTransOne = Rect(0, bgRectOne.top - transHeight, getScreenWidth(), bgRectOne.top)
+        bgRectTwo = Rect(0, bgRectTransOne.top - bGHeight, getScreenWidth(), bgRectTransOne.top)
+        bgRectTransTwo = Rect(0, bgRectTwo.top - transHeight, getScreenWidth(), bgRectTwo.top)
+    }
+
     fun getBackground(id: Int): Bitmap{
 
         return when (id) {

@@ -162,6 +162,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.isGameEnded = true
             spawnTimer.cancel()
             powerUpTimer.cancel()
+            AssetManager.resetBackGround()
             myActivity.finish()
         }
 

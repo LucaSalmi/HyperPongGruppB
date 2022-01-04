@@ -17,6 +17,7 @@ import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 import android.os.Build
 import android.util.Log
 import android.view.View
+import com.example.hyperponggruppb.model.AssetManager
 import java.lang.Exception
 
 
@@ -56,6 +57,7 @@ class GameModeOneActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         PhysicsEngine.gameStart = false
+        AssetManager.resetBackGround()
         super.onBackPressed()
     }
 }
