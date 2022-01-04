@@ -34,7 +34,7 @@ object PlayerManager {
 
     fun saveHighScore(sp: SharedPreferences?) {
 
-        levelScoresArray.add(currentLevel, playerPoints)
+        //levelScoresArray.add(currentLevel, playerPoints)
 
         val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray)
         var isNew = true
@@ -90,12 +90,8 @@ object PlayerManager {
 
             if (obj.highScore > playerHighScore && obj.name == name) {
 
-                playerHighScore = if (isInfiniteMode) {
-                    obj.highScore
-                } else {
-                    levelScoresArray[currentLevel]
+                playerHighScore = obj.highScore
 
-                }
             }
         }
 
