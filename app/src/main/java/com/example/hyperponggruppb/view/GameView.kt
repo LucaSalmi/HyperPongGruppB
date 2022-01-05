@@ -195,8 +195,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                 ballObj.draw(canvas)
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
-                    ballObj.ballPosX - 20,
-                    ballObj.ballPosY - 20,
+                    ballObj.ballLeft.toFloat(),
+                    ballObj.ballTop.toFloat(),
                     null
                 )
             }
@@ -284,8 +284,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         if (!gameStart) {
 
-            infiniteMode.ball.ballPosX = infiniteMode.player.right - infiniteMode.player.playerWidth / 2
-            infiniteMode.ball.ballPosY = infiniteMode.player.top - infiniteMode.ball.radius
+            infiniteMode.ball.ballLeft = ((infiniteMode.player.right - infiniteMode.player.playerWidth / 2) - infiniteMode.ball.ballsize/2).toInt()
+            infiniteMode.ball.ballRight = ((infiniteMode.player.right - infiniteMode.player.playerWidth / 2) + infiniteMode.ball.ballsize/2).toInt()
+            infiniteMode.ball.ballTop = (infiniteMode.player.top - infiniteMode.ball.ballsize).toInt()
+            infiniteMode.ball.ballBottom = (infiniteMode.player.top).toInt()
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !gameStart) {

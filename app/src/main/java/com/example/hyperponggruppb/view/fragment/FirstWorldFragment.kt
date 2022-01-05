@@ -1,23 +1,17 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
-import com.example.hyperponggruppb.LeaderBoardActivity
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.view.GameModeStoryActivity
-import com.example.hyperponggruppb.view.GameView
-import com.example.hyperponggruppb.view.MainActivity
-import com.example.hyperponggruppb.view.StoryView
 
 class FirstWorldFragment : Fragment() {
 
@@ -87,7 +81,7 @@ class FirstWorldFragment : Fragment() {
         val startLevelBtn = dialog.findViewById(R.id.iv_level_start) as ImageView
         var screenLevelID = dialog.findViewById(R.id.tv_level_id) as TextView
 
-        val starProgressResult = dialog.findViewById(R.id.iv_star_progress) as ImageView
+        val starProgressResult = dialog.findViewById(R.id.iv_star_progress_holder) as ImageView
         val screenLevelScore = dialog.findViewById(R.id.tv_level_score) as TextView
         val screenLevelScoreResult = dialog.findViewById(R.id.tv_level_score_result) as TextView
 
@@ -105,7 +99,7 @@ class FirstWorldFragment : Fragment() {
         when (levelId) {
             1 -> {
                 screenLevelID.setText(R.string.level_one)
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+               // screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
             2 -> {
                 screenLevelID.setText(R.string.level_two)
@@ -187,9 +181,9 @@ class FirstWorldFragment : Fragment() {
         return PlayerManager.setLevel(levelId)
     }
 
-    private fun checkPoints(levelId: Int): String {
+    /*private fun checkPoints(levelId: Int): String {
          return PlayerManager.levelScoresArray[levelId - 1].toString()
-    }
+    }*/
 
     private fun startLevel(){
         val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)

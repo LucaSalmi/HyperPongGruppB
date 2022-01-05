@@ -77,8 +77,8 @@ SurfaceHolder.Callback, Runnable {
                 ballObj.draw(canvas)
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
-                    ballObj.ballPosX - 20,
-                    ballObj.ballPosY - 20,
+                    ballObj.ballLeft.toFloat(),
+                    ballObj.ballTop.toFloat(),
                     null
                 )
             }
@@ -166,8 +166,10 @@ SurfaceHolder.Callback, Runnable {
 
         if (!PhysicsEngine.gameStart) {
 
-            storyMode.ball.ballPosX = storyMode.player.right - storyMode.player.playerWidth / 2
-            storyMode.ball.ballPosY = storyMode.player.top - storyMode.ball.radius
+            storyMode.ball.ballLeft = ((storyMode.player.right - storyMode.player.playerWidth / 2) - storyMode.ball.ballsize/2).toInt()
+            storyMode.ball.ballRight = ((storyMode.player.right - storyMode.player.playerWidth / 2) + storyMode.ball.ballsize/2).toInt()
+            storyMode.ball.ballTop = (storyMode.player.top - storyMode.ball.ballsize).toInt()
+            storyMode.ball.ballBottom = (storyMode.player.top).toInt()
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !PhysicsEngine.gameStart) {
