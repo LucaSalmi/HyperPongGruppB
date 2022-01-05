@@ -30,7 +30,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:padding="22dp"
+            android:padding="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/exit_symbol"/>
 
         <TextView
@@ -42,14 +44,16 @@
             android:paddingTop="33dp"
             android:text="Level 1"
             android:textColor="@color/white"
-            android:textSize="50sp" />
+            android:textSize="40sp" />
 
         <ImageView
             android:id="@+id/iv_level_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:padding="22dp"
+            android:padding="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/play_symbol" />
     </LinearLayout>
 
@@ -65,41 +69,44 @@
     <LinearLayout
         android:id="@+id/score_layout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
+        android:gravity="center"
         android:background="@drawable/character_black_bg_fade"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_star_progress">
 
         <TextView
             android:id="@+id/tv_level_score"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Your Score:"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="20dp"
+            android:text="Score:"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_level_score_result"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="999 P"
+            android:layout_marginEnd="60dp"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_layout">
 
         <ImageView
@@ -128,36 +135,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <ImageView
             android:id="@+id/iv_level_loadout_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/multiball_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/locked_gun_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/locked_shield_button" />
 
         <ImageView
