@@ -19,7 +19,7 @@ object PlayerManager {
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
-    private var levelScoresArray = mutableListOf<Int>()
+    var levelScoresArray = mutableListOf<Int>()
     var isInfiniteMode = false
     var isReplaying = false
 
@@ -88,7 +88,6 @@ object PlayerManager {
             Log.d(TAG, "users: $usersArray")
             Log.d(TAG, "current: $currentLevel")
             Log.d(TAG, "next: $nextLevel")
-            setHighScore()
         }
 
         orderArray()
@@ -108,6 +107,10 @@ object PlayerManager {
             }
         }
         orderArray()
+    }
+
+    fun setLevelHIghScore(){
+
     }
 
     fun setPlacement(): Int {

@@ -2,6 +2,7 @@ package com.example.hyperponggruppb.view
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var accountText: String = ""
     private var isStoryMode = true
     var isFirstAccount = false
+    private lateinit var sp: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         SoundEffectManager.bGMusic(this)
         AssetManager.prepareAssets(this)
 
-        val sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
+        sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
 
         if (PlayerManager.name == "null") {
@@ -100,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
+        PlayerManager.setHighScore()
         startActivity(toGameModeOne)
     }
 
@@ -131,6 +134,7 @@ class MainActivity : AppCompatActivity() {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(this, 1)
                 setAccount()
+                PlayerManager.saveHighScore(sp)
                 PlayerManager.resetHighScore()
                 PlayerManager.setHighScore()
                 dialog.dismiss()

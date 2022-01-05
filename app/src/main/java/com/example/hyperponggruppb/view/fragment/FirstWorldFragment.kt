@@ -105,7 +105,7 @@ class FirstWorldFragment : Fragment() {
         when (levelId) {
             1 -> {
                 screenLevelID.setText(R.string.level_one)
-                screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
             2 -> {
                 screenLevelID.setText(R.string.level_two)
@@ -185,6 +185,10 @@ class FirstWorldFragment : Fragment() {
 
     private fun checkUnlock(levelId: Int): Boolean{
         return PlayerManager.setLevel(levelId)
+    }
+
+    private fun checkPoints(levelId: Int): String {
+         return PlayerManager.levelScoresArray[levelId - 1].toString()
     }
 
     private fun startLevel(){
