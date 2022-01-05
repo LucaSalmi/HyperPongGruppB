@@ -13,10 +13,11 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.example.hyperponggruppb.controller.PhysicsEngine
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
 
-class StoryView(context: Context?, var activity: Activity) : SurfaceView(context),
+class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
 SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null

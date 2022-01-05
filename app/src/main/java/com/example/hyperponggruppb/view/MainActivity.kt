@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         }, 2000)
 
         setContentView(binding.root)
-        SoundEffectManager.bGMusic(this)
         AssetManager.prepareAssets(this)
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
@@ -56,6 +55,9 @@ class MainActivity : AppCompatActivity() {
     private fun onClick(){
 
         binding.ivGameMode.setOnClickListener {
+            
+            SoundEffectManager.stopMusic()
+            
             if (isStoryMode){
                 startStoryMode()
             }else{
@@ -231,6 +233,8 @@ class MainActivity : AppCompatActivity() {
             PlayerManager.isGameEnded = false
             scoreBoard()
         }
+        
+        SoundEffectManager.musicSetup(this)
         super.onResume()
     }
 

@@ -31,6 +31,7 @@ class GameModeOneActivity : AppCompatActivity() {
         binding = ActivityGameModeOneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        SoundEffectManager.setupBGMusic(this, 1)
 
         supportFragmentManager.commit {
             add(R.id.frame_layout, PointFragment())
@@ -58,6 +59,7 @@ class GameModeOneActivity : AppCompatActivity() {
     override fun onBackPressed() {
         PhysicsEngine.gameStart = false
         AssetManager.resetBackGround()
+        SoundEffectManager.stopMusic()
         super.onBackPressed()
     }
 }

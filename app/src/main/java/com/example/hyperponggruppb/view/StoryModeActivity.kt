@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.databinding.ActivityStoryModeBinding
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.example.hyperponggruppb.view.fragment.PointFragment
@@ -20,6 +21,8 @@ class StoryModeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        SoundEffectManager.setupBGMusic(this, 1)
 
         supportFragmentManager.commit {
             add(R.id.gameViewContainer, FirstWorldFragment())
