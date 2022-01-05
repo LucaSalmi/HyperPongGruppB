@@ -241,6 +241,7 @@ SurfaceHolder.Callback, Runnable {
     private fun checkLevelCompleted(){
 
         if (storyMode.brickRow.isEmpty()){
+
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)

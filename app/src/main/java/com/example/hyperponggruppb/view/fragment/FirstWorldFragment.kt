@@ -179,7 +179,6 @@ class FirstWorldFragment : Fragment() {
             startLevel()
         }
 
-
         dialog.show()
         dialog.window?.setBackgroundDrawableResource(R.color.trans)
     }

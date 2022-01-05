@@ -151,7 +151,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
     }
 
     /**
