@@ -8,13 +8,12 @@ object SoundEffectManager {
     var soundEffectPlayer: MediaPlayer? = null
     var backgroundPlayer: MediaPlayer? = null
 
-    fun musicSetup(context: Context) {
-
-        setupBGMusic(context, 0)
+    fun musicSetup(context: Context, trackId: Int) {
+        setupBGMusic(context, trackId)
         playBGMusic()
     }
 
-    fun playBGMusic() {
+    private fun playBGMusic() {
 
         if (backgroundPlayer != null) {
 
@@ -26,7 +25,7 @@ object SoundEffectManager {
         }
     }
 
-    fun setupBGMusic(context: Context, trackId: Int) {
+    private fun setupBGMusic(context: Context, trackId: Int) {
 
         var resID = when (trackId) {
             0 -> context.resources.getIdentifier(
@@ -36,6 +35,26 @@ object SoundEffectManager {
             )
             1 -> context.resources.getIdentifier(
                 "crystal_cave_ambience",
+                "raw",
+                context.packageName
+            )
+            2 -> context.resources.getIdentifier(
+                "theme_part_1",
+                "raw",
+                context.packageName
+            )
+            3 -> context.resources.getIdentifier(
+                "theme_part_2",
+                "raw",
+                context.packageName
+            )
+            4 -> context.resources.getIdentifier(
+                "theme_part_3",
+                "raw",
+                context.packageName
+            )
+            5 -> context.resources.getIdentifier(
+                "theme_part_4",
                 "raw",
                 context.packageName
             )
@@ -99,6 +118,6 @@ object SoundEffectManager {
         soundEffectPlayer = MediaPlayer.create(context, resID)
         soundEffectPlayer?.start()
 
-
     }
+
 }

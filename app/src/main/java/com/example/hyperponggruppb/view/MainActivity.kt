@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
             scoreBoard()
         }
         
-        SoundEffectManager.musicSetup(this)
+        SoundEffectManager.musicSetup(this, 0)
         super.onResume()
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
+import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
@@ -46,6 +47,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var backgroundIdOne = 1
     var backgroundIdTwo = 2
 
+    var sound1: MediaPlayer? = null
+    var sound2: MediaPlayer? = null
+
 
     init {
 
@@ -56,6 +60,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context, false)
+        SoundEffectManager.musicSetup(context!!,1)
+
     }
 
     /**

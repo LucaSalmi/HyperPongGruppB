@@ -22,7 +22,7 @@ class StoryModeActivity : AppCompatActivity() {
         binding = ActivityStoryModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SoundEffectManager.setupBGMusic(this, 1)
+        SoundEffectManager.musicSetup(this, 1)
 
         supportFragmentManager.commit {
             add(R.id.gameViewContainer, FirstWorldFragment())
