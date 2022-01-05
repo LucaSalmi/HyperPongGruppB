@@ -109,19 +109,19 @@ class FirstWorldFragment : Fragment() {
             }
             2 -> {
                 screenLevelID.setText(R.string.level_two)
-                screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
             3 -> {
                 screenLevelID.setText(R.string.level_three)
-                screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
             4 -> {
                 screenLevelID.setText(R.string.level_four)
-                screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
             5 -> {
                 screenLevelID.setText(R.string.level_five)
-                screenLevelScoreResult.setText("99") // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
             }
         }
 
@@ -175,6 +175,7 @@ class FirstWorldFragment : Fragment() {
 
         startLevelBtn.setOnClickListener {
             // put this button to start level  of selected level
+            dialog.dismiss()
             startLevel()
         }
 
@@ -188,7 +189,12 @@ class FirstWorldFragment : Fragment() {
     }
 
     private fun checkPoints(levelId: Int): String {
-         return PlayerManager.levelScoresArray[levelId - 1].toString()
+
+        return if (PlayerManager.levelScoresArray.size < levelId){
+            "0"
+        }else{
+            PlayerManager.levelScoresArray[levelId - 1].toString()
+        }
     }
 
     private fun startLevel(){

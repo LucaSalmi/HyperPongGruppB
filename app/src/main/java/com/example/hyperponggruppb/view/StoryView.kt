@@ -222,8 +222,8 @@ SurfaceHolder.Callback, Runnable {
 
         if (isGameOver || PlayerManager.lives <= 0) {
 
+            PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
-            PlayerManager.setPlacement()
             PhysicsEngine.gameStart = false
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
@@ -241,9 +241,7 @@ SurfaceHolder.Callback, Runnable {
 
         if (storyMode.brickRow.isEmpty()){
             PlayerManager.unlockNextLevel()
-            Log.d(TAG, "${PlayerManager.nextLevel}")
-            Log.d(TAG, "${PlayerManager.currentLevel}")
-            PlayerManager.setLevelScore()
+            PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
             PhysicsEngine.gameStart = false
             storyMode.clearArrays()

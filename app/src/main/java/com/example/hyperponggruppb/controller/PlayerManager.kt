@@ -85,9 +85,6 @@ object PlayerManager {
                     nextLevel = obj.currentLevel + 1
                 }
             }
-            Log.d(TAG, "users: $usersArray")
-            Log.d(TAG, "current: $currentLevel")
-            Log.d(TAG, "next: $nextLevel")
         }
 
         orderArray()
@@ -109,17 +106,11 @@ object PlayerManager {
         orderArray()
     }
 
-    fun setLevelHIghScore(){
-
-    }
-
     fun setPlacement(): Int {
 
         var resultPlacement = 1
 
         orderArray()
-
-        Log.d(TAG, "setPlacement: $usersArray")
 
         for (obj in usersArray) {
 
@@ -128,7 +119,6 @@ object PlayerManager {
             }
         }
 
-        Log.d(TAG, "setPlacement: $resultPlacement")
         return resultPlacement
     }
 
@@ -176,14 +166,17 @@ object PlayerManager {
         }
     }
 
-    fun setLevelScore() {
+    fun setLevelHIghScore(){
 
-        if (levelScoresArray.isEmpty() || levelScoresArray.size < nextLevel){
+        if (levelScoresArray.size < currentLevel){
             levelScoresArray.add(playerPoints)
 
-        }else if (levelScoresArray[currentLevel-1] < playerPoints) {
+        }else{
 
-            levelScoresArray.add(nextLevel, playerPoints)
+            if (levelScoresArray[currentLevel-1]< playerPoints){
+                levelScoresArray.removeAt(currentLevel-1)
+                levelScoresArray.add(currentLevel-1, playerPoints)
+            }
         }
     }
 
