@@ -330,7 +330,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                     playerAndBrickInteractions()
 
 
-                    if (infiniteMode.brickRow.size < 50) {
+                    if (infiniteMode.brickRow.size < 15) {
                         produceExtraBricks()
                     }
                     powerUpInteractions()
@@ -415,7 +415,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun produceExtraBricks(){
 
-        BrickStructure.makeOOBBricks(infiniteMode.brickRow)
+        infiniteMode.makeOOBBricks()
         AssetManager.fillAssetArray(infiniteMode.brickAssets, infiniteMode.brickRow.size, 1)
     }
 

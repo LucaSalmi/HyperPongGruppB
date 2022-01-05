@@ -66,7 +66,6 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     }
 
     private fun makeBricks() {
-        var tempArray = mutableListOf<Rect>()
 
         val brickwidth = (AssetManager.getScreenWidth() / 10) - 4
         val brickheight = (brickwidth * 0.6).toInt()
@@ -89,12 +88,17 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
 
         if(!isStoryMode){
 
-            tempArray = BrickStructure.makeOOBBricks(tempArray)
-            tempArray = BrickStructure.createOOBBPattern(tempArray, patternId)
-            brickRow.addAll(tempArray)
+            makeOOBBricks()
         }
     }
 
+    fun makeOOBBricks(){
+
+        var tempArray = mutableListOf<Rect>()
+        tempArray = BrickStructure.makeOOBBricks(tempArray)
+        tempArray = BrickStructure.createOOBBPattern(tempArray, patternId)
+        brickRow.addAll(tempArray)
+    }
 
     private fun makeAssets(){
 
