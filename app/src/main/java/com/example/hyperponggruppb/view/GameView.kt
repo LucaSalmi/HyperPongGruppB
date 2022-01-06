@@ -47,9 +47,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
     var backgroundIdOne = 1
     var backgroundIdTwo = 2
 
-    var sound1: MediaPlayer? = null
-    var sound2: MediaPlayer? = null
-
 
     init {
 
