@@ -161,6 +161,7 @@ object PlayerManager {
             }else{
 
                 isReplaying = true
+                currentLevel = levelId
             }
             true
         }
