@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.ViewPagerAdapter
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.databinding.ActivityStoryModeBinding
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
@@ -19,9 +20,7 @@ class StoryModeActivity : AppCompatActivity() {
 
         SoundEffectManager.musicSetup(this, 1)
 
-        supportFragmentManager.commit {
-            add(R.id.overworld_map_container, FirstWorldFragment())
-        }
+        binding.overworldMapContainer.adapter = ViewPagerAdapter(this)
     }
 
 }
