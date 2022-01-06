@@ -56,15 +56,26 @@
             android:layout_marginTop="20dp"
             app:srcCompat="@drawable/play_symbol" />
     </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_star_progress_change"
+        android:layout_width="172dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="120dp"
+        android:background="@color/star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
-        android:id="@+id/iv_star_progress"
+        android:id="@+id/iv_star_progress_holder"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/starframe" />
+
+
 
     <LinearLayout
         android:id="@+id/score_layout"
@@ -76,7 +87,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_star_progress">
+        app:layout_constraintTop_toBottomOf="@+id/iv_star_progress_holder">
 
         <TextView
             android:id="@+id/tv_level_score"

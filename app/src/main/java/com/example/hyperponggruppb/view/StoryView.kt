@@ -179,7 +179,6 @@ SurfaceHolder.Callback, Runnable {
             PhysicsEngine.gameStart = true
 
         }
-        Log.d(TAG, "onTouchEvent: ${PhysicsEngine.gameStart}")
         return true
     }
 

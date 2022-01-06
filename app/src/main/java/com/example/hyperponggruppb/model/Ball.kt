@@ -7,19 +7,16 @@ class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: In
 
 
     var paint = Paint()
-    var hitBoxPaint: Paint = Paint()
-    var radius = 20f
     var ballSpeedX = 0f
     var ballSpeedY = 0f
-    var ballsize = 18f
+    var ballsize = 20f
     var ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
 
     var playerCollision = false
     var brickCollision = false
 
     init {
-        paint.color = Color.TRANSPARENT
-        hitBoxPaint.color = Color.TRANSPARENT
+        paint.color = Color.WHITE
     }
 
     fun draw(canvas: Canvas?) {

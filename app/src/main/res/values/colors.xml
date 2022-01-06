@@ -12,4 +12,5 @@
     <color name="faded_black">#1A000000</color>
     <color name="trans">#00000000</color>
     <color name="gold">#c59508</color>
+    <color name="star">#FFC313</color>
 </resources>
