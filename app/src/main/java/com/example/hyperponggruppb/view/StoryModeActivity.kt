@@ -3,6 +3,7 @@ package com.example.hyperponggruppb.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.ViewPagerAdapter
 import com.example.hyperponggruppb.controller.SoundEffectManager
@@ -19,8 +20,9 @@ class StoryModeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         SoundEffectManager.musicSetup(this, 1)
-
-        binding.overworldMapContainer.adapter = ViewPagerAdapter(this)
+        val adapter = ViewPagerAdapter(this)
+        binding.overworldMapContainer.adapter = adapter
+        binding.overworldMapContainer.currentItem = 1
     }
 
 }
