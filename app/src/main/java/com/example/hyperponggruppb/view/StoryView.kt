@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -16,6 +17,7 @@ import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+import java.util.*
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
 SurfaceHolder.Callback, Runnable {
@@ -33,6 +35,9 @@ SurfaceHolder.Callback, Runnable {
     private val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = System.currentTimeMillis()
+    
+    var levelSeconds = 0
+    var levelMinutes = 0
 
     init {
 
@@ -41,6 +46,24 @@ SurfaceHolder.Callback, Runnable {
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
+    }
+
+    private val levelTimer = object : CountDownTimer(60000,1000){
+        
+        override fun onTick(p0: Long) {
+            levelSeconds++
+        }
+
+        override fun onFinish() {
+            restartLevelTimer()
+        }
+    }
+    
+    private fun restartLevelTimer(){
+        levelTimer.cancel()
+        levelSeconds = 0
+        levelMinutes ++
+        levelTimer.start()
     }
 
     override fun run() {
@@ -173,6 +196,7 @@ SurfaceHolder.Callback, Runnable {
 
         if (event?.action == MotionEvent.ACTION_UP && !PhysicsEngine.gameStart) {
 
+            restartLevelTimer()
             storyMode.ball.ballSpeedX = 7f
             storyMode.ball.ballSpeedY = -13f
             PhysicsEngine.gameStart = true
@@ -222,7 +246,9 @@ SurfaceHolder.Callback, Runnable {
     private fun gameEnd() {
 
         if (isGameOver || PlayerManager.lives <= 0) {
-
+            
+            levelTimer.cancel()
+            Log.d(TAG, "gameEnd: min: $levelMinutes, sec: $levelSeconds")
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
             PhysicsEngine.gameStart = false
@@ -242,6 +268,7 @@ SurfaceHolder.Callback, Runnable {
 
         if (storyMode.brickRow.isEmpty()){
 
+            levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)

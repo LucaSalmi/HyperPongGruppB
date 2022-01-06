@@ -34,8 +34,9 @@ class SecondWorldFragment : Fragment() {
         levelSix?.setOnClickListener {
             if (checkUnlock(6)) {
                 enterLevelScreen(6)
-
                 //startLevel()
+            }else{
+                toaster()
             }
         }
         levelSeven?.setOnClickListener {
