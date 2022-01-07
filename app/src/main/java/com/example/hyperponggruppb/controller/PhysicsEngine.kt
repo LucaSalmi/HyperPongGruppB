@@ -167,167 +167,132 @@ object PhysicsEngine {
                     }
 
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
-/*
-                        if (ball.ballSpeedX <= 0) {
-                            ball.ballLeft -= ball.ballSpeedX.toInt()
-                            ball.ballRight -= ball.ballSpeedX.toInt()
 
-                        }else{
-                            ball.ballLeft += ball.ballSpeedX.toInt()
-                            ball.ballRight += ball.ballSpeedX.toInt()
-
-                        }
-                        if (ball.ballSpeedY <= 0) {
-                            ball.ballTop -= ball.ballSpeedY.toInt()
-                            ball.ballBottom -= ball.ballSpeedY.toInt()
-                        } else {
-                            ball.ballTop += ball.ballSpeedY.toInt()
-                            ball.ballBottom += ball.ballSpeedY.toInt()
-                        }
-
- */
                         Log.d(TAG, "top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied")
                         Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
                         Log.d(TAG, "ballspeed X = ${ball.ballSpeedX} ")
-                        //ball Y negative and X negative
-                        if (ball.ballSpeedX < 0 && ball.ballSpeedY < 0 && isBottomOccupied) {
-                            Log.d(TAG, "ballPhysics: right hit 1")
 
-                            ball.ballSpeedX *= -1
-                            /*
-                            ball.ballLeft = brickHit.right
-                            ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
+                                                    //ball X Negative Y Negative
 
-                             */
-                            isDone = true
+                        if (ball.ballSpeedX < 0 && ball.ballSpeedY < 0) {
 
+                            if (isBottomOccupied) {
+                                Log.d(TAG, "ballPhysics: right hit 1")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
 
-                        }else if (ball.ballSpeedX < 0 && ball.ballSpeedY < 0 && isRightOccupied && !isDone){
+                            }else if (isRightOccupied){
+                                Log.d(TAG, "ballPhysics: bot hit 1")
+                                ball.ballSpeedY *= -1
+                                ball.ballTop = brickHit.bottom
+                                ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            Log.d(TAG, "ballPhysics: bottom hit 1")
-                            ball.ballSpeedY *= -1
-                            /*
-                            ball.ballTop = brickHit.bottom
-                            ball.ballBottom = (ball.ballTop - ball.ballsize).toInt()
+                            } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                                Log.d(TAG, "ballPhysics: bot hit 1 - v2")
+                                ball.ballSpeedY *= -1
+                                ball.ballTop = brickHit.bottom
+                                ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                             */
-                            isDone = true
-
-                        }
-
-                        //ball X positive Y negative
-                        if (ball.ballSpeedX > 0 && ball.ballSpeedY < 0 && isBottomOccupied && !isDone) {
-                            Log.d(TAG, "ballPhysics: left hit 1")
-
-                            ball.ballSpeedX *= -1
-                            /*
-                            ball.ballLeft = brickHit.right
-                            ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
-
-                             */
-                            isDone = true
-
-
-                        }else if (ball.ballSpeedX > 0 && ball.ballSpeedY < 0 && isLeftOccupied && !isDone){
-
-                            Log.d(TAG, "ballPhysics: bottom hit 2")
-                            ball.ballSpeedY *= -1
-                            /*
-                            ball.ballTop = brickHit.bottom
-                            ball.ballBottom = (ball.ballTop - ball.ballsize).toInt()
-
-                             */
+                            }else {
+                                Log.d(TAG, "ballPhysics: right hit 1 - v2")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
+                            }
                             isDone = true
                         }
+                                                    //ball X positive Y negative
 
-                        //ball X negative Y positive
-                        if (ball.ballSpeedX < 0 && ball.ballSpeedY > 0 && isTopOccupied && !isDone) {
+                        else if (ball.ballSpeedX > 0 && ball.ballSpeedY < 0 && !isDone) {
+
+                            if (isBottomOccupied) {
+                                Log.d(TAG, "ballPhysics: left hit 1")
+                                ball.ballSpeedX *= -1
+                                ball.ballRight = brickHit.left
+                                ball.ballLeft = brickHit.left - ball.ballsize.toInt()
+
+                            }else if (isLeftOccupied){
+                                Log.d(TAG, "ballPhysics: bot hit 2")
+                                ball.ballSpeedY *= -1
+                                ball.ballTop = brickHit.bottom
+                                ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
+
+                            } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                                Log.d(TAG, "ballPhysics: bot hit 2 - v2")
+                                ball.ballSpeedY *= -1
+                                ball.ballTop = brickHit.bottom
+                                ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
+
+                            }else {
+                                Log.d(TAG, "ballPhysics: left hit 1 - v2")
+                                ball.ballSpeedX *= -1
+                                ball.ballRight = brickHit.left
+                                ball.ballLeft = brickHit.left - ball.ballsize.toInt()
+                            }
+                            isDone = true
+
+                                                    //ball X Negative Y Positive
+
+                        }else if (ball.ballSpeedX < 0 && ball.ballSpeedY > 0 && !isDone) {
+
+                            if (isTopOccupied) {
+                                Log.d(TAG, "ballPhysics: right hit 2")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
+
+                            }else if (isRightOccupied){
+                                Log.d(TAG, "ballPhysics: top hit 1")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
+
+                            } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                                Log.d(TAG, "ballPhysics: top hit 1 - v2")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
+
+                            }else {
+                                Log.d(TAG, "ballPhysics: right hit 2 - v2")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
+                            }
+                            isDone = true
+                        }
+
+                                                // ball X Positive Y Positive
+
+                     else if (ball.ballSpeedX > 0 && ball.ballSpeedY > 0 && !isDone) {
+
+                        if (isTopOccupied) {
                             Log.d(TAG, "ballPhysics: left hit 2")
-
                             ball.ballSpeedX *= -1
-                            /*
-                            ball.ballLeft = brickHit.right
-                            ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
+                            ball.ballRight = brickHit.left
+                            ball.ballLeft = brickHit.left - ball.ballsize.toInt()
 
-                             */
-                            isDone = true
-
-
-                        }else if (ball.ballSpeedX < 0 && ball.ballSpeedY > 0 && isLeftOccupied && !isDone){
-
-                            Log.d(TAG, "ballPhysics: top hit 1")
-                            ball.ballSpeedY *= -1
-                            /*
-                            ball.ballBottom = brickHit.top
-                            ball.ballTop = (ball.ballBottom - ball.ballsize).toInt()
-
-                             */
-                            isDone = true
-
-                        }
-
-                        //ball X positive Y positive
-                        if (ball.ballSpeedX > 0 && ball.ballSpeedY > 0 && isTopOccupied && !isDone) {
-                            Log.d(TAG, "ballPhysics: right hit 2")
-
-                            ball.ballSpeedX *= -1
-                            /*
-                            ball.ballLeft = brickHit.right
-                            ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
-
-                             */
-                            isDone = true
-
-
-                        }else if (ball.ballSpeedX > 0 && ball.ballSpeedY > 0 && isRightOccupied && !isDone){
-
+                        }else if (isLeftOccupied){
                             Log.d(TAG, "ballPhysics: top hit 2")
                             ball.ballSpeedY *= -1
-                            /*
                             ball.ballBottom = brickHit.top
-                            ball.ballTop = (ball.ballBottom - ball.ballsize).toInt()
+                            ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                             */
-                            isDone = true
+                        } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                            Log.d(TAG, "ballPhysics: top hit 2 - v2")
+                            ball.ballSpeedY *= -1
+                            ball.ballBottom = brickHit.top
+                            ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                        }
-/*
-                        if (ball.ballSpeedY < 0 && isBottomOccupied && !isDone|| ball.ballSpeedY > 0 && isTopOccupied && !isDone ){
-
-                            if (ball.ballSpeedX < 0){
-                                ball.ballLeft = brickHit.right
-                                ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
-                            }else{
-                                ball.ballRight = brickHit.left
-                                ball.ballLeft = (ball.ballRight - ball.ballsize).toInt()
-                            }
+                        }else {
+                            Log.d(TAG, "ballPhysics: left hit 2 - v2")
                             ball.ballSpeedX *= -1
-                            isRightOccupied = false
-                            isLeftOccupied = false
-                            isBottomOccupied = false
-                            isTopOccupied = false
-                            isDone = true
-                            Log.d(TAG, "ballPhysics: top/bottom")
+                            ball.ballRight = brickHit.left
+                            ball.ballLeft = brickHit.left - ball.ballsize.toInt()
                         }
-
-                        if (brickHit.bottom > ball.ballTop + ball.ballsize/2 && brickHit.top < ball.ballBottom - ball.ballsize/2 && !isDone) { // om bollens y-axel är mindre än botten
-                            Log.d(TAG, "BallPhysics: side check 1 PASS ")        // och större än top, dvs att bollen befinner sig MELLAN brickens TOP och BOTTEN
-
-                            //fixa bollens pos bid kolition till exakta position den kolidera ) ta bor hastigheten.
-                            if ( ball.ballLeft - ball.ballsize/2 > brickHit.right   && ball.ballRight + ball.ballsize/2 > brickHit.left ||
-                                ball.ballLeft - ball.ballsize/2 < brickHit.right   && ball.ballRight + ball.ballsize/2 < brickHit.left ) {
-                                Log.d(TAG, "BallPhysics: side check 2 PASS ")
-
-                                ball.ballSpeedX *= -1f
-                            }
-
-                        } else {
-                            Log.d(TAG, "BallPhysics: top/bottom")
-
-                            ball.ballSpeedY *= -1f
-                        }
-
- */
+                        isDone = true
+                     }
 
                         isRightOccupied = false
                         isLeftOccupied = false
@@ -336,46 +301,6 @@ object PhysicsEngine {
                         isDone = false
 
 
-                        /*
-                        var VL = brickHit.left - ball.ballRight // differens mellan brick vänster och boll höger
-                        var VR = ball.ballLeft - brickHit.right // differens mellan brick höger och boll vänster
-                        var VT = brickHit.top - ball.ballBottom // differens mellan brick topp och boll botten
-                        var VB = ball.ballTop - brickHit.bottom // differens mellan brick bott och boll topp
-
-                        // vi vill hitta den största siffra
-                        if (VL > VR && VL > VT && VL > VB){
-                            Log.d(TAG, "left hit")
-                            ball.ballSpeedX *= -1f
-                            ball.ballRight = brickHit.left
-                            ball.ballLeft = (ball.ballRight-ball.ballsize).toInt()
-                        }else if (VR > VL && VR > VT && VR > VB){
-                            Log.d(TAG, "right hit")
-                            ball.ballSpeedX *= -1f
-                            ball.ballLeft = brickHit.right
-                            ball.ballRight = (ball.ballLeft + ball.ballsize).toInt()
-                        }else if (VT > VL && VT > VR && VT > VB){
-                            Log.d(TAG, "top hit")
-                            ball.ballSpeedY *= -1f
-                            ball.ballBottom = brickHit.top
-                            ball.ballTop = (ball.ballBottom - ball.ballsize).toInt()
-                        }else{
-                            Log.d(TAG, "bottom hit")
-                            ball.ballSpeedY *= -1f
-                            ball.ballTop = brickHit.bottom
-                            ball.ballBottom = (ball.ballTop + ball.ballsize).toInt()
-                        }
-
-                         */
-
-                        Log.d(
-                            TAG,
-                            "brickLeft ${brickHit.left}, brickTop ${brickHit.top}, bricktRight ${brickHit.right}, brickBottom ${brickHit.bottom}"
-                        )
-
-                        Log.d(
-                            TAG,
-                            "ballLeft ${ball.ballLeft}, ballLTop ${ball.ballTop}, ballRight ${ball.ballRight}, ballLBottom ${ball.ballBottom} "
-                        )
                     }
 
                     if (ball.playerCollision) {
