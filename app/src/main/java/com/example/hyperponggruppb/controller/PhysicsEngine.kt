@@ -188,7 +188,7 @@ object PhysicsEngine {
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                            } else if (ball.ballLeft > brickHit.left && ball.ballRight < brickHit.right){
                                 Log.d(TAG, "ballPhysics: bot hit 1 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
