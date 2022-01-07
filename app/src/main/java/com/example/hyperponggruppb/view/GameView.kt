@@ -190,16 +190,24 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
+            //canvas.save(); // first save the state of the canvas
+            //canvas.rotate(45f); // rotate it
+
             for (ballObj in infiniteMode.ballsArray) {
 
                 ballObj.draw(canvas)
+
+
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
                     ballObj.ballLeft.toFloat(),
                     ballObj.ballTop.toFloat(),
                     null
                 )
+
+
             }
+            //canvas.restore(); // restore previous state (rotate it back)
 
             infiniteMode.player.draw(canvas)
 

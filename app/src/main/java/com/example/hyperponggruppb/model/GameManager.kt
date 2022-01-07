@@ -1,9 +1,11 @@
 package com.example.hyperponggruppb.model
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Rect
+import android.util.Log
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -53,7 +55,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     fun respawnBall(){
 
         ball = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
-        ball.paint.color = Color.TRANSPARENT
+        ball.paint.color = Color.WHITE
         ballsArray.add(ball)
         ball.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
         ball.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
@@ -98,6 +100,10 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
         if(!isStoryMode){
             BrickStructure.makeOOBBricks(brickRow)
         }
+        Log.d(TAG, "makeBricks: ${brickRow[5].left}, ${brickRow[5].top}, ${brickRow[5].right}, ${brickRow[5].bottom}")
+        Log.d(TAG, "makeBricks: ${brickRow[6].left}, ${brickRow[6].top}, ${brickRow[6].right}, ${brickRow[6].bottom}")
+        Log.d(TAG, "makeBricks: ${brickRow[7].left}, ${brickRow[7].top}, ${brickRow[7].right}, ${brickRow[7].bottom}")
+
 
     }
 
