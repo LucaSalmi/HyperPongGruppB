@@ -332,7 +332,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                     playerAndBrickInteractions()
 
 
-                    if (infiniteMode.brickRow.size < 15) {
+                    if (infiniteMode.brickRow.size < 5) {
                         produceExtraBricks()
                     }
                     powerUpInteractions()
