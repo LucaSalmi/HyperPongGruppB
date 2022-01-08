@@ -1,23 +1,17 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
-import com.example.hyperponggruppb.LeaderBoardActivity
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.view.GameModeStoryActivity
-import com.example.hyperponggruppb.view.GameView
-import com.example.hyperponggruppb.view.MainActivity
-import com.example.hyperponggruppb.view.StoryView
 
 class FirstWorldFragment : Fragment() {
 

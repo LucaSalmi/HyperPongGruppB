@@ -192,16 +192,24 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
+            //canvas.save(); // first save the state of the canvas
+            //canvas.rotate(45f); // rotate it
+
             for (ballObj in infiniteMode.ballsArray) {
 
                 ballObj.draw(canvas)
+
+
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
-                    ballObj.ballPosX - 20,
-                    ballObj.ballPosY - 20,
+                    ballObj.ballLeft.toFloat(),
+                    ballObj.ballTop.toFloat(),
                     null
                 )
+
+
             }
+            //canvas.restore(); // restore previous state (rotate it back)
 
             infiniteMode.player.draw(canvas)
 
@@ -286,8 +294,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         if (!gameStart) {
 
-            infiniteMode.ball.ballPosX = infiniteMode.player.right - infiniteMode.player.playerWidth / 2
-            infiniteMode.ball.ballPosY = infiniteMode.player.top - infiniteMode.ball.radius
+            infiniteMode.ball.ballLeft = ((infiniteMode.player.right - infiniteMode.player.playerWidth / 2) - infiniteMode.ball.ballsize/2).toInt()
+            infiniteMode.ball.ballRight = ((infiniteMode.player.right - infiniteMode.player.playerWidth / 2) + infiniteMode.ball.ballsize/2).toInt()
+            infiniteMode.ball.ballTop = (infiniteMode.player.top - infiniteMode.ball.ballsize).toInt()
+            infiniteMode.ball.ballBottom = (infiniteMode.player.top).toInt()
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !gameStart) {

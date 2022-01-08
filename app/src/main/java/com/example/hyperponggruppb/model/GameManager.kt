@@ -1,9 +1,11 @@
 package com.example.hyperponggruppb.model
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Rect
+import android.util.Log
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -16,6 +18,10 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     var ballsArray = mutableListOf<Ball>()
     var powerUpArray = mutableListOf<PowerUp>()
     lateinit var ball: Ball
+    var ballLeft = 0
+    var ballRight = 0
+    var ballTop = 0
+    var ballBottom = 0
     lateinit var extraBall: Ball
     private val ballRadius = 20f
     lateinit var player: Player
@@ -42,24 +48,30 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     }
 
     fun makeBall(){
-        ball = Ball(context!!,player.right - player.playerWidth / 2, player.top - ballRadius)
+        ball = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
         ballsArray.add(ball)
     }
 
     fun respawnBall(){
 
-        ball = Ball(context!!, (player.right - player.playerWidth / 2), (player.top - ballRadius))
-        ball.paint.color = Color.TRANSPARENT
-        ball.hitBoxPaint.color = Color.TRANSPARENT
+        ball = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
+        ball.paint.color = Color.WHITE
         ballsArray.add(ball)
-        ball.ballPosX = player.right - player.playerWidth / 2
-        ball.ballPosY = player.top - ball.radius
+        ball.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
+        ball.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
+        ball.ballTop = player.right.toInt() - (player.playerWidth / 2).toInt() - ball.ballsize.toInt()
+        ball.ballBottom = player.right.toInt() - (player.playerWidth / 2).toInt() + ball.ballsize.toInt()
         ball.ballSpeedX = 0f
         ball.ballSpeedY = 0f
     }
 
     fun spawnExtraBall(){
-        extraBall = Ball(context!!, (player.right - player.playerWidth / 2), (player.top - ball.radius))
+        extraBall = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
+        ballsArray.add(extraBall)
+        extraBall.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
+        extraBall.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
+        extraBall.ballTop = player.right.toInt() - (player.playerWidth / 2).toInt() - ball.ballsize.toInt()
+        extraBall.ballBottom = player.right.toInt() - (player.playerWidth / 2).toInt() + ball.ballsize.toInt()
         extraBall.ballSpeedX = 7f
         extraBall.ballSpeedY = -13f
         ballsArray.add(extraBall)
@@ -87,10 +99,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
         brickRow = BrickStructure.createPattern(brickRow, patternId)
 
         if(!isStoryMode){
-
-            makeOOBBricks()
+            BrickStructure.makeOOBBricks(brickRow)
         }
-    }
 
     fun makeOOBBricks(){
 
