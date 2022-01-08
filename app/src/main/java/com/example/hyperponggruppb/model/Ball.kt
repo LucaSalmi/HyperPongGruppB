@@ -12,6 +12,14 @@ class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: In
     var ballsize = 20f
     var ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
 
+    var ballGoesRight = ballSpeedX > 0
+    var ballGoesLeft = ballSpeedX < 0
+    var ballGoesDown = ballSpeedY > 0
+    var ballGoesUp = ballSpeedY < 0
+
+
+
+
     var playerCollision = false
     var brickCollision = false
 

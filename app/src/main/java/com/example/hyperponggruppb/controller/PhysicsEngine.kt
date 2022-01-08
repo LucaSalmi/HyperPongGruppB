@@ -27,6 +27,7 @@ object PhysicsEngine {
     var isBottomOccupied = false
     var isDone = false
 
+
     fun brickCollision(
         brickRow: MutableList<Rect>,
         brickAssets: MutableList<Bitmap>,
@@ -126,28 +127,36 @@ object PhysicsEngine {
 
     fun ballPhysics(ballsArray: MutableList<Ball>, player: Player) {
 
+
+
+
         for (ball in ballsArray) {
+
+            var ballIsBottomOfScreen = ball.ballTop > canvasHeight
+            var ballIsOutsideTopOfScreen = ball.ballBottom < 0f
+            var ballIsOutsideRightOfScreen = ball.ballRight >= canvasWidth
+            var ballIsOutsideLeftOfScreen = ball.ballLeft < 0f
 
             ball.ballRect = Rect(ball.ballLeft, ball.ballTop, ball.ballRight, ball.ballBottom)
 
-            if (ball.ballTop > canvasHeight && gameStart && !damageTaken) {
+            if (ballIsBottomOfScreen && gameStart && !damageTaken) {
 
                 damageTaken = true
                 ballToEliminate = ballsArray.indexOf(ball)
 
             }
 
-            if (ball.ballRight >= canvasWidth || ball.ballLeft <= 0f || ball.ballTop <= 0f || ball.playerCollision || ball.brickCollision) {
+            if (ballIsOutsideRightOfScreen || ballIsOutsideLeftOfScreen || ballIsOutsideTopOfScreen || ball.playerCollision || ball.brickCollision) {
 
-                if (ball.ballRight >= canvasWidth || ball.ballLeft <= 0f) {
+                if (ballIsOutsideRightOfScreen || ballIsOutsideLeftOfScreen) {
 
-                    if (ball.ballRight > canvasWidth) {
+                    if (ballIsOutsideRightOfScreen) {
 
                         ball.ballLeft = (canvasWidth - ball.ballsize).toInt()
                         ball.ballRight = canvasWidth.toInt()
 
                     }
-                    if (ball.ballLeft < 0f) {
+                    if (ballIsOutsideLeftOfScreen) {
 
                         ball.ballLeft = 0
                         ball.ballRight = ball.ballsize.toInt()
@@ -156,9 +165,9 @@ object PhysicsEngine {
                     ball.ballSpeedX *= -1f //-ball.ballSpeedX
                 }
 
-                if (ball.ballBottom <= 0f || ball.playerCollision || ball.brickCollision) {
+                if (ballIsOutsideTopOfScreen || ball.playerCollision || ball.brickCollision) {
 
-                    if (ball.ballBottom < 0f) {
+                    if (ballIsOutsideTopOfScreen) {
 
                         ball.ballTop = 0
                         ball.ballBottom = ball.ballsize.toInt()
@@ -168,13 +177,22 @@ object PhysicsEngine {
 
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
 
+                        var ballLeftIsInsideOfBrick = ball.ballLeft + ball.ballsize/2 > brickHit.left
+                        var ballRightIsInsideOfBrick = ball.ballRight - ball.ballsize/2 < brickHit.right
+
+                        var ballIsOutsideOfBrickTop = ball.ballTop + ball.ballsize < brickHit.top
+                        var ballIsOutsideOfBrickTBottom = ball.ballBottom - ball.ballsize > brickHit.bottom
+
+
+
+
                         Log.d(TAG, "top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied")
                         Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
                         Log.d(TAG, "ballspeed X = ${ball.ballSpeedX} ")
 
                                                     //ball X Negative Y Negative
 
-                        if (ball.ballSpeedX < 0 && ball.ballSpeedY < 0) {
+                        if (ball.ballGoesLeft && ball.ballGoesUp) {
 
                             if (isBottomOccupied) {
                                 Log.d(TAG, "ballPhysics: right hit 1")
@@ -188,13 +206,14 @@ object PhysicsEngine {
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            } else if (ball.ballLeft > brickHit.left && ball.ballRight < brickHit.right){
+                            } else if (ballLeftIsInsideOfBrick && ballRightIsInsideOfBrick && ballIsOutsideOfBrickTop && ballIsOutsideOfBrickTBottom){
+                                // ball is inside of brick's sides & outside of brick top n Bottom
                                 Log.d(TAG, "ballPhysics: bot hit 1 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            }else {
+                            }else {                                             // ball is outside of brick's sides
                                 Log.d(TAG, "ballPhysics: right hit 1 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
@@ -218,13 +237,14 @@ object PhysicsEngine {
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            } else if (ball.ballLeft > brickHit.left && ball.ballRight < brickHit.right){
+                            } else if (ballLeftIsInsideOfBrick && ballRightIsInsideOfBrick && ballIsOutsideOfBrickTop && ballIsOutsideOfBrickTBottom){
+                                // ball is inside of brick's sides & outside of brick top n Bottom
                                 Log.d(TAG, "ballPhysics: bot hit 2 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            }else {
+                            }else {                                             // ball is outside of brick's sides
                                 Log.d(TAG, "ballPhysics: left hit 1 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballRight = brickHit.left
@@ -248,13 +268,14 @@ object PhysicsEngine {
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                            } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                            } else if (ballLeftIsInsideOfBrick && ballRightIsInsideOfBrick && ballIsOutsideOfBrickTop && ballIsOutsideOfBrickTBottom){
+                                // ball is inside of brick's sides & outside of brick top n Bottom
                                 Log.d(TAG, "ballPhysics: top hit 1 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                            }else {
+                            }else {                                             // ball is outside of brick's sides
                                 Log.d(TAG, "ballPhysics: right hit 2 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
@@ -279,13 +300,14 @@ object PhysicsEngine {
                             ball.ballBottom = brickHit.top
                             ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                        } else if (ball.ballRight > brickHit.left && ball.ballLeft < brickHit.right){
+                        } else if (ballLeftIsInsideOfBrick && ballRightIsInsideOfBrick && ballIsOutsideOfBrickTop && ballIsOutsideOfBrickTBottom){
+                            // ball is inside of brick's sides & outside of brick top n Bottom
                             Log.d(TAG, "ballPhysics: top hit 2 - v2")
                             ball.ballSpeedY *= -1
                             ball.ballBottom = brickHit.top
                             ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                        }else {
+                        }else {                                             // ball is outside of brick's sides
                             Log.d(TAG, "ballPhysics: left hit 2 - v2")
                             ball.ballSpeedX *= -1
                             ball.ballRight = brickHit.left
