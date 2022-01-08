@@ -91,16 +91,17 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
 
         BrickStructure.makeInboundsBricks(brickRow)
 
-        patternId = if (!isStoryMode){
-            RandomNumberGenerator.rNG(0,13)
-        }else{
+        patternId = if (!isStoryMode) {
+            RandomNumberGenerator.rNG(0, 13)
+        } else {
             PlayerManager.currentLevel - 1
         }
         brickRow = BrickStructure.createPattern(brickRow, patternId)
 
-        if(!isStoryMode){
+        if (!isStoryMode) {
             BrickStructure.makeOOBBricks(brickRow)
         }
+    }
 
     fun makeOOBBricks(){
 
@@ -110,7 +111,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
         brickRow.addAll(tempArray)
     }
 
-    private fun makeAssets(){
+    fun makeAssets(){
 
         AssetManager.fillAssetArray(brickAssets, brickRow.size, patternId)
     }

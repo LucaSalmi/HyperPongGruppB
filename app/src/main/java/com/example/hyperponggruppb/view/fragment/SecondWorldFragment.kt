@@ -89,7 +89,7 @@ class SecondWorldFragment : Fragment() {
         val startLevelBtn = dialog.findViewById(R.id.iv_level_start) as ImageView
         var screenLevelID = dialog.findViewById(R.id.tv_level_id) as TextView
 
-        val starProgressResult = dialog.findViewById(R.id.iv_star_progress) as ImageView
+        val starProgressResult = dialog.findViewById(R.id.iv_star_progress_holder) as ImageView
         val screenLevelScore = dialog.findViewById(R.id.tv_level_score) as TextView
         val screenLevelScoreResult = dialog.findViewById(R.id.tv_level_score_result) as TextView
 
