@@ -12,10 +12,15 @@ class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: In
     var ballsize = 20f
     var ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
 
-    var ballGoesRight = ballSpeedX > 0
-    var ballGoesLeft = ballSpeedX < 0
-    var ballGoesDown = ballSpeedY > 0
-    var ballGoesUp = ballSpeedY < 0
+    fun ballGoesDown(): Boolean{
+        return ballSpeedY > 0
+    }
+
+    fun ballGoesRight(): Boolean{
+        return ballSpeedX > 0
+    }
+
+
 
 
 

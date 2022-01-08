@@ -75,12 +75,12 @@ SurfaceHolder.Callback, Runnable {
             for (ballObj in storyMode.ballsArray) {
 
                 ballObj.draw(canvas)
-                canvas.drawBitmap(
+               /* canvas.drawBitmap(
                     AssetManager.ballAsset,
                     ballObj.ballLeft.toFloat(),
                     ballObj.ballTop.toFloat(),
                     null
-                )
+                )*/
             }
 
             storyMode.player.draw(canvas)
