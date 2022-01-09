@@ -6,6 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.os.CountDownTimer
 import android.util.Log
@@ -88,6 +89,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     }
 
     private fun draw() {
+
         try {
 
             canvas = mHolder!!.lockCanvas()
@@ -103,8 +105,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
-                    ballObj.ballLeft.toFloat(),
-                    ballObj.ballTop.toFloat(),
+                    ballObj.ballRect.left.toFloat()-ballObj.ballsize/2,
+                    ballObj.ballRect.top.toFloat()-ballObj.ballsize/2,
                     null
                 )
             }
@@ -198,6 +200,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 ((storyMode.player.right - storyMode.player.playerWidth / 2) + storyMode.ball.ballsize / 2).toInt()
             storyMode.ball.ballTop = (storyMode.player.top - storyMode.ball.ballsize).toInt()
             storyMode.ball.ballBottom = (storyMode.player.top).toInt()
+            storyMode.ball.update()
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !PhysicsEngine.gameStart) {

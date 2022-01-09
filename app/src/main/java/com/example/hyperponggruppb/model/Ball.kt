@@ -19,7 +19,7 @@ class Ball() {
     var brickCollision = false
 
     init {
-        paint.color = Color.WHITE
+        paint.color = Color.TRANSPARENT
     }
 
     fun update(){
