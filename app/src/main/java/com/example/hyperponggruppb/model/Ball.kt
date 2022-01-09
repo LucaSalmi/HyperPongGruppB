@@ -11,6 +11,12 @@ class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: In
     var ballSpeedY = 0f
     var ballsize = 20f
     var ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
+    var playerCollision = false
+    var brickCollision = false
+
+    init {
+        paint.color = Color.WHITE
+    }
 
     fun ballGoesDown(): Boolean{
         return ballSpeedY > 0
@@ -20,20 +26,7 @@ class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: In
         return ballSpeedX > 0
     }
 
-
-
-
-
-
-    var playerCollision = false
-    var brickCollision = false
-
-    init {
-        paint.color = Color.WHITE
-    }
-
     fun draw(canvas: Canvas?) {
         canvas?.drawRect(ballRect,paint)
-
     }
 }

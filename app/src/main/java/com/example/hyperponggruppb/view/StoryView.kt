@@ -20,14 +20,15 @@ import com.example.hyperponggruppb.model.GameManager
 import java.util.*
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
-SurfaceHolder.Callback, Runnable {
+    SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null
     private var running = false
     private lateinit var canvas: Canvas
     var mHolder: SurfaceHolder? = holder
     private val myActivity = context as GameModeStoryActivity
-    private val sp = context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
+    private val sp =
+        context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
 
     private var storyMode: GameManager
     var isGameOver = false
@@ -35,7 +36,7 @@ SurfaceHolder.Callback, Runnable {
     private val frameRate = 60
     val deltaTime = 0L
     var timeToUpdate = System.currentTimeMillis()
-    
+
     var levelSeconds = 0
     var levelMinutes = 0
 
@@ -48,8 +49,8 @@ SurfaceHolder.Callback, Runnable {
         storyMode = GameManager(context, true)
     }
 
-    private val levelTimer = object : CountDownTimer(60000,1000){
-        
+    private val levelTimer = object : CountDownTimer(60000, 1000) {
+
         override fun onTick(p0: Long) {
             levelSeconds++
         }
@@ -58,11 +59,11 @@ SurfaceHolder.Callback, Runnable {
             restartLevelTimer()
         }
     }
-    
-    private fun restartLevelTimer(){
+
+    private fun restartLevelTimer() {
         levelTimer.cancel()
         levelSeconds = 0
-        levelMinutes ++
+        levelMinutes++
         levelTimer.start()
     }
 
@@ -73,7 +74,7 @@ SurfaceHolder.Callback, Runnable {
             if (System.currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                if (PhysicsEngine.gameStart){
+                if (PhysicsEngine.gameStart) {
 
                     ballInteractions()
                     checkDamage()
@@ -86,7 +87,7 @@ SurfaceHolder.Callback, Runnable {
         }
     }
 
-    private fun draw(){
+    private fun draw() {
         try {
 
             canvas = mHolder!!.lockCanvas()
@@ -99,12 +100,13 @@ SurfaceHolder.Callback, Runnable {
             for (ballObj in storyMode.ballsArray) {
 
                 ballObj.draw(canvas)
-               /* canvas.drawBitmap(
+
+                canvas.drawBitmap(
                     AssetManager.ballAsset,
                     ballObj.ballLeft.toFloat(),
                     ballObj.ballTop.toFloat(),
                     null
-                )*/
+                )
             }
 
             storyMode.player.draw(canvas)
@@ -190,8 +192,10 @@ SurfaceHolder.Callback, Runnable {
 
         if (!PhysicsEngine.gameStart) {
 
-            storyMode.ball.ballLeft = ((storyMode.player.right - storyMode.player.playerWidth / 2) - storyMode.ball.ballsize/2).toInt()
-            storyMode.ball.ballRight = ((storyMode.player.right - storyMode.player.playerWidth / 2) + storyMode.ball.ballsize/2).toInt()
+            storyMode.ball.ballLeft =
+                ((storyMode.player.right - storyMode.player.playerWidth / 2) - storyMode.ball.ballsize / 2).toInt()
+            storyMode.ball.ballRight =
+                ((storyMode.player.right - storyMode.player.playerWidth / 2) + storyMode.ball.ballsize / 2).toInt()
             storyMode.ball.ballTop = (storyMode.player.top - storyMode.ball.ballsize).toInt()
             storyMode.ball.ballBottom = (storyMode.player.top).toInt()
         }
@@ -207,12 +211,12 @@ SurfaceHolder.Callback, Runnable {
         return true
     }
 
-    private fun ballInteractions(){
+    private fun ballInteractions() {
 
         PhysicsEngine.ballPhysics(storyMode.ballsArray, storyMode.player)
     }
 
-    private fun checkDamage(){
+    private fun checkDamage() {
 
         myActivity.updateText()
 
@@ -224,7 +228,7 @@ SurfaceHolder.Callback, Runnable {
         }
     }
 
-    private fun playerAndBrickInteractions(){
+    private fun playerAndBrickInteractions() {
 
         for (ballObj in storyMode.ballsArray) {
 
@@ -247,7 +251,7 @@ SurfaceHolder.Callback, Runnable {
     private fun gameEnd() {
 
         if (isGameOver || PlayerManager.lives <= 0) {
-            
+
             levelTimer.cancel()
             Log.d(TAG, "gameEnd: min: $levelMinutes, sec: $levelSeconds")
             PlayerManager.setLevelHIghScore()
@@ -265,9 +269,9 @@ SurfaceHolder.Callback, Runnable {
         }
     }
 
-    private fun checkLevelCompleted(){
+    private fun checkLevelCompleted() {
 
-        if (storyMode.brickRow.isEmpty()){
+        if (storyMode.brickRow.isEmpty()) {
 
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()

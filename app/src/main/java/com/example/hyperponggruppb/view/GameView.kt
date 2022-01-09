@@ -199,17 +199,13 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                 ballObj.draw(canvas)
 
-
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
                     ballObj.ballLeft.toFloat(),
                     ballObj.ballTop.toFloat(),
                     null
                 )
-
-
             }
-            //canvas.restore(); // restore previous state (rotate it back)
 
             infiniteMode.player.draw(canvas)
 
