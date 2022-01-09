@@ -3,19 +3,27 @@ package com.example.hyperponggruppb.model
 import android.content.Context
 import android.graphics.*
 
-class Ball(context: Context,var ballLeft: Int,var ballTop: Int,var ballRight: Int,var ballBottom: Int) {
+class Ball() {
 
 
     var paint = Paint()
     var ballSpeedX = 0f
     var ballSpeedY = 0f
     var ballsize = 20f
-    var ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
+    var ballLeft = 0
+    var ballTop = 0
+    var ballRight = 0
+    var ballBottom = 0
+    var ballRect = Rect()
     var playerCollision = false
     var brickCollision = false
 
     init {
         paint.color = Color.WHITE
+    }
+
+    fun update(){
+        ballRect = Rect(ballLeft,ballTop,ballRight,ballBottom)
     }
 
     fun ballGoesDown(): Boolean{

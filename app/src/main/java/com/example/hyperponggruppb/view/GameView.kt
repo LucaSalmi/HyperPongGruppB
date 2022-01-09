@@ -189,11 +189,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdTwo), AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
-
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
-
-            //canvas.save(); // first save the state of the canvas
-            //canvas.rotate(45f); // rotate it
 
             for (ballObj in infiniteMode.ballsArray) {
 

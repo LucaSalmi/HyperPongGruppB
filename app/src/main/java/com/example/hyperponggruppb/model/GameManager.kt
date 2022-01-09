@@ -23,7 +23,6 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     var ballTop = 0
     var ballBottom = 0
     lateinit var extraBall: Ball
-    private val ballRadius = 20f
     lateinit var player: Player
     var patternId = 0
 
@@ -48,25 +47,26 @@ class GameManager(var context: Context?, var isStoryMode: Boolean){
     }
 
     fun makeBall(){
-        ball = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
+        ball = Ball()
+        ball.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
+        ball.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
+        ball.ballTop = player.right.toInt() - (player.playerWidth / 2).toInt() - ball.ballsize.toInt()
+        ball.ballBottom = player.right.toInt() - (player.playerWidth / 2).toInt() + ball.ballsize.toInt()
         ballsArray.add(ball)
     }
 
     fun respawnBall(){
 
-        ball = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
+        ball = Ball()
         ball.paint.color = Color.WHITE
         ballsArray.add(ball)
-        ball.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
-        ball.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
-        ball.ballTop = player.right.toInt() - (player.playerWidth / 2).toInt() - ball.ballsize.toInt()
-        ball.ballBottom = player.right.toInt() - (player.playerWidth / 2).toInt() + ball.ballsize.toInt()
+
         ball.ballSpeedX = 0f
         ball.ballSpeedY = 0f
     }
 
     fun spawnExtraBall(){
-        extraBall = Ball(context!!, ballLeft,ballTop,ballRight,ballBottom)
+        extraBall = Ball()
         ballsArray.add(extraBall)
         extraBall.ballLeft = player.right.toInt() - (player.playerWidth / 2).toInt() - (ball.ballsize/2).toInt()
         extraBall.ballRight = player.right.toInt() - (player.playerWidth / 2).toInt() + (ball.ballsize/2).toInt()
