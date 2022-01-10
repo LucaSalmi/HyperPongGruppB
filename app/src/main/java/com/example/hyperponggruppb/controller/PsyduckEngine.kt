@@ -10,7 +10,7 @@ import com.example.hyperponggruppb.model.Ball
 import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.RandomNumberGenerator
 
-object PhysicsEngine {
+object PsyduckEngine {
 
     private var isCollisionDetected = false
     private var brickHit = Rect()
@@ -49,7 +49,6 @@ object PhysicsEngine {
                 SoundEffectManager.jukebox(context, 0)
             }
         }
-
 
         if (ball.brickCollision){
 

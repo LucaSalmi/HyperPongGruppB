@@ -48,8 +48,6 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         }
     }
 
-    // testing a powerup
-
     //typeID 0
     fun forceBrickDown(brickRow: MutableList<Rect>): MutableList<Rect>{
         for (obj in brickRow){
@@ -58,10 +56,6 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         }
         return brickRow
     }
-    /*fun speedDown(timeTicks: Int): Int {
-        PlayerManager.playTime - 3
-        return timeTicks - 2
-    }*/
 
     //typeID 1
     fun forceBrickUp(brickRow: MutableList<Rect>): MutableList<Rect>{
@@ -71,11 +65,6 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         }
         return brickRow
     }
-    /*
-    fun speedUp(timeTicks: Int): Int {
-        PlayerManager.playTime + 2
-        return timeTicks + +1
-    }*/
 
     //typeID 2
     fun bigPaddle(player: Player) {

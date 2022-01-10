@@ -55,8 +55,8 @@ object AssetManager {
     var brickwidth = 110
     var brickheight = 70
 
-    var powerUpHeight = 40
-    var powerUpWidth = 40
+    var powerUpHeight = 70
+    var powerUpWidth = 70
 
     var dangerZoneHeight = 100
 

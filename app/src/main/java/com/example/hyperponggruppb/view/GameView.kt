@@ -4,14 +4,13 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.*
-import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.example.hyperponggruppb.controller.PhysicsEngine
-import com.example.hyperponggruppb.controller.PhysicsEngine.gameStart
+import com.example.hyperponggruppb.controller.PsyduckEngine
+import com.example.hyperponggruppb.controller.PsyduckEngine.gameStart
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -192,8 +191,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         try {
             canvas = mHolder!!.lockCanvas()
 
-            PhysicsEngine.canvasHeight = canvas.height.toFloat()
-            PhysicsEngine.canvasWidth = canvas.width.toFloat()
+            PsyduckEngine.canvasHeight = canvas.height.toFloat()
+            PsyduckEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdOne), AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
@@ -344,10 +343,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
                     playerAndBrickInteractions()
 
-
-                    if (infiniteMode.brickRow.size < 20) {
+                    if(infiniteMode.brickRow[infiniteMode.brickRow.size-1].top > 0 ){
                         produceExtraBricks()
                     }
+
                     powerUpInteractions()
                 }
 
@@ -396,16 +395,16 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun ballInteractions(){
 
-        PhysicsEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
+        PsyduckEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
     }
 
     private fun checkDamage(){
 
         myActivity.updateText()
 
-        if (PhysicsEngine.damageTaken) {
+        if (PsyduckEngine.damageTaken) {
 
-            PhysicsEngine.damageTaken = false
+            PsyduckEngine.damageTaken = false
             PlayerManager.loseLife()
             gameEnd()
         }
@@ -415,9 +414,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         for (ballObj in infiniteMode.ballsArray) {
 
-            PhysicsEngine.playerCollision(ballObj, infiniteMode.player, context)
+            PsyduckEngine.playerCollision(ballObj, infiniteMode.player, context)
 
-            PhysicsEngine.brickCollision(
+            PsyduckEngine.brickCollision(
                 infiniteMode.brickRow,
                 infiniteMode.brickAssets,
                 ballObj,
@@ -436,7 +435,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun powerUpInteractions(){
 
-        PhysicsEngine.powerUpPhysics(infiniteMode.powerUpArray, infiniteMode.player)
+        PsyduckEngine.powerUpPhysics(infiniteMode.powerUpArray, infiniteMode.player)
         var powerUpToErase: Int? = null
         for (powerUp in infiniteMode.powerUpArray) {
 
@@ -496,7 +495,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     private fun checkDeath(){
 
-        if (PhysicsEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
+        if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
             isGameOver = true
             gameEnd()

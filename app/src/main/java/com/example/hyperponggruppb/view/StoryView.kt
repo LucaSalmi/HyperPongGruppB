@@ -6,19 +6,16 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Matrix
 import android.graphics.Paint
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.example.hyperponggruppb.controller.PhysicsEngine
+import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
-import java.util.*
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
     SurfaceHolder.Callback, Runnable {
@@ -75,7 +72,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             if (System.currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000 / frameRate
 
-                if (PhysicsEngine.gameStart) {
+                if (PsyduckEngine.gameStart) {
 
                     ballInteractions()
                     checkDamage()
@@ -94,8 +91,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             canvas = mHolder!!.lockCanvas()
 
-            PhysicsEngine.canvasHeight = canvas.height.toFloat()
-            PhysicsEngine.canvasWidth = canvas.width.toFloat()
+            PsyduckEngine.canvasHeight = canvas.height.toFloat()
+            PsyduckEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.getBackground(1), matrix, null)
 
@@ -192,7 +189,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         storyMode.player.left = sx.toFloat() - storyMode.player.playerWidth / 2
         storyMode.player.update()
 
-        if (!PhysicsEngine.gameStart) {
+        if (!PsyduckEngine.gameStart) {
 
             storyMode.ball.ballLeft =
                 ((storyMode.player.right - storyMode.player.playerWidth / 2) - storyMode.ball.ballsize / 2).toInt()
@@ -203,12 +200,12 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.ball.update()
         }
 
-        if (event?.action == MotionEvent.ACTION_UP && !PhysicsEngine.gameStart) {
+        if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
 
             restartLevelTimer()
             storyMode.ball.ballSpeedX = 7f
             storyMode.ball.ballSpeedY = -13f
-            PhysicsEngine.gameStart = true
+            PsyduckEngine.gameStart = true
 
         }
         return true
@@ -216,16 +213,16 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
     private fun ballInteractions() {
 
-        PhysicsEngine.ballPhysics(storyMode.ballsArray, storyMode.player)
+        PsyduckEngine.ballPhysics(storyMode.ballsArray, storyMode.player)
     }
 
     private fun checkDamage() {
 
         myActivity.updateText()
 
-        if (PhysicsEngine.damageTaken) {
+        if (PsyduckEngine.damageTaken) {
 
-            PhysicsEngine.damageTaken = false
+            PsyduckEngine.damageTaken = false
             PlayerManager.loseLife()
             gameEnd()
         }
@@ -235,9 +232,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         for (ballObj in storyMode.ballsArray) {
 
-            PhysicsEngine.playerCollision(ballObj, storyMode.player, context)
+            PsyduckEngine.playerCollision(ballObj, storyMode.player, context)
 
-            PhysicsEngine.brickCollision(
+            PsyduckEngine.brickCollision(
                 storyMode.brickRow,
                 storyMode.brickAssets,
                 ballObj,
@@ -259,15 +256,15 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             Log.d(TAG, "gameEnd: min: $levelMinutes, sec: $levelSeconds")
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
-            PhysicsEngine.gameStart = false
+            PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
             myActivity.finish()
         }
 
-        if (PlayerManager.lives > 0 && PhysicsEngine.gameStart) {
+        if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
 
-            PhysicsEngine.gameStart = false
+            PsyduckEngine.gameStart = false
             storyMode.respawnBall()
         }
     }
@@ -280,7 +277,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
-            PhysicsEngine.gameStart = false
+            PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             myActivity.finish()
         }

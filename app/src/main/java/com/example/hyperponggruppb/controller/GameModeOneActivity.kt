@@ -47,7 +47,7 @@ class GameModeOneActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        PhysicsEngine.gameStart = false
+        PsyduckEngine.gameStart = false
         AssetManager.resetBackGround()
         SoundEffectManager.stopMusic()
         super.onBackPressed()
