@@ -100,7 +100,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         brickRow = BrickStructure.createPattern(brickRow, patternId)
 
         if (!isStoryMode) {
-            BrickStructure.makeOOBBricks(brickRow)
+            makeOOBBricks()
         }
     }
 

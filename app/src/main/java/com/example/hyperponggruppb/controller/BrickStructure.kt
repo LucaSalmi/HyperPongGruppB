@@ -1,6 +1,8 @@
 package com.example.hyperponggruppb.controller
 
+import android.content.ContentValues.TAG
 import android.graphics.Rect
+import android.util.Log
 import com.example.hyperponggruppb.model.Bricks
 
 object BrickStructure {
@@ -132,6 +134,8 @@ object BrickStructure {
 
     fun createOOBBPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect>{
 
+        Log.d(TAG, "createOOBBPattern: in function")
+
         val patternOne = when(id){
 
             0 -> "1000000001100000000110000000011000110001100011000110001100011011111101111011011110001100011111111111" // HellGate-level
@@ -155,6 +159,7 @@ object BrickStructure {
         var index = 0
 
         if(patternOne.length < brickRow.size){
+            Log.d(TAG, "createOOBBPattern: pattern too long")
             return brickRow
         }
 
@@ -167,6 +172,7 @@ object BrickStructure {
             }
             index++
         }
+        Log.d(TAG, "createOOBBPattern: finished succesfully")
 
         return temOOBBricks
     }
