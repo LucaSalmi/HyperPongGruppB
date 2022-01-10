@@ -17,6 +17,12 @@ object BrickStructure {
     var top = 5
     var right = 115
     var bottom = 65
+    var brickHeight = bottom - top
+    var brickWidth = right - left
+
+// the amount of tempo the bricks is falling AKA playerSpeed illusion
+
+    var playerSpeed = 1
 
     /**
      * makes the first ten rows of bricks, visible to the player on startup
@@ -179,9 +185,12 @@ object BrickStructure {
 
     fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
 
+
+
         for (obj in brickRow){
-            obj.top += (bottom /32.5).toInt()
-            obj.bottom += (bottom /32.5).toInt()
+
+            obj.top += playerSpeed
+            obj.bottom += playerSpeed
         }
         return brickRow
     }

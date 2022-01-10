@@ -160,14 +160,14 @@ object AssetManager {
 
     fun moveBackGround(){
 
-        bgRectOne.top += (BrickStructure.bottom /32.5).toInt()
-        bgRectOne.bottom += (BrickStructure.bottom /32.5).toInt()
-        bgRectTransOne.top += (BrickStructure.bottom /32.5).toInt()
-        bgRectTransOne.bottom += (BrickStructure.bottom /32.5).toInt()
-        bgRectTwo.top += (BrickStructure.bottom /32.5).toInt()
-        bgRectTwo.bottom += (BrickStructure.bottom /32.5).toInt()
-        bgRectTransTwo.top += (BrickStructure.bottom /32.5).toInt()
-        bgRectTransTwo.bottom += (BrickStructure.bottom /32.5).toInt()
+        bgRectOne.top += BrickStructure.playerSpeed
+        bgRectOne.bottom += BrickStructure.playerSpeed
+        bgRectTransOne.top += BrickStructure.playerSpeed
+        bgRectTransOne.bottom += BrickStructure.playerSpeed
+        bgRectTwo.top += BrickStructure.playerSpeed
+        bgRectTwo.bottom += BrickStructure.playerSpeed
+        bgRectTransTwo.top += BrickStructure.playerSpeed
+        bgRectTransTwo.bottom += BrickStructure.playerSpeed
     }
 
     fun resetBackGround(){

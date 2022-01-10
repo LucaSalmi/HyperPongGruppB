@@ -53,8 +53,8 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     //typeID 0
     fun forceBrickDown(brickRow: MutableList<Rect>): MutableList<Rect>{
         for (obj in brickRow){
-            obj.top += BrickStructure.bottom
-            obj.bottom += BrickStructure.bottom
+            obj.top += BrickStructure.brickHeight
+            obj.bottom += BrickStructure.brickHeight
         }
         return brickRow
     }
@@ -66,8 +66,8 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     //typeID 1
     fun forceBrickUp(brickRow: MutableList<Rect>): MutableList<Rect>{
         for (obj in brickRow){
-            obj.top -= BrickStructure.bottom
-            obj.bottom -= BrickStructure.bottom
+            obj.top -= BrickStructure.brickHeight
+            obj.bottom -= BrickStructure.brickHeight
         }
         return brickRow
     }
