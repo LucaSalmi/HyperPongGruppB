@@ -253,7 +253,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (isGameOver || PlayerManager.lives <= 0) {
 
             levelTimer.cancel()
-            Log.d(TAG, "gameEnd: min: $levelMinutes, sec: $levelSeconds")
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveHighScore(sp)
             PsyduckEngine.gameStart = false

@@ -30,14 +30,11 @@ class FirstWorldFragment : Fragment() {
         levelOne?.setOnClickListener {
             if (checkUnlock(1)){
                 enterLevelScreen(1)
-
-                //startLevel()
             }
         }
         levelTwo?.setOnClickListener {
             if (checkUnlock(2)){
                 enterLevelScreen(2)
-                //startLevel()
             }else{
                 toaster()
             }
@@ -45,7 +42,6 @@ class FirstWorldFragment : Fragment() {
         levelThree?.setOnClickListener {
             if (checkUnlock(3)){
                 enterLevelScreen(3)
-                //startLevel()
             }else{
                 toaster()
             }
@@ -53,7 +49,6 @@ class FirstWorldFragment : Fragment() {
         levelFour?.setOnClickListener {
             if (checkUnlock(4)){
                 enterLevelScreen(4)
-                //startLevel()
             }else{
                 toaster()
             }
@@ -61,7 +56,6 @@ class FirstWorldFragment : Fragment() {
         levelFive?.setOnClickListener {
             if (checkUnlock(5)){
                 enterLevelScreen(5)
-                //startLevel()
             }else{
                 toaster()
             }
@@ -95,27 +89,33 @@ class FirstWorldFragment : Fragment() {
         val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
 
                         // HÄR ÄR JAG HUEHUEHUEHUEHUEH
+        val levelString = getString(R.string.level) + levelId.toString()
 
         when (levelId) {
             1 -> {
-                screenLevelID.setText(R.string.level_one)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             2 -> {
-                screenLevelID.setText(R.string.level_two)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             3 -> {
-                screenLevelID.setText(R.string.level_three)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             4 -> {
-                screenLevelID.setText(R.string.level_four)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             5 -> {
-                screenLevelID.setText(R.string.level_five)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
         }
 
@@ -194,7 +194,6 @@ class FirstWorldFragment : Fragment() {
         val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
         startActivity(toLevel)
     }
-
     private fun toaster(){
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
     }

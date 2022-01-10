@@ -34,7 +34,6 @@ class SecondWorldFragment : Fragment() {
         levelSix?.setOnClickListener {
             if (checkUnlock(6)) {
                 enterLevelScreen(6)
-                //startLevel()
             }else{
                 toaster()
             }
@@ -42,7 +41,6 @@ class SecondWorldFragment : Fragment() {
         levelSeven?.setOnClickListener {
             if (checkUnlock(7)) {
                 enterLevelScreen(7)
-                //startLevel()
             } else {
                 toaster()
             }
@@ -50,7 +48,6 @@ class SecondWorldFragment : Fragment() {
         levelEight?.setOnClickListener {
             if (checkUnlock(8)) {
                 enterLevelScreen(8)
-                //startLevel()
             } else {
                 toaster()
             }
@@ -58,7 +55,6 @@ class SecondWorldFragment : Fragment() {
         levelNine?.setOnClickListener {
             if (checkUnlock(9)) {
                 enterLevelScreen(9)
-                //startLevel()
             } else {
                 toaster()
             }
@@ -66,7 +62,6 @@ class SecondWorldFragment : Fragment() {
         levelTen?.setOnClickListener {
             if (checkUnlock(10)) {
                 enterLevelScreen(10)
-                //startLevel()
             } else {
                 toaster()
             }
@@ -103,32 +98,38 @@ class SecondWorldFragment : Fragment() {
         val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
 
         // HÄR ÄR JAG HUEHUEHUEHUEHUEH
+        val levelString = getString(R.string.level) + levelId.toString()
 
         when (levelId) {
             6 -> {
-                screenLevelID.setText(R.string.level_one)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             7 -> {
-                screenLevelID.setText(R.string.level_two)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             8 -> {
-                screenLevelID.setText(R.string.level_three)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             9 -> {
-                screenLevelID.setText(R.string.level_four)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
             10 -> {
-                screenLevelID.setText(R.string.level_five)
+                screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                dialog.dismiss()
             }
         }
 

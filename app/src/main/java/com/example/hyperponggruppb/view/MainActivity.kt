@@ -136,8 +136,7 @@ class MainActivity : AppCompatActivity() {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(this, 1)
                 setAccount()
-                PlayerManager.resetHighScore()
-                PlayerManager.setHighScore()
+                PlayerManager.changeUser()
                 PlayerManager.saveHighScore(sp)
                 dialog.dismiss()
             }

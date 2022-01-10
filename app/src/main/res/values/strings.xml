@@ -28,17 +28,7 @@
     <string name="txt_story_mode">Story Mode</string>
 
     <!-- Enter Level Screen Strings -->
-    <string name="level">level</string>
-    <string name="level_one">level 1</string>
-    <string name="level_two">level 2</string>
-    <string name="level_three">level 3</string>
-    <string name="level_four">level 4</string>
-    <string name="level_five">level 5</string>
-    <string name="level_six">level 6</string>
-    <string name="level_seven">level 7</string>
-    <string name="level_eight">level 8</string>
-    <string name="level_nine">level 9</string>
-    <string name="level_ten">level 10</string>
+    <string name="level">"level "</string>
 
 
 </resources>

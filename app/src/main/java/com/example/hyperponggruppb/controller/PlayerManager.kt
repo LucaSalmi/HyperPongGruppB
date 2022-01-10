@@ -45,7 +45,7 @@ object PlayerManager {
                 if (obj.highScore < save.highScore) {
                     obj.highScore = save.highScore
                 }
-                if (currentLevel> obj.currentLevel){
+                if (currentLevel > obj.currentLevel){
 
                     obj.currentLevel = currentLevel
                 }
@@ -86,8 +86,27 @@ object PlayerManager {
                 }
             }
         }
+        Log.d(TAG, "readSave: $usersArray")
 
         orderArray()
+    }
+
+    fun changeUser(){
+
+        resetPoints()
+        resetHighScore()
+        resetScoresArray()
+        resetLevel()
+
+        for (obj in usersArray) {
+
+            if (obj.name == name) {
+                levelScoresArray = obj.levelScoresArray
+                currentLevel = obj.currentLevel
+                nextLevel = obj.currentLevel + 1
+                playerHighScore = obj.highScore
+            }
+        }
     }
 
     fun setHighScore() {
@@ -128,6 +147,15 @@ object PlayerManager {
 
     fun resetHighScore() {
         playerHighScore = 0
+    }
+
+    fun resetLevel(){
+        currentLevel = 0
+        nextLevel = 1
+    }
+
+    fun resetScoresArray(){
+        levelScoresArray.clear()
     }
 
     fun loseLife() {
@@ -182,6 +210,8 @@ object PlayerManager {
     }
 
     fun unlockNextLevel(){
+
+        Log.d(TAG, "unlockNextLevel: $isReplaying")
 
         if (isReplaying){
 
