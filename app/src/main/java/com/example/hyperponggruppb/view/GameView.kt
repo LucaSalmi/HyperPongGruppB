@@ -108,6 +108,15 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             9 -> millisSpawnTimer = 32L
             10 -> millisSpawnTimer = 16L
         }
+        if (timeTicks in 3..6) {
+            BrickStructure.playerSpeed = 2
+        }
+        if (timeTicks in 7..9) {
+            BrickStructure.playerSpeed = 3
+        } else if (timeTicks == 10) {
+            BrickStructure.playerSpeed = 4
+        }
+
     }
 
     /**
@@ -160,6 +169,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PlayerManager.saveHighScore(sp)
             PlayerManager.setPlacement()
             gameStart = false
+            BrickStructure.playerSpeed = 1
             infiniteMode.clearArrays()
             PlayerManager.isGameEnded = true
             spawnTimer.cancel()
