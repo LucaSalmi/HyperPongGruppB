@@ -38,6 +38,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var levelSeconds = 0
     var levelMinutes = 0
 
+    var backgroundCode = 1
+
     init {
 
         mHolder?.addCallback(this)
@@ -45,6 +47,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
+        if (PlayerManager.currentLevel > 5 ){
+            backgroundCode = 3
+        }
     }
 
     private val levelTimer = object : CountDownTimer(60000, 1000) {
@@ -94,7 +99,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PsyduckEngine.canvasHeight = canvas.height.toFloat()
             PsyduckEngine.canvasWidth = canvas.width.toFloat()
 
-            canvas.drawBitmap(AssetManager.getBackground(1), matrix, null)
+            canvas.drawBitmap(AssetManager.getBackground(backgroundCode), matrix, null)
 
             for (ballObj in storyMode.ballsArray) {
 
