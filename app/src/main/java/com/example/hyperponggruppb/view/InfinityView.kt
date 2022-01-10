@@ -20,7 +20,7 @@ import com.example.hyperponggruppb.model.GameManager
 import java.lang.System.currentTimeMillis
 
 
-class GameView(context: Context?, var activity: Activity) : SurfaceView(context),
+class InfinityView(context: Context?, var activity: Activity) : SurfaceView(context),
     SurfaceHolder.Callback, Runnable {
 
 

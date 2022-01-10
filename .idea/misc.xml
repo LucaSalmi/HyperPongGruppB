@@ -15,6 +15,7 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_fragment_preload_level.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.2" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_one.xml" value="0.225" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_story.xml" value="0.11317567567567567" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_leader_board.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_splash.xml" value="0.10648148148148148" />
@@ -22,7 +23,12 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/enter_level_screen.xml" value="0.46848899012908124" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_first_world.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.25" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point_story_mode.xml" value="0.25" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point_storymode.xml" value="0.5" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_second_world.xml" value="0.11317567567567567" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_story_level.xml" value="0.11317567567567567" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/list_item_layout.xml" value="0.11317567567567567" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/splash_activity.xml" value="0.10648148148148148" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/drawable/ball_sprite.xml" value="0.1787037037037037" />

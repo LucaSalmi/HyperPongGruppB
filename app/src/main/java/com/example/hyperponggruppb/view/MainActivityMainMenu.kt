@@ -18,7 +18,7 @@ import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivityMainMenu : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var accountText: String = ""
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startStoryMode(){
 
-        val toStoryMode = Intent(this, StoryModeActivity::class.java)
+        val toStoryMode = Intent(this, OverWorldActivity::class.java)
         PlayerManager.isInfiniteMode = false
         startActivity(toStoryMode)
     }

@@ -4,8 +4,8 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
-import com.example.hyperponggruppb.view.fragment.GameOneFragment
-import com.example.hyperponggruppb.view.fragment.PointFragment
+import com.example.hyperponggruppb.view.fragment.InfintyFragment
+import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 import android.util.Log
@@ -24,11 +24,11 @@ class GameModeOneActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportFragmentManager.commit {
-            add(R.id.frame_layout, PointFragment())
+            add(R.id.frame_layout, PointFragmentInfinityMode())
         }
 
         supportFragmentManager.commit {
-            add(R.id.overworld_map_container, GameOneFragment())
+            add(R.id.overworld_map_container, InfintyFragment())
         }
     }
 
@@ -37,7 +37,7 @@ class GameModeOneActivity : AppCompatActivity() {
         runOnUiThread(Runnable {
             try {
                 supportFragmentManager.commit {
-                    replace(R.id.frame_layout, PointFragment())
+                    replace(R.id.frame_layout, PointFragmentInfinityMode())
                 }
             }catch (e: Exception){
                 Log.e(TAG, "updateText: caught")
