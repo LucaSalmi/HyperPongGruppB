@@ -45,6 +45,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
     var backgroundIdOne = 1
     var backgroundIdTwo = 2
+    var transBackroundIdOne = 1
+    var transBackgroundIdTwo = 2
 
 
     init {
@@ -52,6 +54,8 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         mHolder?.addCallback(this)
         backgroundIdOne = 1
         backgroundIdTwo = 2
+        transBackroundIdOne = 1
+        transBackgroundIdTwo = 2
         PlayerManager.lives = 3
         PlayerManager.resetPoints()
         myActivity.updateText()
@@ -195,9 +199,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PsyduckEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdOne), AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
-            canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.transLavaToStone, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdTwo), AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
-            canvas.drawBitmap(AssetManager.lavaBackgroundTrans, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.transStoneToIce, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
             for (ballObj in infiniteMode.ballsArray) {
@@ -370,9 +374,18 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             AssetManager.bgRectOne.top = AssetManager.bgRectOne.bottom - AssetManager.bGHeight
 
             when (backgroundIdOne){
-                1 -> backgroundIdOne = 3
-                2 -> backgroundIdOne = 1
-                3 -> backgroundIdOne = 2
+                1 -> {
+                    backgroundIdOne = 3
+                    transBackroundIdOne = 3
+                }
+                2 -> {
+                    backgroundIdOne = 1
+                    transBackroundIdOne = 1
+                }
+                3 -> {
+                    backgroundIdOne = 2
+                    transBackroundIdOne = 2
+                }
             }
 
         }
@@ -386,9 +399,18 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             AssetManager.bgRectTwo.top = AssetManager.bgRectTwo.bottom - AssetManager.bGHeight
 
             when(backgroundIdTwo){
-                1-> backgroundIdTwo = 3
-                2-> backgroundIdTwo = 1
-                3-> backgroundIdTwo = 2
+                1-> {
+                    backgroundIdTwo = 3
+                    transBackgroundIdTwo= 3
+                }
+                2-> {
+                    backgroundIdTwo = 1
+                    transBackgroundIdTwo= 1
+                }
+                3-> {
+                    backgroundIdTwo = 2
+                    transBackgroundIdTwo= 2
+                }
             }
 
         }

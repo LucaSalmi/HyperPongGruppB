@@ -13,6 +13,10 @@ object AssetManager {
 
     lateinit var lavaBackground: Bitmap
     lateinit var lavaBackgroundTrans: Bitmap
+    lateinit var transLavaToStone: Bitmap
+    lateinit var transStoneToIce: Bitmap
+    lateinit var transIceToLava: Bitmap
+    lateinit var transEndPortal: Bitmap
     lateinit var iceBackground: Bitmap
     lateinit var stoneBackground: Bitmap
     lateinit var playerAsset: Bitmap
@@ -39,7 +43,7 @@ object AssetManager {
     lateinit var powerUpAssetHealthPlus: Bitmap
     lateinit var darkRectangleDeathZone: Bitmap
     val bGHeight = getScreenHeight()
-    val transHeight = getScreenHeight()/2
+    val transHeight = getScreenHeight()/3
     var bgRectOne = Rect(0, 0, getScreenWidth(), bGHeight)
     var bgRectTransOne = Rect(0, bgRectOne.top - transHeight, getScreenWidth(), bgRectOne.top)
     var bgRectTwo = Rect(0, bgRectTransOne.top - bGHeight, getScreenWidth(), bgRectTransOne.top)
@@ -62,30 +66,21 @@ object AssetManager {
 
 
     fun prepareAssets(context: Context){
+        lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_story_bg).scale(getScreenWidth(), getScreenHeight(), true)
+        iceBackground = BitmapFactory.decodeResource(context.resources, R.drawable.ice_level_background).scale(getScreenWidth(), getScreenHeight(), true)
+        stoneBackground = BitmapFactory.decodeResource(context.resources, R.drawable.cave_background).scale(getScreenWidth(), getScreenHeight(), true)
 
-        lavaBackground = BitmapFactory.decodeResource(context.resources,
-            R.drawable.lava_story_bg
-        ).scale(getScreenWidth(), getScreenHeight(), true)
-        iceBackground = BitmapFactory.decodeResource(context.resources,
-            R.drawable.ice_level_background
-        ).scale(getScreenWidth(), getScreenHeight(), true)
-        stoneBackground = BitmapFactory.decodeResource(context.resources,
-            R.drawable.cave_background
-        ).scale(getScreenWidth(), getScreenHeight(), true)
-
-        lavaBackgroundTrans = BitmapFactory.decodeResource(context.resources,
-            R.drawable.lava_story_bg
-        ).scale(getScreenWidth(), getScreenHeight()/2, true)
+        lavaBackgroundTrans = BitmapFactory.decodeResource(context.resources, R.drawable.lava_story_bg).scale(getScreenWidth(), getScreenHeight()/3, true)
+        transLavaToStone = BitmapFactory.decodeResource(context.resources, R.drawable.lava_to_stone_background).scale(getScreenWidth(), getScreenHeight()/3, true)
+        transStoneToIce = BitmapFactory.decodeResource(context.resources, R.drawable.stone_to_ice_background).scale(getScreenWidth(), getScreenHeight()/3, true)
+        transIceToLava = BitmapFactory.decodeResource(context.resources, R.drawable.lava_story_bg).scale(getScreenWidth(), getScreenHeight()/3, true)
+        transEndPortal = BitmapFactory.decodeResource(context.resources, R.drawable.lava_story_bg).scale(getScreenWidth(), getScreenHeight()/3, true)
 
         playerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_normal).scale(
             playerwidth,
             playerhight,true )
-        bigPlayerAsset = BitmapFactory.decodeResource(context.resources,
-            R.drawable.player_pad_wide
-        ).scale(playerwidth + playerwidth/2, playerhight,true )
-        smallPlayerAsset = BitmapFactory.decodeResource(context.resources,
-            R.drawable.player_pad_small
-        ).scale(playerwidth - playerwidth/2, playerhight,true )
+        bigPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_wide).scale(playerwidth + playerwidth/2, playerhight,true )
+        smallPlayerAsset = BitmapFactory.decodeResource(context.resources, R.drawable.player_pad_small).scale(playerwidth - playerwidth/2, playerhight,true )
 
         ballAsset = BitmapFactory.decodeResource(context.resources, R.drawable.ball_glow_simple).scale(ballwidth, ballheight,true)
         brickAssetV1 = BitmapFactory.decodeResource(context.resources, R.drawable.brick_v1).scale(brickwidth, brickheight,true)
@@ -186,6 +181,16 @@ object AssetManager {
             2 -> stoneBackground
             3 -> iceBackground
             else -> lavaBackground
+        }
+    }
+    fun getTransBackground(id: Int): Bitmap{
+
+        return when (id) {
+
+            1 -> transLavaToStone
+            2 -> transStoneToIce
+            3 -> transIceToLava
+            else -> transLavaToStone
         }
     }
 }
