@@ -18,12 +18,8 @@ class UserSelectScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_user_select_screen, container, false)
-        val usersList = view.findViewById<RecyclerView>(R.id.rw_user_list)
-        usersList.layoutManager = LinearLayoutManager(super.getContext())
-        val userSelectionAdapter = super.getContext()?.let { UserSelectionAdapter(it, PlayerManager.usersArray) }
-        usersList.adapter = userSelectionAdapter
-        return view
+        return inflater.inflate(R.layout.fragment_user_select_screen, container, false)
+
     }
 
 

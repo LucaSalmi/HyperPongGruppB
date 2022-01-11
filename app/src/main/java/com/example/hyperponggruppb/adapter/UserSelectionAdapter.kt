@@ -1,5 +1,6 @@
 package com.example.hyperponggruppb.adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.model.PlayerData
+import com.example.hyperponggruppb.view.MainActivity
 
-class UserSelectionAdapter (val context: Context, private val users: MutableList<PlayerData>): RecyclerView.Adapter<UserSelectionAdapter.ViewHolder>() {
+class UserSelectionAdapter (val context: Context, private val users: MutableList<PlayerData>, val userDialog: Dialog): RecyclerView.Adapter<UserSelectionAdapter.ViewHolder>() {
+
+    private val myActivity = context as MainActivity
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -40,7 +44,9 @@ class UserSelectionAdapter (val context: Context, private val users: MutableList
 
         holder.linearLayout.setOnClickListener {
 
-            Toast.makeText(context, user.name, Toast.LENGTH_SHORT).show()
+            PlayerManager.name = user.name
+            myActivity.setAccount()
+            userDialog.dismiss()
         }
     }
 

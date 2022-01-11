@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         binding.ivGameMode.setOnClickListener {
             
             SoundEffectManager.stopMusic()
+            PlayerManager.loadUserData()
             
             if (isStoryMode){
                 startStoryMode()
@@ -89,6 +90,10 @@ class MainActivity : AppCompatActivity() {
 
             changeAccount()
         }
+
+        binding.ivSettings.setOnClickListener {
+            nameInput()
+        }
     }
 
     private fun changeAccount(){
@@ -99,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
         val usersList = userListDialog.findViewById<RecyclerView>(R.id.rw_user_list)
         usersList.layoutManager = LinearLayoutManager(this)
-        val userSelectionAdapter = UserSelectionAdapter(this, PlayerManager.usersArray)
+        val userSelectionAdapter = UserSelectionAdapter(this, PlayerManager.usersArray, userListDialog)
         usersList.adapter = userSelectionAdapter
 
         userListDialog.show()
@@ -107,6 +112,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeButtonText(){
+
         if (isStoryMode){
             binding.tvGameMode.text = getString(R.string.txt_story_mode)
         }else{
@@ -118,6 +124,7 @@ class MainActivity : AppCompatActivity() {
 
         val toStoryMode = Intent(this, StoryModeActivity::class.java)
         PlayerManager.isInfiniteMode = false
+        PlayerManager.loadUserData()
         startActivity(toStoryMode)
     }
 
@@ -125,11 +132,12 @@ class MainActivity : AppCompatActivity() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
+        PlayerManager.loadUserData()
         PlayerManager.setHighScore()
         startActivity(toGameModeOne)
     }
 
-    private fun setAccount(){
+    fun setAccount(){
 
         accountText = if (PlayerManager.name != "null"){
             getString(R.string.active_account_string) + PlayerManager.name
@@ -157,7 +165,7 @@ class MainActivity : AppCompatActivity() {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(this, 1)
                 setAccount()
-                PlayerManager.saveHighScore(sp)
+                PlayerManager.saveUserData(sp)
                 dialog.dismiss()
             }
         }

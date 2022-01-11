@@ -259,7 +259,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
-            PlayerManager.saveHighScore(sp)
+            PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
@@ -280,7 +280,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
-            PlayerManager.saveHighScore(sp)
+            PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             myActivity.finish()

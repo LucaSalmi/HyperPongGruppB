@@ -165,7 +165,7 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
 
         if (isGameOver || PlayerManager.lives <= 0) {
 
-            PlayerManager.saveHighScore(sp)
+            PlayerManager.saveUserData(sp)
             PlayerManager.setPlacement()
             gameStart = false
             BrickStructure.playerSpeed = 1
@@ -350,7 +350,6 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
                             produceExtraBricks()
                         }
                     }
-
 
                     powerUpInteractions()
                 }
