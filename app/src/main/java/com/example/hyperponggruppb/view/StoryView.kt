@@ -31,7 +31,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     private var storyMode: GameManager
     var isGameOver = false
 
-    private val frameRate = 60
+    private val frameRate = 30
     val deltaTime = 0L
     var timeToUpdate = System.currentTimeMillis()
 

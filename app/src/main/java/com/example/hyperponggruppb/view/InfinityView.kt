@@ -38,7 +38,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
     var millisPowerUpTimer = 7000L
     var isGameOver = false
 
-    private val frameRate = 60
+    private val frameRate = 30
     val deltaTime = 0L
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false

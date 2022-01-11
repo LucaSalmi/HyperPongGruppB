@@ -33,8 +33,6 @@ class PointFragmentStoryMode : Fragment() {
         starBar.max = PlayerManager.currentMaxScore
         starBar.progress = 0
 
-        Log.d(TAG, "onCreateView: ${PlayerManager.currentMaxScore}")
-
         score?.text = PlayerManager.playerPoints.toString()
         if (currentScore > refScore) {
             starBar.progress = (currentScore)
