@@ -3,6 +3,7 @@ package com.example.hyperponggruppb.controller
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -22,6 +23,9 @@ object PlayerManager {
     var levelScoresArray = mutableListOf<Int>()
     var isInfiniteMode = false
     var isReplaying = false
+    var currentMaxScore = 0
+
+
 
 
     fun addPoints(newPoints: Int) {

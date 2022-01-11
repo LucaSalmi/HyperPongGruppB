@@ -51,16 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_story_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/pb_starbar"
-                app:layout_constraintStart_toStartOf="@+id/pb_starbar"
-                app:layout_constraintTop_toTopOf="@id/pb_starbar" />
+
 
             <ProgressBar
                 android:id="@+id/pb_starbar"
@@ -71,6 +62,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_story_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/pb_starbar"
+                app:layout_constraintStart_toStartOf="@+id/pb_starbar"
+                app:layout_constraintTop_toTopOf="@id/pb_starbar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
