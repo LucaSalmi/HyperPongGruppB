@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.adapter.UserSelectionAdapter
 import com.example.hyperponggruppb.view.LeaderBoardActivity
-import com.example.hyperponggruppb.view.MainActivity
+import com.example.hyperponggruppb.view.MainActivityMainMenu
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class DialogManager(val context: Context) {
@@ -172,8 +172,8 @@ class DialogManager(val context: Context) {
 
     }
 
-    private fun getMainActivity(): MainActivity {
-        return context as MainActivity
+    private fun getMainActivity(): MainActivityMainMenu {
+        return context as MainActivityMainMenu
     }
 
 

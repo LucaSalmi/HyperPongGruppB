@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.model.PlayerData
-import com.example.hyperponggruppb.view.MainActivity
+import com.example.hyperponggruppb.view.MainActivityMainMenu
 
 class UserSelectionAdapter (val context: Context, private val users: MutableList<PlayerData>, val userDialog: Dialog): RecyclerView.Adapter<UserSelectionAdapter.ViewHolder>() {
 
-    private val myActivity = context as MainActivity
+    private val myActivity = context as MainActivityMainMenu
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
