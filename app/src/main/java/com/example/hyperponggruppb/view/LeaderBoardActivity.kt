@@ -1,9 +1,10 @@
-package com.example.hyperponggruppb
+package com.example.hyperponggruppb.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.adapter.LeaderboardAdapter
 import com.example.hyperponggruppb.databinding.ActivityLeaderBoardBinding
 
 
