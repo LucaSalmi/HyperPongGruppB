@@ -9,7 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Window
 import android.widget.*
-import com.example.hyperponggruppb.LeaderBoardActivity
+import com.example.hyperponggruppb.view.LeaderBoardActivity
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.SoundEffectManager
