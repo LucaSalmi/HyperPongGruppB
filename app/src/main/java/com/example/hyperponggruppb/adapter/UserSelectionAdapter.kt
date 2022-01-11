@@ -32,7 +32,7 @@ class UserSelectionAdapter (val context: Context, private val users: MutableList
 
         var nameString = "Name: " + user.name
         var highScoreString = "HighScore: " + user.highScore.toString()
-        var levelString = "Current Level: " + user.currentLevel.toString()
+        var levelString = "Level: " + user.currentLevel.toString()
 
         holder.userName.text = nameString
         holder.userHighScore.text = highScoreString

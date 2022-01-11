@@ -11,15 +11,15 @@ import android.os.Looper
 import android.util.Log
 import android.view.Window
 import android.widget.*
-import androidx.fragment.app.commit
-import com.example.hyperponggruppb.view.LeaderBoardActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.adapter.UserSelectionAdapter
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
-import com.example.hyperponggruppb.view.fragment.UserSelectScreenFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private var isStoryMode = true
     var isFirstAccount = false
     private lateinit var sp: SharedPreferences
-    val fragment = UserSelectScreenFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,13 +86,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnChangeAccount.setOnClickListener {
-            //nameInput()
 
-            supportFragmentManager.commit {
-                add(R.id.fragment_container_main, fragment)
-            }
-
+            changeAccount()
         }
+    }
+
+    private fun changeAccount(){
+
+        val userListDialog = Dialog(this)
+        userListDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        userListDialog.setContentView(R.layout.fragment_user_select_screen)
+
+        val usersList = userListDialog.findViewById<RecyclerView>(R.id.rw_user_list)
+        usersList.layoutManager = LinearLayoutManager(this)
+        val userSelectionAdapter = UserSelectionAdapter(this, PlayerManager.usersArray)
+        usersList.adapter = userSelectionAdapter
+
+        userListDialog.show()
+        userListDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
     private fun changeButtonText(){
@@ -136,10 +146,10 @@ class MainActivity : AppCompatActivity() {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
         dialog.setContentView(R.layout.enter_name_dialog)
         val nameField = dialog.findViewById<EditText>(R.id.et_enter_name_field)
         val saveBtn = dialog.findViewById<Button>(R.id.save_btn)
-        val cancelBtn = dialog.findViewById<Button>(R.id.cancel_btn)
 
         saveBtn.setOnClickListener {
 
@@ -147,20 +157,11 @@ class MainActivity : AppCompatActivity() {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(this, 1)
                 setAccount()
-                PlayerManager.changeUser()
                 PlayerManager.saveHighScore(sp)
                 dialog.dismiss()
             }
         }
-            cancelBtn.setOnClickListener {
 
-                if (isFirstAccount){
-
-                    PlayerManager.name = "Guest"
-                }
-                dialog.dismiss()
-            }
-        
         dialog.show()
     }
 
@@ -244,17 +245,6 @@ class MainActivity : AppCompatActivity() {
         
         SoundEffectManager.musicSetup(this, 0)
         super.onResume()
-    }
-
-    override fun onBackPressed() {
-
-        if (fragment.isVisible){
-            supportFragmentManager.commit {
-                remove(fragment)
-            }
-        }else{
-            super.onBackPressed()
-        }
     }
 
 }
