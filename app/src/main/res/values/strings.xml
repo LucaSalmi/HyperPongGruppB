@@ -29,6 +29,9 @@
 
     <!-- Enter Level Screen Strings -->
     <string name="level">"level "</string>
+    <string name="new_account">Create New Account</string>
+    <string name="switch_label_music">Background Music</string>
+    <string name="switch_label_effects">Sound Effects</string>
 
 
 </resources>

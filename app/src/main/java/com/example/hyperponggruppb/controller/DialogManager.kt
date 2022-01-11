@@ -1,14 +1,13 @@
 package com.example.hyperponggruppb.controller
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,20 +15,19 @@ import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.adapter.UserSelectionAdapter
 import com.example.hyperponggruppb.view.LeaderBoardActivity
 import com.example.hyperponggruppb.view.MainActivity
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class DialogManager(val context: Context) {
 
-    private var myActivity: MainActivity = context as MainActivity
-
 
     /**
-     * lets the player change wich account he/she is playing on from a list of all saved users.
+     * lets the player change which account he/she is playing on from a list of all saved users.
      */
-    fun changeAccount(context: Context){
+    fun changeAccount(){
 
         val userListDialog = Dialog(context)
         userListDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        userListDialog.setContentView(R.layout.fragment_user_select_screen)
+        userListDialog.setContentView(R.layout.user_select_screen_layout)
 
         val usersList = userListDialog.findViewById<RecyclerView>(R.id.rw_user_list)
         usersList.layoutManager = LinearLayoutManager(context)
@@ -43,14 +41,14 @@ class DialogManager(val context: Context) {
     /**
      * if no Account is loaded, or the user wants to change the account he is playing on, the dialog prompts for a name and loads, if present, all the necessary data coupled with the user
      */
-    fun nameInput(context: Context, sp: SharedPreferences){
+    fun nameInput(sp: SharedPreferences){
 
-        val dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.enter_name_dialog)
-        val nameField = dialog.findViewById<EditText>(R.id.et_enter_name_field)
-        val saveBtn = dialog.findViewById<Button>(R.id.save_btn)
+        val nameInputDialog = Dialog(context)
+        nameInputDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        nameInputDialog.setCancelable(false)
+        nameInputDialog.setContentView(R.layout.enter_name_dialog)
+        val nameField = nameInputDialog.findViewById<EditText>(R.id.et_enter_name_field)
+        val saveBtn = nameInputDialog.findViewById<Button>(R.id.save_btn)
 
         saveBtn.setOnClickListener {
 
@@ -58,12 +56,12 @@ class DialogManager(val context: Context) {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
                 PlayerManager.saveUserData(sp)
-                myActivity.setAccount()
-                dialog.dismiss()
+                getMainActivity().setAccount()
+                nameInputDialog.dismiss()
             }
         }
 
-        dialog.show()
+        nameInputDialog.show()
     }
 
     /**
@@ -71,17 +69,17 @@ class DialogManager(val context: Context) {
      */
     fun scoreBoard() {
 
-        val dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.result_view)
-        val returnBtn = dialog.findViewById(R.id.tv_result_return) as TextView
-        val retryBtn = dialog.findViewById(R.id.tv_result_next) as TextView
-        val leaderboardBtn = dialog.findViewById(R.id.iv_result_leaderboard) as ImageView
+        val scoreBoardDialog = Dialog(context)
+        scoreBoardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        scoreBoardDialog.setCancelable(false)
+        scoreBoardDialog.setContentView(R.layout.result_view)
+        val returnBtn = scoreBoardDialog.findViewById(R.id.tv_result_return) as TextView
+        val retryBtn = scoreBoardDialog.findViewById(R.id.tv_result_next) as TextView
+        val leaderboardBtn = scoreBoardDialog.findViewById(R.id.iv_result_leaderboard) as ImageView
 
-        val resultScore = dialog.findViewById(R.id.tv_result_score) as TextView
-        val resultPlacement = dialog.findViewById(R.id.tv_result_placement) as TextView
-        val resultMessage = dialog.findViewById(R.id.tv_result_message) as TextView
+        val resultScore = scoreBoardDialog.findViewById(R.id.tv_result_score) as TextView
+        val resultPlacement = scoreBoardDialog.findViewById(R.id.tv_result_placement) as TextView
+        val resultMessage = scoreBoardDialog.findViewById(R.id.tv_result_message) as TextView
 
         val playerScore = PlayerManager.playerPoints
         val playerPlacement = PlayerManager.setPlacement()
@@ -116,24 +114,55 @@ class DialogManager(val context: Context) {
 
         returnBtn.setOnClickListener {
 
-            dialog.dismiss()
+            scoreBoardDialog.dismiss()
         }
 
         retryBtn.setOnClickListener {
 
-            myActivity.startInfinityMode()
-            dialog.dismiss()
+            getMainActivity().startInfinityMode()
+            scoreBoardDialog.dismiss()
         }
 
         leaderboardBtn.setOnClickListener {
 
-            val toLeaderboard = Intent(myActivity, LeaderBoardActivity::class.java)
-            dialog.dismiss()
+            val toLeaderboard = Intent(getMainActivity(), LeaderBoardActivity::class.java)
+            scoreBoardDialog.dismiss()
             startActivity(context, toLeaderboard, null)
         }
 
-        dialog.show()
-        dialog.window?.setBackgroundDrawableResource(R.color.trans)
+        scoreBoardDialog.show()
+        scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
+    fun settingsDialog(sp: SharedPreferences){
+
+        val settingsDialog = Dialog(context)
+        settingsDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        settingsDialog.setContentView(R.layout.setting_screen_layout)
+        val musicSwitch = settingsDialog.findViewById<SwitchMaterial>(R.id.switch_music)
+        val effectSwitch = settingsDialog.findViewById<SwitchMaterial>(R.id.switch_sound_effects)
+        val newUserBtn = settingsDialog.findViewById<Button>(R.id.btn_create_account)
+
+        musicSwitch.setOnCheckedChangeListener { _, b ->
+            PlayerManager.isMusicActive = b
+            Log.d(TAG, "settingsDialog: ${PlayerManager.isMusicActive}")}
+
+        effectSwitch.setOnCheckedChangeListener { _, b ->
+            PlayerManager.isSoundEffectsActive = b
+            Log.d(TAG, "settingsDialog: ${PlayerManager.isSoundEffectsActive}")}
+
+        newUserBtn.setOnClickListener {
+            nameInput(sp)
+            settingsDialog.dismiss()
+        }
+
+        settingsDialog.show()
+        settingsDialog.window?.setBackgroundDrawableResource(R.color.trans)
+
+    }
+
+    private fun getMainActivity(): MainActivity {
+        return context as MainActivity
     }
 
 

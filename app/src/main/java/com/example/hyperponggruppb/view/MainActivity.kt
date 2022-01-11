@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         if (PlayerManager.name == "null") {
             isFirstAccount = true
-            mainDialog.nameInput(this, sp)
+            mainDialog.nameInput(sp)
         }
 
         setAccount()
@@ -88,11 +88,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnChangeAccount.setOnClickListener {
 
-            mainDialog.changeAccount(this)
+            mainDialog.changeAccount()
         }
 
         binding.ivSettings.setOnClickListener {
-            mainDialog.nameInput(this, sp)
+            mainDialog.settingsDialog(sp)
         }
     }
 

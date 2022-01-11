@@ -15,6 +15,8 @@ object PlayerManager {
     var nextLevel = 1
     var lives = 0
     var name = "null"
+    var isMusicActive = true
+    var isSoundEffectsActive = true
     var playTime = 0
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
