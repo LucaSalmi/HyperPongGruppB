@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/menu_pongtropolis_upgraded"
-    tools:context=".view.MainActivity">
+    tools:context=".view.MainActivityMainMenu">
 
     <FrameLayout
         android:id="@+id/fragment_container_main"

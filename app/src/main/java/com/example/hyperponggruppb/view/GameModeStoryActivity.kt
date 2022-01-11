@@ -8,8 +8,9 @@ import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.databinding.ActivityGameModeStoryBinding
-import com.example.hyperponggruppb.view.fragment.PointFragment
+import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
+import com.example.hyperponggruppb.view.fragment.PointFragmentStoryMode
 
 class GameModeStoryActivity : AppCompatActivity() {
 
@@ -25,7 +26,7 @@ class GameModeStoryActivity : AppCompatActivity() {
     private fun setFragments(){
 
         supportFragmentManager.commit {
-            add(R.id.score_fragment_container_story, PointFragment())
+            add(R.id.score_fragment_container_story, PointFragmentStoryMode())
             add(R.id.story_view_container, StoryLevelFragment())
         }
     }
@@ -37,7 +38,7 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
 
                 supportFragmentManager.commit {
-                    replace(R.id.score_fragment_container_story, PointFragment())
+                    replace(R.id.score_fragment_container_story, PointFragmentStoryMode())
                 }
 
             }catch (e: Exception){

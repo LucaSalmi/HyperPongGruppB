@@ -7,7 +7,7 @@ import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.databinding.ActivityStoryModeBinding
 
-class StoryModeActivity : AppCompatActivity() {
+class OverWorldActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryModeBinding
 
