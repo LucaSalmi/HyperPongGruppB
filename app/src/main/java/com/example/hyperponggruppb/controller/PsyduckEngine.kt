@@ -15,8 +15,8 @@ object PsyduckEngine {
     private var isCollisionDetected = false
     private var brickHit = Rect()
     var testBrick = Rect()
-    var canvasHeight = 1977f
-    var canvasWidth = 1080f
+    var canvasHeight = AssetManager.getScreenHeight()
+    var canvasWidth = AssetManager.getScreenWidth()
     var gameStart = false
     var damageTaken = false
     var ballToEliminate = 0
@@ -84,7 +84,7 @@ object PsyduckEngine {
 
             if (RandomNumberGenerator.rNG(1, 8) == 2) {
 
-                var rngLimit = if (PlayerManager.lives >= 3) {
+                val rngLimit = if (PlayerManager.lives >= 3) {
                     4
                 } else {
                     5
@@ -110,7 +110,7 @@ object PsyduckEngine {
 
     fun playerCollision(ball: Ball, player: Player, context: Context) {
 
-        if (ball.ballTop < 1500) {
+        if (ball.ballTop < canvasHeight * 0.6) {
             isCollisionDetected = false
         }
 
@@ -128,10 +128,10 @@ object PsyduckEngine {
 
         for (ball in ballsArray) {
 
-            var ballIsBottomOfScreen = ball.ballTop > canvasHeight
-            var ballIsOutsideTopOfScreen = ball.ballBottom < 0f
-            var ballIsOutsideRightOfScreen = ball.ballRight >= canvasWidth
-            var ballIsOutsideLeftOfScreen = ball.ballLeft < 0f
+            val ballIsBottomOfScreen = ball.ballTop > canvasHeight
+            val ballIsOutsideTopOfScreen = ball.ballBottom < 0f
+            val ballIsOutsideRightOfScreen = ball.ballRight >= canvasWidth
+            val ballIsOutsideLeftOfScreen = ball.ballLeft < 0f
 
             ball.ballRect = Rect(ball.ballLeft, ball.ballTop, ball.ballRight, ball.ballBottom)
 
@@ -149,7 +149,7 @@ object PsyduckEngine {
                     if (ballIsOutsideRightOfScreen) {
 
                         ball.ballLeft = (canvasWidth - ball.ballsize).toInt()
-                        ball.ballRight = canvasWidth.toInt()
+                        ball.ballRight = canvasWidth
 
                     }
                     if (ballIsOutsideLeftOfScreen) {
@@ -173,11 +173,11 @@ object PsyduckEngine {
 
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
 
-                        var ballLeftIsInsideOfBrick = ball.ballLeft + ball.ballsize/2 > brickHit.left
-                        var ballRightIsInsideOfBrick = ball.ballRight - ball.ballsize/2 < brickHit.right
+                        val ballLeftIsInsideOfBrick = ball.ballLeft + ball.ballsize/2 > brickHit.left
+                        val ballRightIsInsideOfBrick = ball.ballRight - ball.ballsize/2 < brickHit.right
 
-                        var ballIsOutsideOfBrickTop = ball.ballTop + ball.ballsize < brickHit.top
-                        var ballIsOutsideOfBrickTBottom = ball.ballBottom - ball.ballsize > brickHit.bottom
+                        //var ballIsOutsideOfBrickTop = ball.ballTop + ball.ballsize < brickHit.top
+                        //var ballIsOutsideOfBrickTBottom = ball.ballBottom - ball.ballsize > brickHit.bottom
 
                         if (!ball.ballGoesRight()) {
                             ball.ballLeft -= ball.ballSpeedX.toInt()
@@ -328,6 +328,8 @@ object PsyduckEngine {
                     }
 
                     if (ball.playerCollision) {
+                        ball.ballBottom = player.top.toInt()
+                        ball.ballTop = (player.top + ball.ballsize).toInt()
 
                         when {
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.1 * player.playerWidth -> { // 0% --> 10% of the pad
@@ -396,7 +398,7 @@ object PsyduckEngine {
 
         for (rect in brickRow) {
 
-            if (rect.bottom > (1200f)) {
+            if (rect.bottom > (canvasHeight *0.6)) {
 
                 return true
             }

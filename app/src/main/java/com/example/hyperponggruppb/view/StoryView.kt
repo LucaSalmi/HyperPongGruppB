@@ -96,8 +96,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             canvas = mHolder!!.lockCanvas()
 
-            PsyduckEngine.canvasHeight = canvas.height.toFloat()
-            PsyduckEngine.canvasWidth = canvas.width.toFloat()
+            PsyduckEngine.canvasHeight = canvas.height
+            PsyduckEngine.canvasWidth = canvas.width
 
             canvas.drawBitmap(AssetManager.getBackground(backgroundCode), matrix, null)
 

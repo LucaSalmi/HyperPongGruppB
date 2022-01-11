@@ -1,11 +1,8 @@
 package com.example.hyperponggruppb.model
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.Rect
-import android.util.Log
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -33,8 +30,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     fun makePlayer() {
 
         player = Player()
-        player.left = AssetManager.getScreenWidth() / 2 - player.playerWidth / 2
-        player.right = AssetManager.getScreenWidth() / 2 + player.playerWidth / 2
+        player.left = AssetManager.bGWidth / 2 - player.playerWidth / 2
+        player.right = AssetManager.bGWidth / 2 + player.playerWidth / 2
         player.top =
             AssetManager.getScreenHeight() - (AssetManager.getScreenHeight() * 0.2).toFloat() - player.playerHeight / 2 - 100
         player.bottom =
@@ -80,7 +77,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
     private fun makeBricks() {
 
-        val brickwidth = (AssetManager.getScreenWidth() / 10) - 4
+        val brickwidth = (AssetManager.bGWidth / 10) - 4
         val brickheight = (brickwidth * 0.6).toInt()
         BrickStructure.left = 7
         BrickStructure.top = 5
