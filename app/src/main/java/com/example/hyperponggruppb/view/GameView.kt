@@ -60,8 +60,10 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context, false)
-        SoundEffectManager.musicSetup(context!!,1)
 
+        if (PlayerManager.isMusicActive){
+            SoundEffectManager.musicSetup(context!!,1)
+        }
     }
 
     /**

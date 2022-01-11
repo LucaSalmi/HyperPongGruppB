@@ -23,7 +23,7 @@ class DialogManager(val context: Context) {
     /**
      * lets the player change which account he/she is playing on from a list of all saved users.
      */
-    fun changeAccount(){
+    fun changeAccount() {
 
         val userListDialog = Dialog(context)
         userListDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -31,7 +31,8 @@ class DialogManager(val context: Context) {
 
         val usersList = userListDialog.findViewById<RecyclerView>(R.id.rw_user_list)
         usersList.layoutManager = LinearLayoutManager(context)
-        val userSelectionAdapter = UserSelectionAdapter(context, PlayerManager.usersArray, userListDialog)
+        val userSelectionAdapter =
+            UserSelectionAdapter(context, PlayerManager.usersArray, userListDialog)
         usersList.adapter = userSelectionAdapter
 
         userListDialog.show()
@@ -41,7 +42,7 @@ class DialogManager(val context: Context) {
     /**
      * if no Account is loaded, or the user wants to change the account he is playing on, the dialog prompts for a name and loads, if present, all the necessary data coupled with the user
      */
-    fun nameInput(sp: SharedPreferences){
+    fun nameInput(sp: SharedPreferences) {
 
         val nameInputDialog = Dialog(context)
         nameInputDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -134,7 +135,7 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
-    fun settingsDialog(sp: SharedPreferences){
+    fun settingsDialog(sp: SharedPreferences) {
 
         val settingsDialog = Dialog(context)
         settingsDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -143,13 +144,23 @@ class DialogManager(val context: Context) {
         val effectSwitch = settingsDialog.findViewById<SwitchMaterial>(R.id.switch_sound_effects)
         val newUserBtn = settingsDialog.findViewById<Button>(R.id.btn_create_account)
 
+        if (PlayerManager.isMusicActive) {
+            musicSwitch.isChecked = true
+        }
+        if (PlayerManager.isSoundEffectsActive) {
+            effectSwitch.isChecked = true
+        }
+
         musicSwitch.setOnCheckedChangeListener { _, b ->
             PlayerManager.isMusicActive = b
-            Log.d(TAG, "settingsDialog: ${PlayerManager.isMusicActive}")}
+            Log.d(TAG, "settingsDialog: ${PlayerManager.isMusicActive}")
+            getMainActivity().checkForMusic()
+        }
 
         effectSwitch.setOnCheckedChangeListener { _, b ->
             PlayerManager.isSoundEffectsActive = b
-            Log.d(TAG, "settingsDialog: ${PlayerManager.isSoundEffectsActive}")}
+            Log.d(TAG, "settingsDialog: ${PlayerManager.isSoundEffectsActive}")
+        }
 
         newUserBtn.setOnClickListener {
             nameInput(sp)

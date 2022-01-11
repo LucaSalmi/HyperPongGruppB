@@ -15,7 +15,7 @@ object SoundEffectManager {
 
     private fun playBGMusic() {
 
-        if (backgroundPlayer != null) {
+        if (backgroundPlayer != null && PlayerManager.isMusicActive) {
 
             if (!backgroundPlayer!!.isPlaying) {
 
@@ -116,7 +116,11 @@ object SoundEffectManager {
         //val mediaPlayer = MediaPlayer.create(context, resID).stop()
 
         soundEffectPlayer = MediaPlayer.create(context, resID)
-        soundEffectPlayer?.start()
+
+        if (PlayerManager.isSoundEffectsActive){
+            soundEffectPlayer?.start()
+        }
+
 
     }
 

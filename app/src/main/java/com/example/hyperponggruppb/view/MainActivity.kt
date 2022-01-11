@@ -57,11 +57,24 @@ class MainActivity : AppCompatActivity() {
         onClick()
     }
 
+    fun checkForMusic(){
+
+        if (!PlayerManager.isMusicActive){
+            SoundEffectManager.stopMusic()
+        }else{
+            SoundEffectManager.musicSetup(this, 0)
+        }
+
+    }
+
     private fun onClick(){
 
         binding.ivGameMode.setOnClickListener {
-            
-            SoundEffectManager.stopMusic()
+
+            if (PlayerManager.isMusicActive){
+                SoundEffectManager.stopMusic()
+            }
+
             PlayerManager.loadUserData()
             
             if (isStoryMode){
@@ -139,8 +152,11 @@ class MainActivity : AppCompatActivity() {
             PlayerManager.isGameEnded = false
             mainDialog.scoreBoard()
         }
-        
-        SoundEffectManager.musicSetup(this, 0)
+
+        if (PlayerManager.isMusicActive){
+            SoundEffectManager.musicSetup(this, 0)
+        }
+
         super.onResume()
     }
 
