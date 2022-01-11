@@ -199,9 +199,9 @@ class GameView(context: Context?, var activity: Activity) : SurfaceView(context)
             PsyduckEngine.canvasWidth = canvas.width.toFloat()
 
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdOne), AssetManager.bgRectOne.left.toFloat(), AssetManager.bgRectOne.top.toFloat(), null)
-            canvas.drawBitmap(AssetManager.transLavaToStone, AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.getBackground(transBackroundIdOne), AssetManager.bgRectTransOne.left.toFloat(), AssetManager.bgRectTransOne.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.getBackground(backgroundIdTwo), AssetManager.bgRectTwo.left.toFloat(), AssetManager.bgRectTwo.top.toFloat(), null)
-            canvas.drawBitmap(AssetManager.transStoneToIce, AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
+            canvas.drawBitmap(AssetManager.getBackground(backgroundIdTwo), AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
             for (ballObj in infiniteMode.ballsArray) {
