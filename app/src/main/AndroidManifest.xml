@@ -17,7 +17,7 @@
             android:name=".view.StoryModeActivity"
             android:exported="false" />
         <activity
-            android:name=".LeaderBoardActivity"
+            android:name=".view.LeaderBoardActivity"
             android:exported="false" />
         <activity
             android:name=".controller.GameModeOneActivity"
