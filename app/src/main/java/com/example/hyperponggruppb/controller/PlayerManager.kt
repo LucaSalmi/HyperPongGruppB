@@ -33,7 +33,7 @@ object PlayerManager {
         }
     }
 
-    fun saveHighScore(sp: SharedPreferences?) {
+    fun saveUserData(sp: SharedPreferences?) {
 
         val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray)
         var isNew = true
@@ -77,21 +77,12 @@ object PlayerManager {
             usersArray = gson.fromJson(load, mutableListPlayerDataType)
             name = sp?.getString("activeAccount", "null")!!
 
-            for (obj in usersArray) {
-
-                if (obj.name == name) {
-                    levelScoresArray = obj.levelScoresArray
-                    currentLevel = obj.currentLevel
-                    nextLevel = obj.currentLevel + 1
-                }
-            }
         }
-        Log.d(TAG, "readSave: $usersArray")
 
         orderArray()
     }
 
-    fun changeUser(){
+    fun loadUserData(){
 
         resetPoints()
         resetHighScore()
@@ -104,7 +95,6 @@ object PlayerManager {
                 levelScoresArray = obj.levelScoresArray
                 currentLevel = obj.currentLevel
                 nextLevel = obj.currentLevel + 1
-                playerHighScore = obj.highScore
             }
         }
     }

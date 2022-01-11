@@ -1,17 +1,21 @@
 package com.example.hyperponggruppb.view
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Window
 import android.widget.*
-import com.example.hyperponggruppb.view.LeaderBoardActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.adapter.UserSelectionAdapter
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
@@ -42,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
+        Log.d(TAG, "onCreate: ${PlayerManager.usersArray}")
 
         if (PlayerManager.name == "null") {
             isFirstAccount = true
@@ -57,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         binding.ivGameMode.setOnClickListener {
             
             SoundEffectManager.stopMusic()
+            PlayerManager.loadUserData()
             
             if (isStoryMode){
                 startStoryMode()
@@ -81,11 +87,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnChangeAccount.setOnClickListener {
+
+            changeAccount()
+        }
+
+        binding.ivSettings.setOnClickListener {
             nameInput()
         }
     }
 
+    private fun changeAccount(){
+
+        val userListDialog = Dialog(this)
+        userListDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        userListDialog.setContentView(R.layout.fragment_user_select_screen)
+
+        val usersList = userListDialog.findViewById<RecyclerView>(R.id.rw_user_list)
+        usersList.layoutManager = LinearLayoutManager(this)
+        val userSelectionAdapter = UserSelectionAdapter(this, PlayerManager.usersArray, userListDialog)
+        usersList.adapter = userSelectionAdapter
+
+        userListDialog.show()
+        userListDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
     private fun changeButtonText(){
+
         if (isStoryMode){
             binding.tvGameMode.text = getString(R.string.txt_story_mode)
         }else{
@@ -97,6 +124,7 @@ class MainActivity : AppCompatActivity() {
 
         val toStoryMode = Intent(this, StoryModeActivity::class.java)
         PlayerManager.isInfiniteMode = false
+        PlayerManager.loadUserData()
         startActivity(toStoryMode)
     }
 
@@ -104,11 +132,12 @@ class MainActivity : AppCompatActivity() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
+        PlayerManager.loadUserData()
         PlayerManager.setHighScore()
         startActivity(toGameModeOne)
     }
 
-    private fun setAccount(){
+    fun setAccount(){
 
         accountText = if (PlayerManager.name != "null"){
             getString(R.string.active_account_string) + PlayerManager.name
@@ -125,10 +154,10 @@ class MainActivity : AppCompatActivity() {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
         dialog.setContentView(R.layout.enter_name_dialog)
         val nameField = dialog.findViewById<EditText>(R.id.et_enter_name_field)
         val saveBtn = dialog.findViewById<Button>(R.id.save_btn)
-        val cancelBtn = dialog.findViewById<Button>(R.id.cancel_btn)
 
         saveBtn.setOnClickListener {
 
@@ -136,20 +165,11 @@ class MainActivity : AppCompatActivity() {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(this, 1)
                 setAccount()
-                PlayerManager.changeUser()
-                PlayerManager.saveHighScore(sp)
+                PlayerManager.saveUserData(sp)
                 dialog.dismiss()
             }
         }
-            cancelBtn.setOnClickListener {
 
-                if (isFirstAccount){
-
-                    PlayerManager.name = "Guest"
-                }
-                dialog.dismiss()
-            }
-        
         dialog.show()
     }
 

@@ -63,7 +63,7 @@ class FirstWorldFragment : Fragment() {
         return view
     }
     /**
-     * creates the scoreboard to show the player their high score and their position in the leaderboard, it also links directly to the full scoreboard, the main menu and restarts the game.
+     *
      */
     private fun enterLevelScreen(levelId: Int) {
         val dialog = activity?.applicationContext.let { super.getContext()
