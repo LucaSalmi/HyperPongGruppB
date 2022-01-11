@@ -4,12 +4,15 @@ import android.content.ContentValues.TAG
 import android.graphics.Rect
 import android.util.Log
 import com.example.hyperponggruppb.model.Bricks
+import com.example.hyperponggruppb.model.GameManager
 
 object BrickStructure {
 
     var firstBrickRow = 9
     var rowOfBricks = 10
     var totalSumOfBricks = firstBrickRow + (rowOfBricks * 9)
+
+    var brickScoreValue = 10
 
 //brick base positions
 
@@ -23,6 +26,8 @@ object BrickStructure {
 // the amount of tempo the bricks is falling AKA playerSpeed illusion
 
     var playerSpeed = 1
+
+
 
     /**
      * makes the first ten rows of bricks, visible to the player on startup

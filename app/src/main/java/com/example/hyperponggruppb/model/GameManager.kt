@@ -25,6 +25,16 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         makeBall()
         makeBricks()
         makeAssets()
+
+        if (isStoryMode) {
+            calculateMaxScore()
+        }
+    }
+
+    fun calculateMaxScore() {
+        var totalBricks = brickRow.size
+        PlayerManager.currentMaxScore = totalBricks * BrickStructure.brickScoreValue
+
     }
 
     fun makePlayer() {
