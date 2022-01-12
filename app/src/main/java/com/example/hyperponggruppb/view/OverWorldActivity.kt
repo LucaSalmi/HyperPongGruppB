@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb.view
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.hyperponggruppb.adapter.ViewPagerAdapter
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
