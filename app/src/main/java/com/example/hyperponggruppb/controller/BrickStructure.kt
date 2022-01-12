@@ -97,7 +97,7 @@ object BrickStructure {
     /**
      * by eliminating some bricks from the array this function creates a recognizable pattern
      */
-    fun createPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect> {
+    fun createPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks> {
 
         val patternOne = when(id){
 
@@ -119,7 +119,7 @@ object BrickStructure {
 
         }
 
-        var temBricks = mutableListOf<Rect>()
+        var temBricks = mutableListOf<Bricks>()
         var index = 0
 
         if(patternOne.length < brickRow.size){

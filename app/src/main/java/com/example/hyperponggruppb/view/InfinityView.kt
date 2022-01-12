@@ -259,15 +259,16 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 spawnNewRow = false
             }
 
-            for (obj in infiniteMode.brickRow) {
+            for (brick in infiniteMode.brickRow) {
 
                 var brickColor = Paint()
                 brickColor.color = Color.TRANSPARENT
-                canvas.drawRect(obj, brickColor)
+                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+                canvas.drawRect(brickRect, brickColor)
                 canvas.drawBitmap(
-                    (infiniteMode.brickAssets[infiniteMode.brickRow.indexOf(obj)]),
-                    obj.left.toFloat() - 5,
-                    obj.top.toFloat() - 5,
+                    brick.asset,
+                    brick.brickLeft.toFloat() - 5,
+                    brick.brickTop.toFloat() - 5,
                     null
                 )
             }
@@ -352,7 +353,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                     var size = infiniteMode.brickRow.size - 1
 
                     if (size > 0){
-                        if(infiniteMode.brickRow[size].top > 0 ){
+                        if(infiniteMode.brickRow[size].brickTop > 0 ){
                             produceExtraBricks()
                         }
                     }
@@ -446,7 +447,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
             PsyduckEngine.brickCollision(
                 infiniteMode.brickRow,
-                infiniteMode.brickAssets,
                 ballObj,
                 infiniteMode.powerUpArray,
                 context,
@@ -458,7 +458,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
     private fun produceExtraBricks(){
 
         infiniteMode.makeOOBBricks()
-        AssetManager.fillAssetArray(infiniteMode.brickAssets, infiniteMode.brickRow.size, 1)
     }
 
     private fun powerUpInteractions(){

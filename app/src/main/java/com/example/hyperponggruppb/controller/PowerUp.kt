@@ -2,6 +2,7 @@ package com.example.hyperponggruppb.controller
 
 import android.graphics.*
 import com.example.hyperponggruppb.model.AssetManager
+import com.example.hyperponggruppb.model.Bricks
 
 class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int) {
 
@@ -49,19 +50,19 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     }
 
     //typeID 0
-    fun forceBrickDown(brickRow: MutableList<Rect>): MutableList<Rect>{
+    fun forceBrickDown(brickRow: MutableList<Bricks>): MutableList<Bricks>{
         for (obj in brickRow){
-            obj.top += BrickStructure.brickHeight
-            obj.bottom += BrickStructure.brickHeight
+            obj.brickTop += BrickStructure.brickHeight
+            obj.brickBottom += BrickStructure.brickHeight
         }
         return brickRow
     }
 
     //typeID 1
-    fun forceBrickUp(brickRow: MutableList<Rect>): MutableList<Rect>{
+    fun forceBrickUp(brickRow: MutableList<Bricks>): MutableList<Bricks>{
         for (obj in brickRow){
-            obj.top -= BrickStructure.brickHeight
-            obj.bottom -= BrickStructure.brickHeight
+            obj.brickTop -= BrickStructure.brickHeight
+            obj.brickBottom -= BrickStructure.brickHeight
         }
         return brickRow
     }

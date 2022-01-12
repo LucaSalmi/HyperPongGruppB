@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
@@ -148,15 +149,16 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 }
             }
 
-            for (obj in storyMode.brickRow) {
+            for (brick in storyMode.brickRow) {
 
                 var brickColor = Paint()
                 brickColor.color = Color.TRANSPARENT
-                canvas.drawRect(obj, brickColor)
+                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+                canvas.drawRect(brickRect, brickColor)
                 canvas.drawBitmap(
-                    (storyMode.brickAssets[storyMode.brickRow.indexOf(obj)]),
-                    obj.left.toFloat() - 5,
-                    obj.top.toFloat() - 5,
+                    brick.asset,
+                    brick.brickLeft.toFloat() - 5,
+                    brick.brickTop.toFloat() - 5,
                     null
                 )
             }
@@ -241,7 +243,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             PsyduckEngine.brickCollision(
                 storyMode.brickRow,
-                storyMode.brickAssets,
                 ballObj,
                 storyMode.powerUpArray,
                 context,

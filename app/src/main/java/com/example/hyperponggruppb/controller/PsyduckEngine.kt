@@ -5,10 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.util.Log
-import com.example.hyperponggruppb.model.AssetManager
-import com.example.hyperponggruppb.model.Ball
-import com.example.hyperponggruppb.model.GameManager
-import com.example.hyperponggruppb.model.RandomNumberGenerator
+import com.example.hyperponggruppb.model.*
 
 object PsyduckEngine {
 
@@ -29,8 +26,7 @@ object PsyduckEngine {
 
 
     fun brickCollision(
-        brickRow: MutableList<Rect>,
-        brickAssets: MutableList<Bitmap>,
+        brickRow: MutableList<Bricks>,
         ball: Ball,
         powerUpArray: MutableList<PowerUp>,
         context: Context,
@@ -39,38 +35,42 @@ object PsyduckEngine {
 
         var toRemove = BrickStructure.totalSumOfBricks + 1
 
-        for (rect in brickRow) {
+        for (brick in brickRow) {
 
-            if (ball.ballRect.intersect(rect)) {
+            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
-                toRemove = brickRow.indexOf(rect)
+            if (ball.ballRect.intersect(brickRect)) {
+
+                toRemove = brickRow.indexOf(brick)
                 ball.brickCollision = true
-                brickHit = rect
+                brickHit = brickRect
                 SoundEffectManager.jukebox(context, 0)
             }
         }
 
         if (ball.brickCollision){
 
-            for (obj in brickRow){
+            for (brick in brickRow){
+
+                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
                 testBrick = Rect(brickHit.left-30, brickHit.top, brickHit.left-10, brickHit.bottom)
-                if (testBrick.intersect(obj)){
+                if (testBrick.intersect(brickRect)){
                     isLeftOccupied = true
                 }
 
                 testBrick = Rect(brickHit.right+10, brickHit.top, brickHit.right+30, brickHit.bottom)
-                if (testBrick.intersect(obj)){
+                if (testBrick.intersect(brickRect)){
                     isRightOccupied = true
                 }
 
                 testBrick = Rect(brickHit.left, brickHit.top-30, brickHit.right, brickHit.top-10)
-                if (testBrick.intersect(obj)){
+                if (testBrick.intersect(brickRect)){
                     isTopOccupied = true
                 }
 
                 testBrick = Rect(brickHit.left, brickHit.bottom+10, brickHit.right, brickHit.bottom+30)
-                if (testBrick.intersect(obj)){
+                if (testBrick.intersect(brickRect)){
                     isBottomOccupied = true
                 }
             }
@@ -102,7 +102,6 @@ object PsyduckEngine {
 
         if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks + 1) {
             brickRow.removeAt(toRemove)
-            brickAssets.removeAt(toRemove)
             PlayerManager.addPoints(BrickStructure.brickScoreValue)
         }
     }
@@ -394,11 +393,13 @@ object PsyduckEngine {
         }
     }
 
-    fun brickDeathZone(brickRow: MutableList<Rect>): Boolean {
+    fun brickDeathZone(brickRow: MutableList<Bricks>): Boolean {
 
-        for (rect in brickRow) {
+        for (brick in brickRow) {
 
-            if (rect.bottom > (canvasHeight *0.6)) {
+            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+
+            if (brickRect.bottom > (canvasHeight *0.6)) {
 
                 return true
             }
