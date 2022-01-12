@@ -28,15 +28,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/text_frame"
-        android:gravity="center">
+        android:gravity="center"
+        android:weightSum="2">
 
         <Button
             android:id="@+id/save_btn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_5"
             android:text="Save"
-            />
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_5"
+            android:text="return"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 

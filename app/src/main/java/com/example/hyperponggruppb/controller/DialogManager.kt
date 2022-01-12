@@ -50,16 +50,22 @@ class DialogManager(val context: Context) {
         nameInputDialog.setContentView(R.layout.enter_name_dialog)
         val nameField = nameInputDialog.findViewById<EditText>(R.id.et_enter_name_field)
         val saveBtn = nameInputDialog.findViewById<Button>(R.id.save_btn)
+        val cancelBtn = nameInputDialog.findViewById<Button>(R.id.cancel_btn)
 
         saveBtn.setOnClickListener {
 
             if (nameField.text != null && nameField.text.length == 3) {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
+                PlayerManager.resetAll()
                 PlayerManager.saveUserData(sp)
                 getMainActivity().setAccount()
                 nameInputDialog.dismiss()
             }
+        }
+
+        cancelBtn.setOnClickListener {
+            nameInputDialog.dismiss()
         }
 
         nameInputDialog.show()

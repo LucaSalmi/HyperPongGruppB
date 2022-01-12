@@ -137,6 +137,14 @@ object PlayerManager {
         return resultPlacement
     }
 
+    fun resetAll(){
+
+        resetPoints()
+        resetHighScore()
+        resetLevel()
+        resetScoresArray()
+    }
+
     fun resetPoints() {
         playerPoints = 0
     }
