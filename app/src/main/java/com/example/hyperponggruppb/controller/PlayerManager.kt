@@ -99,6 +99,9 @@ object PlayerManager {
                 activeUser = user
             }
         }
+
+        isMusicActive = activeUser!!.isMusicActive
+        isSoundEffectsActive = activeUser!!.isSoundEffectsActive
     }
 
     fun setPlacement(): Int {

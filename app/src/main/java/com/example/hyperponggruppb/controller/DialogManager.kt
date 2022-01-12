@@ -156,22 +156,18 @@ class DialogManager(val context: Context) {
         val effectSwitch = settingsDialog.findViewById<SwitchMaterial>(R.id.switch_sound_effects)
         val newUserBtn = settingsDialog.findViewById<Button>(R.id.btn_create_account)
 
-        if (PlayerManager.isMusicActive) {
-            musicSwitch.isChecked = true
-        }
-        if (PlayerManager.isSoundEffectsActive) {
-            effectSwitch.isChecked = true
-        }
+        musicSwitch.isChecked = PlayerManager.isMusicActive
+        effectSwitch.isChecked = PlayerManager.isSoundEffectsActive
 
         musicSwitch.setOnCheckedChangeListener { _, b ->
             PlayerManager.isMusicActive = b
-            Log.d(TAG, "settingsDialog: ${PlayerManager.isMusicActive}")
             getMainActivity().checkForMusic()
+            setUserPreferences()
         }
 
         effectSwitch.setOnCheckedChangeListener { _, b ->
             PlayerManager.isSoundEffectsActive = b
-            Log.d(TAG, "settingsDialog: ${PlayerManager.isSoundEffectsActive}")
+            setUserPreferences()
         }
 
         newUserBtn.setOnClickListener {
@@ -182,6 +178,12 @@ class DialogManager(val context: Context) {
         settingsDialog.show()
         settingsDialog.window?.setBackgroundDrawableResource(R.color.trans)
 
+    }
+
+    private fun setUserPreferences(){
+
+        PlayerManager.activeUser!!.isMusicActive = PlayerManager.isMusicActive
+        PlayerManager.activeUser!!.isSoundEffectsActive = PlayerManager.isSoundEffectsActive
     }
 
     private fun getMainActivity(): MainActivityMainMenu {

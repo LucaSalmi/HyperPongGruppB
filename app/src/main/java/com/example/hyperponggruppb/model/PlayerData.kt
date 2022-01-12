@@ -10,5 +10,7 @@ data class PlayerData(
     var levelScoresArray = mutableListOf<Int>()
     var levelStarsArray = mutableListOf<Int>()
     var powerUpInventory = listOf<Int>()
+    var isMusicActive = true
+    var isSoundEffectsActive = true
 }
 

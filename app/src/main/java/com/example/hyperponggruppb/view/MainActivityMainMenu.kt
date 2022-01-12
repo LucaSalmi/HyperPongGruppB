@@ -51,10 +51,13 @@ class MainActivityMainMenu : AppCompatActivity() {
         if (PlayerManager.name == "null") {
             isFirstAccount = true
             mainDialog.nameInput(sp)
+        }else{
+
+            setAccount()
+            onClick()
         }
 
-        setAccount()
-        onClick()
+
     }
 
     fun checkForMusic(){
@@ -122,7 +125,6 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         val toStoryMode = Intent(this, OverWorldActivity::class.java)
         PlayerManager.isInfiniteMode = false
-        loadData()
         startActivity(toStoryMode)
     }
 
@@ -130,12 +132,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
-        loadData()
         startActivity(toGameModeOne)
-    }
-
-    private fun loadData(){
-        PlayerManager.loadUserData()
     }
 
     fun setAccount(){
@@ -146,6 +143,8 @@ class MainActivityMainMenu : AppCompatActivity() {
             getString(R.string.active_account_string) + "None"
         }
         binding.tvActiveAccount.text = accountText
+        PlayerManager.loadUserData()
+
     }
 
     override fun onResume() {
