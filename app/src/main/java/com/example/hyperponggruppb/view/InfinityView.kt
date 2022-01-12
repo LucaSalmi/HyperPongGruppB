@@ -56,7 +56,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         backgroundIdTwo = 2
         transBackroundIdOne = 1
         transBackgroundIdTwo = 2
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context, false)

@@ -1,7 +1,6 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.view.GameModeStoryActivity
+import com.example.hyperponggruppb.view.OverWorldActivity
 
 class FirstWorldFragment : Fragment() {
 
@@ -170,7 +169,12 @@ class FirstWorldFragment : Fragment() {
         startLevelBtn.setOnClickListener {
             // put this button to start level  of selected level
             dialog.dismiss()
-            startLevel()
+
+            val fuckMyselfToDeath = context as OverWorldActivity
+            fuckMyselfToDeath.startLevel()
+
+            //startLevel()
+
         }
 
         dialog.show()
@@ -190,13 +194,17 @@ class FirstWorldFragment : Fragment() {
         }
     }
 
+    /*
     private fun startLevel(){
         val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
         startActivity(toLevel)
     }
+     */
+
     private fun toaster(){
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
     }
+
     private fun toasterClicked(){
         Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT).show()
     }

@@ -1,5 +1,7 @@
 package com.example.hyperponggruppb.view
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -12,10 +14,15 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.DialogManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
     SurfaceHolder.Callback, Runnable {
@@ -43,7 +50,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
@@ -194,6 +201,28 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         storyMode.player.left = sx.toFloat() - storyMode.player.playerWidth / 2
         storyMode.player.update()
 
+        /*
+        val animation = AnimationUtils.loadAnimation(context, R.anim.bounce)
+        val player = storyMode.player
+        player.startAnimation(animation)
+
+         */
+
+        /*
+
+        val animator = ValueAnimator.ofFloat(0f, -200f)
+        animator.duration = 2000
+        animator.start()
+        animator.addUpdateListener(object:ValueAnimator.AnimatorUpdateListener) {
+
+            override fun onAnimationUpdate(animation: ValueAnimator?){
+                val animatedvalue = animation?.animatedValue as Float
+            }
+        }
+         */
+
+        //val objectAnimator = ObjectAnimator.ofFloat()
+
         if (!PsyduckEngine.gameStart) {
 
             storyMode.ball.ballLeft =
@@ -264,6 +293,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
             myActivity.finish()
+
         }
 
         if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
