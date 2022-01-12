@@ -122,7 +122,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         val toStoryMode = Intent(this, OverWorldActivity::class.java)
         PlayerManager.isInfiniteMode = false
-        PlayerManager.loadUserData()
+        loadData()
         startActivity(toStoryMode)
     }
 
@@ -130,9 +130,12 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
-        PlayerManager.loadUserData()
-        PlayerManager.setHighScore()
+        loadData()
         startActivity(toGameModeOne)
+    }
+
+    private fun loadData(){
+        PlayerManager.loadUserData()
     }
 
     fun setAccount(){

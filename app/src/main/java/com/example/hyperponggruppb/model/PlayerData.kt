@@ -2,11 +2,13 @@ package com.example.hyperponggruppb.model
 
 data class PlayerData(
     var name: String,
-    var points: Int,
     var highScore: Int,
     var currentLevel: Int,
-    var levelScoresArray: MutableList<Int>,
-    var levelStarsArray: MutableList<Int>,
+    var nextLevel: Int,
     var coins: Int,
-    var powerUpInventory: Array<Int>
-)
+    ){
+    var levelScoresArray = mutableListOf<Int>()
+    var levelStarsArray = mutableListOf<Int>()
+    var powerUpInventory = listOf<Int>()
+}
+

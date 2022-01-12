@@ -24,7 +24,7 @@ class PointFragmentInfinityMode : Fragment() {
         val lives = view?.findViewById<ImageView>(R.id.iv_frag_coolant)
 
         pointsView?.text = PlayerManager.playerPoints.toString()
-        highScoreView?.text = PlayerManager.playerHighScore.toString()
+        highScoreView?.text = PlayerManager.activeUser?.highScore.toString()
 
 
         when {

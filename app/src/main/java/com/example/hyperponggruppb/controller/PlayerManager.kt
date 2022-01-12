@@ -10,10 +10,8 @@ import com.google.gson.reflect.TypeToken
 
 object PlayerManager {
 
+    var activeUser: PlayerData? = null
     var playerPoints = 0
-    var playerHighScore = 0
-    var currentLevel = 0
-    var nextLevel = 1
     var lives = 0
     var name = "null"
     var isMusicActive = true
@@ -22,58 +20,59 @@ object PlayerManager {
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
-    var levelScoresArray = mutableListOf<Int>()
-    var levelStarsArray = mutableListOf<Int>()
-    var coins = 0
-    var powerUpInventory = arrayOf(0,0,0,0)
     var isInfiniteMode = false
     var isReplaying = false
     var currentMaxScore = 0
 
+    fun createUser(): Boolean{
 
+        for (user in usersArray){
 
+            if (user.name == name){
+                return false
+            }
+        }
+
+        activeUser = PlayerData(name, 0, 0, 1, 0)
+        return true
+    }
 
     fun addPoints(newPoints: Int) {
 
         playerPoints += newPoints
 
-        if (playerPoints > playerHighScore) {
-            playerHighScore = playerPoints
+        if (playerPoints > activeUser?.highScore!!) {
+
+            activeUser?.highScore = playerPoints
+
         }
     }
 
     fun saveUserData(sp: SharedPreferences?) {
 
-        val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray, levelStarsArray, coins, powerUpInventory)
-        var isNew = true
+        val save = activeUser
+        var position = 0
 
-        for (obj in usersArray) {
+        if (usersArray.size > 0){
 
-            if (obj.name == save.name) {
+            for (obj in usersArray) {
 
-                if (obj.highScore < save.highScore) {
-                    obj.highScore = save.highScore
+                if (obj.name == save?.name) {
+
+                    position = usersArray.indexOf(obj)
+                    usersArray.removeAt(position)
                 }
-                if (currentLevel > obj.currentLevel){
-
-                    obj.currentLevel = currentLevel
-                }
-
-                obj.levelScoresArray = levelScoresArray
-                isNew = false
             }
         }
 
-        if (isNew) {
-            usersArray.add(save)
-        }
+        usersArray.add(save!!)
 
         orderArray()
 
-        var saveString = gson.toJson(usersArray)
+        val saveString = gson.toJson(usersArray)
         val editor = sp?.edit()
         editor?.putString("playerData", saveString)
-        editor?.putString("activeAccount", save.name)
+        editor?.putString("activeAccount", name)
         editor?.apply()
     }
 
@@ -91,37 +90,15 @@ object PlayerManager {
         orderArray()
     }
 
-    fun loadUserData(){
+    fun loadUserData() {
 
-        resetPoints()
-        resetHighScore()
-        resetScoresArray()
-        resetLevel()
+        for (user in usersArray) {
 
-        for (obj in usersArray) {
+            if (user.name == name) {
 
-            if (obj.name == name) {
-                levelScoresArray = obj.levelScoresArray
-                currentLevel = obj.currentLevel
-                nextLevel = obj.currentLevel + 1
+                activeUser = user
             }
         }
-    }
-
-    fun setHighScore() {
-
-        for (obj in usersArray) {
-
-            if (obj.highScore > playerHighScore && obj.name == name) {
-
-                playerHighScore = if (isInfiniteMode) {
-                    obj.highScore
-                } else {
-                    levelScoresArray[levelScoresArray.size-1]
-                }
-            }
-        }
-        orderArray()
     }
 
     fun setPlacement(): Int {
@@ -140,29 +117,8 @@ object PlayerManager {
         return resultPlacement
     }
 
-    fun resetAll(){
-
-        resetPoints()
-        resetHighScore()
-        resetLevel()
-        resetScoresArray()
-    }
-
     fun resetPoints() {
         playerPoints = 0
-    }
-
-    fun resetHighScore() {
-        playerHighScore = 0
-    }
-
-    fun resetLevel(){
-        currentLevel = 0
-        nextLevel = 1
-    }
-
-    fun resetScoresArray(){
-        levelScoresArray.clear()
     }
 
     fun loseLife() {
@@ -184,49 +140,49 @@ object PlayerManager {
 
     fun setLevel(levelId: Int): Boolean {
 
-        return if (levelId > nextLevel) {
+        return if (levelId > activeUser?.nextLevel!!) {
 
             false
 
         } else {
 
-            if (currentLevel < levelId){
-                currentLevel = levelId
+            if (activeUser?.currentLevel!! < levelId) {
+                activeUser?.currentLevel = levelId
 
-            }else{
+            } else {
 
                 isReplaying = true
-                currentLevel = levelId
+                activeUser?.currentLevel = levelId
             }
             true
         }
     }
 
-    fun setLevelHIghScore(){
+    fun setLevelHIghScore() {
 
-        if (levelScoresArray.size < currentLevel){
-            levelScoresArray.add(playerPoints)
+        if (activeUser?.levelScoresArray?.size!! < activeUser!!.currentLevel) {
+            activeUser?.levelScoresArray!!.add(playerPoints)
 
-        }else{
+        } else {
 
-            if (levelScoresArray[currentLevel-1]< playerPoints){
-                levelScoresArray.removeAt(currentLevel-1)
-                levelScoresArray.add(currentLevel-1, playerPoints)
+            if (activeUser?.levelScoresArray!![activeUser!!.currentLevel - 1] < playerPoints) {
+                activeUser?.levelScoresArray!!.removeAt(activeUser!!.currentLevel - 1)
+                activeUser?.levelScoresArray!!.add(activeUser!!.currentLevel - 1, playerPoints)
             }
         }
     }
 
-    fun unlockNextLevel(){
+    fun unlockNextLevel() {
 
         Log.d(TAG, "unlockNextLevel: $isReplaying")
 
-        if (isReplaying){
+        if (isReplaying) {
 
             isReplaying = false
 
-        }else{
+        } else {
 
-            nextLevel++
+            activeUser?.nextLevel!! + 1
         }
 
     }

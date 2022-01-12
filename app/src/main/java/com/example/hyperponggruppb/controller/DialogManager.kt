@@ -58,10 +58,14 @@ class DialogManager(val context: Context) {
 
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
-                PlayerManager.resetAll()
-                PlayerManager.saveUserData(sp)
-                getMainActivity().setAccount()
-                nameInputDialog.dismiss()
+                if (PlayerManager.createUser()){
+                    PlayerManager.saveUserData(sp)
+                    getMainActivity().setAccount()
+                    nameInputDialog.dismiss()
+                }else{
+                    nameField.error = "Name already in use"
+                }
+
             }
         }
 

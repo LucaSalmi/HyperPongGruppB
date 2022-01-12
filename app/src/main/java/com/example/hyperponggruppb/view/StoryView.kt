@@ -48,7 +48,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
-        if (PlayerManager.currentLevel > 5 ){
+        if (PlayerManager.activeUser!!.currentLevel > 5 ){
             backgroundCode = 3
         }
     }
@@ -289,8 +289,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
-        Log.d(TAG, "${PlayerManager.nextLevel}")
-        Log.d(TAG, "${PlayerManager.currentLevel}")
         start()
     }
 
