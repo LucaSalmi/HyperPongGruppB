@@ -19,6 +19,7 @@ import com.example.hyperponggruppb.view.MainActivityMainMenu
 import com.example.hyperponggruppb.view.OverWorldActivity
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.android.material.switchmaterial.SwitchMaterial
+import kotlinx.coroutines.delay
 
 class DialogManager(val context: Context) {
 
@@ -153,11 +154,15 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.setCancelable(false)
         scoreBoardDialog.setContentView(R.layout.story_mode_result)
 
+        val starBar = scoreBoardDialog.findViewById(R.id.pb_starbar) as ProgressBar
+
+        val starOne = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_one) as ImageView
+        val starTwo = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_two) as ImageView
+        val starThree = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_three) as ImageView
+
         val returnBtn = scoreBoardDialog.findViewById(R.id.iv_sm_result_level_return) as ImageView
 
         val retryBtn = scoreBoardDialog.findViewById(R.id.iv_sm_result_level_start) as ImageView
-
-        //val leaderboardBtn = scoreBoardDialog.findViewById(R.id.iv_result_leaderboard) as ImageView
 
         val resultScore = scoreBoardDialog.findViewById(R.id.tv_sm_score_result) as TextView
 
@@ -165,22 +170,35 @@ class DialogManager(val context: Context) {
 
         val resultPowerUpsLooted = scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
 
-        val playerScore = PlayerManager.playerPoints
-        val playerPlacement = PlayerManager.setPlacement()
-        var playerPlacementEnding = ""
+        var isOneStar = 0
+        var isTwoStar = 0
+        var currentScore = PlayerManager.playerPoints
+        starBar.max = PlayerManager.currentMaxScore
+        starBar.progress = 0
+        var stars = 0
 
-/*
-        resultPlacement.text = (playerPlacement.toString() + playerPlacementEnding)
-        var resultScoreWithSign = playerScore.toString() + context.getString(R.string.result_p_sign)
-        resultScore.text = resultScoreWithSign
+        resultScore.text = PlayerManager.playerPoints.toString()
+        while (starBar.progress < currentScore) {
+            starBar.progress =+ 10
 
- */
+            if (currentScore >= PlayerManager.currentMaxScore * 0.33 && isOneStar == 0) {
+                starOne.setImageResource(R.drawable.star)
+                isOneStar = 1
+
+            }
+            if (currentScore >= PlayerManager.currentMaxScore * 0.66 && isOneStar == 1) {
+                starTwo.setImageResource(R.drawable.star)
+                isTwoStar = 1
+            }
+            if (currentScore >= PlayerManager.currentMaxScore && isTwoStar == 1) {
+                starThree.setImageResource(R.drawable.star)
+            }
+
+        }
 
         returnBtn.setOnClickListener {
 
-
             scoreBoardDialog.dismiss()
-
         }
 
         retryBtn.setOnClickListener {
@@ -188,16 +206,6 @@ class DialogManager(val context: Context) {
             getOverWorldActivity().startLevel()
             scoreBoardDialog.dismiss()
         }
-
-        /*
-        leaderboardBtn.setOnClickListener {
-
-            val toLeaderboard = Intent(getMainActivity(), LeaderBoardActivity::class.java)
-            scoreBoardDialog.dismiss()
-            startActivity(context, toLeaderboard, null)
-        }
-
-         */
 
         scoreBoardDialog.show()
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)

@@ -75,20 +75,21 @@
             android:id="@+id/iv_sm_result_star_one"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+            android:scaleType="fitCenter"
+            android:background="@drawable/no_star"/>
 
         <ImageView
             android:id="@+id/iv_sm_result_star_two"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+            android:background="@drawable/no_star"/>
 
         <ImageView
             android:id="@+id/iv_sm_result_star_three"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+            android:background="@drawable/no_star" />
     </LinearLayout>
 
         <ProgressBar
