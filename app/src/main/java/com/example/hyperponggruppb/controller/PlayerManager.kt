@@ -23,6 +23,9 @@ object PlayerManager {
     private val gson = Gson()
     var isGameEnded = false
     var levelScoresArray = mutableListOf<Int>()
+    var levelStarsArray = mutableListOf<Int>()
+    var coins = 0
+    var powerUpInventory = arrayOf(0,0,0,0)
     var isInfiniteMode = false
     var isReplaying = false
     var currentMaxScore = 0
@@ -41,7 +44,7 @@ object PlayerManager {
 
     fun saveUserData(sp: SharedPreferences?) {
 
-        val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray)
+        val save = PlayerData(name, playerPoints, playerHighScore, currentLevel, levelScoresArray, levelStarsArray, coins, powerUpInventory)
         var isNew = true
 
         for (obj in usersArray) {
