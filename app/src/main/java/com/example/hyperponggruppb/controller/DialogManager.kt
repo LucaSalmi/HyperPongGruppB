@@ -142,6 +142,7 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.show()
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
+
     fun scoreBoardStoryMode() {
 
         val scoreBoardDialog = Dialog(context)

@@ -28,8 +28,6 @@ object PlayerManager {
     var currentMaxScore = 0
 
 
-
-
     fun addPoints(newPoints: Int) {
 
         playerPoints += newPoints
