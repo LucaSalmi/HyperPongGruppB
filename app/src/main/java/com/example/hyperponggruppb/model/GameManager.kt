@@ -10,7 +10,7 @@ import com.example.hyperponggruppb.controller.PlayerManager
 
 class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
-    var brickRow = mutableListOf<Rect>()
+    var brickRow = mutableListOf<Bricks>()
     var brickAssets = mutableListOf<Bitmap>()
     var ballsArray = mutableListOf<Ball>()
     var powerUpArray = mutableListOf<PowerUp>()
@@ -31,7 +31,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         }
     }
 
-    fun calculateMaxScore() {
+    private fun calculateMaxScore() {
         var totalBricks = brickRow.size
         PlayerManager.currentMaxScore = totalBricks * BrickStructure.brickScoreValue
 
@@ -113,7 +113,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
     fun makeOOBBricks() {
 
-        var tempArray = mutableListOf<Rect>()
+        var tempArray = mutableListOf<Bricks>()
         tempArray = BrickStructure.makeOOBBricks(tempArray)
         tempArray = BrickStructure.createOOBBPattern(tempArray, RandomNumberGenerator.rNG(0, 13))
         brickRow.addAll(tempArray)

@@ -32,7 +32,7 @@ object BrickStructure {
     /**
      * makes the first ten rows of bricks, visible to the player on startup
      */
-    fun makeInboundsBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
+    fun makeInboundsBricks(brickRow: MutableList<Bricks>): MutableList<Bricks> {
 
         var leftInBounds = left
         var topInBounds = top
@@ -42,9 +42,7 @@ object BrickStructure {
         for (i in 0..(totalSumOfBricks)) {
 
             var brick = Bricks(leftInBounds, topInBounds, rightInBounds, bottomInBounds)
-            var brickRect =
-                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
-            brickRow.add(brickRect)
+            brickRow.add(brick)
             leftInBounds += right - left + 4
             rightInBounds += right - left + 4
 
@@ -66,7 +64,7 @@ object BrickStructure {
     /**
      * makes ten more rows outside of the canvas (and the player's sight) that will then roll down.
      */
-    fun makeOOBBricks(brickRow: MutableList<Rect>): MutableList<Rect> {
+    fun makeOOBBricks(brickRow: MutableList<Bricks>): MutableList<Bricks> {
 
         var oOBLeft = left
         var oOBTop = -(bottom - top)
@@ -77,9 +75,7 @@ object BrickStructure {
         for (i in 0..(totalSumOfBricks)) {
 
             var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom)
-            var brickRect =
-                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
-            brickRow.add(brickRect)
+            brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
 
@@ -143,9 +139,7 @@ object BrickStructure {
         return temBricks
     }
 
-    fun createOOBBPattern(brickRow: MutableList<Rect>, id: Int): MutableList<Rect>{
-
-        Log.d(TAG, "createOOBBPattern: in function")
+    fun createOOBBPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks>{
 
         val patternOne = when(id){
 
@@ -166,7 +160,7 @@ object BrickStructure {
             else -> "Invalid"
         }
 
-        var temOOBBricks = mutableListOf<Rect>()
+        var temOOBBricks = mutableListOf<Bricks>()
         var index = 0
 
         if(patternOne.length < brickRow.size){
@@ -183,19 +177,16 @@ object BrickStructure {
             }
             index++
         }
-        Log.d(TAG, "createOOBBPattern: finished succesfully")
 
         return temOOBBricks
     }
 
-    fun moveDownRow(brickRow: MutableList<Rect>): MutableList<Rect>{
-
-
+    fun moveDownRow(brickRow: MutableList<Bricks>): MutableList<Bricks>{
 
         for (obj in brickRow){
 
-            obj.top += playerSpeed
-            obj.bottom += playerSpeed
+            obj.brickTop += playerSpeed
+            obj.brickBottom += playerSpeed
         }
         return brickRow
     }
