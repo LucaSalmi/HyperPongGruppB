@@ -48,6 +48,12 @@ object PlayerManager {
         }
     }
 
+    fun removePoints(newPoints: Int) {
+
+        playerPoints -= newPoints
+
+    }
+
     fun saveUserData(sp: SharedPreferences?) {
 
         val save = activeUser

@@ -93,7 +93,16 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             player.smallPaddle = true
         }
     }
-    //TypeID 4
+    //TypeID 4 Multiball
+
+    //TypeID 5 Gain Life
+
+    //TypeID 6
+    fun losePoints(){
+        if (PlayerManager.playerPoints > 0){
+            PlayerManager.removePoints(BrickStructure.brickScoreValue)
+        }
+    }
 
 
 }

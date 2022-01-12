@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.hyperponggruppb.view.InfinityView
 
 
-class InfintyFragment : Fragment() {
+class InfinityFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

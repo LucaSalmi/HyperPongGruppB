@@ -5,7 +5,7 @@ data class PlayerData(
     var highScore: Int,
     var currentLevel: Int,
     var nextLevel: Int,
-    var coins: Int,
+    var gems: Int,
     ){
     var levelScoresArray = mutableListOf<Int>()
     var levelStarsArray = mutableListOf<Int>()

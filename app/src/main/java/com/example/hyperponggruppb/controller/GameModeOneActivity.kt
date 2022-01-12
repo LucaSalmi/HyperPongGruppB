@@ -4,7 +4,7 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
-import com.example.hyperponggruppb.view.fragment.InfintyFragment
+import com.example.hyperponggruppb.view.fragment.InfinityFragment
 import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
@@ -28,7 +28,7 @@ class GameModeOneActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.commit {
-            add(R.id.overworld_map_container, InfintyFragment())
+            add(R.id.overworld_map_container, InfinityFragment())
         }
     }
 
