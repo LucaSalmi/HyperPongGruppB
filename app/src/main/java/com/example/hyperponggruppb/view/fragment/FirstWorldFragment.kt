@@ -21,11 +21,11 @@ class FirstWorldFragment : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_first_world, container, false)
 
-        val levelOne = view?.findViewById<ImageButton>(R.id.ib_level_one)
-        val levelTwo = view?.findViewById<ImageButton>(R.id.ib_level_two)
-        val levelThree = view?.findViewById<ImageButton>(R.id.ib_level_three)
-        val levelFour = view?.findViewById<ImageButton>(R.id.ib_level_four)
-        val levelFive = view?.findViewById<ImageButton>(R.id.ib_level_five)
+        val levelOne = view?.findViewById<ImageView>(R.id.iv_level_one)
+        val levelTwo = view?.findViewById<ImageView>(R.id.iv_level_two)
+        val levelThree = view?.findViewById<ImageView>(R.id.iv_level_three)
+        val levelFour = view?.findViewById<ImageView>(R.id.iv_level_four)
+        val levelFive = view?.findViewById<ImageView>(R.id.iv_level_five)
 
         levelOne?.setOnClickListener {
             if (checkUnlock(1)){
