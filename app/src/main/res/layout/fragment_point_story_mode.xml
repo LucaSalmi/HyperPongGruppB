@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_story_lives">
 
         <LinearLayout
-            android:id="@+id/layout_stars"
+            android:id="@+id/layout_sm_result_stars"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:orientation="horizontal">
