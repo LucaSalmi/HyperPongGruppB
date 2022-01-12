@@ -76,7 +76,73 @@ class DialogManager(val context: Context) {
     /**
      * creates the scoreboard to show the player their high score and their position in the leaderboard, it also links directly to the full scoreboard, the main menu and restarts the game.
      */
-    fun scoreBoard() {
+    fun scoreBoardInfinityMode() {
+
+        val scoreBoardDialog = Dialog(context)
+        scoreBoardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        scoreBoardDialog.setCancelable(false)
+        scoreBoardDialog.setContentView(R.layout.result_view)
+        val returnBtn = scoreBoardDialog.findViewById(R.id.tv_result_return) as TextView
+        val retryBtn = scoreBoardDialog.findViewById(R.id.tv_result_next) as TextView
+        val leaderboardBtn = scoreBoardDialog.findViewById(R.id.iv_result_leaderboard) as ImageView
+
+        val resultScore = scoreBoardDialog.findViewById(R.id.tv_result_score) as TextView
+        val resultPlacement = scoreBoardDialog.findViewById(R.id.tv_result_placement) as TextView
+        val resultMessage = scoreBoardDialog.findViewById(R.id.tv_result_message) as TextView
+
+        val playerScore = PlayerManager.playerPoints
+        val playerPlacement = PlayerManager.setPlacement()
+        var playerPlacementEnding = ""
+
+        when (playerPlacement) {
+            1 -> {
+                resultMessage.setText(R.string.result_message_one)
+                playerPlacementEnding = context.getString(R.string.result_placement_one)
+            }
+            2 -> {
+                resultMessage.setText(R.string.result_message_two)
+                playerPlacementEnding = context.getString(R.string.result_placement_two)
+            }
+            3 -> {
+                resultMessage.setText(R.string.result_message_three)
+                playerPlacementEnding = context.getString(R.string.result_placement_three)
+            }
+            in 4..10 -> {
+                resultMessage.setText(R.string.result_message_four)
+                playerPlacementEnding = context.getString(R.string.result_placement_four_plus)
+            }
+            else -> {
+                resultMessage.setText(R.string.result_message_five)
+                playerPlacementEnding = context.getString(R.string.result_placement_four_plus)
+            }
+        }
+
+        resultPlacement.text = (playerPlacement.toString() + playerPlacementEnding)
+        var resultScoreWithSign = playerScore.toString() + context.getString(R.string.result_p_sign)
+        resultScore.text = resultScoreWithSign
+
+        returnBtn.setOnClickListener {
+
+            scoreBoardDialog.dismiss()
+        }
+
+        retryBtn.setOnClickListener {
+
+            getMainActivity().startInfinityMode()
+            scoreBoardDialog.dismiss()
+        }
+
+        leaderboardBtn.setOnClickListener {
+
+            val toLeaderboard = Intent(getMainActivity(), LeaderBoardActivity::class.java)
+            scoreBoardDialog.dismiss()
+            startActivity(context, toLeaderboard, null)
+        }
+
+        scoreBoardDialog.show()
+        scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+    fun scoreBoardStoryMode() {
 
         val scoreBoardDialog = Dialog(context)
         scoreBoardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

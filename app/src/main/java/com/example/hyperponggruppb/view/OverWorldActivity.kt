@@ -24,5 +24,4 @@ class OverWorldActivity : AppCompatActivity() {
         binding.overworldMapContainer.adapter = adapter
         binding.overworldMapContainer.currentItem = 1
     }
-
 }
