@@ -55,6 +55,7 @@ class DialogManager(val context: Context) {
         saveBtn.setOnClickListener {
 
             if (nameField.text != null && nameField.text.length == 3) {
+
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
                 PlayerManager.resetAll()
@@ -65,6 +66,7 @@ class DialogManager(val context: Context) {
         }
 
         cancelBtn.setOnClickListener {
+
             nameInputDialog.dismiss()
         }
 
