@@ -1,5 +1,7 @@
 package com.example.hyperponggruppb.view
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -13,10 +15,16 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.DialogManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
     SurfaceHolder.Callback, Runnable {
@@ -40,11 +48,13 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var levelMinutes = 0
 
     var backgroundCode = 1
+    var soundCode = 0
 
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.lives = 3
+        PlayerManager.lives = 1
+        soundCode = 0
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
@@ -86,6 +96,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     checkLevelCompleted()
                 }
 
+                starSound()
                 draw()
             }
         }
@@ -265,6 +276,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
             myActivity.finish()
+
         }
 
         if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
@@ -285,6 +297,20 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             myActivity.finish()
+        }
+    }
+
+    private fun starSound(){
+
+        if (PlayerManager.starCounter == 1 && soundCode == 0){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
+        }else if (PlayerManager.starCounter == 2 && soundCode == 1){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
+        }else if (PlayerManager.starCounter == 3 && soundCode == 2){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
         }
     }
 

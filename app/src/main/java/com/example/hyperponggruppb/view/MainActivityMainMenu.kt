@@ -1,6 +1,5 @@
 package com.example.hyperponggruppb.view
 
-import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,8 +9,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
-import android.view.Window
-import android.widget.*
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.DialogManager
@@ -153,7 +150,7 @@ class MainActivityMainMenu : AppCompatActivity() {
         if (PlayerManager.isGameEnded) {
 
             PlayerManager.isGameEnded = false
-            mainDialog.scoreBoard()
+            mainDialog.scoreBoardInfinityMode()
         }
 
         if (PlayerManager.isMusicActive){

@@ -11,73 +11,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/ib_level_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_level_one"
+            android:layout_width="60dp"
+            android:layout_height="120dp"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_one_one_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.761"
+            app:layout_constraintVertical_bias="0.691"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/ib_level_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="106dp"
+        <ImageView
+            android:id="@+id/iv_level_two"
+            android:layout_width="55dp"
+            android:layout_height="110dp"
             android:layout_marginBottom="256dp"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_one_two_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.834"
+            app:layout_constraintHorizontal_bias="0.831"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ib_level_four"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_level_four"
+            app:layout_constraintVertical_bias="0.575" />
 
-        <ImageButton
-            android:id="@+id/ib_level_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_level_three"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_one_three_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.278"
+            app:layout_constraintHorizontal_bias="0.249"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.571" />
+            app:layout_constraintVertical_bias="0.516" />
 
-        <ImageButton
-            android:id="@+id/ib_level_four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_level_four"
+            android:layout_width="45dp"
+            android:layout_height="90dp"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_one_four_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.807"
+            app:layout_constraintHorizontal_bias="0.840"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.385" />
+            app:layout_constraintVertical_bias="0.340
+" />
 
-        <ImageButton
-            android:id="@+id/ib_level_five"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_level_five"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_one_five_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.539"
+            app:layout_constraintHorizontal_bias="0.536"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.314" />
+            app:layout_constraintVertical_bias="0.28" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

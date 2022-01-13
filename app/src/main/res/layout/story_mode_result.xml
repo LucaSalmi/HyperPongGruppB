@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:layout_gravity="center"
+    android:background="@drawable/enter_level_bg">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_sm_result_level_return"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:padding="12dp"
+            app:srcCompat="@drawable/exit_symbol" />
+
+        <TextView
+            android:id="@+id/tv_level_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center_horizontal"
+            android:paddingTop="33dp"
+            android:text="Level 1"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/iv_sm_result_level_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="2"
+            android:padding="12dp"
+            app:srcCompat="@drawable/play_symbol" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_star_progress_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:srcCompat="@drawable/starframe" />
+
+    <LinearLayout
+        android:id="@+id/layout_sm_result_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_star_progress_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+        <ImageView
+            android:id="@+id/iv_sm_result_star_one"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/no_star"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/iv_sm_result_star_two"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/no_star" />
+
+        <ImageView
+            android:id="@+id/iv_sm_result_star_three"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/no_star" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_starbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:indeterminateDuration="10"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:scaleY="5"
+        android:layout_marginTop="10dp"
+        android:progressTint="@color/star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_star_progress_holder" />
+
+
+    <TableLayout
+        android:id="@+id/layout_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="-5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pb_starbar">
+
+
+        <TableRow
+            android:id="@+id/progressbar_row"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Score:" />
+
+            <TextView
+                android:id="@+id/tv_sm_score_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="999" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/time_result_row"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_time_symbol"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/play_symbol" />
+
+            <TextView
+                android:id="@+id/tv_sm_time_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="999" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/gem_loot_row"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_gem_symbol"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/hyper_ball" />
+
+            <TextView
+                android:id="@+id/tv_sm_total_gem_looted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="999" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/powerup_loot_row"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_loot_symbol"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/multiball_button" />
+
+            <TextView
+                android:id="@+id/tv_sm_total_powerups_looted2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="999" />
+        </TableRow>
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

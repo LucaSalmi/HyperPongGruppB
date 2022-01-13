@@ -1,7 +1,6 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,11 +21,11 @@ class FirstWorldFragment : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_first_world, container, false)
 
-        val levelOne = view?.findViewById<ImageButton>(R.id.ib_level_one)
-        val levelTwo = view?.findViewById<ImageButton>(R.id.ib_level_two)
-        val levelThree = view?.findViewById<ImageButton>(R.id.ib_level_three)
-        val levelFour = view?.findViewById<ImageButton>(R.id.ib_level_four)
-        val levelFive = view?.findViewById<ImageButton>(R.id.ib_level_five)
+        val levelOne = view?.findViewById<ImageView>(R.id.iv_level_one)
+        val levelTwo = view?.findViewById<ImageView>(R.id.iv_level_two)
+        val levelThree = view?.findViewById<ImageView>(R.id.iv_level_three)
+        val levelFour = view?.findViewById<ImageView>(R.id.iv_level_four)
+        val levelFive = view?.findViewById<ImageView>(R.id.iv_level_five)
 
         levelOne?.setOnClickListener {
             if (checkUnlock(1)){
@@ -170,8 +169,14 @@ class FirstWorldFragment : Fragment() {
 
         startLevelBtn.setOnClickListener {
             // put this button to start level  of selected level
+            PlayerManager.starCounter = 0 // reset the stars in the !!! - UI - !!!
             dialog.dismiss()
-            startLevel()
+
+            val overWorldActivity = context as OverWorldActivity
+            overWorldActivity.startLevel()
+
+            //startLevel()
+
         }
 
         dialog.show()
@@ -191,13 +196,17 @@ class FirstWorldFragment : Fragment() {
         }
     }
 
+    /*
     private fun startLevel(){
         val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
         startActivity(toLevel)
     }
+     */
+
     private fun toaster(){
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
     }
+
     private fun toasterClicked(){
         Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT).show()
     }

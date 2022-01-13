@@ -25,11 +25,11 @@ class SecondWorldFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_second_world, container, false)
 
-        val levelSix = view?.findViewById<ImageButton>(R.id.ib_level_six)
-        val levelSeven = view?.findViewById<ImageButton>(R.id.ib_level_seven)
-        val levelEight = view?.findViewById<ImageButton>(R.id.ib_level_eight)
-        val levelNine = view?.findViewById<ImageButton>(R.id.ib_level_nine)
-        val levelTen = view?.findViewById<ImageButton>(R.id.ib_level_ten)
+        val levelSix = view?.findViewById<ImageView>(R.id.iv_level_six)
+        val levelSeven = view?.findViewById<ImageView>(R.id.iv_level_seven)
+        val levelEight = view?.findViewById<ImageView>(R.id.iv_level_eight)
+        val levelNine = view?.findViewById<ImageView>(R.id.iv_level_nine)
+        val levelTen = view?.findViewById<ImageView>(R.id.iv_level_ten)
 
         levelSix?.setOnClickListener {
             if (checkUnlock(6)) {

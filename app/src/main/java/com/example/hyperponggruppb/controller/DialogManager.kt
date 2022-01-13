@@ -5,6 +5,8 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Window
 import android.widget.*
@@ -13,9 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.adapter.UserSelectionAdapter
+import com.example.hyperponggruppb.view.GameModeStoryActivity
 import com.example.hyperponggruppb.view.LeaderBoardActivity
 import com.example.hyperponggruppb.view.MainActivityMainMenu
+import com.example.hyperponggruppb.view.OverWorldActivity
+import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.android.material.switchmaterial.SwitchMaterial
+import kotlinx.coroutines.delay
 
 class DialogManager(val context: Context) {
 
@@ -80,7 +86,7 @@ class DialogManager(val context: Context) {
     /**
      * creates the scoreboard to show the player their high score and their position in the leaderboard, it also links directly to the full scoreboard, the main menu and restarts the game.
      */
-    fun scoreBoard() {
+    fun scoreBoardInfinityMode() {
 
         val scoreBoardDialog = Dialog(context)
         scoreBoardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -147,6 +153,99 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
+    fun scoreBoardStoryMode() {
+
+        val scoreBoardDialog = Dialog(context)
+        scoreBoardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        scoreBoardDialog.setCancelable(false)
+        scoreBoardDialog.setContentView(R.layout.story_mode_result)
+
+        val starBar = scoreBoardDialog.findViewById(R.id.pb_starbar) as ProgressBar
+
+        val starOne = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_one) as ImageView
+        val starTwo = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_two) as ImageView
+        val starThree = scoreBoardDialog.findViewById(R.id.iv_sm_result_star_three) as ImageView
+
+        val returnBtn = scoreBoardDialog.findViewById(R.id.iv_sm_result_level_return) as ImageView
+
+        val retryBtn = scoreBoardDialog.findViewById(R.id.iv_sm_result_level_start) as ImageView
+
+        val resultScore = scoreBoardDialog.findViewById(R.id.tv_sm_score_result) as TextView
+
+        val resultGemsLooted =
+            scoreBoardDialog.findViewById(R.id.tv_sm_total_gem_looted) as TextView
+
+        val resultPowerUpsLooted =
+            scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
+
+        val currentScore = PlayerManager.playerPoints
+
+        resultScore.text = PlayerManager.playerPoints.toString()
+
+        var stars = 0
+        starBar.progress = 0
+        starBar.max = PlayerManager.currentMaxScore
+        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore}")
+        Log.d(TAG, "scoreBoardStoryMode: progress = $currentScore")
+        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore / 3}")
+        Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
+
+
+        val refScore = 0
+        starBar.max = PlayerManager.currentMaxScore
+        starBar.progress = 0
+        var isOneStar = false
+        var isTwoStar = false
+
+        if (currentScore > refScore) {
+            //Handler(Looper.myLooper()!!).postDelayed({ FÖRSÖKER DELAYA STARBARLOAD "animation brush" dock FUNKAR EJ
+                while (starBar.progress < currentScore) {
+                    starBar.progress + 10
+                    Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
+
+                    starBar.progress = (currentScore)
+
+                    if (starBar.progress >= (PlayerManager.currentMaxScore / 3) && !isOneStar) {
+                        starOne.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
+                        isOneStar = true
+
+                        stars = 1
+                    }
+                    if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && isOneStar) {
+                        starTwo.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
+                        isTwoStar = true
+
+                        stars = 2
+                    }
+                    if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
+                        starThree.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
+                        stars = 3
+                    }
+                }
+           //}, 100)
+
+        }
+
+        returnBtn.setOnClickListener {
+
+            scoreBoardDialog.dismiss()
+        }
+
+        retryBtn.setOnClickListener {
+            PlayerManager.starCounter = 0 // reset the stars on the !!! - UI - !!!
+
+            getOverWorldActivity().startLevel()
+            scoreBoardDialog.dismiss()
+        }
+
+        scoreBoardDialog.show()
+        scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
+
     fun settingsDialog(sp: SharedPreferences) {
 
         val settingsDialog = Dialog(context)
@@ -190,5 +289,8 @@ class DialogManager(val context: Context) {
         return context as MainActivityMainMenu
     }
 
+    private fun getOverWorldActivity(): OverWorldActivity {
+        return context as OverWorldActivity
+    }
 
 }
