@@ -61,12 +61,13 @@
 
     <LinearLayout
         android:id="@+id/layout_sm_result_stars"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_star_progress_holder"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -75,15 +76,15 @@
             android:id="@+id/iv_sm_result_star_one"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitCenter"
-            android:background="@drawable/no_star"/>
+            android:background="@drawable/no_star"
+            android:scaleType="fitCenter" />
 
         <ImageView
             android:id="@+id/iv_sm_result_star_two"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/no_star"/>
+            android:background="@drawable/no_star" />
 
         <ImageView
             android:id="@+id/iv_sm_result_star_three"
@@ -92,16 +93,21 @@
             android:background="@drawable/no_star" />
     </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/pb_starbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:paddingStart="80dp"
-            android:paddingEnd="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_star_progress_holder"/>
+    <ProgressBar
+        android:id="@+id/pb_starbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:indeterminateDuration="10"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:layout_marginTop="10dp"
+        android:progressTint="@color/star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_star_progress_holder" />
+
 
     <TableLayout
         android:id="@+id/layout_summary"
@@ -109,13 +115,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pb_starbar">
 
+
         <TableRow
-            android:id="@+id/score_result"
+            android:id="@+id/progressbar_row"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center">
@@ -138,7 +144,7 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/time_result"
+            android:id="@+id/time_result_row"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textColor="@color/white"
@@ -160,7 +166,7 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/gem_loot"
+            android:id="@+id/gem_loot_row"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center">
@@ -181,7 +187,7 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/powerup_loot"
+            android:id="@+id/powerup_loot_row"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center">

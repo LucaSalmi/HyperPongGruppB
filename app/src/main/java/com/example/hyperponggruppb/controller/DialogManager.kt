@@ -5,6 +5,8 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Window
 import android.widget.*
@@ -166,33 +168,61 @@ class DialogManager(val context: Context) {
 
         val resultScore = scoreBoardDialog.findViewById(R.id.tv_sm_score_result) as TextView
 
-        val resultGemsLooted = scoreBoardDialog.findViewById(R.id.tv_sm_total_gem_looted) as TextView
+        val resultGemsLooted =
+            scoreBoardDialog.findViewById(R.id.tv_sm_total_gem_looted) as TextView
 
-        val resultPowerUpsLooted = scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
+        val resultPowerUpsLooted =
+            scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
 
-        var isOneStar = 0
-        var isTwoStar = 0
-        var currentScore = PlayerManager.playerPoints
-        starBar.max = PlayerManager.currentMaxScore
-        starBar.progress = 0
-        var stars = 0
+        val currentScore = PlayerManager.playerPoints
 
         resultScore.text = PlayerManager.playerPoints.toString()
-        while (starBar.progress < currentScore) {
-            starBar.progress =+ 10
 
-            if (currentScore >= PlayerManager.currentMaxScore * 0.33 && isOneStar == 0) {
-                starOne.setImageResource(R.drawable.star)
-                isOneStar = 1
+        var stars = 0
+        starBar.progress = 0
+        starBar.max = PlayerManager.currentMaxScore
+        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore}")
+        Log.d(TAG, "scoreBoardStoryMode: progress = $currentScore")
+        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore / 3}")
+        Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
 
-            }
-            if (currentScore >= PlayerManager.currentMaxScore * 0.66 && isOneStar == 1) {
-                starTwo.setImageResource(R.drawable.star)
-                isTwoStar = 1
-            }
-            if (currentScore >= PlayerManager.currentMaxScore && isTwoStar == 1) {
-                starThree.setImageResource(R.drawable.star)
-            }
+
+        val refScore = 0
+        starBar.max = PlayerManager.currentMaxScore
+        starBar.progress = 0
+        var isOneStar = false
+        var isTwoStar = false
+        starBar.scaleY = 5f
+
+        if (currentScore > refScore) {
+            //Handler(Looper.myLooper()!!).postDelayed({ FÖRSÖKER DELAYA STARBARLOAD "animation brush" dock FUNKAR EJ
+                while (starBar.progress < currentScore) {
+                    starBar.progress + 10
+                    Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
+
+                    starBar.progress = (currentScore)
+
+                    if (starBar.progress >= (PlayerManager.currentMaxScore / 3) && !isOneStar) {
+                        starOne.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
+                        isOneStar = true
+
+                        stars = 1
+                    }
+                    if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && isOneStar) {
+                        starTwo.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
+                        isTwoStar = true
+
+                        stars = 2
+                    }
+                    if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
+                        starThree.setImageResource(R.drawable.star)
+                        Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
+                        stars = 3
+                    }
+                }
+           //}, 100)
 
         }
 
@@ -210,6 +240,7 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.show()
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
+
 
     fun settingsDialog(sp: SharedPreferences) {
 

@@ -32,10 +32,29 @@ class PointFragmentStoryMode : Fragment() {
         var currentScore = PlayerManager.playerPoints
         starBar.max = PlayerManager.currentMaxScore
         starBar.progress = 0
+        var isOneStar = false
+        var isTwoStar = false
+        starBar.scaleY = 5f
 
         score?.text = PlayerManager.playerPoints.toString()
         if (currentScore > refScore) {
             starBar.progress = (currentScore)
+        }
+        if (starBar.progress >= (PlayerManager.currentMaxScore / 3) && !isOneStar) {
+            starOne.setImageResource(R.drawable.star)
+            Log.d(TAG, "storyModeUI: star reach")
+            isOneStar = true
+
+        }
+        if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && isOneStar) {
+            starTwo.setImageResource(R.drawable.star)
+            Log.d(TAG, "storyModeUI:: 2 star reach")
+            isTwoStar = true
+
+        }
+        if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
+            starThree.setImageResource(R.drawable.star)
+            Log.d(TAG, "storyModeUI: 3 star reach")
         }
 
         when {

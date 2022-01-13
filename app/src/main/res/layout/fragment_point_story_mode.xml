@@ -23,28 +23,28 @@
             android:id="@+id/layout_sm_result_stars"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/iv_star_one"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/no_star" />
 
             <ImageView
                 android:id="@+id/iv_star_two"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/no_star" />
 
             <ImageView
                 android:id="@+id/iv_star_three"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/no_star" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
