@@ -25,7 +25,8 @@ object PlayerManager {
     var levelScoresArray = mutableListOf<Int>()
     var isInfiniteMode = false
     var isReplaying = false
-    var currentMaxScore = 0
+    var currentMaxScore = 1000
+    var starCounter = 0
 
 
     fun addPoints(newPoints: Int) {

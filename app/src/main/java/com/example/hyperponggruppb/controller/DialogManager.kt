@@ -192,7 +192,6 @@ class DialogManager(val context: Context) {
         starBar.progress = 0
         var isOneStar = false
         var isTwoStar = false
-        starBar.scaleY = 5f
 
         if (currentScore > refScore) {
             //Handler(Looper.myLooper()!!).postDelayed({ FÖRSÖKER DELAYA STARBARLOAD "animation brush" dock FUNKAR EJ
@@ -232,6 +231,7 @@ class DialogManager(val context: Context) {
         }
 
         retryBtn.setOnClickListener {
+            PlayerManager.starCounter = 0 // reset the stars on the !!! - UI - !!!
 
             getOverWorldActivity().startLevel()
             scoreBoardDialog.dismiss()

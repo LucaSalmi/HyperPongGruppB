@@ -168,10 +168,11 @@ class FirstWorldFragment : Fragment() {
 
         startLevelBtn.setOnClickListener {
             // put this button to start level  of selected level
+            PlayerManager.starCounter = 0 // reset the stars in the !!! - UI - !!!
             dialog.dismiss()
 
-            val fuckMyselfToDeath = context as OverWorldActivity
-            fuckMyselfToDeath.startLevel()
+            val overWorldActivity = context as OverWorldActivity
+            overWorldActivity.startLevel()
 
             //startLevel()
 

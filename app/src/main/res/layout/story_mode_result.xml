@@ -102,6 +102,7 @@
         android:indeterminateDuration="10"
         android:paddingStart="70dp"
         android:paddingEnd="70dp"
+        android:scaleY="5"
         android:layout_marginTop="10dp"
         android:progressTint="@color/star"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,6 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginTop="-5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pb_starbar">
