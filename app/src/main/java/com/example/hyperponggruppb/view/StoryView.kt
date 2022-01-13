@@ -36,9 +36,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     val deltaTime = 0L
     var timeToUpdate = System.currentTimeMillis()
 
-    var levelSeconds = 0
-    var levelMinutes = 0
-
     var backgroundCode = 1
 
     init {
@@ -51,24 +48,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.activeUser!!.currentLevel > 5 ){
             backgroundCode = 3
         }
-    }
-
-    private val levelTimer = object : CountDownTimer(60000, 1000) {
-
-        override fun onTick(p0: Long) {
-            levelSeconds++
-        }
-
-        override fun onFinish() {
-            restartLevelTimer()
-        }
-    }
-
-    private fun restartLevelTimer() {
-        levelTimer.cancel()
-        levelSeconds = 0
-        levelMinutes++
-        levelTimer.start()
     }
 
     override fun run() {
@@ -209,7 +188,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
 
-            restartLevelTimer()
             storyMode.ball.ballSpeedX = 7f
             storyMode.ball.ballSpeedY = -13f
             PsyduckEngine.gameStart = true
@@ -258,7 +236,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (isGameOver || PlayerManager.lives <= 0) {
 
-            levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
@@ -278,7 +255,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (storyMode.brickRow.isEmpty()) {
 
-            levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
             PlayerManager.saveUserData(sp)

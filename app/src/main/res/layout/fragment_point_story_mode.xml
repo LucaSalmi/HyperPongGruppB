@@ -14,10 +14,12 @@
         android:orientation="vertical"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/iv_story_lives"
         app:layout_constraintEnd_toStartOf="@+id/iv_story_lives"
-        app:layout_constraintTop_toTopOf="@+id/iv_story_lives">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_story_lives"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/layout_stars"
@@ -52,7 +54,6 @@
             android:layout_height="match_parent">
 
 
-
             <ProgressBar
                 android:id="@+id/pb_starbar"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -60,8 +61,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_story_score"
@@ -84,4 +87,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/three_coolant" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -104,5 +104,31 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         }
     }
 
+    //TypeID 7
+    fun addTime(levelSec: Int): Int{
+
+        var newTime = levelSec + 10
+
+        if (newTime > 60){
+            newTime = 0
+        }
+
+        return newTime
+    }
+
+    //TypeID 8
+
+    fun removeTime(levelSec: Int): Int{
+
+        var newTime = levelSec - 10
+
+        if (newTime < 0){
+            newTime = 0
+        }
+
+        return newTime
+
+    }
+
 
 }
