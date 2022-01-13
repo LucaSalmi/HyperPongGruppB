@@ -20,6 +20,7 @@ import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.DialogManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
 
@@ -46,11 +47,13 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var levelMinutes = 0
 
     var backgroundCode = 1
+    var soundCode = 0
 
     init {
 
         mHolder?.addCallback(this)
         PlayerManager.lives = 1
+        soundCode = 0
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
@@ -92,6 +95,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     checkLevelCompleted()
                 }
 
+                starSound()
                 draw()
             }
         }
@@ -201,28 +205,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         storyMode.player.left = sx.toFloat() - storyMode.player.playerWidth / 2
         storyMode.player.update()
 
-        /*
-        val animation = AnimationUtils.loadAnimation(context, R.anim.bounce)
-        val player = storyMode.player
-        player.startAnimation(animation)
-
-         */
-
-        /*
-
-        val animator = ValueAnimator.ofFloat(0f, -200f)
-        animator.duration = 2000
-        animator.start()
-        animator.addUpdateListener(object:ValueAnimator.AnimatorUpdateListener) {
-
-            override fun onAnimationUpdate(animation: ValueAnimator?){
-                val animatedvalue = animation?.animatedValue as Float
-            }
-        }
-         */
-
-        //val objectAnimator = ObjectAnimator.ofFloat()
-
         if (!PsyduckEngine.gameStart) {
 
             storyMode.ball.ballLeft =
@@ -314,6 +296,20 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             myActivity.finish()
+        }
+    }
+
+    private fun starSound(){
+
+        if (PlayerManager.starCounter == 1 && soundCode == 0){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
+        }else if (PlayerManager.starCounter == 2 && soundCode == 1){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
+        }else if (PlayerManager.starCounter == 3 && soundCode == 2){
+            SoundEffectManager.playStarSound(context)
+            soundCode++
         }
     }
 

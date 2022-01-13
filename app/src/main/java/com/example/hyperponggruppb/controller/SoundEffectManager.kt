@@ -7,6 +7,7 @@ object SoundEffectManager {
 
     var soundEffectPlayer: MediaPlayer? = null
     var backgroundPlayer: MediaPlayer? = null
+    var starSoundPlayer: MediaPlayer? = null
 
     fun musicSetup(context: Context, trackId: Int) {
         setupBGMusic(context, trackId)
@@ -102,11 +103,6 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-            4 -> context.resources.getIdentifier(
-                "star_sound_effect",
-                "raw",
-                context.packageName
-            )
 
             else -> {
 
@@ -125,8 +121,19 @@ object SoundEffectManager {
         if (PlayerManager.isSoundEffectsActive){
             soundEffectPlayer?.start()
         }
+    }
 
+    fun playStarSound(context: Context){
 
+         starSoundPlayer = MediaPlayer.create(context, context.resources.getIdentifier(
+        "star_sound_effect",
+        "raw",
+        context.packageName
+        ))
+
+        if (PlayerManager.isSoundEffectsActive) {
+            starSoundPlayer?.start()
+        }
     }
 
 }
