@@ -12,6 +12,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.GameManager
 
 class PointFragmentStoryMode : Fragment() {
@@ -44,17 +45,20 @@ class PointFragmentStoryMode : Fragment() {
             starOne.setImageResource(R.drawable.star)
             Log.d(TAG, "storyModeUI: star reach")
             isOneStar = true
+            context?.let { SoundEffectManager.jukebox(it, 4) }
 
         }
         if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && isOneStar) {
             starTwo.setImageResource(R.drawable.star)
             Log.d(TAG, "storyModeUI:: 2 star reach")
             isTwoStar = true
+            context?.let { SoundEffectManager.jukebox(it, 4) }
 
         }
         if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
             starThree.setImageResource(R.drawable.star)
             Log.d(TAG, "storyModeUI: 3 star reach")
+            context?.let { SoundEffectManager.jukebox(it, 4) }
         }
 
         when {

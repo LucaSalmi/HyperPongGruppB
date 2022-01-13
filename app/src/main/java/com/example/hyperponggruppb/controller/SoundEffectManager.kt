@@ -102,6 +102,11 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
+            4 -> context.resources.getIdentifier(
+                "star_sound_effect",
+                "raw",
+                context.packageName
+            )
 
             else -> {
 
