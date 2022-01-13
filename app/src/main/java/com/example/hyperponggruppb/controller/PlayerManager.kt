@@ -24,7 +24,6 @@ object PlayerManager {
     var isReplaying = false
     var currentMaxScore = 1000
     var starCounter = 0
-    var currentMaxScore = 0
 
     fun createUser(): Boolean{
 

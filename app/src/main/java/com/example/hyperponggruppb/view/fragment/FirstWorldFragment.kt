@@ -196,13 +196,6 @@ class FirstWorldFragment : Fragment() {
         }
     }
 
-    /*
-    private fun startLevel(){
-        val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
-        startActivity(toLevel)
-    }
-     */
-
     private fun toaster(){
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
     }
