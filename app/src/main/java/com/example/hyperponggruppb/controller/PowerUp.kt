@@ -110,7 +110,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         var newTime = levelSec + 10
 
         if (newTime > 60){
-            newTime = 0
+            newTime -= 60
         }
 
         return newTime
@@ -123,7 +123,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         var newTime = levelSec - 10
 
         if (newTime < 0){
-            newTime = 0
+            newTime += 60
         }
 
         return newTime
