@@ -213,6 +213,9 @@ object PlayerManager {
             }
         }
     }
+    fun activatePowerUp(){
+
+    }
 
 
 
