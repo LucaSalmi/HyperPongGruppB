@@ -2,12 +2,14 @@ package com.example.hyperponggruppb.controller
 
 import android.content.Context
 import android.media.MediaPlayer
+import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object SoundEffectManager {
 
     var soundEffectPlayer: MediaPlayer? = null
     var backgroundPlayer: MediaPlayer? = null
     var starSoundPlayer: MediaPlayer? = null
+    var brickHitPlayer: MediaPlayer? = null
 
     fun musicSetup(context: Context, trackId: Int) {
         setupBGMusic(context, trackId)
@@ -134,6 +136,56 @@ object SoundEffectManager {
         if (PlayerManager.isSoundEffectsActive) {
             starSoundPlayer?.start()
         }
+    }
+
+    fun playBrickHitSound(context: Context, id: Int) {
+
+        brickHitPlayer?.stop()
+        brickHitPlayer?.release()
+
+        var resID: Int = when (id){
+
+            0 -> context.resources.getIdentifier(
+                "rock_hit_1",
+                "raw",
+                context.packageName
+            )
+            1 -> context.resources.getIdentifier(
+                "rock_hit_2",
+                "raw",
+                context.packageName
+            )
+            2 -> context.resources.getIdentifier(
+                "rock_hit_3",
+                "raw",
+                context.packageName
+            )
+            3 -> context.resources.getIdentifier(
+                "rock_hit_4",
+                "raw",
+                context.packageName
+            )
+            4 -> context.resources.getIdentifier(
+                "rock_hit_5",
+                "raw",
+                context.packageName
+            )
+            else -> {
+                context.resources.getIdentifier(
+                    "rock_hit_6",
+                    "raw",
+                    context.packageName
+                )
+            }
+
+        }
+
+        brickHitPlayer = MediaPlayer.create(context, resID)
+
+        if (PlayerManager.isSoundEffectsActive){
+            brickHitPlayer?.start()
+        }
+
     }
 
 }

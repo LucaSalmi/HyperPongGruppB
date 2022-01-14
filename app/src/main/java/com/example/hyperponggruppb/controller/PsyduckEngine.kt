@@ -44,7 +44,9 @@ object PsyduckEngine {
                 toRemove = brickRow.indexOf(brick)
                 ball.brickCollision = true
                 brickHit = brickRect
-                SoundEffectManager.jukebox(context, 0)
+
+                //SoundEffectManager.jukebox(context, 0)
+                SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 6))
             }
         }
 
