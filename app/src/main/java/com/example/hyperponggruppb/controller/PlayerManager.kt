@@ -25,7 +25,7 @@ object PlayerManager {
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()
-    var powerUpInventory: List<Int>? = listOf(0,0,0,0)
+    var powerUpInventory: List<Int> = listOf(0,0,0,0)
     var isMusicActive = true
     var isSoundEffectsActive = true
     var gems = 0
