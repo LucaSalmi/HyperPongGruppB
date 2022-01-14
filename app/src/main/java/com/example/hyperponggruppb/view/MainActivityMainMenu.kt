@@ -43,7 +43,6 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
-        Log.d(TAG, "onCreate: ${PlayerManager.usersArray}")
 
         if (PlayerManager.name == "null") {
 

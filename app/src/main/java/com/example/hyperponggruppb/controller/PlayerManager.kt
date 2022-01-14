@@ -35,7 +35,7 @@ object PlayerManager {
             }
         }
 
-        activeUser = PlayerData(name, 0, 0, 1, 0)
+        activeUser = PlayerData(name)
         return true
     }
 
@@ -109,6 +109,9 @@ object PlayerManager {
                 isSoundEffectsActive = activeUser!!.isSoundEffectsActive
             }
         }
+
+        Log.d(TAG, "NextLevel: ${activeUser?.nextLevel}")
+        Log.d(TAG, "CurrentLevel: ${activeUser?.nextLevel}")
 
     }
 
@@ -193,8 +196,10 @@ object PlayerManager {
 
         } else {
 
-            activeUser?.nextLevel!! + 1
+            activeUser!!.nextLevel += 1
         }
+        Log.d(TAG, "NextLevel: ${activeUser?.nextLevel}")
+        Log.d(TAG, "CurrentLevel: ${activeUser?.nextLevel}")
     }
 
     fun addStarsToUser(){
