@@ -22,6 +22,7 @@ object PlayerManager {
     var isGameEnded = false
     var isInfiniteMode = false
     var isReplaying = false
+    var isFirstAccount = false
     var currentMaxScore = 1000
     var starCounter = 0
 
@@ -104,11 +105,11 @@ object PlayerManager {
             if (user.name == name) {
 
                 activeUser = user
+                isMusicActive = activeUser!!.isMusicActive
+                isSoundEffectsActive = activeUser!!.isSoundEffectsActive
             }
         }
 
-        isMusicActive = activeUser!!.isMusicActive
-        isSoundEffectsActive = activeUser!!.isSoundEffectsActive
     }
 
     fun setPlacement(): Int {
@@ -194,7 +195,20 @@ object PlayerManager {
 
             activeUser?.nextLevel!! + 1
         }
-
     }
+
+    fun addStarsToUser(){
+
+        if (activeUser?.levelStarsArray?.size!! < activeUser!!.currentLevel){
+            activeUser?.levelStarsArray?.add(starCounter)
+        }else{
+            if (activeUser?.levelStarsArray!![activeUser!!.currentLevel - 1] < starCounter) {
+                activeUser?.levelStarsArray!!.removeAt(activeUser!!.currentLevel - 1)
+                activeUser?.levelStarsArray!!.add(activeUser!!.currentLevel - 1, starCounter)
+            }
+        }
+    }
+
+
 
 }

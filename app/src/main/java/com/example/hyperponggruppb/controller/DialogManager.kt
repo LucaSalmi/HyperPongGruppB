@@ -76,8 +76,12 @@ class DialogManager(val context: Context) {
         }
 
         cancelBtn.setOnClickListener {
+            if (PlayerManager.isFirstAccount){
+                cancelBtn.error = "create an account"
+            }else{
+                nameInputDialog.dismiss()
+            }
 
-            nameInputDialog.dismiss()
         }
 
         nameInputDialog.show()
