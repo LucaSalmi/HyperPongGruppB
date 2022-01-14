@@ -24,7 +24,6 @@ class MainActivityMainMenu : AppCompatActivity() {
     private lateinit var mainDialog: DialogManager
     private var accountText: String = ""
     private var isStoryMode = true
-    var isFirstAccount = false
     private lateinit var sp: SharedPreferences
 
 
@@ -44,43 +43,42 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
-        Log.d(TAG, "onCreate: ${PlayerManager.usersArray}")
 
         if (PlayerManager.name == "null") {
-            isFirstAccount = true
-            mainDialog.nameInput(sp)
-        }else{
 
-            setAccount()
-            onClick()
+            PlayerManager.isFirstAccount = true
+            mainDialog.nameInput(sp)
         }
+
+        setAccount()
+        onClick()
 
 
     }
 
-    fun checkForMusic(){
+    fun checkForMusic() {
 
-        if (!PlayerManager.isMusicActive){
+        if (!PlayerManager.isMusicActive) {
             SoundEffectManager.stopMusic()
-        }else{
+        } else {
             SoundEffectManager.musicSetup(this, 0)
         }
 
     }
 
-    private fun onClick(){
+    private fun onClick() {
 
         binding.ivGameMode.setOnClickListener {
 
-            if (PlayerManager.isMusicActive){
+            if (PlayerManager.isMusicActive) {
                 SoundEffectManager.stopMusic()
             }
 
             PlayerManager.loadUserData()
-            
-            if (isStoryMode){
+
+            if (isStoryMode) {
                 startStoryMode()
-            }else{
+            } else {
                 startInfinityMode()
             }
         }
@@ -110,34 +108,34 @@ class MainActivityMainMenu : AppCompatActivity() {
         }
     }
 
-    private fun changeButtonText(){
+    private fun changeButtonText() {
 
-        if (isStoryMode){
+        if (isStoryMode) {
             binding.tvGameMode.text = getString(R.string.txt_story_mode)
-        }else{
+        } else {
             binding.tvGameMode.text = getText(R.string.txt_infinite_mode)
         }
     }
 
-    private fun startStoryMode(){
+    private fun startStoryMode() {
 
         val toStoryMode = Intent(this, OverWorldActivity::class.java)
         PlayerManager.isInfiniteMode = false
         startActivity(toStoryMode)
     }
 
-    fun startInfinityMode(){
+    fun startInfinityMode() {
 
         val toGameModeOne = Intent(this, GameModeOneActivity::class.java)
         PlayerManager.isInfiniteMode = true
         startActivity(toGameModeOne)
     }
 
-    fun setAccount(){
+    fun setAccount() {
 
-        accountText = if (PlayerManager.name != "null"){
+        accountText = if (PlayerManager.name != "null") {
             getString(R.string.active_account_string) + PlayerManager.name
-        }else{
+        } else {
             getString(R.string.active_account_string) + "None"
         }
         binding.tvActiveAccount.text = accountText
@@ -153,7 +151,7 @@ class MainActivityMainMenu : AppCompatActivity() {
             mainDialog.scoreBoardInfinityMode()
         }
 
-        if (PlayerManager.isMusicActive){
+        if (PlayerManager.isMusicActive) {
             SoundEffectManager.musicSetup(this, 0)
         }
 

@@ -27,6 +27,8 @@ class FirstWorldFragment : Fragment() {
         val levelFour = view?.findViewById<ImageView>(R.id.iv_level_four)
         val levelFive = view?.findViewById<ImageView>(R.id.iv_level_five)
 
+
+
         levelOne?.setOnClickListener {
             if (checkUnlock(1)){
                 enterLevelScreen(1)
