@@ -7,9 +7,9 @@
     tools:context=".view.GameModeStoryActivity">
 
     <FrameLayout
+        android:id="@+id/score_fragment_container_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/score_fragment_container_story"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/story_view_container"/>
@@ -19,5 +19,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/score_fragment_container_story"/>
+
+
+    <ImageView
+        android:id="@+id/iv_powerup_holder_ui"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/powerup_holder"
+        app:layout_constraintBottom_toTopOf="@+id/iv_powerup_belt_ui"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_current_powerup_activated"
+        android:layout_marginStart="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/multiball_button"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_powerup_holder_ui"
+        app:layout_constraintEnd_toEndOf="@id/iv_powerup_holder_ui"
+        app:layout_constraintStart_toStartOf="@+id/iv_powerup_holder_ui"
+        app:layout_constraintTop_toTopOf="@+id/iv_powerup_holder_ui" />
+
+    <ImageView
+        android:id="@+id/iv_powerup_belt_ui"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ui_powerhud_belt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
