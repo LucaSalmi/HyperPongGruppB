@@ -121,7 +121,7 @@
             android:gravity="center"
             android:layout_marginStart="60dp"
             android:layout_marginEnd="20dp"
-            android:text="Score:"
+            android:text="Highscore:"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -195,7 +195,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/locked_gun_button" />
+            app:srcCompat="@drawable/gun_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_3"
@@ -203,7 +203,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/locked_shield_button" />
+            app:srcCompat="@drawable/shield_button" />
 
         <ImageView
             android:id="@+id/iv_level_loadout_4"
