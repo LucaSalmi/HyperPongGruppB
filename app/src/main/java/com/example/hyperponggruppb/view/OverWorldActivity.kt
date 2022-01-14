@@ -28,6 +28,8 @@ class OverWorldActivity : AppCompatActivity() {
             SoundEffectManager.musicSetup(this, 1)
         }
 
+        Log.d(TAG, "addStarsToUser: ${PlayerManager.activeUser!!.levelStarsArray}")
+
         val adapter = ViewPagerAdapter(this)
         binding.overworldMapContainer.adapter = adapter
         binding.overworldMapContainer.currentItem = 1

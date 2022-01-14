@@ -65,6 +65,7 @@ class DialogManager(val context: Context) {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
                 if (PlayerManager.createUser()){
+                    PlayerManager.cleanArrays()
                     PlayerManager.saveUserData(sp)
                     getMainActivity().setAccount()
                     nameInputDialog.dismiss()
@@ -189,11 +190,6 @@ class DialogManager(val context: Context) {
         var stars = 0
         starBar.progress = 0
         starBar.max = PlayerManager.currentMaxScore
-        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore}")
-        Log.d(TAG, "scoreBoardStoryMode: progress = $currentScore")
-        Log.d(TAG, "scoreBoardStoryMode: maxScore = ${PlayerManager.currentMaxScore / 3}")
-        Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
-
 
         val refScore = 0
         starBar.max = PlayerManager.currentMaxScore
@@ -202,7 +198,7 @@ class DialogManager(val context: Context) {
         var isTwoStar = false
 
         if (currentScore > refScore) {
-            //Handler(Looper.myLooper()!!).postDelayed({ FÖRSÖKER DELAYA STARBARLOAD "animation brush" dock FUNKAR EJ
+
                 while (starBar.progress < currentScore) {
                     starBar.progress + 10
                     Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
@@ -226,11 +222,10 @@ class DialogManager(val context: Context) {
                     if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
                         starThree.setImageResource(R.drawable.star)
                         Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
+
                         stars = 3
                     }
                 }
-           //}, 100)
-
         }
 
         returnBtn.setOnClickListener {

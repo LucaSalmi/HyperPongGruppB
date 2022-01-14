@@ -3,7 +3,6 @@ package com.example.hyperponggruppb.controller
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -13,9 +12,6 @@ object PlayerManager {
     var activeUser: PlayerData? = null
     var playerPoints = 0
     var lives = 0
-    var name = "null"
-    var isMusicActive = true
-    var isSoundEffectsActive = true
     var playTime = 0
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
@@ -26,6 +22,27 @@ object PlayerManager {
     var currentMaxScore = 1000
     var starCounter = 0
 
+    var name = "null"
+    var levelScoresArray: MutableList<Int> = mutableListOf()
+    var levelStarsArray: MutableList<Int> = mutableListOf()
+    var powerUpInventory: List<Int>? = listOf(0,0,0,0)
+    var isMusicActive = true
+    var isSoundEffectsActive = true
+    var gems = 0
+    var highScore = 0
+    var currentLevel = 0
+    var nextLevel = currentLevel + 1
+
+    fun cleanArrays(){
+
+        levelScoresArray.clear()
+        levelStarsArray.clear()
+        powerUpInventory = listOf(0,0,0,0)
+        gems = 0
+        highScore = 0
+        currentLevel = 0
+    }
+
     fun createUser(): Boolean{
 
         for (user in usersArray){
@@ -35,7 +52,7 @@ object PlayerManager {
             }
         }
 
-        activeUser = PlayerData(name)
+        activeUser = PlayerData(name, levelScoresArray, levelStarsArray, powerUpInventory, isMusicActive, isSoundEffectsActive, gems, highScore, currentLevel, nextLevel)
         return true
     }
 
@@ -43,11 +60,14 @@ object PlayerManager {
 
         playerPoints += newPoints
 
-        if (playerPoints > activeUser?.highScore!!) {
+        if (isInfiniteMode){
 
-            activeUser?.highScore = playerPoints
+            if (playerPoints > activeUser?.highScore!!) {
 
+                activeUser?.highScore = playerPoints
+            }
         }
+
     }
 
     fun removePoints(newPoints: Int) {
@@ -58,14 +78,14 @@ object PlayerManager {
 
     fun saveUserData(sp: SharedPreferences?) {
 
-        val save = activeUser
+        var save = PlayerData(name, levelScoresArray, levelStarsArray, powerUpInventory, isMusicActive, isSoundEffectsActive, gems, highScore, currentLevel, nextLevel)
         var position = 0
 
         if (usersArray.size > 0){
 
             for (obj in usersArray) {
 
-                if (obj.name == save?.name) {
+                if (obj.name == activeUser!!.name) {
 
                     position = usersArray.indexOf(obj)
                     usersArray.removeAt(position)
@@ -73,7 +93,9 @@ object PlayerManager {
             }
         }
 
-        usersArray.add(save!!)
+        usersArray.add(save)
+        activeUser = save
+        Log.d(TAG, "saved: ${activeUser!!.levelStarsArray}")
 
         orderArray()
 
@@ -94,7 +116,6 @@ object PlayerManager {
             name = sp?.getString("activeAccount", "null")!!
 
         }
-
         orderArray()
     }
 
@@ -105,14 +126,17 @@ object PlayerManager {
             if (user.name == name) {
 
                 activeUser = user
+                levelScoresArray = activeUser!!.levelScoresArray
+                levelStarsArray = activeUser!!.levelStarsArray
+                powerUpInventory = activeUser!!.powerUpInventory
+                gems = activeUser!!.gems
+                highScore = activeUser!!.highScore
+                currentLevel = activeUser!!.currentLevel
+                nextLevel = currentLevel + 1
                 isMusicActive = activeUser!!.isMusicActive
                 isSoundEffectsActive = activeUser!!.isSoundEffectsActive
             }
         }
-
-        Log.d(TAG, "NextLevel: ${activeUser?.nextLevel}")
-        Log.d(TAG, "CurrentLevel: ${activeUser?.nextLevel}")
-
     }
 
     fun setPlacement(): Int {
@@ -174,14 +198,14 @@ object PlayerManager {
 
     fun setLevelHIghScore() {
 
-        if (activeUser?.levelScoresArray?.size!! < activeUser!!.currentLevel) {
-            activeUser?.levelScoresArray!!.add(playerPoints)
+        if (levelScoresArray.size < currentLevel) {
+            levelScoresArray.add(playerPoints)
 
         } else {
 
-            if (activeUser?.levelScoresArray!![activeUser!!.currentLevel - 1] < playerPoints) {
-                activeUser?.levelScoresArray!!.removeAt(activeUser!!.currentLevel - 1)
-                activeUser?.levelScoresArray!!.add(activeUser!!.currentLevel - 1, playerPoints)
+            if (levelScoresArray[currentLevel - 1] < playerPoints) {
+                levelScoresArray.removeAt(currentLevel - 1)
+                levelScoresArray.add(currentLevel - 1, playerPoints)
             }
         }
     }
@@ -198,18 +222,18 @@ object PlayerManager {
 
             activeUser!!.nextLevel += 1
         }
-        Log.d(TAG, "NextLevel: ${activeUser?.nextLevel}")
-        Log.d(TAG, "CurrentLevel: ${activeUser?.nextLevel}")
     }
 
     fun addStarsToUser(){
 
-        if (activeUser?.levelStarsArray?.size!! < activeUser!!.currentLevel){
-            activeUser?.levelStarsArray?.add(starCounter)
+        if (levelStarsArray.size < currentLevel){
+            levelStarsArray.add(starCounter)
+
         }else{
-            if (activeUser?.levelStarsArray!![activeUser!!.currentLevel - 1] < starCounter) {
-                activeUser?.levelStarsArray!!.removeAt(activeUser!!.currentLevel - 1)
-                activeUser?.levelStarsArray!!.add(activeUser!!.currentLevel - 1, starCounter)
+
+            if (levelStarsArray[currentLevel - 1] < starCounter) {
+                levelStarsArray.removeAt(currentLevel - 1)
+                levelStarsArray.add(currentLevel - 1, starCounter)
             }
         }
     }
