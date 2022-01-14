@@ -178,19 +178,19 @@ object PlayerManager {
 
     fun setLevel(levelId: Int): Boolean {
 
-        return if (levelId > activeUser?.nextLevel!!) {
+        return if (levelId > nextLevel) {
 
             false
 
         } else {
 
-            if (activeUser?.currentLevel!! < levelId) {
-                activeUser?.currentLevel = levelId
+            if (currentLevel < levelId) {
+                currentLevel = levelId
 
             } else {
 
                 isReplaying = true
-                activeUser?.currentLevel = levelId
+                currentLevel = levelId
             }
             true
         }
@@ -198,12 +198,14 @@ object PlayerManager {
 
     fun setLevelHIghScore() {
 
+        Log.d(TAG, "setLevelHIghScore: $currentLevel")
+
         if (levelScoresArray.size < currentLevel) {
             levelScoresArray.add(playerPoints)
 
         } else {
 
-            if (levelScoresArray[currentLevel - 1] < playerPoints) {
+            if (levelScoresArray[currentLevel-1] < playerPoints) {
                 levelScoresArray.removeAt(currentLevel - 1)
                 levelScoresArray.add(currentLevel - 1, playerPoints)
             }

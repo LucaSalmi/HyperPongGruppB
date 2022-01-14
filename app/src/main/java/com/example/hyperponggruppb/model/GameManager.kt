@@ -100,7 +100,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         patternId = if (!isStoryMode) {
             RandomNumberGenerator.rNG(0, 13)
         } else {
-            PlayerManager.activeUser!!.currentLevel - 1
+            PlayerManager.currentLevel - 1
         }
 
         brickRow = BrickStructure.createPattern(brickRow, patternId)

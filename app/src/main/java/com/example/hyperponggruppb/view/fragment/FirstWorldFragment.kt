@@ -10,7 +10,6 @@ import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.view.GameModeStoryActivity
 import com.example.hyperponggruppb.view.OverWorldActivity
 
 class FirstWorldFragment : Fragment() {
@@ -119,7 +118,7 @@ class FirstWorldFragment : Fragment() {
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
         dialog?.setContentView(R.layout.enter_level_screen)
-        val returnToWordlBtn = dialog?.findViewById(R.id.iv_level_return) as ImageView
+        val returnToWorldBtn = dialog?.findViewById(R.id.iv_level_return) as ImageView
         val startLevelBtn = dialog.findViewById(R.id.iv_level_start) as ImageView
         var screenLevelID = dialog.findViewById(R.id.tv_level_id) as TextView
 
@@ -136,7 +135,30 @@ class FirstWorldFragment : Fragment() {
         val screenLevelLoadoutThree = dialog.findViewById(R.id.iv_level_loadout_3) as ImageView
         val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
 
-                        // HÄR ÄR JAG HUEHUEHUEHUEHUEH
+        val starContainerOne = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
+        val starContainerTwo = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
+        val starContainerThree = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
+
+                        // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
+
+        if (PlayerManager.levelStarsArray.size > levelId - 1){
+            when(PlayerManager.levelStarsArray[levelId - 1]){
+
+                1 -> starContainerOne!!.setImageResource(R.drawable.star)
+
+                2 -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                }
+
+                3 -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                    starContainerThree!!.setImageResource(R.drawable.star)
+                }
+            }
+        }
+
         val levelString = getString(R.string.level) + levelId.toString()
 
         when (levelId) {
@@ -210,7 +232,7 @@ class FirstWorldFragment : Fragment() {
             toasterClicked()
         }
 
-        returnToWordlBtn.setOnClickListener {
+        returnToWorldBtn.setOnClickListener {
 
             dialog.dismiss()
         }

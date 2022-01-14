@@ -14,7 +14,7 @@ import com.example.hyperponggruppb.databinding.ActivityStoryModeBinding
 class OverWorldActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryModeBinding
-
+    private lateinit var adapter: ViewPagerAdapter
     private lateinit var storyModeDialog: DialogManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +30,14 @@ class OverWorldActivity : AppCompatActivity() {
 
         Log.d(TAG, "addStarsToUser: ${PlayerManager.activeUser!!.levelStarsArray}")
 
-        val adapter = ViewPagerAdapter(this)
+        adapter = ViewPagerAdapter(this)
         binding.overworldMapContainer.adapter = adapter
         binding.overworldMapContainer.currentItem = 1
     }
 
     override fun onResume() {
+
+        adapter.notifyDataSetChanged()
 
         if(PlayerManager.isGameEnded){
 
