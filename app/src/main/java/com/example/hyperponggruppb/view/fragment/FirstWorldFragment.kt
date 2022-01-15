@@ -18,7 +18,7 @@ class FirstWorldFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_first_world, container, false)
+        val view = inflater.inflate(R.layout.fragment_first_world, container, false)
 
         val levelOne = view?.findViewById<ImageView>(R.id.iv_level_one)
         val levelTwo = view?.findViewById<ImageView>(R.id.iv_level_two)
@@ -26,16 +26,16 @@ class FirstWorldFragment : Fragment() {
         val levelFour = view?.findViewById<ImageView>(R.id.iv_level_four)
         val levelFive = view?.findViewById<ImageView>(R.id.iv_level_five)
 
-        if (PlayerManager.levelStarsArray.size > 0){
-            when(PlayerManager.levelStarsArray[0]){
+        if (PlayerManager.levelStarsArray.size > 0) {
+            when (PlayerManager.levelStarsArray[0]) {
                 0 -> levelOne!!.setImageResource(R.drawable.flag_one_one_no_star)
                 1 -> levelOne!!.setImageResource(R.drawable.flag_one_one_one_star)
                 2 -> levelOne!!.setImageResource(R.drawable.flag_one_one_two_star)
                 3 -> levelOne!!.setImageResource(R.drawable.flag_one_one_three_star)
             }
         }
-        if (PlayerManager.levelStarsArray.size > 1){
-            when(PlayerManager.levelStarsArray[1]){
+        if (PlayerManager.levelStarsArray.size > 1) {
+            when (PlayerManager.levelStarsArray[1]) {
 
                 0 -> levelOne!!.setImageResource(R.drawable.flag_one_two_no_star)
                 1 -> levelOne!!.setImageResource(R.drawable.flag_one_two_one_star)
@@ -43,8 +43,8 @@ class FirstWorldFragment : Fragment() {
                 3 -> levelOne!!.setImageResource(R.drawable.flag_one_two_three_star)
             }
         }
-        if (PlayerManager.levelStarsArray.size > 2){
-            when(PlayerManager.levelStarsArray[2]){
+        if (PlayerManager.levelStarsArray.size > 2) {
+            when (PlayerManager.levelStarsArray[2]) {
 
                 0 -> levelOne!!.setImageResource(R.drawable.flag_one_three_no_star)
                 1 -> levelOne!!.setImageResource(R.drawable.flag_one_three_one_star)
@@ -52,8 +52,8 @@ class FirstWorldFragment : Fragment() {
                 3 -> levelOne!!.setImageResource(R.drawable.flag_one_three_three_star)
             }
         }
-        if (PlayerManager.levelStarsArray.size > 3){
-            when(PlayerManager.levelStarsArray[3]){
+        if (PlayerManager.levelStarsArray.size > 3) {
+            when (PlayerManager.levelStarsArray[3]) {
 
                 0 -> levelOne!!.setImageResource(R.drawable.flag_one_four_no_star)
                 1 -> levelOne!!.setImageResource(R.drawable.flag_one_four_one_star)
@@ -61,8 +61,8 @@ class FirstWorldFragment : Fragment() {
                 3 -> levelOne!!.setImageResource(R.drawable.flag_one_four_three_star)
             }
         }
-        if (PlayerManager.levelStarsArray.size > 4){
-            when(PlayerManager.levelStarsArray[4]){
+        if (PlayerManager.levelStarsArray.size > 4) {
+            when (PlayerManager.levelStarsArray[4]) {
 
                 0 -> levelOne!!.setImageResource(R.drawable.flag_one_five_no_star)
                 1 -> levelOne!!.setImageResource(R.drawable.flag_one_five_one_star)
@@ -75,46 +75,49 @@ class FirstWorldFragment : Fragment() {
 
 
         levelOne?.setOnClickListener {
-            if (checkUnlock(1)){
+            if (checkUnlock(1)) {
                 enterLevelScreen(1)
             }
         }
         levelTwo?.setOnClickListener {
-            if (checkUnlock(2)){
+            if (checkUnlock(2)) {
                 enterLevelScreen(2)
-            }else{
+            } else {
                 toaster()
             }
         }
         levelThree?.setOnClickListener {
-            if (checkUnlock(3)){
+            if (checkUnlock(3)) {
                 enterLevelScreen(3)
-            }else{
+            } else {
                 toaster()
             }
         }
         levelFour?.setOnClickListener {
-            if (checkUnlock(4)){
+            if (checkUnlock(4)) {
                 enterLevelScreen(4)
-            }else{
+            } else {
                 toaster()
             }
         }
         levelFive?.setOnClickListener {
-            if (checkUnlock(5)){
+            if (checkUnlock(5)) {
                 enterLevelScreen(5)
-            }else{
+            } else {
                 toaster()
             }
         }
         return view
     }
+
     /**
      *
      */
     private fun enterLevelScreen(levelId: Int) {
-        val dialog = activity?.applicationContext.let { super.getContext()
-            ?.let { it1 -> Dialog(it1) } }
+        val dialog = activity?.applicationContext.let {
+            super.getContext()
+                ?.let { it1 -> Dialog(it1) }
+        }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
         dialog?.setContentView(R.layout.enter_level_screen)
@@ -139,10 +142,10 @@ class FirstWorldFragment : Fragment() {
         val starContainerTwo = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
         val starContainerThree = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
 
-                        // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
+        // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
 
-        if (PlayerManager.levelStarsArray.size > levelId - 1){
-            when(PlayerManager.levelStarsArray[levelId - 1]){
+        if (PlayerManager.levelStarsArray.size > levelId - 1) {
+            when (PlayerManager.levelStarsArray[levelId - 1]) {
 
                 1 -> starContainerOne!!.setImageResource(R.drawable.star)
 
@@ -156,6 +159,11 @@ class FirstWorldFragment : Fragment() {
                     starContainerTwo!!.setImageResource(R.drawable.star)
                     starContainerThree!!.setImageResource(R.drawable.star)
                 }
+                else -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                    starContainerThree!!.setImageResource(R.drawable.star)
+                }
             }
         }
 
@@ -164,27 +172,32 @@ class FirstWorldFragment : Fragment() {
         when (levelId) {
             1 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text =
+                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
                 dialog.dismiss()
             }
             2 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text =
+                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
                 dialog.dismiss()
             }
             3 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text =
+                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
                 dialog.dismiss()
             }
             4 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text =
+                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
                 dialog.dismiss()
             }
             5 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text = checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                screenLevelScoreResult.text =
+                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
                 dialog.dismiss()
             }
         }
@@ -253,24 +266,24 @@ class FirstWorldFragment : Fragment() {
         dialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
-    private fun checkUnlock(levelId: Int): Boolean{
+    private fun checkUnlock(levelId: Int): Boolean {
         return PlayerManager.setLevel(levelId)
     }
 
     private fun checkPoints(levelId: Int): String {
 
-        return if (PlayerManager.levelScoresArray.size < levelId){
+        return if (PlayerManager.levelScoresArray.size < levelId) {
             "0"
-        }else{
+        } else {
             PlayerManager.levelScoresArray[levelId - 1].toString()
         }
     }
 
-    private fun toaster(){
+    private fun toaster() {
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
     }
 
-    private fun toasterClicked(){
+    private fun toasterClicked() {
         Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT).show()
     }
 
