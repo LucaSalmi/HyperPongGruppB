@@ -47,6 +47,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var levelSeconds = 0
     var levelMinutes = 0
 
+    private var levelTimeLimit = 0L
+
     var backgroundCode = 1
     var soundCode = 0
 
@@ -61,23 +63,27 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.activeUser!!.currentLevel > 5 ){
             backgroundCode = 3
         }
+        levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
     }
 
-    private val levelTimer = object : CountDownTimer(60000, 1000) {
+    private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
 
         override fun onTick(p0: Long) {
             levelSeconds++
+
+            if (levelSeconds == 60){
+                levelSeconds = 0
+                levelMinutes++
+            }
         }
 
         override fun onFinish() {
-            restartLevelTimer()
+            //something when time finishes
         }
     }
 
     private fun restartLevelTimer() {
         levelTimer.cancel()
-        levelSeconds = 0
-        levelMinutes++
         levelTimer.start()
     }
 

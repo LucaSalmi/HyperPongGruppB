@@ -105,28 +105,16 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     }
 
     //TypeID 7
-    fun addTime(levelSec: Int): Int{
-
-        var newTime = levelSec + 10
-
-        if (newTime > 60){
-            newTime -= 60
-        }
-
-        return newTime
+    fun addTime(levelTimeLimit: Long): Long{
+        // makes the countdown 5 seconds shorter
+        return levelTimeLimit - 5000
     }
 
     //TypeID 8
 
-    fun removeTime(levelSec: Int): Int{
-
-        var newTime = levelSec - 10
-
-        if (newTime < 0){
-            newTime += 60
-        }
-
-        return newTime
+    fun removeTime(levelTimeLimit: Long): Long{
+        //makes the countdown 5 seconds longer
+        return levelTimeLimit + 5000
 
     }
 
