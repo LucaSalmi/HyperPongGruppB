@@ -236,8 +236,13 @@ class DialogManager(val context: Context) {
         retryBtn.setOnClickListener {
             PlayerManager.starCounter = 0 // reset the stars on the !!! - UI - !!!
 
+            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
+                PlayerManager.isLevelCompleted = false
+                PlayerManager.currentLevel ++
+            }
             getOverWorldActivity().startLevel()
             scoreBoardDialog.dismiss()
+
         }
 
         scoreBoardDialog.show()

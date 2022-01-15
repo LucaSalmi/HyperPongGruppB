@@ -37,9 +37,9 @@ class OverWorldActivity : AppCompatActivity() {
 
     override fun onResume() {
 
-        adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
 
-        if(PlayerManager.isGameEnded){
+        if(PlayerManager.isGameEnded || PlayerManager.isLevelCompleted){
 
             storyModeDialog.scoreBoardStoryMode()
 

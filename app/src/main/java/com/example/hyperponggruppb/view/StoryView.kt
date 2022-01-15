@@ -303,6 +303,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.addStarsToUser()
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
+            PlayerManager.isLevelCompleted = true
             storyMode.clearArrays()
             myActivity.finish()
         }

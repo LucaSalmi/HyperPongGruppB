@@ -16,6 +16,7 @@ object PlayerManager {
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
+    var isLevelCompleted = false
     var isInfiniteMode = false
     var isReplaying = false
     var isFirstAccount = false
@@ -222,7 +223,7 @@ object PlayerManager {
 
         } else {
 
-            activeUser!!.nextLevel += 1
+            nextLevel += 1
         }
     }
 
