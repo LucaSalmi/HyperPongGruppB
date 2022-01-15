@@ -23,17 +23,16 @@
 
     <ImageView
         android:id="@+id/iv_powerup_holder_ui"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/powerup_holder"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:background="@drawable/powerup_belt_holder"
         app:layout_constraintBottom_toTopOf="@+id/iv_powerup_belt_ui"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/iv_current_powerup_activated"
-        android:layout_marginStart="20dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="22sp"
+        android:layout_height="22sp"
         android:background="@drawable/multiball_button"
         app:layout_constraintBottom_toBottomOf="@+id/iv_powerup_holder_ui"
         app:layout_constraintEnd_toEndOf="@id/iv_powerup_holder_ui"
@@ -43,8 +42,8 @@
     <ImageView
         android:id="@+id/iv_powerup_belt_ui"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/ui_powerhud_belt"
+        android:layout_height="150dp"
+        android:background="@drawable/powerup_belt_main_for_holder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
