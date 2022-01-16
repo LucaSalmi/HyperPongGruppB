@@ -37,7 +37,7 @@ class OverWorldActivity : AppCompatActivity() {
 
     override fun onResume() {
 
-        //adapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
 
         if(PlayerManager.isGameEnded || PlayerManager.isLevelCompleted){
 
@@ -53,5 +53,6 @@ class OverWorldActivity : AppCompatActivity() {
         val toLevel = Intent(this, GameModeStoryActivity::class.java)
         startActivity(toLevel)
     }
+
 
 }

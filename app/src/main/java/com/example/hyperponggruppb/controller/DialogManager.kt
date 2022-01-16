@@ -176,6 +176,7 @@ class DialogManager(val context: Context) {
         val retryBtn = scoreBoardDialog.findViewById(R.id.iv_sm_result_level_start) as ImageView
 
         val resultScore = scoreBoardDialog.findViewById(R.id.tv_sm_score_result) as TextView
+        val levelText = scoreBoardDialog.findViewById<TextView>(R.id.tv_level_id)
 
         val resultGemsLooted =
             scoreBoardDialog.findViewById(R.id.tv_sm_total_gem_looted) as TextView
@@ -196,6 +197,9 @@ class DialogManager(val context: Context) {
         starBar.progress = 0
         var isOneStar = false
         var isTwoStar = false
+        var levelString = "Level " + "${PlayerManager.currentLevel}"
+
+        levelText.text = levelString
 
         if (currentScore > refScore) {
 
