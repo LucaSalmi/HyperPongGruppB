@@ -111,11 +111,16 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     }
 
     //TypeID 8
-
     fun removeTime(levelTimeLimit: Long): Long{
         //makes the countdown 5 seconds longer
         return levelTimeLimit + 5000
 
+    }
+
+    //TypeID 9
+    fun addGems(){
+
+        PlayerManager.gems += 5
     }
 
 

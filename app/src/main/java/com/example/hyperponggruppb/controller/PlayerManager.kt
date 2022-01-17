@@ -23,7 +23,6 @@ object PlayerManager {
     var isFirstAccount = false
     var currentMaxScore = 1000
     var starCounter = 0
-    var currentPlayer: PlayerData? = null
     var powerUpActivated: Int = 0
     var selectedPowerUp = -1
     var activatePowerUp = false
