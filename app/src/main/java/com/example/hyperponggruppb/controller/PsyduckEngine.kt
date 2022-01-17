@@ -88,7 +88,7 @@ object PsyduckEngine {
 
         if (ball.brickCollision && !gameManager.isStoryMode) {
 
-            infinteModePowerUpSpawn(powerUpArray)
+            infiniteModePowerUpSpawn(powerUpArray)
 
         }else if(ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp){
 
@@ -104,7 +104,8 @@ object PsyduckEngine {
     private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
 
         powerUp = PowerUp(
-            RandomNumberGenerator.rNG(2, 4),
+            //RandomNumberGenerator.rNG(2, 4),
+            9,
             brickHit.left,
             brickHit.top,
             brickHit.right,
@@ -114,7 +115,7 @@ object PsyduckEngine {
 
     }
 
-    private fun infinteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
+    private fun infiniteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
 
         if (RandomNumberGenerator.rNG(1, 8) == 2) {
 

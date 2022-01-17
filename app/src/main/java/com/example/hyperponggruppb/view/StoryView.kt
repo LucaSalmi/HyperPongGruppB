@@ -14,6 +14,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
@@ -312,8 +313,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                         storyMode.spawnExtraBall()
                         SoundEffectManager.jukebox(context, 2)
                     }
-                    5 -> {
-
+                    9 -> {
+                        powerUp.addGems()
+                        SoundEffectManager.jukebox(context, 2)
                     }
                 }
             }
