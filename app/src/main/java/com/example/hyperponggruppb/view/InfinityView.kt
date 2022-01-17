@@ -62,7 +62,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         infiniteMode = GameManager(context, false)
 
         if (PlayerManager.isMusicActive){
-            SoundEffectManager.musicSetup(context!!,1)
+            SoundEffectManager.musicSetup(context!!,6)
         }
     }
 

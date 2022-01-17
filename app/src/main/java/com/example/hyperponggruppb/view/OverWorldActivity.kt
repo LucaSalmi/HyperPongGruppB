@@ -25,7 +25,7 @@ class OverWorldActivity : AppCompatActivity() {
         storyModeDialog = DialogManager(this)
 
         if (PlayerManager.isMusicActive){
-            SoundEffectManager.musicSetup(this, 1)
+            SoundEffectManager.musicSetup(this, 7)
         }
 
         adapter = ViewPagerAdapter(this)
@@ -35,7 +35,8 @@ class OverWorldActivity : AppCompatActivity() {
 
     override fun onResume() {
 
-        adapter.notifyDataSetChanged()
+        binding.overworldMapContainer.adapter = adapter
+        binding.overworldMapContainer.currentItem = 1
 
         if(PlayerManager.isGameEnded || PlayerManager.isLevelCompleted){
 
