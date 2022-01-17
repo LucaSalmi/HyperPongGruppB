@@ -99,6 +99,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     ballInteractions()
                     checkDamage()
                     playerAndBrickInteractions()
+                    powerUpInteractions()
                     checkLevelCompleted()
                 }
 
@@ -176,6 +177,17 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     brick.asset,
                     brick.brickLeft.toFloat() - 5,
                     brick.brickTop.toFloat() - 5,
+                    null
+                )
+            }
+
+            for (powerUp in storyMode.powerUpArray) {
+
+                powerUp.draw(canvas)
+                canvas.drawBitmap(
+                    powerUp.assignAsset(),
+                    powerUp.left.toFloat(),
+                    powerUp.top.toFloat(),
                     null
                 )
             }
@@ -265,6 +277,55 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 context,
                 storyMode
             )
+        }
+    }
+
+    private fun powerUpInteractions(){
+
+        PsyduckEngine.powerUpPhysics(storyMode.powerUpArray, storyMode.player)
+        var powerUpToErase: Int? = null
+        for (powerUp in storyMode.powerUpArray) {
+
+            if (powerUp.isCatched) {
+
+                when (powerUp.typeID) {
+
+                    0 -> {
+
+                    }
+                    1 -> {
+
+                    }
+                    2 -> {
+                        powerUp.bigPaddle(storyMode.player)
+                        SoundEffectManager.jukebox(context, 2)
+                        storyMode.player.update()
+                    }
+                    3 -> {
+                        powerUp.smallPaddle(storyMode.player)
+                        SoundEffectManager.jukebox(context, 3)
+                        storyMode.player.update()
+                    }
+                    4 -> {
+                        storyMode.spawnExtraBall()
+                        SoundEffectManager.jukebox(context, 2)
+                    }
+                    5 -> {
+
+                    }
+                }
+            }
+
+            if (powerUp.isCatched || powerUp.isToDestroy) {
+
+                powerUpToErase = storyMode.powerUpArray.indexOf(powerUp)
+            }
+
+        }
+
+        if (powerUpToErase != null) {
+
+            storyMode.powerUpArray.removeAt(powerUpToErase)
         }
     }
 

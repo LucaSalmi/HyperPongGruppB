@@ -72,7 +72,6 @@ class DialogManager(val context: Context) {
                 }else{
                     nameField.error = "Name already in use"
                 }
-
             }
         }
 
@@ -82,7 +81,6 @@ class DialogManager(val context: Context) {
             }else{
                 nameInputDialog.dismiss()
             }
-
         }
 
         nameInputDialog.show()

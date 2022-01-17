@@ -95,7 +95,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         AssetManager.brickwidth = brickwidth
         AssetManager.brickheight = brickheight
 
-        BrickStructure.makeInboundsBricks(brickRow)
+        BrickStructure.makeInboundsBricks(brickRow, this.isStoryMode)
 
         patternId = if (!isStoryMode) {
             RandomNumberGenerator.rNG(0, 13)

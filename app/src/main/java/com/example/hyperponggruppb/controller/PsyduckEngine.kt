@@ -2,7 +2,6 @@ package com.example.hyperponggruppb.controller
 
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Rect
 import android.util.Log
 import com.example.hyperponggruppb.model.*
@@ -11,6 +10,7 @@ object PsyduckEngine {
 
     private var isCollisionDetected = false
     private var brickHit = Rect()
+    private lateinit var infoBrick: Bricks
     var testBrick = Rect()
     var canvasHeight = AssetManager.getScreenHeight()
     var canvasWidth = AssetManager.getScreenWidth()
@@ -81,30 +81,56 @@ object PsyduckEngine {
 
         }
 
+        if (toRemove < BrickStructure.totalSumOfBricks){
+
+            infoBrick = brickRow[toRemove]
+        }
 
         if (ball.brickCollision && !gameManager.isStoryMode) {
 
-            if (RandomNumberGenerator.rNG(1, 8) == 2) {
+            infinteModePowerUpSpawn(powerUpArray)
 
-                val rngLimit = if (PlayerManager.lives >= 3) {
-                    4
-                } else {
-                    5
-                }
-                powerUp = PowerUp(
-                    RandomNumberGenerator.rNG(0, rngLimit),
-                    brickHit.left,
-                    brickHit.top,
-                    brickHit.right,
-                    brickHit.bottom
-                )
-                powerUpArray.add(powerUp)
-            }
+        }else if(ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp){
+
+            storyModePowerUpSpawn(powerUpArray)
         }
 
         if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks + 1) {
             brickRow.removeAt(toRemove)
             PlayerManager.addPoints(BrickStructure.brickScoreValue)
+        }
+    }
+
+    private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
+
+        powerUp = PowerUp(
+            RandomNumberGenerator.rNG(2, 4),
+            brickHit.left,
+            brickHit.top,
+            brickHit.right,
+            brickHit.bottom
+        )
+        powerUpArray.add(powerUp)
+
+    }
+
+    private fun infinteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
+
+        if (RandomNumberGenerator.rNG(1, 8) == 2) {
+
+            val rngLimit = if (PlayerManager.lives >= 3) {
+                4
+            } else {
+                5
+            }
+            powerUp = PowerUp(
+                RandomNumberGenerator.rNG(0, rngLimit),
+                brickHit.left,
+                brickHit.top,
+                brickHit.right,
+                brickHit.bottom
+            )
+            powerUpArray.add(powerUp)
         }
     }
 

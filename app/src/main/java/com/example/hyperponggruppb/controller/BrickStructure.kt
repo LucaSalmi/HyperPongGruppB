@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.util.Log
 import com.example.hyperponggruppb.model.Bricks
 import com.example.hyperponggruppb.model.GameManager
+import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object BrickStructure {
 
@@ -28,20 +29,41 @@ object BrickStructure {
     var playerSpeed = 1
 
 
-
     /**
      * makes the first ten rows of bricks, visible to the player on startup
      */
-    fun makeInboundsBricks(brickRow: MutableList<Bricks>): MutableList<Bricks> {
+    fun makeInboundsBricks(
+        brickRow: MutableList<Bricks>,
+        isStoryMode: Boolean
+    ): MutableList<Bricks> {
 
         var leftInBounds = left
         var topInBounds = top
         var rightInBounds = right
         var bottomInBounds = bottom
+        var powerUpPresent = false
+        var counter = 0
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(leftInBounds, topInBounds, rightInBounds, bottomInBounds)
+            if (isStoryMode) {
+                if (counter == 10) {
+                    powerUpPresent = true
+                    counter = 0
+                } else{
+                    counter++
+                    powerUpPresent = false
+                }
+            }
+
+            var brick = Bricks(
+                leftInBounds,
+                topInBounds,
+                rightInBounds,
+                bottomInBounds,
+                powerUpPresent,
+                1
+            )
             brickRow.add(brick)
             leftInBounds += right - left + 4
             rightInBounds += right - left + 4
@@ -74,7 +96,7 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom)
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom, false, 1)
             brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
@@ -99,7 +121,7 @@ object BrickStructure {
      */
     fun createPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks> {
 
-        val patternOne = when(id){
+        val patternOne = when (id) {
 
             0 -> "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001" // HellGate-level
             1 -> "1111111111100000000110000010011000011001101111100110011110011000111101100011111110001100011000100001" // Shuriken-Level
@@ -122,16 +144,16 @@ object BrickStructure {
         var temBricks = mutableListOf<Bricks>()
         var index = 0
 
-        if(patternOne.length < brickRow.size){
+        if (patternOne.length < brickRow.size) {
             return brickRow
         }
-        
-        for(element in patternOne){
 
-            if ( element == '1'){
-                
+        for (element in patternOne) {
+
+            if (element == '1') {
+
                 temBricks.add(brickRow[index])
-                
+
             }
             index++
         }
@@ -139,9 +161,9 @@ object BrickStructure {
         return temBricks
     }
 
-    fun createOOBBPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks>{
+    fun createOOBBPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks> {
 
-        val patternOne = when(id){
+        val patternOne = when (id) {
 
             0 -> "1000000001100000000110000000011000110001100011000110001100011011111101111011011110001100011111111111" // HellGate-level
             1 -> "1000100001100011000110001111111000111101100111100110111110011000011001100000100110000000011111111111" // Shuriken-Level
@@ -163,14 +185,14 @@ object BrickStructure {
         var temOOBBricks = mutableListOf<Bricks>()
         var index = 0
 
-        if(patternOne.length < brickRow.size){
+        if (patternOne.length < brickRow.size) {
             Log.d(TAG, "createOOBBPattern: pattern too long")
             return brickRow
         }
 
-        for(element in patternOne){
+        for (element in patternOne) {
 
-            if ( element == '1'){
+            if (element == '1') {
 
                 temOOBBricks.add(brickRow[index])
 
@@ -181,9 +203,9 @@ object BrickStructure {
         return temOOBBricks
     }
 
-    fun moveDownRow(brickRow: MutableList<Bricks>): MutableList<Bricks>{
+    fun moveDownRow(brickRow: MutableList<Bricks>): MutableList<Bricks> {
 
-        for (obj in brickRow){
+        for (obj in brickRow) {
 
             obj.brickTop += playerSpeed
             obj.brickBottom += playerSpeed
