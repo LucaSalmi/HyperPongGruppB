@@ -114,12 +114,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_star_progress_holder">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/gem"/>
+
+        <TextView
+            android:id="@+id/tv_level_gem_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text= "3"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="50dp"
+            android:src="@drawable/character_black_bg_fade"
+            android:layout_marginEnd="10dp"/>
+
         <TextView
             android:id="@+id/tv_level_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginStart="60dp"
             android:layout_marginEnd="20dp"
             android:text="Highscore:"
             android:textColor="@color/white"
@@ -130,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="999 P"
+            tools:text= "999P"
             android:layout_marginEnd="60dp"
             android:textColor="@color/white"
             android:textSize="15sp" />
@@ -170,6 +190,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_loadout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
@@ -211,5 +232,54 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@drawable/locked_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_loadout"
+        app:layout_constraintEnd_toEndOf="@id/layout_loadout"
+        app:layout_constraintStart_toStartOf="@id/layout_loadout">
+
+        <TextView
+            android:id="@+id/iv_level_loadout_1_ammount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="viewEnd"
+            tools:text= "x3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/iv_level_loadout_2_ammount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="viewEnd"
+            tools:text= "x3"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/iv_level_loadout_3_ammount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="viewEnd"
+            tools:text= "x3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/iv_level_loadout_4_ammount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="viewEnd"
+            tools:text= "x3"
+            android:layout_weight="1" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
