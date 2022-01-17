@@ -12,8 +12,6 @@ import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.model.PlayerData
-import com.example.hyperponggruppb.view.GameModeStoryActivity
 import com.example.hyperponggruppb.view.OverWorldActivity
 
 class FirstWorldFragment : Fragment() {
@@ -76,9 +74,6 @@ class FirstWorldFragment : Fragment() {
             }
         }
 
-
-
-
         levelOne?.setOnClickListener {
             if (checkUnlock(1)) {
                 enterLevelScreen(1)
@@ -88,28 +83,28 @@ class FirstWorldFragment : Fragment() {
             if (checkUnlock(2)) {
                 enterLevelScreen(2)
             } else {
-                toaster()
+                toaster(0)
             }
         }
         levelThree?.setOnClickListener {
             if (checkUnlock(3)) {
                 enterLevelScreen(3)
             } else {
-                toaster()
+                toaster(0)
             }
         }
         levelFour?.setOnClickListener {
             if (checkUnlock(4)) {
                 enterLevelScreen(4)
             } else {
-                toaster()
+                toaster(0)
             }
         }
         levelFive?.setOnClickListener {
             if (checkUnlock(5)) {
                 enterLevelScreen(5)
             } else {
-                toaster()
+                toaster(0)
             }
         }
         return view
@@ -228,13 +223,18 @@ class FirstWorldFragment : Fragment() {
         leftArrowCharacter.setOnClickListener {
             //skapa en array med olika skins
             //screenLevelCharacter.setImageResource(ARRAYID MINUS)
-            toasterClicked()
+            toaster(1)
         }
         rightArrowCharacter.setOnClickListener {
             //skapa en array med olika skins
             //screenLevelCharacter.setImageResource(ARRAYID PLUS)
-            toasterClicked()
+            toaster(1)
         }
+
+        //0 = multiball powerup
+        //1 = gun powerup
+        //2 = shield powerup
+
         screenLevelLoadoutOne.setOnClickListener {
             PlayerManager.selectedPowerUp = 0
 
@@ -308,36 +308,28 @@ class FirstWorldFragment : Fragment() {
             PlayerManager.selectedPowerUp = 2
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
-                Log.d(TAG, "enterLevelScreen:  check OUTSIDE 1")
 
                 checkIfPowerUpAvailable()
 
 
                 if (PlayerManager.powerUpActivated >= 0) {
-                    Log.d(TAG, "enterLevelScreen:  check INSIDE 1")
 
                     if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
                         screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 2-1")
                     } else {
                         screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 2-2")
                     }
 
                     if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
                         screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 3-1")
                     } else {
                         screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 3-2")
                     }
 
                     if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
                         screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 4-1")
                     } else {
                         screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
-                        Log.d(TAG, "enterLevelScreen:  check INSIDE 4-2")
                     }
                     screenLevelLoadoutThree.setImageResource(R.drawable.shield_button_selected)
                 }
@@ -345,15 +337,14 @@ class FirstWorldFragment : Fragment() {
             } else {
                 screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
                 PlayerManager.powerUpActivated = -1
-                Log.d(TAG, "enterLevelScreen:  check OUTSIDE 2")
             }
         }
         screenLevelLoadoutFour.setOnClickListener {
 
             PlayerManager.selectedPowerUp = 3
-            PlayerManager.checkIfPowerUpAvailable()
+            checkIfPowerUpAvailable()
 
-            toasterClicked()
+            toaster(1)
         }
 
         returnToWorldBtn.setOnClickListener {
@@ -390,14 +381,16 @@ class FirstWorldFragment : Fragment() {
         }
     }
 
-    private fun toaster() {
-        Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT)
-            .show()
-    }
+    private fun toaster(id: Int) {
+        when(id){
+            0-> Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT)
+                .show()
+            1-> Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT)
+                .show()
+            2-> Toast.makeText(super.getContext(), "not enough gems", Toast.LENGTH_SHORT)
+                .show()
+        }
 
-    private fun toasterClicked() {
-        Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT)
-            .show()
     }
 
     fun checkIfPowerUpAvailable() {
@@ -405,10 +398,48 @@ class FirstWorldFragment : Fragment() {
         if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
             PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
 
-            //SoundEffectManager.powerUpActivationSounds(1)
         } else {
             PlayerManager.powerUpActivated = -1
-
+            shopDialog()
         }
+    }
+
+    fun shopDialog(){
+        val shopDialog = Dialog(super.getContext()!!)
+        shopDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        shopDialog.setContentView(R.layout.shop_dialog_layout)
+
+        val shopText = shopDialog.findViewById<TextView>(R.id.shop_dialog_text)
+        val yesButton = shopDialog.findViewById<Button>(R.id.shop_yes_btn)
+        val noButton = shopDialog.findViewById<Button>(R.id.shop_no_btn)
+
+        val shopStringOne = getString(R.string.shop_dialog_text_part_1)
+        val shopStringTwo = getString(R.string.shop_dialog_string_part_2)
+        val price = when(PlayerManager.selectedPowerUp){
+            0-> PlayerManager.multiBallPrice.toString()
+            1-> PlayerManager.gunPrice.toString()
+            2-> PlayerManager.shieldPrice.toString()
+            else -> PlayerManager.multiBallPrice.toString()
+        }
+        var shopStringFinal = shopStringOne + price + shopStringTwo
+
+        shopText.text = shopStringFinal
+
+        yesButton.setOnClickListener {
+
+            if (PlayerManager.buyPowerUp(20)){
+                PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] =+ 1
+                shopDialog.dismiss()
+            }else{
+                toaster(2)
+            }
+        }
+
+        noButton.setOnClickListener {
+            shopDialog.dismiss()
+        }
+
+        shopDialog.show()
+        shopDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 }

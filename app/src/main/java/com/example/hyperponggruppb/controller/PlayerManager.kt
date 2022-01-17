@@ -1,5 +1,6 @@
 package com.example.hyperponggruppb.controller
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
@@ -27,10 +28,15 @@ object PlayerManager {
     var selectedPowerUp = -1
     var activatePowerUp = false
 
+    val multiBallPrice = 20
+    val gunPrice = 20
+    val shieldPrice = 20
+
+
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()
-    var powerUpInventory: List<Int> = listOf(1,0,1,0)
+    var powerUpInventory: MutableList<Int> = mutableListOf(0,1,0,1)
     var isMusicActive = true
     var isSoundEffectsActive = true
     var gems = 0
@@ -42,7 +48,7 @@ object PlayerManager {
 
         levelScoresArray.clear()
         levelStarsArray.clear()
-        powerUpInventory = listOf(1,0,1,0)
+        powerUpInventory = mutableListOf(0,1,0,1)
         gems = 0
         highScore = 0
         currentLevel = 0
@@ -249,22 +255,14 @@ object PlayerManager {
         }
     }
 
-    fun checkIfPowerUpAvailable(){
+    fun buyPowerUp(price: Int): Boolean{
 
-        if (powerUpInventory.indexOf(selectedPowerUp) > 0){ //MultiBall powerUp
-
-            powerUpActivated = 1
-
-
-            //powerUpOneActivated = true
-            //SoundEffectManager.powerUpActivationSounds(1)
-
-        } else{ // bomb powerUp
-
-            powerUpActivated = 0
-
+        return if (price < gems){
+            gems -= price
+            true
+        }else{
+            false
         }
-
     }
 
 }

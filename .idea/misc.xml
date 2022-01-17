@@ -15,7 +15,7 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_fragment_preload_level.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.2" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_one.xml" value="0.225" />
-        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_story.xml" value="0.25" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_story.xml" value="0.14" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_leader_board.xml" value="0.225" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/activity_splash.xml" value="0.10648148148148148" />
@@ -53,6 +53,7 @@
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/fragment_user_select_screen.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/result_view.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/setting_screen_layout.xml" value="0.3625" />
+        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/shop_dialog_layout.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/spinner_item_layout.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/story_mode_result.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/user_selection_layout.xml" value="0.3625" />
