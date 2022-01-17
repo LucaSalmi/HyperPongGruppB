@@ -1,8 +1,10 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -188,36 +190,126 @@ class SecondWorldFragment : Fragment() {
             //screenLevelCharacter.setImageResource(ARRAYID PLUS)
             toasterClicked()
         }
+
+
         screenLevelLoadoutOne.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
-            toasterClicked()
+            PlayerManager.selectedPowerUp = 0
+
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                PlayerManager.powerUpActivated = -1
+            }
         }
         screenLevelLoadoutTwo.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
-            toasterClicked()
+            PlayerManager.selectedPowerUp = 1
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                PlayerManager.powerUpActivated = -1
+            }
         }
         screenLevelLoadoutThree.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
-            toasterClicked()
+            PlayerManager.selectedPowerUp = 2
+
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+                Log.d(ContentValues.TAG, "enterLevelScreen:  check OUTSIDE 1")
+
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+                    Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 1")
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 2-1")
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 2-2")
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 3-1")
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 3-2")
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 4-1")
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                        Log.d(ContentValues.TAG, "enterLevelScreen:  check INSIDE 4-2")
+                    }
+                    screenLevelLoadoutThree.setImageResource(R.drawable.shield_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                PlayerManager.powerUpActivated = -1
+                Log.d(ContentValues.TAG, "enterLevelScreen:  check OUTSIDE 2")
+            }
         }
         screenLevelLoadoutFour.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
+
+            PlayerManager.selectedPowerUp = 3
+            PlayerManager.checkIfPowerUpAvailable()
+
             toasterClicked()
         }
 
@@ -252,6 +344,17 @@ class SecondWorldFragment : Fragment() {
     private fun startLevel() {
         val toLevel = Intent(super.getContext(), GameModeStoryActivity::class.java)
         startActivity(toLevel)
+    }
+
+    fun checkIfPowerUpAvailable() {
+
+        if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
+            PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
+
+        } else {
+            PlayerManager.powerUpActivated = -1
+
+        }
     }
 
     private fun toaster() {
