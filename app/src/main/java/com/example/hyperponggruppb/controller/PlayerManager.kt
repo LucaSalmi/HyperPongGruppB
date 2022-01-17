@@ -84,7 +84,7 @@ object PlayerManager {
     fun saveUserData(sp: SharedPreferences?) {
 
         var save = PlayerData(name, levelScoresArray, levelStarsArray, powerUpInventory, isMusicActive, isSoundEffectsActive, gems, highScore, currentLevel, nextLevel)
-        var position = 0
+        var position = -1
 
         if (usersArray.size > 0){
 
@@ -97,7 +97,11 @@ object PlayerManager {
                 }
             }
         }
-        usersArray.removeAt(position)
+
+        if (position >= 0){
+            usersArray.removeAt(position)
+        }
+
         usersArray.add(save)
         activeUser = save
         Log.d(TAG, "saved: ${activeUser!!.levelStarsArray}")
