@@ -214,35 +214,33 @@ class FirstWorldFragment : Fragment() {
             toasterClicked()
         }
         screenLevelLoadoutOne.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
+
+            PlayerManager.selectedPowerUp = 0
+            PlayerManager.checkIfPowerUpAvailable()
+
+            screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+
             toasterClicked()
         }
         screenLevelLoadoutTwo.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
+
+            PlayerManager.selectedPowerUp = 1
+            PlayerManager.checkIfPowerUpAvailable()
+
             toasterClicked()
         }
         screenLevelLoadoutThree.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
+
+            PlayerManager.selectedPowerUp = 2
+            PlayerManager.checkIfPowerUpAvailable()
+
             toasterClicked()
         }
         screenLevelLoadoutFour.setOnClickListener {
-            //skapa en array av powerups vi ska kunna ha i storymode och en variavel på antal man kan ha.
-            //if (playerMannager.powerupMultiball > 0) {
-            //  playerMannager.powerupMultiball -1 - KANSKE BÄTTRE ATT ta minus vid start av level om man ändrar sig?!?!?!?!
-            //  AKTIVERA multiball som powerup till Leveln.
-            // }
+
+            PlayerManager.selectedPowerUp = 3
+            PlayerManager.checkIfPowerUpAvailable()
+
             toasterClicked()
         }
 

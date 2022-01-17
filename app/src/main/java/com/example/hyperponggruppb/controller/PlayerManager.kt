@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.hyperponggruppb.model.PlayerData
+import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -22,6 +23,9 @@ object PlayerManager {
     var isFirstAccount = false
     var currentMaxScore = 1000
     var starCounter = 0
+    var currentPlayer: PlayerData? = null
+    var powerUpActivated: Int = 0
+    var selectedPowerUp = 0
 
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
@@ -241,6 +245,22 @@ object PlayerManager {
         }
     }
 
+    fun checkIfPowerUpAvailable(){
 
+        if (currentPlayer?.powerUpInventory?.indexOf(selectedPowerUp)!! > 0){ //MultiBall powerUp
+
+            powerUpActivated = 1
+
+
+            //powerUpOneActivated = true
+            //SoundEffectManager.powerUpActivationSounds(1)
+
+        } else{ // bomb powerUp
+
+            powerUpActivated = 0
+
+        }
+
+    }
 
 }

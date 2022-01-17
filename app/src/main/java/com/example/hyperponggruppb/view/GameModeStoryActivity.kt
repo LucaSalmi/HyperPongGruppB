@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
+import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.databinding.ActivityGameModeStoryBinding
 import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
@@ -20,6 +22,10 @@ class GameModeStoryActivity : AppCompatActivity() {
         binding = ActivityGameModeStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setFragments()
+
+        if (PlayerManager.isMusicActive){
+            SoundEffectManager.musicSetup(this, 8)
+        }
 
     }
 

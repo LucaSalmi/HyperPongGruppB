@@ -61,6 +61,21 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
+            6 -> context.resources.getIdentifier(   // New Theme try
+                "hyper_pong_theme_v5_infinity_mode",
+                "raw",
+                context.packageName
+            )
+            7 -> context.resources.getIdentifier(  // DwtD blood moon
+                "blood_moon",
+                "raw",
+                context.packageName
+            )
+            8 -> context.resources.getIdentifier(  // DwtD that house
+                "that_house",
+                "raw",
+                context.packageName
+            )
             else -> context.resources.getIdentifier(
                 "hyper_pong_main_theme_3",
                 "raw",
@@ -115,8 +130,6 @@ object SoundEffectManager {
                 )
             }
         }
-
-        //val mediaPlayer = MediaPlayer.create(context, resID).stop()
 
         soundEffectPlayer = MediaPlayer.create(context, resID)
 
@@ -177,7 +190,6 @@ object SoundEffectManager {
                     context.packageName
                 )
             }
-
         }
 
         brickHitPlayer = MediaPlayer.create(context, resID)
@@ -187,5 +199,4 @@ object SoundEffectManager {
         }
 
     }
-
 }
