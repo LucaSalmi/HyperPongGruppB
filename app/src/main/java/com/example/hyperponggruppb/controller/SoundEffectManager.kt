@@ -88,6 +88,7 @@ object SoundEffectManager {
 
     fun stopMusic() {
 
+
         backgroundPlayer?.stop()
         backgroundPlayer?.release()
     }
@@ -133,18 +134,20 @@ object SoundEffectManager {
 
         soundEffectPlayer = MediaPlayer.create(context, resID)
 
-        if (PlayerManager.isSoundEffectsActive){
+        if (PlayerManager.isSoundEffectsActive) {
             soundEffectPlayer?.start()
         }
     }
 
-    fun playStarSound(context: Context){
+    fun playStarSound(context: Context) {
 
-         starSoundPlayer = MediaPlayer.create(context, context.resources.getIdentifier(
-        "star_sound_effect",
-        "raw",
-        context.packageName
-        ))
+        starSoundPlayer = MediaPlayer.create(
+            context, context.resources.getIdentifier(
+                "star_sound_effect",
+                "raw",
+                context.packageName
+            )
+        )
 
         if (PlayerManager.isSoundEffectsActive) {
             starSoundPlayer?.start()
@@ -156,7 +159,7 @@ object SoundEffectManager {
         brickHitPlayer?.stop()
         brickHitPlayer?.release()
 
-        var resID: Int = when (id){
+        var resID: Int = when (id) {
 
             0 -> context.resources.getIdentifier(
                 "rock_hit_1",
@@ -194,7 +197,7 @@ object SoundEffectManager {
 
         brickHitPlayer = MediaPlayer.create(context, resID)
 
-        if (PlayerManager.isSoundEffectsActive){
+        if (PlayerManager.isSoundEffectsActive) {
             brickHitPlayer?.start()
         }
 

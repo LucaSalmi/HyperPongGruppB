@@ -74,7 +74,7 @@ class MainActivityMainMenu : AppCompatActivity() {
                 SoundEffectManager.stopMusic()
             }
 
-            PlayerManager.loadUserData()
+            loadUser()
 
             if (isStoryMode) {
                 startStoryMode()
@@ -156,6 +156,10 @@ class MainActivityMainMenu : AppCompatActivity() {
         }
 
         super.onResume()
+    }
+
+    fun loadUser(){
+        PlayerManager.loadUserData()
     }
 
 }

@@ -46,6 +46,8 @@ class UserSelectionAdapter (val context: Context, private val users: MutableList
 
             PlayerManager.name = user.name
             myActivity.setAccount()
+            myActivity.loadUser()
+            myActivity.checkForMusic()
             userDialog.dismiss()
         }
     }

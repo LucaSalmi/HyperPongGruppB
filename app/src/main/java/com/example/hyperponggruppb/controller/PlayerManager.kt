@@ -131,15 +131,15 @@ object PlayerManager {
             if (user.name == name) {
 
                 activeUser = user
-                levelScoresArray = activeUser!!.levelScoresArray
-                levelStarsArray = activeUser!!.levelStarsArray
-                powerUpInventory = activeUser!!.powerUpInventory
-                gems = activeUser!!.gems
-                highScore = activeUser!!.highScore
-                currentLevel = activeUser!!.currentLevel
+                levelScoresArray = user.levelScoresArray
+                levelStarsArray = user.levelStarsArray
+                powerUpInventory = user.powerUpInventory
+                gems = user.gems
+                highScore = user.highScore
+                currentLevel = user.currentLevel
                 nextLevel = currentLevel + 1
-                isMusicActive = activeUser!!.isMusicActive
-                isSoundEffectsActive = activeUser!!.isSoundEffectsActive
+                isMusicActive = user.isMusicActive
+                isSoundEffectsActive = user.isSoundEffectsActive
             }
         }
     }
