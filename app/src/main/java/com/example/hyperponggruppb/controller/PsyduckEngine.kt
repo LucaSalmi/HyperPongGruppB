@@ -46,7 +46,7 @@ object PsyduckEngine {
                 brickHit = brickRect
 
                 //SoundEffectManager.jukebox(context, 0)
-                SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 6))
+                SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 2))
             }
         }
 
