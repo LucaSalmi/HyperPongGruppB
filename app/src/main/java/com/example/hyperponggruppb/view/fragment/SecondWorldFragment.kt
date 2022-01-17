@@ -242,10 +242,10 @@ class SecondWorldFragment : Fragment() {
 
     private fun checkPoints(levelId: Int): String? {
 
-        return if (PlayerManager.activeUser!!.levelScoresArray?.size!! < levelId) {
+        return if (PlayerManager.levelScoresArray.size < levelId) {
             "0"
         } else {
-            PlayerManager.activeUser!!.levelScoresArray?.get(levelId - 1)?.toString()
+            PlayerManager.levelScoresArray[levelId-1].toString()
         }
     }
 
