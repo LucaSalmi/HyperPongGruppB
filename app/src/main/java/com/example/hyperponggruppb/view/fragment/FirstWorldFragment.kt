@@ -145,15 +145,15 @@ class FirstWorldFragment : Fragment() {
         PlayerManager.powerUpActivated = -1
 
 
-        if (PlayerManager.powerUpArray[0] < 1) { //multiball powerup
+        if (PlayerManager.powerUpInventory[0] < 1) { //multiball powerup
             screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
         }
 
-        if (PlayerManager.powerUpArray[1] < 1) { //gun powerUp
+        if (PlayerManager.powerUpInventory[1] < 1) { //gun powerUp
             screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
         }
 
-        if (PlayerManager.powerUpArray[2] < 1) { //shield powerup
+        if (PlayerManager.powerUpInventory[2] < 1) { //shield powerup
             screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
         }
 
@@ -242,19 +242,19 @@ class FirstWorldFragment : Fragment() {
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
-                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
                         screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
                     } else {
                         screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
                     }
 
-                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
                         screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
                     } else {
                         screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
                     }
 
-                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
                         screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
                     } else {
                         screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
@@ -276,19 +276,19 @@ class FirstWorldFragment : Fragment() {
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
-                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
                         screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
                     } else {
                         screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
                     }
 
-                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
                         screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
                     } else {
                         screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
                     }
 
-                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
                         screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
                     } else {
                         screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
@@ -313,7 +313,7 @@ class FirstWorldFragment : Fragment() {
                 if (PlayerManager.powerUpActivated >= 0) {
                     Log.d(TAG, "enterLevelScreen:  check INSIDE 1")
 
-                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
                         screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
                         Log.d(TAG, "enterLevelScreen:  check INSIDE 2-1")
                     } else {
@@ -321,7 +321,7 @@ class FirstWorldFragment : Fragment() {
                         Log.d(TAG, "enterLevelScreen:  check INSIDE 2-2")
                     }
 
-                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
                         screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
                         Log.d(TAG, "enterLevelScreen:  check INSIDE 3-1")
                     } else {
@@ -329,7 +329,7 @@ class FirstWorldFragment : Fragment() {
                         Log.d(TAG, "enterLevelScreen:  check INSIDE 3-2")
                     }
 
-                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
                         screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
                         Log.d(TAG, "enterLevelScreen:  check INSIDE 4-1")
                     } else {
@@ -399,7 +399,7 @@ class FirstWorldFragment : Fragment() {
 
     fun checkIfPowerUpAvailable() {
 
-        if (PlayerManager.powerUpArray[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
+        if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
             PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
 
             //SoundEffectManager.powerUpActivationSounds(1)

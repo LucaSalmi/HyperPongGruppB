@@ -1,10 +1,7 @@
 package com.example.hyperponggruppb.view
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -15,10 +12,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import com.example.hyperponggruppb.R
-import com.example.hyperponggruppb.controller.DialogManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
@@ -106,9 +99,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     checkLevelCompleted()
                     myActivity.activatePowerup()
 
-                    if (PlayerManager.activatePowerup) {
+                    if (PlayerManager.activatePowerUp) {
                         storyMode.multiBall()
-                        PlayerManager.activatePowerup = false
+                        PlayerManager.activatePowerUp = false
                     }
                 }
 

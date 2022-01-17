@@ -1,11 +1,9 @@
 package com.example.hyperponggruppb.view
 
-import android.app.GameManager
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PowerManager
 import android.util.Log
 import android.widget.ImageView
 import androidx.fragment.app.commit
@@ -14,7 +12,6 @@ import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.databinding.ActivityGameModeStoryBinding
-import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.view.fragment.StoryLevelFragment
 import com.example.hyperponggruppb.view.fragment.PointFragmentStoryMode
 
@@ -94,8 +91,8 @@ class GameModeStoryActivity : AppCompatActivity() {
                         activatedPowerup.setImageResource(R.drawable.shield_button)
                     }
                     if (PlayerManager.selectedPowerUp >= 0) {
-                        PlayerManager.activatePowerup = true
-                        PlayerManager.powerUpArray[PlayerManager.selectedPowerUp] - 1
+                        PlayerManager.activatePowerUp = true
+                        PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] - 1
                         PlayerManager.selectedPowerUp = -1
                     }
                 }

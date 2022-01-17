@@ -25,12 +25,13 @@ object PlayerManager {
     var starCounter = 0
     var currentPlayer: PlayerData? = null
     var powerUpActivated: Int = 0
-    var selectedPowerUp = 0
+    var selectedPowerUp = -1
+    var activatePowerUp = false
 
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()
-    var powerUpInventory: List<Int> = listOf(0,0,0,0)
+    var powerUpInventory: List<Int> = listOf(1,0,1,0)
     var isMusicActive = true
     var isSoundEffectsActive = true
     var gems = 0
@@ -42,15 +43,11 @@ object PlayerManager {
 
         levelScoresArray.clear()
         levelStarsArray.clear()
-        powerUpInventory = listOf(0,0,0,0)
+        powerUpInventory = listOf(1,0,1,0)
         gems = 0
         highScore = 0
         currentLevel = 0
     }
-    var powerUpActivated: Int = 0
-    var selectedPowerUp = -1
-    val powerUpArray: IntArray = intArrayOf(1, 0, 1, 0)
-    var activatePowerup = false
 
     fun createUser(): Boolean{
 
@@ -97,11 +94,11 @@ object PlayerManager {
                 if (obj.name == activeUser!!.name) {
 
                     position = usersArray.indexOf(obj)
-                    usersArray.removeAt(position)
+
                 }
             }
         }
-
+        usersArray.removeAt(position)
         usersArray.add(save)
         activeUser = save
         Log.d(TAG, "saved: ${activeUser!!.levelStarsArray}")
