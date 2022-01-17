@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import android.view.Window
 import android.widget.*
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
+import com.example.hyperponggruppb.model.PlayerData
+import com.example.hyperponggruppb.view.GameModeStoryActivity
 import com.example.hyperponggruppb.view.OverWorldActivity
 
 class FirstWorldFragment : Fragment() {
@@ -138,6 +142,21 @@ class FirstWorldFragment : Fragment() {
         val screenLevelLoadoutTwo = dialog.findViewById(R.id.iv_level_loadout_2) as ImageView
         val screenLevelLoadoutThree = dialog.findViewById(R.id.iv_level_loadout_3) as ImageView
         val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
+        PlayerManager.powerUpActivated = -1
+
+
+        if (PlayerManager.powerUpArray[0] < 1) { //multiball powerup
+            screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+        }
+
+        if (PlayerManager.powerUpArray[1] < 1) { //gun powerUp
+            screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+        }
+
+        if (PlayerManager.powerUpArray[2] < 1) { //shield powerup
+            screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+        }
+
 
         val starContainerOne = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
         val starContainerTwo = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
@@ -214,27 +233,117 @@ class FirstWorldFragment : Fragment() {
             toasterClicked()
         }
         screenLevelLoadoutOne.setOnClickListener {
-
             PlayerManager.selectedPowerUp = 0
-            PlayerManager.checkIfPowerUpAvailable()
 
-            screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-            toasterClicked()
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                PlayerManager.powerUpActivated = -1
+            }
         }
         screenLevelLoadoutTwo.setOnClickListener {
-
             PlayerManager.selectedPowerUp = 1
-            PlayerManager.checkIfPowerUpAvailable()
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-            toasterClicked()
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                PlayerManager.powerUpActivated = -1
+            }
         }
         screenLevelLoadoutThree.setOnClickListener {
-
             PlayerManager.selectedPowerUp = 2
-            PlayerManager.checkIfPowerUpAvailable()
 
-            toasterClicked()
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+                Log.d(TAG, "enterLevelScreen:  check OUTSIDE 1")
+
+                checkIfPowerUpAvailable()
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+                    Log.d(TAG, "enterLevelScreen:  check INSIDE 1")
+
+                    if (PlayerManager.powerUpArray[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 2-1")
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 2-2")
+                    }
+
+                    if (PlayerManager.powerUpArray[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 3-1")
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 3-2")
+                    }
+
+                    if (PlayerManager.powerUpArray[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 4-1")
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                        Log.d(TAG, "enterLevelScreen:  check INSIDE 4-2")
+                    }
+                    screenLevelLoadoutThree.setImageResource(R.drawable.shield_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                PlayerManager.powerUpActivated = -1
+                Log.d(TAG, "enterLevelScreen:  check OUTSIDE 2")
+            }
         }
         screenLevelLoadoutFour.setOnClickListener {
 
@@ -279,11 +388,24 @@ class FirstWorldFragment : Fragment() {
     }
 
     private fun toaster() {
-        Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT).show()
+        Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun toasterClicked() {
-        Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT).show()
+        Toast.makeText(super.getContext(), "pressed a button", Toast.LENGTH_SHORT)
+            .show()
     }
 
+    fun checkIfPowerUpAvailable() {
+
+        if (PlayerManager.powerUpArray[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
+            PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
+
+            //SoundEffectManager.powerUpActivationSounds(1)
+        } else {
+            PlayerManager.powerUpActivated = -1
+
+        }
+    }
 }

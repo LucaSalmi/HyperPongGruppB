@@ -82,6 +82,29 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         extraBall.ballSpeedY = -13f
         ballsArray.add(extraBall)
     }
+    fun multiBall() {
+        extraBall = Ball()
+        extraBall.ballLeft = ((player.right - player.playerWidth / 2) - ball.ballsize / 2).toInt()
+        extraBall.ballRight = ((player.right - player.playerWidth / 2) + ball.ballsize / 2).toInt()
+        extraBall.ballTop = (player.top - ball.ballsize).toInt()
+        extraBall.ballBottom = (player.top).toInt()
+        extraBall.update()
+        extraBall.ballSpeedX = 7f
+        extraBall.ballSpeedY = -13f
+        ballsArray.add(extraBall)
+        extraBall = Ball()
+
+        extraBall.ballLeft = ((player.right - player.playerWidth / 2) - ball.ballsize / 2).toInt()
+        extraBall.ballRight = ((player.right - player.playerWidth / 2) + ball.ballsize / 2).toInt()
+        extraBall.ballTop = (player.top - ball.ballsize).toInt()
+        extraBall.ballBottom = (player.top).toInt()
+        extraBall.update()
+        extraBall.ballSpeedX = -7f
+        extraBall.ballSpeedY = -13f
+        ballsArray.add(extraBall)
+
+    }
+
 
     private fun makeBricks() {
 

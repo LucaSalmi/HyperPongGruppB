@@ -173,6 +173,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
             PlayerManager.saveUserData(sp)
             PlayerManager.setPlacement()
+            PlayerManager.starCounter = 0
             gameStart = false
             BrickStructure.playerSpeed = 1
             infiniteMode.clearArrays()

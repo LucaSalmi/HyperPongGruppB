@@ -64,6 +64,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             backgroundCode = 3
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
+        myActivity.checkSelectedPowerup()
+
+
     }
 
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
@@ -101,6 +104,12 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     playerAndBrickInteractions()
                     powerUpInteractions()
                     checkLevelCompleted()
+                    myActivity.activatePowerup()
+
+                    if (PlayerManager.activatePowerup) {
+                        storyMode.multiBall()
+                        PlayerManager.activatePowerup = false
+                    }
                 }
 
                 starSound()
@@ -360,7 +369,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
-            PlayerManager.starCounter++ //temporary
+            PlayerManager.starCounter++
             PlayerManager.addStarsToUser()
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false

@@ -13,4 +13,5 @@
     <color name="trans">#00000000</color>
     <color name="gold">#c59508</color>
     <color name="star">#FFC313</color>
+    <color name="faded_powerup">#9A000000</color>
 </resources>

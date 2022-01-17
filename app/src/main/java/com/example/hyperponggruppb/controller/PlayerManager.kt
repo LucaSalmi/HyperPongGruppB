@@ -47,6 +47,10 @@ object PlayerManager {
         highScore = 0
         currentLevel = 0
     }
+    var powerUpActivated: Int = 0
+    var selectedPowerUp = -1
+    val powerUpArray: IntArray = intArrayOf(1, 0, 1, 0)
+    var activatePowerup = false
 
     fun createUser(): Boolean{
 
@@ -247,7 +251,7 @@ object PlayerManager {
 
     fun checkIfPowerUpAvailable(){
 
-        if (currentPlayer?.powerUpInventory?.indexOf(selectedPowerUp)!! > 0){ //MultiBall powerUp
+        if (powerUpInventory.indexOf(selectedPowerUp) > 0){ //MultiBall powerUp
 
             powerUpActivated = 1
 
