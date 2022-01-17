@@ -13,7 +13,10 @@ class StoryLevelFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return activity?.applicationContext?.let { StoryView(super.getContext(), activity!!) }
+
+        return activity?.applicationContext?.let { StoryView(super.getContext(), activity!!)
+
+        }
     }
 
 }

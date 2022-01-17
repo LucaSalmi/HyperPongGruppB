@@ -26,8 +26,9 @@ object PlayerManager {
     var currentMaxScore = 1000
     var starCounter = 0
     var powerUpActivated: Int = 0
-    var selectedPowerUp = 0
+    var selectedPowerUp = -1
     val powerUpArray: IntArray = intArrayOf(1, 0, 1, 0)
+    var activatePowerup = false
 
     fun createUser(): Boolean{
 

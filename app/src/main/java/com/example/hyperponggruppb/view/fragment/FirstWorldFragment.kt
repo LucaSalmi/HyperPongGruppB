@@ -120,31 +120,31 @@ class FirstWorldFragment : Fragment() {
             1 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
-                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                    checkPoints(levelId) //
                 dialog.dismiss()
             }
             2 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
-                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                    checkPoints(levelId)
                 dialog.dismiss()
             }
             3 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
-                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                    checkPoints(levelId)
                 dialog.dismiss()
             }
             4 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
-                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                    checkPoints(levelId)
                 dialog.dismiss()
             }
             5 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
-                    checkPoints(levelId) // ändra denna till knuten variabel till leveln
+                    checkPoints(levelId)
                 dialog.dismiss()
             }
         }

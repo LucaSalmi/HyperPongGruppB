@@ -50,6 +50,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var backgroundCode = 1
     var soundCode = 0
 
+
     init {
 
         mHolder?.addCallback(this)
@@ -61,6 +62,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.activeUser!!.currentLevel > 5 ){
             backgroundCode = 3
         }
+        myActivity.checkSelectedPowerup()
+
+
     }
 
     private val levelTimer = object : CountDownTimer(60000, 1000) {
@@ -94,6 +98,12 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     checkDamage()
                     playerAndBrickInteractions()
                     checkLevelCompleted()
+                    myActivity.activatePowerup()
+
+                    if (PlayerManager.activatePowerup) {
+                        storyMode.multiBall()
+                        PlayerManager.activatePowerup = false
+                    }
                 }
 
                 starSound()
