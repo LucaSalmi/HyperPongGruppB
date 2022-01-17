@@ -133,6 +133,7 @@ class FirstWorldFragment : Fragment() {
         val starProgressResult = dialog.findViewById(R.id.iv_star_progress_holder) as ImageView
         val screenLevelScore = dialog.findViewById(R.id.tv_level_score) as TextView
         val screenLevelScoreResult = dialog.findViewById(R.id.tv_level_score_result) as TextView
+        val playerGemBalance = dialog.findViewById<TextView>(R.id.tv_level_gem_amount)
 
         val leftArrowCharacter = dialog.findViewById(R.id.iv_level_left_arrow) as ImageView
         val screenLevelCharacter = dialog.findViewById(R.id.iv_level_character) as ImageView
@@ -143,6 +144,8 @@ class FirstWorldFragment : Fragment() {
         val screenLevelLoadoutThree = dialog.findViewById(R.id.iv_level_loadout_3) as ImageView
         val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
         PlayerManager.powerUpActivated = -1
+
+        playerGemBalance.text = PlayerManager.gems.toString()
 
 
         if (PlayerManager.powerUpInventory[0] < 1) { //multiball powerup

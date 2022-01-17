@@ -35,6 +35,7 @@ class GameModeOneActivity : AppCompatActivity() {
     fun updateText() {
 
         runOnUiThread(Runnable {
+
             try {
                 supportFragmentManager.commit {
                     replace(R.id.frame_layout, PointFragmentInfinityMode())
