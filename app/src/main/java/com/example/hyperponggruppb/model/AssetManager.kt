@@ -46,6 +46,19 @@ object AssetManager {
     lateinit var powerUpAssetHealthPlus: Bitmap
     lateinit var powerUpAssetGem: Bitmap
 
+    lateinit var comboCounterZero: Bitmap
+    lateinit var comboCounterOne: Bitmap
+    lateinit var comboCounterTwo: Bitmap
+    lateinit var comboCounterThree: Bitmap
+    lateinit var comboCounterFour: Bitmap
+    lateinit var comboCounterFive: Bitmap
+    lateinit var comboCounterSix: Bitmap
+    lateinit var comboCounterSeven: Bitmap
+    lateinit var comboCounterEight: Bitmap
+    lateinit var comboCounterNine: Bitmap
+    lateinit var comboCounterTen: Bitmap
+    lateinit var comboCounterTenPlus: Bitmap
+
     lateinit var darkRectangleDeathZone: Bitmap
     val bGHeight = getScreenHeight()
     val bGWidth = getScreenWidth()
@@ -105,6 +118,9 @@ object AssetManager {
         powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetGem = BitmapFactory.decodeResource(context.resources, R.drawable.gem).scale(powerUpWidth, powerUpHeight,true)
+
+
+
 
         darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone).scale(bGWidth, dangerZoneHeight, true)
     }
