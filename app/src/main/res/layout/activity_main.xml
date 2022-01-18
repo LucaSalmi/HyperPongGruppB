@@ -4,228 +4,330 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_pongtropolis_upgraded"
+    android:background="@drawable/space_n_planet_background"
     tools:context=".view.MainActivityMainMenu">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/menu_pongtropolis_upgraded">
+    <ImageView
+        android:id="@+id/iv_menu_green_planet"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/green_planet" />
 
-            <ImageView
-                android:id="@+id/title_shadow"
-                android:layout_width="0dp"
-                android:layout_height="430dp"
-                android:background="@color/faded_black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/iv_menu_purple_planet"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/purple_planet" />
 
-            <ImageView
-                android:id="@+id/iv_title"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/new_hyperpong_future_edition" />
+    <ImageView
+        android:id="@+id/iv_menu_meteor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_purple_planet"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:srcCompat="@drawable/meteor_test" />
+
+    <ImageView
+        android:id="@+id/iv_city_back"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/city_layer_back"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/iv_menu_spotlight_one"
+        android:layout_width="wrap_content"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_purple_planet"
+        app:layout_constraintTop_toTopOf="@+id/iv_menu_purple_planet"
+        app:layout_constraintVertical_bias="0.19"
+        app:srcCompat="@drawable/spotlight"
+        app:tint="@color/pink" />
+
+    <ImageView
+        android:id="@+id/iv_menu_spotlight_two"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintTop_toTopOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintVertical_bias="0.19"
+        app:srcCompat="@drawable/spotlight"
+        app:tint="@color/yellow" />
+
+    <ImageView
+        android:id="@+id/iv_menu_spotlight_three"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginStart="-50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintEnd_toEndOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_purple_planet"
+        app:layout_constraintTop_toTopOf="@+id/iv_menu_spotlight_one"
+        app:layout_constraintVertical_bias="0.49"
+        app:srcCompat="@drawable/spotlight"
+        app:tint="@color/green" />
+
+    <ImageView
+        android:id="@+id/iv_city_front"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/city_layer_front"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/iv_cliffs"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/cliffs_props"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/title_shadow"
+        android:layout_width="0dp"
+        android:layout_height="430dp"
+        android:background="@color/faded_black"
+        android:stateListAnimator="@anim/bounce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-            <LinearLayout
-                android:id="@+id/btn_layout_one"
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/new_hyperpong_future_edition" />
+
+
+    <ImageView
+        android:id="@+id/iv_menu_player"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/player_manu_object_animation_test" />
+
+    <LinearLayout
+        android:id="@+id/btn_layout_one"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_title">
+
+        <ImageView
+            android:id="@+id/iv_game_mode"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/golden_item_frame"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_layout_two"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_layout_one">
+
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/golden_item_frame" />
+
+        <ImageView
+            android:id="@+id/iv_leaderboard"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/golden_item_frame" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_layout_two"
+        app:layout_constraintVertical_bias="0.712">
+
+        <TextView
+            android:id="@+id/tv_active_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/active_account_string"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_change_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/gold"
+            android:text="@string/change_account_btn"
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_layout_one"
+        app:layout_constraintEnd_toEndOf="@+id/btn_layout_one"
+        app:layout_constraintStart_toStartOf="@+id/btn_layout_one"
+        app:layout_constraintTop_toTopOf="@+id/btn_layout_one">
+
+        <LinearLayout
+            android:id="@+id/text_layout_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/btn_mode_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/gold"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
+            <TextView
+                android:id="@+id/tv_game_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/golden_item_frame"
+                android:text="@string/txt_story_mode"
+                android:textSize="@dimen/txt_button_size" />
+
+            <ImageButton
+                android:id="@+id/btn_mode_forward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/gold"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_layout_two"
+        app:layout_constraintEnd_toEndOf="@+id/btn_layout_two"
+        app:layout_constraintStart_toStartOf="@+id/btn_layout_two"
+        app:layout_constraintTop_toTopOf="@+id/btn_layout_two">
+
+        <LinearLayout
+            android:id="@+id/text_layout_two"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tv_settings"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_title">
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/golden_item_frame"
 
-                <ImageView
-                    android:id="@+id/iv_game_mode"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/golden_item_frame"
-                    app:layout_constraintStart_toStartOf="parent" />
+                android:text="Settings"
+                android:textSize="@dimen/txt_button_size" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_layout_two"
+            <TextView
+                android:id="@+id/tv_"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_layout_one">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/golden_item_frame"
+                android:text="Leaderboard"
+                android:textSize="@dimen/txt_button_size" />
 
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/iv_settings"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/golden_item_frame" />
-
-                <ImageView
-                    android:id="@+id/iv_leaderboard"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/golden_item_frame" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_layout_two"
-                app:layout_constraintVertical_bias="0.712">
-
-                <TextView
-                    android:id="@+id/tv_active_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:text="@string/active_account_string"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btn_change_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/gold"
-                    android:text="@string/change_account_btn"
-                    android:textColor="@color/black" />
-
-
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_layout_one"
-                app:layout_constraintEnd_toEndOf="@+id/btn_layout_one"
-                app:layout_constraintStart_toStartOf="@+id/btn_layout_one"
-                app:layout_constraintTop_toTopOf="@+id/btn_layout_one">
-
-                <LinearLayout
-                    android:id="@+id/text_layout_one"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <ImageButton
-                        android:id="@+id/btn_mode_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@color/gold"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
-
-                    <TextView
-                        android:id="@+id/tv_game_mode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:src="@drawable/golden_item_frame"
-                        android:text="@string/txt_story_mode"
-                        android:textSize="@dimen/txt_button_size" />
-
-                    <ImageButton
-                        android:id="@+id/btn_mode_forward"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@color/gold"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_layout_two"
-                app:layout_constraintEnd_toEndOf="@+id/btn_layout_two"
-                app:layout_constraintStart_toStartOf="@+id/btn_layout_two"
-                app:layout_constraintTop_toTopOf="@+id/btn_layout_two">
-
-                <LinearLayout
-                    android:id="@+id/text_layout_two"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:id="@+id/tv_settings"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="30dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:src="@drawable/golden_item_frame"
-
-                        android:text="Settings"
-                        android:textSize="@dimen/txt_button_size" />
-
-                    <TextView
-                        android:id="@+id/tv_"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:src="@drawable/golden_item_frame"
-                        android:text="Leaderboard"
-                        android:textSize="@dimen/txt_button_size" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

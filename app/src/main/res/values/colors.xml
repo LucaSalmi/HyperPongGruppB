@@ -14,4 +14,8 @@
     <color name="gold">#c59508</color>
     <color name="star">#FFC313</color>
     <color name="faded_powerup">#9A000000</color>
+    <color name="yellow">#FFE600</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#4CFF00</color>
+    <color name="pink">#FF00FB</color>
 </resources>
