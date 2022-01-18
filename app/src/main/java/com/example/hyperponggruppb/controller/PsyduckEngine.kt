@@ -163,7 +163,11 @@ object PsyduckEngine {
 
         for (ball in ballsArray) {
 
-            val ballIsBottomOfScreen = ball.ballTop > canvasHeight
+            var ballIsBottomOfScreen = if (gameManager.isShieldActive){
+                ball.ballBottom >= player.bottom
+            }else{
+                ball.ballBottom >= canvasHeight
+            }
             val ballIsOutsideTopOfScreen = ball.ballBottom < 0f
             val ballIsOutsideRightOfScreen = ball.ballRight >= canvasWidth
             val ballIsOutsideLeftOfScreen = ball.ballLeft < 0f
@@ -180,11 +184,11 @@ object PsyduckEngine {
                 }else{
 
                     gameManager.isShieldActive = false
+                    ball.ballBottom = player.bottom.toInt()
+                    ball.ballTop = ball.ballBottom - ball.ballsize.toInt()
                     ball.ballSpeedY *= -1f //-ballSpeedY
 
                 }
-
-
             }
 
             if (ballIsOutsideRightOfScreen || ballIsOutsideLeftOfScreen || ballIsOutsideTopOfScreen || ball.playerCollision || ball.brickCollision) {
