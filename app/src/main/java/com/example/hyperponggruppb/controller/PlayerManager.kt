@@ -42,6 +42,7 @@ object PlayerManager {
     var highScore = 0
     var currentLevel = 0
     var nextLevel = 1
+    var comboPoints = 0
 
     fun cleanArrays(){
 

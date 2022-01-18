@@ -46,6 +46,19 @@ object AssetManager {
     lateinit var powerUpAssetHealthPlus: Bitmap
     lateinit var powerUpAssetGem: Bitmap
 
+    lateinit var comboCounterZero: Bitmap
+    lateinit var comboCounterOne: Bitmap
+    lateinit var comboCounterTwo: Bitmap
+    lateinit var comboCounterThree: Bitmap
+    lateinit var comboCounterFour: Bitmap
+    lateinit var comboCounterFive: Bitmap
+    lateinit var comboCounterSix: Bitmap
+    lateinit var comboCounterSeven: Bitmap
+    lateinit var comboCounterEight: Bitmap
+    lateinit var comboCounterNine: Bitmap
+    lateinit var comboCounterTen: Bitmap
+    lateinit var comboCounterTenPlus: Bitmap
+
     lateinit var darkRectangleDeathZone: Bitmap
     val bGHeight = getScreenHeight()
     val bGWidth = getScreenWidth()
@@ -54,6 +67,9 @@ object AssetManager {
     var bgRectTransOne = Rect(0, bgRectOne.top - transHeight, bGWidth, bgRectOne.top)
     var bgRectTwo = Rect(0, bgRectTransOne.top - bGHeight, bGWidth, bgRectTransOne.top)
     var bgRectTransTwo = Rect(0, bgRectTwo.top - transHeight, bGWidth, bgRectTwo.top)
+
+    var counterWidth = 220
+    var counterHeight = 220
 
 
     var playerwidth = 200
@@ -69,6 +85,7 @@ object AssetManager {
     var powerUpWidth = 70
 
     var dangerZoneHeight = 100
+
 
 
     fun prepareAssets(context: Context){
@@ -105,6 +122,21 @@ object AssetManager {
         powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetGem = BitmapFactory.decodeResource(context.resources, R.drawable.gem).scale(powerUpWidth, powerUpHeight,true)
+
+        comboCounterZero = BitmapFactory.decodeResource(context.resources, R.drawable.x_zero).scale(counterWidth, counterHeight, true)
+        comboCounterOne = BitmapFactory.decodeResource(context.resources, R.drawable.x_one).scale(counterWidth, counterHeight, true)
+        comboCounterTwo = BitmapFactory.decodeResource(context.resources, R.drawable.x_two).scale(counterWidth, counterHeight, true)
+        comboCounterThree = BitmapFactory.decodeResource(context.resources, R.drawable.x_three).scale(counterWidth, counterHeight, true)
+        comboCounterFour = BitmapFactory.decodeResource(context.resources, R.drawable.x_four).scale(counterWidth, counterHeight, true)
+        comboCounterFive = BitmapFactory.decodeResource(context.resources, R.drawable.x_five).scale(counterWidth, counterHeight, true)
+        comboCounterSix = BitmapFactory.decodeResource(context.resources, R.drawable.x_six).scale(counterWidth, counterHeight, true)
+        comboCounterSeven = BitmapFactory.decodeResource(context.resources, R.drawable.x_seven).scale(counterWidth, counterHeight, true)
+        comboCounterEight = BitmapFactory.decodeResource(context.resources, R.drawable.x_eight).scale(counterWidth, counterHeight, true)
+        comboCounterNine = BitmapFactory.decodeResource(context.resources, R.drawable.x_nine).scale(counterWidth, counterHeight, true)
+        comboCounterTen = BitmapFactory.decodeResource(context.resources, R.drawable.x_ten).scale(counterWidth, counterHeight, true)
+        comboCounterTenPlus = BitmapFactory.decodeResource(context.resources, R.drawable.x_ten_plus).scale(counterWidth, counterHeight, true)
+
+
 
         darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone).scale(bGWidth, dangerZoneHeight, true)
     }
