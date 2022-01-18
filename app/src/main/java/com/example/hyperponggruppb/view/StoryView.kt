@@ -115,7 +115,16 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     myActivity.activatePowerup()
 
                     if (PlayerManager.activatePowerUp) {
-                        storyMode.multiBall()
+                        when(PlayerManager.selectedPowerUp){
+
+                            0 -> storyMode.multiBall()
+                            1 -> {
+                                storyMode.shotCount = 3
+                                storyMode.gunPowerUp()
+                            }
+                        }
+
+                        PlayerManager.selectedPowerUp = -1
                         PlayerManager.activatePowerUp = false
                     }
                 }

@@ -93,7 +93,6 @@ class GameModeStoryActivity : AppCompatActivity() {
                     if (PlayerManager.selectedPowerUp >= 0) {
                         PlayerManager.activatePowerUp = true
                         PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] - 1
-                        PlayerManager.selectedPowerUp = -1
                     }
                 }
             } catch (e: Exception) {
