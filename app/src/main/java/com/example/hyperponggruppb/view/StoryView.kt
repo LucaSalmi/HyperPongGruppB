@@ -259,10 +259,10 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         when(PlayerManager.comboPoints){
 
-            0 -> canvas.drawBitmap(AssetManager.comboCounterZero, comboLeft, comboTop, paint)
-            1 -> canvas.drawBitmap(AssetManager.comboCounterOne, comboLeft, comboTop, paint)
-            2 -> canvas.drawBitmap(AssetManager.comboCounterTwo, comboLeft, comboTop, paint)
-            3 -> canvas.drawBitmap(AssetManager.comboCounterThree, comboLeft, comboTop, paint)
+            0 -> canvas.drawBitmap(AssetManager.comboCounterZero, comboLeft, comboTop, null)
+            1 -> canvas.drawBitmap(AssetManager.comboCounterOne, comboLeft, comboTop, null)
+            2 -> canvas.drawBitmap(AssetManager.comboCounterTwo, comboLeft, comboTop, null)
+            3 -> canvas.drawBitmap(AssetManager.comboCounterThree, comboLeft, comboTop, null)
             4 -> canvas.drawBitmap(AssetManager.comboCounterFour, comboLeft, comboTop, null)
             5 -> canvas.drawBitmap(AssetManager.comboCounterFive, comboLeft, comboTop, null)
             6 -> canvas.drawBitmap(AssetManager.comboCounterSix, comboLeft, comboTop, null)
@@ -271,7 +271,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             9 -> canvas.drawBitmap(AssetManager.comboCounterNine, comboLeft, comboTop, null)
             10 -> canvas.drawBitmap(AssetManager.comboCounterTen, comboLeft, comboTop, null)
             11 -> canvas.drawBitmap(AssetManager.comboCounterTenPlus, comboLeft, comboTop, null)
-
         }
     }
 

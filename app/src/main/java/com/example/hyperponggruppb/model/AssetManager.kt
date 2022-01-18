@@ -68,6 +68,9 @@ object AssetManager {
     var bgRectTwo = Rect(0, bgRectTransOne.top - bGHeight, bGWidth, bgRectTransOne.top)
     var bgRectTransTwo = Rect(0, bgRectTwo.top - transHeight, bGWidth, bgRectTwo.top)
 
+    var counterWidth = 220
+    var counterHeight = 220
+
 
     var playerwidth = 200
     var playerhight = 40
