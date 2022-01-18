@@ -1,14 +1,13 @@
 package com.example.hyperponggruppb.view
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.SystemClock
-import android.util.Log
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.DialogManager
@@ -16,6 +15,7 @@ import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
+import kotlinx.coroutines.delay
 
 
 class MainActivityMainMenu : AppCompatActivity() {
@@ -40,6 +40,11 @@ class MainActivityMainMenu : AppCompatActivity() {
         setContentView(binding.root)
         AssetManager.prepareAssets(this)
         mainDialog = DialogManager(this)
+        var menuPlayerProp = findViewById<ImageView>(R.id.iv_menu_player)
+        var transUpX = 50f
+        var transdownX = -50f
+
+
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
@@ -50,9 +55,50 @@ class MainActivityMainMenu : AppCompatActivity() {
             mainDialog.nameInput(sp)
         }
 
+
         setAccount()
         onClick()
+        startMenuAnimations()
 
+        val greenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
+        greenPlanet.setOnClickListener {
+            meteorAnim()
+        }
+    }
+    private fun startMenuAnimations() {
+        val menuPlayerProp = findViewById<ImageView>(R.id.iv_menu_player)
+        val animPlayer = AnimationUtils.loadAnimation(applicationContext, R.anim.player_hover_y)
+        menuPlayerProp.startAnimation(animPlayer)
+
+        val menuPurplePlanet = findViewById<ImageView>(R.id.iv_menu_purple_planet)
+        val animPurplePlanet =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.purple_planet_hover_y)
+        menuPurplePlanet.startAnimation(animPurplePlanet)
+
+        val menuGreenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
+        val animGreenPlanet =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.green_planet_hover_x)
+        menuGreenPlanet.startAnimation(animGreenPlanet)
+
+        val menuSpotlightOne = findViewById<ImageView>(R.id.iv_menu_spotlight_one)
+        val menuSpotlightTwo = findViewById<ImageView>(R.id.iv_menu_spotlight_two)
+        val menuSpotlightThree = findViewById<ImageView>(R.id.iv_menu_spotlight_three)
+        val animSpotlightOne =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_one)
+        val animSpotlightTwo =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_two)
+        val animSpotlightThree = AnimationUtils.loadAnimation(
+            applicationContext,
+            R.anim.spotlight_rotation_version_three
+        )
+        menuSpotlightOne.startAnimation(animSpotlightOne)
+        menuSpotlightTwo.startAnimation(animSpotlightThree)
+        menuSpotlightThree.startAnimation(animSpotlightTwo)
+    }
+    private fun meteorAnim(){
+        val menuCometProp = findViewById<ImageView>(R.id.iv_menu_meteor)
+        val animMeteor = AnimationUtils.loadAnimation(applicationContext, R.anim.meteor_animation)
+        menuCometProp.startAnimation(animMeteor)
 
     }
 
@@ -154,6 +200,7 @@ class MainActivityMainMenu : AppCompatActivity() {
         if (PlayerManager.isMusicActive) {
             SoundEffectManager.musicSetup(this, 0)
         }
+
 
         super.onResume()
     }
