@@ -42,7 +42,7 @@ object PlayerManager {
     var gems = 0
     var highScore = 0
     var currentLevel = 0
-    var nextLevel = currentLevel + 1
+    var nextLevel = 1
 
     fun cleanArrays(){
 

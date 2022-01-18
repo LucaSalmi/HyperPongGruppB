@@ -25,6 +25,8 @@ import kotlinx.coroutines.delay
 
 class DialogManager(val context: Context) {
 
+    private var backupLevelId = -1
+
 
     /**
      * lets the player change which account he/she is playing on from a list of all saved users.
@@ -239,7 +241,8 @@ class DialogManager(val context: Context) {
         }
 
         retryBtn.setOnClickListener {
-            PlayerManager.starCounter = 0 // reset the stars on the !!! - UI - !!!
+
+            PlayerManager.starCounter = 0
 
             if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
                 PlayerManager.isLevelCompleted = false
@@ -288,10 +291,375 @@ class DialogManager(val context: Context) {
 
     }
 
+    /**
+     * shows  aDialog where the player can see how many stars and points he earned in the selected level, and lets he/she choose a powerup to bring in the level or buy one if they have enough gems
+     */
+    fun enterLevelScreen(levelId: Int) {
+
+        val enterLevelDialog = Dialog(context)
+
+        enterLevelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        enterLevelDialog.setCancelable(false)
+        enterLevelDialog.setContentView(R.layout.enter_level_screen)
+        val returnToWorldBtn = enterLevelDialog.findViewById(R.id.iv_level_return) as ImageView
+        val startLevelBtn = enterLevelDialog.findViewById(R.id.iv_level_start) as ImageView
+        var screenLevelID = enterLevelDialog.findViewById(R.id.tv_level_id) as TextView
+
+        val starProgressResult = enterLevelDialog.findViewById(R.id.iv_star_progress_holder) as ImageView
+        val screenLevelScore = enterLevelDialog.findViewById(R.id.tv_level_score) as TextView
+        val screenLevelScoreResult = enterLevelDialog.findViewById(R.id.tv_level_score_result) as TextView
+        val playerGemBalance = enterLevelDialog.findViewById<TextView>(R.id.tv_level_gem_amount)
+
+        val leftArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_left_arrow) as ImageView
+        val screenLevelCharacter = enterLevelDialog.findViewById(R.id.iv_level_character) as ImageView
+        val rightArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_right_arrow) as ImageView
+
+        val screenLevelLoadoutOne = enterLevelDialog.findViewById(R.id.iv_level_loadout_1) as ImageView
+        val screenLevelLoadoutTwo = enterLevelDialog.findViewById(R.id.iv_level_loadout_2) as ImageView
+        val screenLevelLoadoutThree = enterLevelDialog.findViewById(R.id.iv_level_loadout_3) as ImageView
+        val screenLevelLoadoutFour = enterLevelDialog.findViewById(R.id.iv_level_loadout_4) as ImageView
+        PlayerManager.powerUpActivated = -1
+
+        backupLevelId = PlayerManager.currentLevel
+
+        playerGemBalance.text = PlayerManager.gems.toString()
+
+
+        if (PlayerManager.powerUpInventory[0] < 1) { //multiball powerup
+            screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+        }
+
+        if (PlayerManager.powerUpInventory[1] < 1) { //gun powerUp
+            screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+        }
+
+        if (PlayerManager.powerUpInventory[2] < 1) { //shield powerup
+            screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+        }
+
+
+        val starContainerOne = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
+        val starContainerTwo = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
+        val starContainerThree = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
+
+        // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
+
+        if (PlayerManager.levelStarsArray.size > levelId - 1) {
+            when (PlayerManager.levelStarsArray[levelId - 1]) {
+
+                1 -> starContainerOne!!.setImageResource(R.drawable.star)
+
+                2 -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                }
+
+                3 -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                    starContainerThree!!.setImageResource(R.drawable.star)
+                }
+                else -> {
+                    starContainerOne!!.setImageResource(R.drawable.star)
+                    starContainerTwo!!.setImageResource(R.drawable.star)
+                    starContainerThree!!.setImageResource(R.drawable.star)
+                }
+            }
+        }
+
+        val levelString = context.getString(R.string.level) + levelId.toString()
+
+        when (levelId) {
+            1 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            2 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            3 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            4 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            5 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            6 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            7 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            8 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            9 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+            10 -> {
+                screenLevelID.text = levelString
+                screenLevelScoreResult.text =
+                    checkPoints(levelId)
+                enterLevelDialog.dismiss()
+            }
+        }
+
+        leftArrowCharacter.setOnClickListener {
+            //skapa en array med olika skins
+            //screenLevelCharacter.setImageResource(ARRAYID MINUS)
+            toaster(1)
+        }
+        rightArrowCharacter.setOnClickListener {
+            //skapa en array med olika skins
+            //screenLevelCharacter.setImageResource(ARRAYID PLUS)
+            toaster(1)
+        }
+
+        //0 = multiball powerup
+        //1 = gun powerup
+        //2 = shield powerup
+
+        screenLevelLoadoutOne.setOnClickListener {
+            PlayerManager.selectedPowerUp = 0
+
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
+
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                PlayerManager.powerUpActivated = -1
+            }
+        }
+        screenLevelLoadoutTwo.setOnClickListener {
+            PlayerManager.selectedPowerUp = 1
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                PlayerManager.powerUpActivated = -1
+            }
+        }
+        screenLevelLoadoutThree.setOnClickListener {
+            PlayerManager.selectedPowerUp = 2
+
+            if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
+
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
+
+                if (PlayerManager.powerUpActivated >= 0) {
+
+                    if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup
+                        screenLevelLoadoutOne.setImageResource(R.drawable.multiball_button)
+                    } else {
+                        screenLevelLoadoutOne.setImageResource(R.drawable.locked_multiball_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[1] > 0) { //gun powerUp
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.gun_button)
+                    } else {
+                        screenLevelLoadoutTwo.setImageResource(R.drawable.locked_gun_button)
+                    }
+
+                    if (PlayerManager.powerUpInventory[2] > 0) { //shield powerup
+                        screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                    } else {
+                        screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
+                    }
+                    screenLevelLoadoutThree.setImageResource(R.drawable.shield_button_selected)
+                }
+
+            } else {
+                screenLevelLoadoutThree.setImageResource(R.drawable.shield_button)
+                PlayerManager.powerUpActivated = -1
+            }
+        }
+        screenLevelLoadoutFour.setOnClickListener {
+
+            PlayerManager.selectedPowerUp = 3
+            checkIfPowerUpAvailable()
+
+            toaster(1)
+        }
+
+        returnToWorldBtn.setOnClickListener {
+
+            enterLevelDialog.dismiss()
+        }
+
+        startLevelBtn.setOnClickListener {
+
+            PlayerManager.starCounter = 0
+            enterLevelDialog.dismiss()
+
+            val overWorldActivity = context as OverWorldActivity
+            overWorldActivity.startLevel()
+
+        }
+
+        enterLevelDialog.show()
+        enterLevelDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
+    private fun checkPoints(levelId: Int): String {
+
+        return if (PlayerManager.levelScoresArray.size < levelId) {
+            "0"
+        } else {
+            PlayerManager.levelScoresArray[levelId - 1].toString()
+        }
+    }
+
+    fun checkIfPowerUpAvailable(): Boolean {
+
+        if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
+            PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
+            return true
+
+        } else {
+            PlayerManager.powerUpActivated = -1
+            shopDialog()
+            return false
+        }
+    }
+
+    fun shopDialog(){
+        val shopDialog = Dialog(context)
+        shopDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        shopDialog.setContentView(R.layout.shop_dialog_layout)
+
+        val shopText = shopDialog.findViewById<TextView>(R.id.shop_dialog_text)
+        val yesButton = shopDialog.findViewById<Button>(R.id.shop_yes_btn)
+        val noButton = shopDialog.findViewById<Button>(R.id.shop_no_btn)
+
+        val shopStringOne = context.getString(R.string.shop_dialog_text_part_1)
+        val shopStringTwo = context.getString(R.string.shop_dialog_string_part_2)
+        val price = when(PlayerManager.selectedPowerUp){
+            0-> PlayerManager.multiBallPrice.toString()
+            1-> PlayerManager.gunPrice.toString()
+            2-> PlayerManager.shieldPrice.toString()
+            else -> PlayerManager.multiBallPrice.toString()
+        }
+        var shopStringFinal = shopStringOne + price + shopStringTwo
+
+        shopText.text = shopStringFinal
+
+        yesButton.setOnClickListener {
+
+            if (PlayerManager.buyPowerUp(20)){
+                PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] =+ 1
+                enterLevelScreen(backupLevelId)
+                shopDialog.dismiss()
+            }else{
+                toaster(2)
+            }
+        }
+
+        noButton.setOnClickListener {
+            shopDialog.dismiss()
+        }
+
+        shopDialog.show()
+        shopDialog.window?.setBackgroundDrawableResource(R.color.trans)
+    }
+
     private fun setUserPreferences(){
 
         PlayerManager.activeUser!!.isMusicActive = PlayerManager.isMusicActive
         PlayerManager.activeUser!!.isSoundEffectsActive = PlayerManager.isSoundEffectsActive
+    }
+
+    private fun toaster(id: Int) {
+        when(id){
+            0-> Toast.makeText(context, "Level not yet unlocked", Toast.LENGTH_SHORT)
+                .show()
+            1-> Toast.makeText(context, "pressed a button", Toast.LENGTH_SHORT)
+                .show()
+            2-> Toast.makeText(context, "not enough gems", Toast.LENGTH_SHORT)
+                .show()
+        }
+
     }
 
     private fun getMainActivity(): MainActivityMainMenu {
