@@ -54,7 +54,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
-        if (PlayerManager.activeUser!!.currentLevel > 5) {
+        if (PlayerManager.currentLevel > 5) {
             backgroundCode = 3
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
