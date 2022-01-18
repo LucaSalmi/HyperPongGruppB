@@ -16,9 +16,15 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     lateinit var ball: Ball
     lateinit var extraBall: Ball
     lateinit var player: Player
+    lateinit var projectile: Gun
+    var projectileWidth = 5
+    var projectileHeight = 10
+    var isGunLive = false
+    var shotCount = 0
     var patternId = 0
 
     init {
+
         clearArrays()
         makePlayer()
         makeBall()
@@ -82,6 +88,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         extraBall.ballSpeedY = -13f
         ballsArray.add(extraBall)
     }
+
     fun multiBall() {
         extraBall = Ball()
         extraBall.ballLeft = ((player.right - player.playerWidth / 2) - ball.ballsize / 2).toInt()
@@ -104,7 +111,6 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         ballsArray.add(extraBall)
 
     }
-
 
     private fun makeBricks() {
 
@@ -141,6 +147,18 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         brickRow.addAll(tempArray)
     }
 
+    fun gunPowerUp() {
+
+        projectile = Gun(
+            ((player.right - player.playerWidth / 2) - projectileWidth).toInt(),
+            (player.top - projectileHeight).toInt(),
+            ((player.right - player.playerWidth / 2) + projectileWidth).toInt(),
+            player.top.toInt()
+        )
+        projectile.update()
+
+        isGunLive = true
+    }
 
     fun clearArrays() {
 

@@ -94,25 +94,32 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             player.smallPaddle = true
         }
     }
-    //TypeID 4 Multiball
+    //TypeID 4 Multiball handled in PsyduckEngine
 
-    //TypeID 5 Gain Life
+    //TypeID 5 Gain Life handled in Player Manager
 
     //TypeID 6
     fun losePoints(){
+
         if (PlayerManager.playerPoints > 0){
             PlayerManager.removePoints(BrickStructure.brickScoreValue)
+
+            if (PlayerManager.playerPoints < 0){
+                PlayerManager.playerPoints = 0
+            }
         }
     }
 
     //TypeID 7
     fun addTime(levelTimeLimit: Long): Long{
+
         // makes the countdown 5 seconds shorter
         return levelTimeLimit - 5000
     }
 
     //TypeID 8
     fun removeTime(levelTimeLimit: Long): Long{
+
         //makes the countdown 5 seconds longer
         return levelTimeLimit + 5000
 
@@ -122,6 +129,11 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     fun addGems(){
 
         PlayerManager.gems += 5
+    }
+
+    //TypeID 10
+    fun gun(){
+
     }
 
 

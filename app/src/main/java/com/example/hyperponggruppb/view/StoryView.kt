@@ -54,7 +54,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         PlayerManager.resetPoints()
         myActivity.updateText()
         storyMode = GameManager(context, true)
-        if (PlayerManager.activeUser!!.currentLevel > 5 ){
+        if (PlayerManager.activeUser!!.currentLevel > 5) {
             backgroundCode = 3
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
@@ -67,7 +67,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         override fun onTick(p0: Long) {
             levelSeconds++
 
-            if (levelSeconds == 60){
+            if (levelSeconds == 60) {
                 levelSeconds = 0
                 levelMinutes++
             }
@@ -97,6 +97,21 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     playerAndBrickInteractions()
                     powerUpInteractions()
                     checkLevelCompleted()
+
+                    if (storyMode.isGunLive) {
+
+                        if (PsyduckEngine.gunPhysics(storyMode.projectile, storyMode.brickRow, context)){
+
+                            storyMode.shotCount --
+
+                            if (storyMode.shotCount == 0) {
+                                storyMode.isGunLive = false
+                            }else{
+                                storyMode.gunPowerUp()
+                            }
+                        }
+                    }
+
                     myActivity.activatePowerup()
 
                     if (PlayerManager.activatePowerUp) {
@@ -128,8 +143,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
                 canvas.drawBitmap(
                     AssetManager.ballAsset,
-                    ballObj.ballRect.left.toFloat()-ballObj.ballsize/2,
-                    ballObj.ballRect.top.toFloat()-ballObj.ballsize/2,
+                    ballObj.ballRect.left.toFloat() - ballObj.ballsize / 2,
+                    ballObj.ballRect.top.toFloat() - ballObj.ballsize / 2,
                     null
                 )
             }
@@ -173,7 +188,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
                 var brickColor = Paint()
                 brickColor.color = Color.TRANSPARENT
-                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+                var brickRect =
+                    Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
                 canvas.drawRect(brickRect, brickColor)
                 canvas.drawBitmap(
                     brick.asset,
@@ -192,6 +208,10 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     powerUp.top.toFloat(),
                     null
                 )
+            }
+
+            if (storyMode.isGunLive && storyMode.shotCount > 0) {
+                storyMode.projectile.draw(canvas)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)
@@ -282,7 +302,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private fun powerUpInteractions(){
+    private fun powerUpInteractions() {
 
         PsyduckEngine.powerUpPhysics(storyMode.powerUpArray, storyMode.player)
         var powerUpToErase: Int? = null
@@ -315,6 +335,10 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     9 -> {
                         powerUp.addGems()
                         SoundEffectManager.jukebox(context, 2)
+                    }
+                    10 -> {
+                        storyMode.shotCount = 3
+                        storyMode.gunPowerUp()
                     }
                 }
             }
@@ -373,15 +397,15 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private fun starSound(){
+    private fun starSound() {
 
-        if (PlayerManager.starCounter == 1 && soundCode == 0){
+        if (PlayerManager.starCounter == 1 && soundCode == 0) {
             SoundEffectManager.playStarSound(context)
             soundCode++
-        }else if (PlayerManager.starCounter == 2 && soundCode == 1){
+        } else if (PlayerManager.starCounter == 2 && soundCode == 1) {
             SoundEffectManager.playStarSound(context)
             soundCode++
-        }else if (PlayerManager.starCounter == 3 && soundCode == 2){
+        } else if (PlayerManager.starCounter == 3 && soundCode == 2) {
             SoundEffectManager.playStarSound(context)
             soundCode++
         }

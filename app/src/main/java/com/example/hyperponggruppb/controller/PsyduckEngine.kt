@@ -105,7 +105,7 @@ object PsyduckEngine {
 
         powerUp = PowerUp(
             //RandomNumberGenerator.rNG(2, 4),
-            9,
+            10,
             brickHit.left,
             brickHit.top,
             brickHit.right,
@@ -451,5 +451,38 @@ object PsyduckEngine {
                 powerUp.isToDestroy = true
             }
         }
+    }
+
+    fun gunPhysics(projectile: Gun, brickRow: MutableList<Bricks>, context: Context): Boolean{
+
+        var toRemove = BrickStructure.totalSumOfBricks + 1
+        var projHit = false
+
+        for (brick in brickRow) {
+
+            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+
+            if (projectile.projRect.intersect(brickRect)) {
+
+                toRemove = brickRow.indexOf(brick)
+                projHit = true
+
+               SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 2))
+            }
+        }
+
+        if (projHit && toRemove < BrickStructure.totalSumOfBricks + 1) {
+            brickRow.removeAt(toRemove)
+            PlayerManager.addPoints(BrickStructure.brickScoreValue)
+            return true
+        }else if (projectile.projRect.bottom < 0){
+            return true
+        }
+
+
+        projectile.projTop -= projectile.projSpeedY.toInt()
+        projectile.projBottom -= projectile.projSpeedY.toInt()
+        projectile.update()
+        return false
     }
 }
