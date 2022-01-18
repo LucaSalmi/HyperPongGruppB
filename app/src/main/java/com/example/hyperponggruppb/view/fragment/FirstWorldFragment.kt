@@ -111,7 +111,7 @@ class FirstWorldFragment : Fragment() {
     }
 
     /**
-     *
+     * shows  aDialog where the player can see how many stars and points he earned in the selected level, and lets he/she choose a powerup to bring in the level or buy one if they have enough gems
      */
     private fun enterLevelScreen(levelId: Int) {
         val enterLevelDialog = activity?.applicationContext.let {
