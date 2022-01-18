@@ -80,7 +80,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_menu_spotlight_one"
         app:layout_constraintVertical_bias="0.49"
         app:srcCompat="@drawable/spotlight"
-        app:tint="@color/green" />
+        app:tint="@color/blue" />
 
     <ImageView
         android:id="@+id/iv_city_front"
@@ -117,13 +117,12 @@
         android:id="@+id/iv_title"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_layout_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/new_hyperpong_future_edition" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.16000003"
+        app:srcCompat="@drawable/hyperpong_led_version_two" />
 
 
     <ImageView
@@ -135,16 +134,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/player_manu_object_animation_test" />
 
+    <ImageView
+        android:id="@+id/iv_menu_glass_hud"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/glass_hud" />
+
     <LinearLayout
         android:id="@+id/btn_layout_one"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_layout_two"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_title">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/iv_game_mode"
@@ -152,7 +160,7 @@
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/golden_item_frame"
+            android:src="@drawable/led_item_frame"
             app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
@@ -163,9 +171,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_layout_one">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <ImageView
@@ -174,7 +183,7 @@
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/golden_item_frame" />
+            android:src="@drawable/led_item_frame" />
 
         <ImageView
             android:id="@+id/iv_leaderboard"
@@ -182,9 +191,18 @@
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/golden_item_frame" />
+            android:src="@drawable/led_item_frame" />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:background="@drawable/led_item_frame"
+        android:layout_marginBottom="-18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3" />
 
 
     <LinearLayout
@@ -192,21 +210,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_layout_two"
-        app:layout_constraintVertical_bias="0.712">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_active_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/active_account_string"
             android:textAlignment="center"
             android:textColor="@color/white" />
@@ -216,9 +233,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/gold"
+            android:backgroundTint="@color/transparent"
             android:text="@string/change_account_btn"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
@@ -236,7 +253,7 @@
         <LinearLayout
             android:id="@+id/text_layout_one"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -247,33 +264,32 @@
 
             <ImageButton
                 android:id="@+id/btn_mode_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:background="@color/gold"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_led_left" />
 
             <TextView
                 android:id="@+id/tv_game_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/golden_item_frame"
+                android:textColor="@color/white"
                 android:text="@string/txt_story_mode"
                 android:textSize="@dimen/txt_button_size" />
 
             <ImageButton
                 android:id="@+id/btn_mode_forward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:background="@color/gold"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_led"/>
 
         </LinearLayout>
 
@@ -283,7 +299,6 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_layout_two"
         app:layout_constraintEnd_toEndOf="@+id/btn_layout_two"
         app:layout_constraintStart_toStartOf="@+id/btn_layout_two"
@@ -304,13 +319,12 @@
             <TextView
                 android:id="@+id/tv_settings"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/golden_item_frame"
-
+                android:textColor="@color/white"
                 android:text="Settings"
                 android:textSize="@dimen/txt_button_size" />
 
@@ -322,7 +336,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/golden_item_frame"
+                android:textColor="@color/white"
                 android:text="Leaderboard"
                 android:textSize="@dimen/txt_button_size" />
 
