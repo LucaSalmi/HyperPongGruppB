@@ -182,12 +182,14 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             powerUpTimer.cancel()
             Thread.sleep(1500)
             AssetManager.resetBackGround()
+            PlayerManager.comboPoints = 0
             myActivity.finish()
         }
 
         if (PlayerManager.lives > 0 && gameStart) {
 
             gameStart = false
+            PlayerManager.comboPoints = 0
             infiniteMode.respawnBall()
 
         }

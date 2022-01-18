@@ -404,6 +404,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
+            PlayerManager.comboPoints = 0
             myActivity.finish()
 
         }
@@ -411,6 +412,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
 
             PsyduckEngine.gameStart = false
+            PlayerManager.comboPoints = 0
             storyMode.respawnBall()
         }
     }
@@ -428,6 +430,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PsyduckEngine.gameStart = false
             PlayerManager.isLevelCompleted = true
             storyMode.clearArrays()
+            PlayerManager.comboPoints = 0
             myActivity.finish()
         }
     }
