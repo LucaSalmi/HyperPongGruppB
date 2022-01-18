@@ -17,7 +17,7 @@ import com.example.hyperponggruppb.view.GameModeStoryActivity
 
 class SecondWorldFragment : Fragment() {
 
-    var levelIdBackup = 0
+    var backupLevelId = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -152,7 +152,7 @@ class SecondWorldFragment : Fragment() {
 
         // HÄR ÄR JAG HUEHUEHUEHUEHUEH
         val levelString = getString(R.string.level) + levelId.toString()
-        levelIdBackup = levelId
+        backupLevelId = PlayerManager.currentLevel
 
         when (levelId) {
             6 -> {
@@ -207,8 +207,9 @@ class SecondWorldFragment : Fragment() {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
-
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
@@ -241,7 +242,9 @@ class SecondWorldFragment : Fragment() {
             PlayerManager.selectedPowerUp = 1
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
@@ -275,7 +278,9 @@ class SecondWorldFragment : Fragment() {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
@@ -345,14 +350,16 @@ class SecondWorldFragment : Fragment() {
         startActivity(toLevel)
     }
 
-    fun checkIfPowerUpAvailable() {
+    fun checkIfPowerUpAvailable(): Boolean {
 
         if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
             PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
+            return true
 
         } else {
             PlayerManager.powerUpActivated = -1
             shopDialog()
+            return false
         }
     }
 
@@ -382,6 +389,7 @@ class SecondWorldFragment : Fragment() {
 
             if (PlayerManager.buyPowerUp(20)) {
                 PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] = +1
+                enterLevelScreen(backupLevelId)
                 shopDialog.dismiss()
             } else {
                 toaster(2)

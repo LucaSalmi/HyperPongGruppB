@@ -1,9 +1,7 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +13,8 @@ import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.view.OverWorldActivity
 
 class FirstWorldFragment : Fragment() {
+
+    var backupLevelId = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,31 +114,34 @@ class FirstWorldFragment : Fragment() {
      *
      */
     private fun enterLevelScreen(levelId: Int) {
-        val dialog = activity?.applicationContext.let {
+        val enterLevelDialog = activity?.applicationContext.let {
             super.getContext()
                 ?.let { it1 -> Dialog(it1) }
         }
-        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog?.setCancelable(false)
-        dialog?.setContentView(R.layout.enter_level_screen)
-        val returnToWorldBtn = dialog?.findViewById(R.id.iv_level_return) as ImageView
-        val startLevelBtn = dialog.findViewById(R.id.iv_level_start) as ImageView
-        var screenLevelID = dialog.findViewById(R.id.tv_level_id) as TextView
 
-        val starProgressResult = dialog.findViewById(R.id.iv_star_progress_holder) as ImageView
-        val screenLevelScore = dialog.findViewById(R.id.tv_level_score) as TextView
-        val screenLevelScoreResult = dialog.findViewById(R.id.tv_level_score_result) as TextView
-        val playerGemBalance = dialog.findViewById<TextView>(R.id.tv_level_gem_amount)
+        enterLevelDialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        enterLevelDialog?.setCancelable(false)
+        enterLevelDialog?.setContentView(R.layout.enter_level_screen)
+        val returnToWorldBtn = enterLevelDialog?.findViewById(R.id.iv_level_return) as ImageView
+        val startLevelBtn = enterLevelDialog.findViewById(R.id.iv_level_start) as ImageView
+        var screenLevelID = enterLevelDialog.findViewById(R.id.tv_level_id) as TextView
 
-        val leftArrowCharacter = dialog.findViewById(R.id.iv_level_left_arrow) as ImageView
-        val screenLevelCharacter = dialog.findViewById(R.id.iv_level_character) as ImageView
-        val rightArrowCharacter = dialog.findViewById(R.id.iv_level_right_arrow) as ImageView
+        val starProgressResult = enterLevelDialog.findViewById(R.id.iv_star_progress_holder) as ImageView
+        val screenLevelScore = enterLevelDialog.findViewById(R.id.tv_level_score) as TextView
+        val screenLevelScoreResult = enterLevelDialog.findViewById(R.id.tv_level_score_result) as TextView
+        val playerGemBalance = enterLevelDialog.findViewById<TextView>(R.id.tv_level_gem_amount)
 
-        val screenLevelLoadoutOne = dialog.findViewById(R.id.iv_level_loadout_1) as ImageView
-        val screenLevelLoadoutTwo = dialog.findViewById(R.id.iv_level_loadout_2) as ImageView
-        val screenLevelLoadoutThree = dialog.findViewById(R.id.iv_level_loadout_3) as ImageView
-        val screenLevelLoadoutFour = dialog.findViewById(R.id.iv_level_loadout_4) as ImageView
+        val leftArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_left_arrow) as ImageView
+        val screenLevelCharacter = enterLevelDialog.findViewById(R.id.iv_level_character) as ImageView
+        val rightArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_right_arrow) as ImageView
+
+        val screenLevelLoadoutOne = enterLevelDialog.findViewById(R.id.iv_level_loadout_1) as ImageView
+        val screenLevelLoadoutTwo = enterLevelDialog.findViewById(R.id.iv_level_loadout_2) as ImageView
+        val screenLevelLoadoutThree = enterLevelDialog.findViewById(R.id.iv_level_loadout_3) as ImageView
+        val screenLevelLoadoutFour = enterLevelDialog.findViewById(R.id.iv_level_loadout_4) as ImageView
         PlayerManager.powerUpActivated = -1
+
+        backupLevelId = PlayerManager.currentLevel
 
         playerGemBalance.text = PlayerManager.gems.toString()
 
@@ -156,9 +159,9 @@ class FirstWorldFragment : Fragment() {
         }
 
 
-        val starContainerOne = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
-        val starContainerTwo = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
-        val starContainerThree = dialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
+        val starContainerOne = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
+        val starContainerTwo = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
+        val starContainerThree = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
 
         // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
 
@@ -192,31 +195,31 @@ class FirstWorldFragment : Fragment() {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
-                dialog.dismiss()
+                enterLevelDialog.dismiss()
             }
             2 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
-                dialog.dismiss()
+                enterLevelDialog.dismiss()
             }
             3 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
-                dialog.dismiss()
+                enterLevelDialog.dismiss()
             }
             4 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
-                dialog.dismiss()
+                enterLevelDialog.dismiss()
             }
             5 -> {
                 screenLevelID.text = levelString
                 screenLevelScoreResult.text =
                     checkPoints(levelId) // ändra denna till knuten variabel till leveln
-                dialog.dismiss()
+                enterLevelDialog.dismiss()
             }
         }
 
@@ -240,7 +243,9 @@ class FirstWorldFragment : Fragment() {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
 
                 if (PlayerManager.powerUpActivated >= 0) {
@@ -274,8 +279,9 @@ class FirstWorldFragment : Fragment() {
             PlayerManager.selectedPowerUp = 1
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
-
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
@@ -309,8 +315,9 @@ class FirstWorldFragment : Fragment() {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                checkIfPowerUpAvailable()
-
+                if (!checkIfPowerUpAvailable()){
+                    enterLevelDialog.dismiss()
+                }
 
                 if (PlayerManager.powerUpActivated >= 0) {
 
@@ -349,13 +356,13 @@ class FirstWorldFragment : Fragment() {
 
         returnToWorldBtn.setOnClickListener {
 
-            dialog.dismiss()
+            enterLevelDialog.dismiss()
         }
 
         startLevelBtn.setOnClickListener {
             // put this button to start level  of selected level
             PlayerManager.starCounter = 0 // reset the stars in the !!! - UI - !!!
-            dialog.dismiss()
+            enterLevelDialog.dismiss()
 
             val overWorldActivity = context as OverWorldActivity
             overWorldActivity.startLevel()
@@ -364,8 +371,8 @@ class FirstWorldFragment : Fragment() {
 
         }
 
-        dialog.show()
-        dialog.window?.setBackgroundDrawableResource(R.color.trans)
+        enterLevelDialog.show()
+        enterLevelDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
     private fun checkUnlock(levelId: Int): Boolean {
@@ -393,14 +400,16 @@ class FirstWorldFragment : Fragment() {
 
     }
 
-    fun checkIfPowerUpAvailable() {
+    fun checkIfPowerUpAvailable(): Boolean {
 
         if (PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] > 0) { //MultiBall powerUp
             PlayerManager.powerUpActivated = PlayerManager.selectedPowerUp
+            return true
 
         } else {
             PlayerManager.powerUpActivated = -1
             shopDialog()
+            return false
         }
     }
 
@@ -429,6 +438,7 @@ class FirstWorldFragment : Fragment() {
 
             if (PlayerManager.buyPowerUp(20)){
                 PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] =+ 1
+                enterLevelScreen(backupLevelId)
                 shopDialog.dismiss()
             }else{
                 toaster(2)

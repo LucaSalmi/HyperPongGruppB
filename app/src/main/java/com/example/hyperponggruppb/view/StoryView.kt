@@ -60,7 +60,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
         myActivity.checkSelectedPowerup()
 
-
     }
 
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
