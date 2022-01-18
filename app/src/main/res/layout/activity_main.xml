@@ -16,21 +16,21 @@
         app:srcCompat="@drawable/green_planet" />
 
     <ImageView
+        android:id="@+id/iv_menu_meteor"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_purple_planet"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/meteor_test" />
+
+    <ImageView
         android:id="@+id/iv_menu_purple_planet"
         android:layout_width="100dp"
         android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/purple_planet" />
-
-    <ImageView
-        android:id="@+id/iv_menu_meteor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="@+id/iv_menu_purple_planet"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:srcCompat="@drawable/meteor_test" />
 
     <ImageView
         android:id="@+id/iv_city_back"

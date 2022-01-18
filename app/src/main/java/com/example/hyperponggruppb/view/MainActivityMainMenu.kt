@@ -15,6 +15,7 @@ import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
+import kotlinx.coroutines.delay
 
 
 class MainActivityMainMenu : AppCompatActivity() {
@@ -59,30 +60,45 @@ class MainActivityMainMenu : AppCompatActivity() {
         onClick()
         startMenuAnimations()
 
-
+        val greenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
+        greenPlanet.setOnClickListener {
+            meteorAnim()
+        }
     }
-    private fun startMenuAnimations(){
+    private fun startMenuAnimations() {
         val menuPlayerProp = findViewById<ImageView>(R.id.iv_menu_player)
         val animPlayer = AnimationUtils.loadAnimation(applicationContext, R.anim.player_hover_y)
         menuPlayerProp.startAnimation(animPlayer)
 
         val menuPurplePlanet = findViewById<ImageView>(R.id.iv_menu_purple_planet)
-        val animPurplePlanet = AnimationUtils.loadAnimation(applicationContext, R.anim.purple_planet_hover_y)
+        val animPurplePlanet =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.purple_planet_hover_y)
         menuPurplePlanet.startAnimation(animPurplePlanet)
 
         val menuGreenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
-        val animGreenPlanet = AnimationUtils.loadAnimation(applicationContext, R.anim.green_planet_hover_x)
+        val animGreenPlanet =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.green_planet_hover_x)
         menuGreenPlanet.startAnimation(animGreenPlanet)
 
         val menuSpotlightOne = findViewById<ImageView>(R.id.iv_menu_spotlight_one)
         val menuSpotlightTwo = findViewById<ImageView>(R.id.iv_menu_spotlight_two)
         val menuSpotlightThree = findViewById<ImageView>(R.id.iv_menu_spotlight_three)
-        val animSpotlightOne = AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_one)
-        val animSpotlightTwo = AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_two)
-        val animSpotlightThree = AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_three)
+        val animSpotlightOne =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_one)
+        val animSpotlightTwo =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.spotlight_rotation_version_two)
+        val animSpotlightThree = AnimationUtils.loadAnimation(
+            applicationContext,
+            R.anim.spotlight_rotation_version_three
+        )
         menuSpotlightOne.startAnimation(animSpotlightOne)
         menuSpotlightTwo.startAnimation(animSpotlightThree)
         menuSpotlightThree.startAnimation(animSpotlightTwo)
+    }
+    private fun meteorAnim(){
+        val menuCometProp = findViewById<ImageView>(R.id.iv_menu_meteor)
+        val animMeteor = AnimationUtils.loadAnimation(applicationContext, R.anim.meteor_animation)
+        menuCometProp.startAnimation(animMeteor)
 
     }
 
