@@ -3,6 +3,7 @@ package com.example.hyperponggruppb.controller
 import android.graphics.*
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.Bricks
+import com.example.hyperponggruppb.model.GameManager
 
 class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var bottom: Int) {
 
@@ -131,10 +132,11 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
         PlayerManager.gems += 5
     }
 
-    //TypeID 10
-    fun gun(){
+    //TypeID 10 Gun handled in GameManager
 
-    }
+
+    //TypeID 11 Shield handled in game Manager
+
 
 
 }

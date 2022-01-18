@@ -23,6 +23,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     var shotCount = 0
     var patternId = 0
 
+    var isShieldActive = false
+
     init {
 
         clearArrays()
@@ -158,6 +160,10 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         projectile.update()
 
         isGunLive = true
+    }
+
+    fun activateShield(){
+        isShieldActive = true
     }
 
     fun clearArrays() {

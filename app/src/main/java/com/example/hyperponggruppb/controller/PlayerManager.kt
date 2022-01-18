@@ -32,7 +32,6 @@ object PlayerManager {
     val gunPrice = 20
     val shieldPrice = 20
 
-
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()

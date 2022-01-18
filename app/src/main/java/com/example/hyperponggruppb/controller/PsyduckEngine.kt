@@ -37,7 +37,8 @@ object PsyduckEngine {
 
         for (brick in brickRow) {
 
-            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
             if (ball.ballRect.intersect(brickRect)) {
 
@@ -50,38 +51,44 @@ object PsyduckEngine {
             }
         }
 
-        if (ball.brickCollision){
+        if (ball.brickCollision) {
 
-            for (brick in brickRow){
+            for (brick in brickRow) {
 
-                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+                var brickRect =
+                    Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
-                testBrick = Rect(brickHit.left-30, brickHit.top, brickHit.left-10, brickHit.bottom)
-                if (testBrick.intersect(brickRect)){
+                testBrick =
+                    Rect(brickHit.left - 30, brickHit.top, brickHit.left - 10, brickHit.bottom)
+                if (testBrick.intersect(brickRect)) {
                     isLeftOccupied = true
                 }
 
-                testBrick = Rect(brickHit.right+10, brickHit.top, brickHit.right+30, brickHit.bottom)
-                if (testBrick.intersect(brickRect)){
+                testBrick =
+                    Rect(brickHit.right + 10, brickHit.top, brickHit.right + 30, brickHit.bottom)
+                if (testBrick.intersect(brickRect)) {
                     isRightOccupied = true
                 }
 
-                testBrick = Rect(brickHit.left, brickHit.top-30, brickHit.right, brickHit.top-10)
-                if (testBrick.intersect(brickRect)){
+                testBrick =
+                    Rect(brickHit.left, brickHit.top - 30, brickHit.right, brickHit.top - 10)
+                if (testBrick.intersect(brickRect)) {
                     isTopOccupied = true
                 }
 
-                testBrick = Rect(brickHit.left, brickHit.bottom+10, brickHit.right, brickHit.bottom+30)
-                if (testBrick.intersect(brickRect)){
+                testBrick =
+                    Rect(brickHit.left, brickHit.bottom + 10, brickHit.right, brickHit.bottom + 30)
+                if (testBrick.intersect(brickRect)) {
                     isBottomOccupied = true
                 }
             }
 
-            testBrick = Rect(0,AssetManager.getScreenHeight()-20 ,15,AssetManager.getScreenHeight())
+            testBrick =
+                Rect(0, AssetManager.getScreenHeight() - 20, 15, AssetManager.getScreenHeight())
 
         }
 
-        if (toRemove < BrickStructure.totalSumOfBricks){
+        if (toRemove < BrickStructure.totalSumOfBricks) {
 
             infoBrick = brickRow[toRemove]
         }
@@ -90,7 +97,7 @@ object PsyduckEngine {
 
             infiniteModePowerUpSpawn(powerUpArray)
 
-        }else if(ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp){
+        } else if (ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp) {
 
             storyModePowerUpSpawn(powerUpArray)
         }
@@ -101,7 +108,7 @@ object PsyduckEngine {
         }
     }
 
-    private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
+    private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
 
         powerUp = PowerUp(
             //RandomNumberGenerator.rNG(2, 4),
@@ -115,7 +122,7 @@ object PsyduckEngine {
 
     }
 
-    private fun infiniteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>){
+    private fun infiniteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
 
         if (RandomNumberGenerator.rNG(1, 8) == 2) {
 
@@ -152,7 +159,7 @@ object PsyduckEngine {
         }
     }
 
-    fun ballPhysics(ballsArray: MutableList<Ball>, player: Player) {
+    fun ballPhysics(ballsArray: MutableList<Ball>, player: Player, gameManager: GameManager) {
 
         for (ball in ballsArray) {
 
@@ -165,8 +172,18 @@ object PsyduckEngine {
 
             if (ballIsBottomOfScreen && gameStart && !damageTaken) {
 
-                damageTaken = true
-                ballToEliminate = ballsArray.indexOf(ball)
+                if (!gameManager.isShieldActive) {
+
+                    damageTaken = true
+                    ballToEliminate = ballsArray.indexOf(ball)
+
+                }else{
+
+                    gameManager.isShieldActive = false
+                    ball.ballSpeedY *= -1f //-ballSpeedY
+
+                }
+
 
             }
 
@@ -211,7 +228,7 @@ object PsyduckEngine {
                             ball.ballLeft -= ball.ballSpeedX.toInt()
                             ball.ballRight -= ball.ballSpeedX.toInt()
 
-                        }else {
+                        } else {
                             ball.ballLeft -= ball.ballSpeedX.toInt()
                             ball.ballRight -= ball.ballSpeedX.toInt()
 
@@ -220,13 +237,16 @@ object PsyduckEngine {
                             ball.ballTop -= ball.ballSpeedY.toInt()
                             ball.ballBottom -= ball.ballSpeedY.toInt()
 
-                        } else{
+                        } else {
                             ball.ballTop -= ball.ballSpeedY.toInt()
                             ball.ballBottom -= ball.ballSpeedY.toInt()
 
                         }
 
-                        Log.d(TAG, "top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied")
+                        Log.d(
+                            TAG,
+                            "top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied"
+                        )
                         Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
                         Log.d(TAG, "ballspeed X = ${ball.ballSpeedX} ")
 
@@ -244,7 +264,7 @@ object PsyduckEngine {
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            } else if (ball.ballTop + ball.ballsize*0.75 > brickHit.bottom) {
+                            } else if (ball.ballTop + ball.ballsize * 0.75 > brickHit.bottom) {
                                 // ball is inside of brick's sides & outside of brick top n Bottom
                                 Log.d(TAG, "ballPhysics: bot hit 1 - v2")
                                 ball.ballSpeedY *= -1
@@ -258,7 +278,7 @@ object PsyduckEngine {
                                 ball.ballRight = brickHit.right + ball.ballsize.toInt()
                             }
 
-                        }else if (ball.ballGoesRight() && !ball.ballGoesDown()) {
+                        } else if (ball.ballGoesRight() && !ball.ballGoesDown()) {
 
                             if (isBottomOccupied) {
                                 Log.d(TAG, "ballPhysics: left hit 1")
@@ -272,7 +292,7 @@ object PsyduckEngine {
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
-                            } else if (ball.ballTop + ball.ballsize*0.75 > brickHit.bottom) {
+                            } else if (ball.ballTop + ball.ballsize * 0.75 > brickHit.bottom) {
                                 // ball is inside of brick's sides & outside of brick top n Bottom
                                 Log.d(TAG, "ballPhysics: bot hit 2 - v2")
                                 ball.ballSpeedY *= -1
@@ -286,62 +306,62 @@ object PsyduckEngine {
                                 ball.ballLeft = brickHit.left - ball.ballsize.toInt()
                             }
 
-                        }else if (!ball.ballGoesRight() && ball.ballGoesDown()) {
+                        } else if (!ball.ballGoesRight() && ball.ballGoesDown()) {
 
-                                if (isTopOccupied) {
-                                    Log.d(TAG, "ballPhysics: right hit 2")
-                                    ball.ballSpeedX *= -1
-                                    ball.ballLeft = brickHit.right
-                                    ball.ballRight = brickHit.right + ball.ballsize.toInt()
+                            if (isTopOccupied) {
+                                Log.d(TAG, "ballPhysics: right hit 2")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
 
-                                } else if (isRightOccupied) {
-                                    Log.d(TAG, "ballPhysics: top hit 1")
-                                    ball.ballSpeedY *= -1
-                                    ball.ballBottom = brickHit.top
-                                    ball.ballTop = brickHit.top - ball.ballsize.toInt()
+                            } else if (isRightOccupied) {
+                                Log.d(TAG, "ballPhysics: top hit 1")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                                } else if (ball.ballBottom - ball.ballsize*0.75 < brickHit.top) {
-                                    // ball is inside of brick's sides & outside of brick top n Bottom
-                                    Log.d(TAG, "ballPhysics: top hit 1 - v2")
-                                    ball.ballSpeedY *= -1
-                                    ball.ballBottom = brickHit.top
-                                    ball.ballTop = brickHit.top - ball.ballsize.toInt()
+                            } else if (ball.ballBottom - ball.ballsize * 0.75 < brickHit.top) {
+                                // ball is inside of brick's sides & outside of brick top n Bottom
+                                Log.d(TAG, "ballPhysics: top hit 1 - v2")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                                } else {                                             // ball is outside of brick's sides
-                                    Log.d(TAG, "ballPhysics: right hit 2 - v2")
-                                    ball.ballSpeedX *= -1
-                                    ball.ballLeft = brickHit.right
-                                    ball.ballRight = brickHit.right + ball.ballsize.toInt()
-                                }
+                            } else {                                             // ball is outside of brick's sides
+                                Log.d(TAG, "ballPhysics: right hit 2 - v2")
+                                ball.ballSpeedX *= -1
+                                ball.ballLeft = brickHit.right
+                                ball.ballRight = brickHit.right + ball.ballsize.toInt()
+                            }
 
-                            }else if (ball.ballGoesRight() && ball.ballGoesDown()) {
+                        } else if (ball.ballGoesRight() && ball.ballGoesDown()) {
 
-                                    if (isTopOccupied) {
-                                        Log.d(TAG, "ballPhysics: Left hit 2")
-                                        ball.ballSpeedX *= -1
-                                        ball.ballRight = brickHit.left
-                                        ball.ballLeft = brickHit.left - ball.ballsize.toInt()
+                            if (isTopOccupied) {
+                                Log.d(TAG, "ballPhysics: Left hit 2")
+                                ball.ballSpeedX *= -1
+                                ball.ballRight = brickHit.left
+                                ball.ballLeft = brickHit.left - ball.ballsize.toInt()
 
-                                    } else if (isLeftOccupied) {
-                                        Log.d(TAG, "ballPhysics: top hit 2")
-                                        ball.ballSpeedY *= -1
-                                        ball.ballBottom = brickHit.top
-                                        ball.ballTop = brickHit.top - ball.ballsize.toInt()
+                            } else if (isLeftOccupied) {
+                                Log.d(TAG, "ballPhysics: top hit 2")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                                    } else if (ball.ballBottom - ball.ballsize*0.75 < brickHit.top) {
-                                        // ball is inside of brick's sides & outside of brick top n Bottom
-                                        Log.d(TAG, "ballPhysics: top hit 2 - v2")
-                                        ball.ballSpeedY *= -1
-                                        ball.ballBottom = brickHit.top
-                                        ball.ballTop = brickHit.top - ball.ballsize.toInt()
+                            } else if (ball.ballBottom - ball.ballsize * 0.75 < brickHit.top) {
+                                // ball is inside of brick's sides & outside of brick top n Bottom
+                                Log.d(TAG, "ballPhysics: top hit 2 - v2")
+                                ball.ballSpeedY *= -1
+                                ball.ballBottom = brickHit.top
+                                ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
-                                    } else {                                             // ball is outside of brick's sides
-                                        Log.d(TAG, "ballPhysics: left hit 2 - v2")
-                                        ball.ballSpeedX *= -1
-                                        ball.ballRight = brickHit.left
-                                        ball.ballLeft = brickHit.left - ball.ballsize.toInt()
-                                    }
-                                }
+                            } else {                                             // ball is outside of brick's sides
+                                Log.d(TAG, "ballPhysics: left hit 2 - v2")
+                                ball.ballSpeedX *= -1
+                                ball.ballRight = brickHit.left
+                                ball.ballLeft = brickHit.left - ball.ballsize.toInt()
+                            }
+                        }
 
                         isRightOccupied = false
                         isLeftOccupied = false
@@ -426,9 +446,10 @@ object PsyduckEngine {
 
         for (brick in brickRow) {
 
-            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
-            if (brickRect.bottom > (canvasHeight *0.6)) {
+            if (brickRect.bottom > (canvasHeight * 0.6)) {
 
                 return true
             }
@@ -453,21 +474,22 @@ object PsyduckEngine {
         }
     }
 
-    fun gunPhysics(projectile: Gun, brickRow: MutableList<Bricks>, context: Context): Boolean{
+    fun gunPhysics(projectile: Gun, brickRow: MutableList<Bricks>, context: Context): Boolean {
 
         var toRemove = BrickStructure.totalSumOfBricks + 1
         var projHit = false
 
         for (brick in brickRow) {
 
-            var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
 
             if (projectile.projRect.intersect(brickRect)) {
 
                 toRemove = brickRow.indexOf(brick)
                 projHit = true
 
-               SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 2))
+                SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 2))
             }
         }
 
@@ -475,7 +497,7 @@ object PsyduckEngine {
             brickRow.removeAt(toRemove)
             PlayerManager.addPoints(BrickStructure.brickScoreValue)
             return true
-        }else if (projectile.projRect.bottom < 0){
+        } else if (projectile.projRect.bottom < 0) {
             return true
         }
 

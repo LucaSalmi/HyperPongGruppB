@@ -426,7 +426,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
     private fun ballInteractions(){
 
-        PsyduckEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player)
+        PsyduckEngine.ballPhysics(infiniteMode.ballsArray, infiniteMode.player, infiniteMode)
     }
 
     private fun checkDamage(){

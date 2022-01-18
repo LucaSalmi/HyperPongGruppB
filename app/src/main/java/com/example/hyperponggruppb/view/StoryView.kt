@@ -122,6 +122,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                                 storyMode.shotCount = 3
                                 storyMode.gunPowerUp()
                             }
+                            2 -> storyMode.activateShield()
                         }
 
                         PlayerManager.selectedPowerUp = -1
@@ -280,7 +281,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
     private fun ballInteractions() {
 
-        PsyduckEngine.ballPhysics(storyMode.ballsArray, storyMode.player)
+        PsyduckEngine.ballPhysics(storyMode.ballsArray, storyMode.player, storyMode)
     }
 
     private fun checkDamage() {
