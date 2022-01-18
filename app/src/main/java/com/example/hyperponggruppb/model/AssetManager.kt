@@ -84,6 +84,7 @@ object AssetManager {
     var dangerZoneHeight = 100
 
 
+
     fun prepareAssets(context: Context){
         lavaBackground = BitmapFactory.decodeResource(context.resources, R.drawable.lava_story_bg).scale(bGWidth,bGHeight, true)
         iceBackground = BitmapFactory.decodeResource(context.resources, R.drawable.ice_level_background).scale(bGWidth, bGHeight, true)
@@ -119,6 +120,18 @@ object AssetManager {
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetGem = BitmapFactory.decodeResource(context.resources, R.drawable.gem).scale(powerUpWidth, powerUpHeight,true)
 
+        comboCounterZero = BitmapFactory.decodeResource(context.resources, R.drawable.x_zero).scale(counterWidth, counterHeight, true)
+        comboCounterOne = BitmapFactory.decodeResource(context.resources, R.drawable.x_one).scale(counterWidth, counterHeight, true)
+        comboCounterTwo = BitmapFactory.decodeResource(context.resources, R.drawable.x_two).scale(counterWidth, counterHeight, true)
+        comboCounterThree = BitmapFactory.decodeResource(context.resources, R.drawable.x_three).scale(counterWidth, counterHeight, true)
+        comboCounterFour = BitmapFactory.decodeResource(context.resources, R.drawable.x_four).scale(counterWidth, counterHeight, true)
+        comboCounterFive = BitmapFactory.decodeResource(context.resources, R.drawable.x_five).scale(counterWidth, counterHeight, true)
+        comboCounterSix = BitmapFactory.decodeResource(context.resources, R.drawable.x_six).scale(counterWidth, counterHeight, true)
+        comboCounterSeven = BitmapFactory.decodeResource(context.resources, R.drawable.x_seven).scale(counterWidth, counterHeight, true)
+        comboCounterEight = BitmapFactory.decodeResource(context.resources, R.drawable.x_eight).scale(counterWidth, counterHeight, true)
+        comboCounterNine = BitmapFactory.decodeResource(context.resources, R.drawable.x_nine).scale(counterWidth, counterHeight, true)
+        comboCounterTen = BitmapFactory.decodeResource(context.resources, R.drawable.x_ten).scale(counterWidth, counterHeight, true)
+        comboCounterTenPlus = BitmapFactory.decodeResource(context.resources, R.drawable.x_ten_plus).scale(counterWidth, counterHeight, true)
 
 
 

@@ -223,7 +223,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             if (storyMode.isGunLive && storyMode.shotCount > 0) {
                 storyMode.projectile.draw(canvas)
             }
-
+            drawComboCounter(canvas)
             mHolder!!.unlockCanvasAndPost(canvas)
 
         } catch (e: Exception) {
@@ -246,6 +246,32 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             thread?.join()
         } catch (e: InterruptedException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun drawComboCounter(canvas: Canvas) {
+
+        val comboTop = 1545f
+        val comboLeft = -15f
+
+        val paint = Paint()
+        paint.color = Color.YELLOW
+
+        when(PlayerManager.comboPoints){
+
+            0 -> canvas.drawBitmap(AssetManager.comboCounterZero, comboLeft, comboTop, paint)
+            1 -> canvas.drawBitmap(AssetManager.comboCounterOne, comboLeft, comboTop, paint)
+            2 -> canvas.drawBitmap(AssetManager.comboCounterTwo, comboLeft, comboTop, paint)
+            3 -> canvas.drawBitmap(AssetManager.comboCounterThree, comboLeft, comboTop, paint)
+            4 -> canvas.drawBitmap(AssetManager.comboCounterFour, comboLeft, comboTop, null)
+            5 -> canvas.drawBitmap(AssetManager.comboCounterFive, comboLeft, comboTop, null)
+            6 -> canvas.drawBitmap(AssetManager.comboCounterSix, comboLeft, comboTop, null)
+            7 -> canvas.drawBitmap(AssetManager.comboCounterSeven, comboLeft, comboTop, null)
+            8 -> canvas.drawBitmap(AssetManager.comboCounterEight, comboLeft, comboTop, null)
+            9 -> canvas.drawBitmap(AssetManager.comboCounterNine, comboLeft, comboTop, null)
+            10 -> canvas.drawBitmap(AssetManager.comboCounterTen, comboLeft, comboTop, null)
+            11 -> canvas.drawBitmap(AssetManager.comboCounterTenPlus, comboLeft, comboTop, null)
+
         }
     }
 
