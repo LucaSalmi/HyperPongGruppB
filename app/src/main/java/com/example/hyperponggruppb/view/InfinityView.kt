@@ -180,6 +180,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             PlayerManager.isGameEnded = true
             spawnTimer.cancel()
             powerUpTimer.cancel()
+            Thread.sleep(1500)
             AssetManager.resetBackGround()
             myActivity.finish()
         }

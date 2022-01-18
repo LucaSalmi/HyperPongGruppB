@@ -156,6 +156,9 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
+    /**
+     * shows the player a board with the results they achieved in the level, if they won they can go directly to the next level, retry the same if they lose, see stars, points and go back to the level selection
+     */
     fun scoreBoardStoryMode() {
 
         val scoreBoardDialog = Dialog(context)
