@@ -18,7 +18,6 @@ import com.example.hyperponggruppb.view.GameModeStoryActivity
 
 class SecondWorldFragment : Fragment() {
 
-    var backupLevelId = -1
     private lateinit var worldTwoDialog: DialogManager
 
     override fun onCreateView(
