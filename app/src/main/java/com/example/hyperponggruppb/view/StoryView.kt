@@ -157,48 +157,16 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             canvas.drawBitmap(AssetManager.getBackground(backgroundCode), matrix, null)
 
-            for (ballObj in storyMode.ballsArray) {
-
-                ballObj.draw(canvas)
-
-                canvas.drawBitmap(
-                    AssetManager.ballAsset,
-                    ballObj.ballRect.left.toFloat() - ballObj.ballsize / 2,
-                    ballObj.ballRect.top.toFloat() - ballObj.ballsize / 2,
-                    null
-                )
-            }
+            storyMode.drawBall(canvas)
 
             storyMode.player.draw(canvas)
 
-            for (brick in storyMode.brickRow) {
+            storyMode.drawBricks(canvas)
 
-                var brickColor = Paint()
-                brickColor.color = Color.TRANSPARENT
-                var brickRect =
-                    Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
-                canvas.drawRect(brickRect, brickColor)
-                canvas.drawBitmap(
-                    brick.asset,
-                    brick.brickLeft.toFloat() - 5,
-                    brick.brickTop.toFloat() - 5,
-                    null
-                )
-            }
-
-            for (powerUp in storyMode.powerUpArray) {
-
-                powerUp.draw(canvas)
-                canvas.drawBitmap(
-                    powerUp.assignAsset(),
-                    powerUp.left.toFloat(),
-                    powerUp.top.toFloat(),
-                    null
-                )
-            }
+           storyMode.drawPowerUp(canvas)
 
             if (storyMode.isGunLive && storyMode.shotCount > 0) {
-                storyMode.projectile.draw(canvas)
+                storyMode.drawProjectile(canvas)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)

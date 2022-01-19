@@ -119,27 +119,6 @@ object AssetManager {
         darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone).scale(bGWidth, dangerZoneHeight, true)
     }
 
-    fun fillAssetArray(
-        assets: MutableList<Bitmap>,
-        numberOfBricks: Int,
-        id: Int
-    ): MutableList<Bitmap> {
-        val pattern = when (id) {
-
-            1 -> "333333333323322113311221155112544554455445555555"
-            else -> "111111111112321155511114114111141111114116781177711876111211456111571155555555116666666611123456781"
-        }
-
-
-        for (i in 0..(numberOfBricks)) {
-            for (c in pattern) {
-                assets.add(randomAsset((c.toString()).toInt()))
-
-            }
-        }
-        return assets
-    }
-
     fun randomAsset(id: Int): Bitmap {
 
         return when (id) {

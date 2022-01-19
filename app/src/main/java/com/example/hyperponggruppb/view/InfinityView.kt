@@ -223,17 +223,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             canvas.drawBitmap(AssetManager.getTransBackground(transBackgroundIdTwo), AssetManager.bgRectTransTwo.left.toFloat(), AssetManager.bgRectTransTwo.top.toFloat(), null)
             canvas.drawBitmap(AssetManager.darkRectangleDeathZone, 0f, deathZoneTop, null) //deathZone
 
-            for (ballObj in infiniteMode.ballsArray) {
-
-                ballObj.draw(canvas)
-
-                canvas.drawBitmap(
-                    AssetManager.ballAsset,
-                    ballObj.ballRect.left.toFloat()-ballObj.ballsize/2,
-                    ballObj.ballRect.top.toFloat()-ballObj.ballsize/2,
-                    null
-                )
-            }
+            infiniteMode.drawBall(canvas)
 
             infiniteMode.player.draw(canvas)
 
@@ -243,33 +233,12 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 spawnNewRow = false
             }
 
-            for (brick in infiniteMode.brickRow) {
+            infiniteMode.drawBricks(canvas)
 
-                var brickColor = Paint()
-                brickColor.color = Color.TRANSPARENT
-                var brickRect = Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
-                canvas.drawRect(brickRect, brickColor)
-                canvas.drawBitmap(
-                    brick.asset,
-                    brick.brickLeft.toFloat() - 5,
-                    brick.brickTop.toFloat() - 5,
-                    null
-                )
-            }
-
-            for (powerUp in infiniteMode.powerUpArray) {
-
-                powerUp.draw(canvas)
-                canvas.drawBitmap(
-                    powerUp.assignAsset(),
-                    powerUp.left.toFloat(),
-                    powerUp.top.toFloat(),
-                    null
-                )
-            }
+            infiniteMode.drawPowerUp(canvas)
 
             if (infiniteMode.isGunLive && infiniteMode.shotCount > 0) {
-                infiniteMode.projectile.draw(canvas)
+                infiniteMode.drawProjectile(canvas)
             }
 
             mHolder!!.unlockCanvasAndPost(canvas)

@@ -1,8 +1,7 @@
 package com.example.hyperponggruppb.model
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Rect
+import android.graphics.*
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -149,6 +148,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         brickRow.addAll(tempArray)
     }
 
+
     fun gunPowerUp() {
 
         projectile = Gun(
@@ -164,6 +164,57 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
     fun activateShield(){
         isShieldActive = true
+    }
+
+    fun drawBricks(canvas: Canvas){
+
+        for (brick in brickRow) {
+
+            val brickColor = Paint()
+            brickColor.color = Color.TRANSPARENT
+            var brickRect =
+                Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
+            canvas.drawRect(brickRect, brickColor)
+            canvas.drawBitmap(
+                brick.asset,
+                brick.brickLeft.toFloat() - 5,
+                brick.brickTop.toFloat() - 5,
+                null
+            )
+        }
+    }
+
+    fun drawPowerUp(canvas: Canvas){
+
+        for (powerUp in powerUpArray) {
+
+            powerUp.draw(canvas)
+            canvas.drawBitmap(
+                powerUp.assignAsset(),
+                powerUp.left.toFloat(),
+                powerUp.top.toFloat(),
+                null
+            )
+        }
+    }
+
+    fun drawBall(canvas: Canvas){
+
+        for (ballObj in ballsArray) {
+
+            ballObj.draw(canvas)
+
+            canvas.drawBitmap(
+                AssetManager.ballAsset,
+                ballObj.ballRect.left.toFloat() - ballObj.ballsize / 2,
+                ballObj.ballRect.top.toFloat() - ballObj.ballsize / 2,
+                null
+            )
+        }
+    }
+
+    fun drawProjectile(canvas: Canvas){
+        projectile.draw(canvas)
     }
 
     fun clearArrays() {
