@@ -154,7 +154,6 @@ object PsyduckEngine {
         if (ball.ballRect.intersect(player.playerRect)) {
 
             if (!isCollisionDetected) {
-
                 PlayerManager.comboPoints = 0
                 ball.playerCollision = true
                 isCollisionDetected = true
