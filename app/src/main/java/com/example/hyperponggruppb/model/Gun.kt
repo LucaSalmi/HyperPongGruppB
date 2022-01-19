@@ -12,7 +12,7 @@ class Gun(var projLeft: Int,var projTop: Int,var projRight: Int,var projBottom: 
     var projRect = Rect()
 
     init {
-        paint.color = Color.GREEN
+        paint.color = Color.TRANSPARENT
     }
 
     fun update(){
@@ -20,6 +20,8 @@ class Gun(var projLeft: Int,var projTop: Int,var projRight: Int,var projBottom: 
     }
 
     fun draw(canvas: Canvas?) {
+
         canvas?.drawRect(projRect,paint)
+        canvas?.drawBitmap(AssetManager.assetGunProjectile, projRect.left.toFloat(), projRect.top.toFloat(), null)
     }
 }
