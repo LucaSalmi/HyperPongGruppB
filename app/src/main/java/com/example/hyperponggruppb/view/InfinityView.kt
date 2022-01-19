@@ -237,39 +237,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
             infiniteMode.player.draw(canvas)
 
-            when {
-
-                infiniteMode.player.bigPaddle -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.bigPlayerAsset,
-                        infiniteMode.player.playerRect.left.toFloat(),
-                        infiniteMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-
-                }
-                infiniteMode.player.smallPaddle -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.smallPlayerAsset,
-                        infiniteMode.player.playerRect.left.toFloat(),
-                        infiniteMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-
-                }
-                else -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.playerAsset,
-                        infiniteMode.player.playerRect.left.toFloat(),
-                        infiniteMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-                }
-            }
-
             if (spawnNewRow) {
 
                 BrickStructure.moveDownRow(infiniteMode.brickRow)

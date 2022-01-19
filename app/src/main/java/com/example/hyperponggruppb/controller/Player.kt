@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import com.example.hyperponggruppb.model.AssetManager
 
 class Player() {
 
@@ -42,6 +43,40 @@ class Player() {
     }
 
     fun draw(canvas: Canvas?) {
+
         canvas?.drawRect(playerRect, paint)
+
+        when {
+
+            bigPaddle -> {
+
+                canvas?.drawBitmap(
+                    AssetManager.bigPlayerAsset,
+                    playerRect.left.toFloat(),
+                    playerRect.top.toFloat(),
+                    null
+                )
+
+            }
+            smallPaddle -> {
+
+                canvas?.drawBitmap(
+                    AssetManager.smallPlayerAsset,
+                    playerRect.left.toFloat(),
+                    playerRect.top.toFloat(),
+                    null
+                )
+
+            }
+            else -> {
+
+                canvas?.drawBitmap(
+                    AssetManager.playerAsset,
+                    playerRect.left.toFloat(),
+                    playerRect.top.toFloat(),
+                    null
+                )
+            }
+        }
     }
 }

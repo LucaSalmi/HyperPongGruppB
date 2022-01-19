@@ -171,39 +171,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             storyMode.player.draw(canvas)
 
-            when {
-
-                storyMode.player.bigPaddle -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.bigPlayerAsset,
-                        storyMode.player.playerRect.left.toFloat(),
-                        storyMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-
-                }
-                storyMode.player.smallPaddle -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.smallPlayerAsset,
-                        storyMode.player.playerRect.left.toFloat(),
-                        storyMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-
-                }
-                else -> {
-
-                    canvas.drawBitmap(
-                        AssetManager.playerAsset,
-                        storyMode.player.playerRect.left.toFloat(),
-                        storyMode.player.playerRect.top.toFloat(),
-                        null
-                    )
-                }
-            }
-
             for (brick in storyMode.brickRow) {
 
                 var brickColor = Paint()
