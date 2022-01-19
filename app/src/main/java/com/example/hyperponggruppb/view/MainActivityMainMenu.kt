@@ -1,21 +1,14 @@
 package com.example.hyperponggruppb.view
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.View
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintSet
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.DialogManager
@@ -23,13 +16,8 @@ import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
-import kotlinx.coroutines.delay
 import android.view.MotionEvent
-
-import android.view.View.OnTouchListener
-
-
-
+import android.view.View
 
 
 class MainActivityMainMenu : AppCompatActivity() {
@@ -65,8 +53,7 @@ class MainActivityMainMenu : AppCompatActivity() {
         }
 
         setAccount()
-        //onClick()
-        onTouchListener()
+        setupOnTouchInputs()
         startMenuAnimations()
 
         val greenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
@@ -124,16 +111,13 @@ class MainActivityMainMenu : AppCompatActivity() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun onTouchListener() {
-
-
+    private fun setupOnTouchInputs() {
 
         binding.ivGameMode.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.ivGameMode.alpha = 1f
 
-                true
-            } else false
+            }
             if (event.action == MotionEvent.ACTION_DOWN) {
                 binding.ivGameMode.alpha = 0.3f
 
@@ -156,8 +140,7 @@ class MainActivityMainMenu : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnModeForward.alpha = 1f
 
-                true
-            } else false
+            }
             if (event.action == MotionEvent.ACTION_DOWN) {
 
                 isStoryMode = !isStoryMode
@@ -174,8 +157,7 @@ class MainActivityMainMenu : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnModeBack.alpha = 1f
 
-                true
-            } else false
+            }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
 
@@ -193,8 +175,7 @@ class MainActivityMainMenu : AppCompatActivity() {
                 val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
                 startActivity(toLeaderboard)
 
-                true
-            } else false
+            }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
 
@@ -209,8 +190,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
                 mainDialog.changeAccount()
 
-                true
-            } else false
+            }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
 
@@ -225,8 +205,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
                 mainDialog.settingsDialog(sp)
 
-                true
-            } else false
+            }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
 
@@ -236,55 +215,6 @@ class MainActivityMainMenu : AppCompatActivity() {
         })
 
     }
-
-/*
-    private fun onClick() {
-
-
-        binding.ivGameMode.setOnClickListener {
-
-           val gameModeButton = findViewById<View>(R.id.iv_game_mode)
-           /          if (PlayerManager.isMusicActive) {
-               SoundEffectManager.stopMusic()
-           }
-
-           loadUser()
-
-           if (isStoryMode) {
-               startStoryMode()
-           } else {
-               startInfinityMode()
-           }
-       }
-
-       binding.btnModeForward.setOnClickListener {
-           isStoryMode = !isStoryMode
-           changeButtonText()
-       }
-
-
-       binding.btnModeBack.setOnClickListener {
-           isStoryMode = !isStoryMode
-           changeButtonText()
-       }
-
-       binding.ivLeaderboard.setOnClickListener {
-           val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
-           startActivity(toLeaderboard)
-       }
-
-
-       binding.btnChangeAccount.setOnClickListener {
-
-           mainDialog.changeAccount()
-       }
-
-       binding.ivSettings.setOnClickListener {
-           mainDialog.settingsDialog(sp)
-       }
-   }
-    */
-
 
    private fun changeButtonText() {
 

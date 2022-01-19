@@ -10,21 +10,12 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.View
-import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
-import android.graphics.BitmapFactory
-
-import android.graphics.Bitmap
-import android.util.Base64
-import androidx.core.graphics.scale
-import java.io.ByteArrayInputStream
-import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 
