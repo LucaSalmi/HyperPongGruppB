@@ -43,6 +43,8 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
     var timeToUpdate = currentTimeMillis()
     var spawnNewRow = false
 
+    var isCounting = false
+
     var backgroundIdOne = 1
     var backgroundIdTwo = 2
     var transBackroundIdOne = 1
@@ -146,6 +148,18 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         powerUpTimer.start()
     }
 
+    private val comboMsgTimer = object : CountDownTimer(1500L, 1000L){
+        override fun onTick(p0: Long) {
+
+        }
+
+        override fun onFinish() {
+            isCounting = false
+            PlayerManager.textIsOn = false
+        }
+
+    }
+
     private fun start() {
 
         running = true
@@ -173,16 +187,15 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
             PlayerManager.saveUserData(sp)
             PlayerManager.setPlacement()
-            PlayerManager.starCounter = 0
             gameStart = false
             BrickStructure.playerSpeed = 1
             infiniteMode.clearArrays()
             PlayerManager.isGameEnded = true
             spawnTimer.cancel()
             powerUpTimer.cancel()
+            PlayerManager.comboPoints = 0
             Thread.sleep(1500)
             AssetManager.resetBackGround()
-            PlayerManager.comboPoints = 0
             myActivity.finish()
         }
 
@@ -357,6 +370,8 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                     checkDamage()
                     playerAndBrickInteractions()
 
+                    myActivity.updateComboCounter()
+
                     var size = infiniteMode.brickRow.size - 1
 
                     if (size > 0){
@@ -474,6 +489,12 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 context,
                 infiniteMode
             )
+        }
+
+        if(PlayerManager.textIsOn && !isCounting){
+
+            isCounting = true
+            comboMsgTimer.start()
         }
     }
 

@@ -29,14 +29,14 @@ class OverWorldActivity : AppCompatActivity() {
         }
 
         adapter = ViewPagerAdapter(this)
-        binding.overworldMapContainer.adapter = adapter
-        binding.overworldMapContainer.currentItem = 1
+        binding.overworldContainer.adapter = adapter
+        binding.overworldContainer.currentItem = 1
     }
 
     override fun onResume() {
 
-        binding.overworldMapContainer.adapter = adapter
-        binding.overworldMapContainer.currentItem = 1
+        binding.overworldContainer.adapter = adapter
+        binding.overworldContainer.currentItem = 1
 
         if(PlayerManager.isGameEnded || PlayerManager.isLevelCompleted){
 

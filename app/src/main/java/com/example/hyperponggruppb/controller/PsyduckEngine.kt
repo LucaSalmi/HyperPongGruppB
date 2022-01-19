@@ -46,7 +46,6 @@ object PsyduckEngine {
                 ball.brickCollision = true
                 brickHit = brickRect
 
-                //SoundEffectManager.jukebox(context, 0)
                 SoundEffectManager.playBrickHitSound(context, RandomNumberGenerator.rNG(0, 2))
             }
         }

@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_combo_meter"
+        android:id="@+id/tv_combo_meter_story"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -62,7 +62,7 @@
         tools:text="5x" />
 
     <TextView
-        android:id="@+id/tv_hyper_combo_message"
+        android:id="@+id/tv_hyper_combo_message_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"

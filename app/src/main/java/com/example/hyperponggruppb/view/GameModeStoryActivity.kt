@@ -56,10 +56,7 @@ class GameModeStoryActivity : AppCompatActivity() {
         })
     }
 
-    override fun onBackPressed() {
-        PsyduckEngine.gameStart = false
-        super.onBackPressed()
-    }
+
 
     fun checkSelectedPowerup() {
         val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))
@@ -107,8 +104,8 @@ class GameModeStoryActivity : AppCompatActivity() {
         runOnUiThread(Runnable {
             try {
 
-                val comboMeter = findViewById<TextView>(R.id.tv_combo_meter)
-                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message)
+                val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_story)
+                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_story)
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
@@ -128,5 +125,10 @@ class GameModeStoryActivity : AppCompatActivity() {
                 Log.e(ContentValues.TAG, "updateCombo: caught")
             }
         })
+    }
+
+    override fun onBackPressed() {
+        PsyduckEngine.gameStart = false
+        super.onBackPressed()
     }
 }
