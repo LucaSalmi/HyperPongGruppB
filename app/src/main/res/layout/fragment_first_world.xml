@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/lava_story_bg"
     tools:context=".view.fragment.FirstWorldFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_world_one"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/lava_story_bg">
 
         <ImageView
             android:id="@+id/iv_level_one"
@@ -21,10 +22,10 @@
             android:src="@drawable/flag_one_one_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.691"
+            app:layout_constraintVertical_bias="0.677"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
@@ -41,7 +42,7 @@
             app:layout_constraintHorizontal_bias="0.831"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_level_four"
-            app:layout_constraintVertical_bias="0.575" />
+            app:layout_constraintVertical_bias="0.526" />
 
         <ImageView
             android:id="@+id/iv_level_three"
@@ -53,7 +54,7 @@
             android:src="@drawable/flag_one_three_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.249"
+            app:layout_constraintHorizontal_bias="0.224"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.516" />
@@ -68,11 +69,10 @@
             android:src="@drawable/flag_one_four_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.840"
+            app:layout_constraintHorizontal_bias="0.844"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.340
-" />
+            app:layout_constraintVertical_bias="0.338" />
 
         <ImageView
             android:id="@+id/iv_level_five"
@@ -84,10 +84,50 @@
             android:src="@drawable/flag_one_five_no_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.536"
+            app:layout_constraintHorizontal_bias="0.54"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.285" />
+
+        <ImageView
+            android:id="@+id/iv_current_level_one"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_level_one"
+            app:layout_constraintEnd_toEndOf="@+id/iv_level_one"
+            app:layout_constraintStart_toStartOf="@+id/iv_level_one" />
+
+        <ImageView
+            android:id="@+id/iv_current_level_two"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_level_two"
+            app:layout_constraintEnd_toEndOf="@+id/iv_level_two"
+            app:layout_constraintStart_toStartOf="@+id/iv_level_two" />
+
+        <ImageView
+            android:id="@+id/iv_current_level_three"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_level_three"
+            app:layout_constraintEnd_toEndOf="@+id/iv_level_three"
+            app:layout_constraintStart_toStartOf="@+id/iv_level_three"/>
+
+        <ImageView
+            android:id="@+id/iv_current_level_four"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_level_four"
+            app:layout_constraintEnd_toEndOf="@+id/iv_level_four"
+            app:layout_constraintStart_toStartOf="@+id/iv_level_four" />
+
+        <ImageView
+            android:id="@+id/iv_current_level_five"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_level_five"
+            app:layout_constraintEnd_toEndOf="@+id/iv_level_five"
+            app:layout_constraintStart_toStartOf="@+id/iv_level_five"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,16 @@
 package com.example.hyperponggruppb.view.fragment
 
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.DialogManager
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -30,6 +33,38 @@ class FirstWorldFragment : Fragment() {
         val levelThree = view?.findViewById<ImageView>(R.id.iv_level_three)
         val levelFour = view?.findViewById<ImageView>(R.id.iv_level_four)
         val levelFive = view?.findViewById<ImageView>(R.id.iv_level_five)
+        val currentLevelOne = view?.findViewById<ImageView>(R.id.iv_current_level_one)
+        val currentLevelTwo = view?.findViewById<ImageView>(R.id.iv_current_level_two)
+        val currentLevelThree = view?.findViewById<ImageView>(R.id.iv_current_level_three)
+        val currentLevelFour = view?.findViewById<ImageView>(R.id.iv_current_level_four)
+        val currentLevelFive = view?.findViewById<ImageView>(R.id.iv_current_level_five)
+        val worldOneBackground = view?.findViewById<ConstraintLayout>(R.id.layout_world_one)
+
+
+        when (PlayerManager.nextLevel) {
+
+            1 -> {
+                currentLevelOne?.setImageResource(R.drawable.current_level_fighting_symbol)
+                worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_level_one_path)
+            }
+            2 -> {
+                currentLevelTwo?.setImageResource(R.drawable.current_level_fighting_symbol)
+                worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_level_two_path)
+            }
+            3 -> {
+                currentLevelThree?.setImageResource(R.drawable.current_level_fighting_symbol)
+                worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_level_three_path)
+            }
+            4 -> {
+                currentLevelFour?.setImageResource(R.drawable.current_level_fighting_symbol)
+                worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_level_four_path)
+            }
+            5 -> {
+                currentLevelFive?.setImageResource(R.drawable.current_level_fighting_symbol)
+                worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_level_five_path)
+            }
+            else -> worldOneBackground?.setBackgroundResource(R.drawable.lava_story_bg_zone_done_path)
+        }
 
         if (PlayerManager.levelStarsArray.size > 0) {
 
