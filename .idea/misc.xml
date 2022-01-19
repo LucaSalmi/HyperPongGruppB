@@ -25,7 +25,7 @@
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_first_world.xml" value="0.1760468257541648" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point.xml" value="0.25" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point_infinity_mode.xml" value="0.23513513513513515" />
-        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point_story_mode.xml" value="0.33" />
+        <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_point_story_mode.xml" value="0.5" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_second_world.xml" value="0.3133723547951373" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
         <entry key="..\:/Kyh Uppgifter/HyperPongGruppB/app/src/main/res/layout/fragment_story_level.xml" value="0.1277027027027027" />
@@ -40,7 +40,6 @@
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game_mode1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_game_mode_story.xml" value="0.3283514492753623" />
-        <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_leader_board.xml" value="0.3625" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_space_invaders.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/metal/Desktop/Android Studio Projects/HyperPongGruppB/app/src/main/res/layout/activity_story_mode.xml" value="0.1762917933130699" />

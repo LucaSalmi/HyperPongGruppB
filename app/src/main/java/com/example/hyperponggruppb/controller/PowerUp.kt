@@ -47,6 +47,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             4 -> AssetManager.powerUpAssetMultiBall
             5 -> AssetManager.powerUpAssetHealthPlus
             9 -> AssetManager.powerUpAssetGem
+            10 -> AssetManager.powerUpAssetGun
             else -> AssetManager.powerUpAssetBigPaddle
         }
     }

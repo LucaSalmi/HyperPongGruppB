@@ -3,30 +3,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/brick_v3">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="80dp"
+    android:padding="5dp"
+    android:background="@drawable/story_mode_ui_bg">
 
-    <TextView
-        android:id="@+id/clock_tv"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginEnd="5dp"
-        android:fontFamily="@font/aldrich"
-        tools:text="11:22" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_clock"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/green_metal_frame_ui"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_time_header"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/aldrich"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Bonus Time" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="12dp"
+            android:src="@drawable/character_black_bg_fade"
+            app:layout_constraintBottom_toBottomOf="@+id/clock_tv"
+            app:layout_constraintEnd_toEndOf="@+id/clock_tv"
+            app:layout_constraintStart_toStartOf="@+id/clock_tv"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time_header" />
+
+        <TextView
+            android:id="@+id/clock_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fontFamily="@font/aldrich"
+            android:gravity="center_horizontal"
+            android:paddingStart="20sp"
+            android:paddingEnd="20sp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time_header"
+            tools:text="11:22" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/green_metal_frame_ui"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_story_lives"
+        app:layout_constraintStart_toEndOf="@+id/layout_clock"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/layout_star_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_story_lives"
+        app:layout_constraintStart_toEndOf="@+id/layout_clock"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layout_sm_result_stars"
@@ -37,23 +94,24 @@
 
             <ImageView
                 android:id="@+id/iv_star_one"
-                android:layout_width="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="40dp"
-                android:background="@drawable/no_star" />
+                android:layout_weight="1"
+                android:src="@drawable/no_star"/>
 
             <ImageView
                 android:id="@+id/iv_star_two"
-                android:layout_width="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="40dp"
-                android:background="@drawable/no_star" />
+                android:layout_weight="1"
+                android:src="@drawable/no_star"/>
 
             <ImageView
                 android:id="@+id/iv_star_three"
-                android:layout_width="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/no_star" />
+                android:layout_weight="1"
+                android:src="@drawable/no_star"/>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,6 +125,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleY="4"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:progressTint="@color/star"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -78,7 +139,7 @@
                 android:id="@+id/tv_story_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                tools:text="0"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/pb_starbar"
@@ -91,10 +152,12 @@
     <ImageView
         android:id="@+id/iv_story_lives"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:background="@drawable/green_metal_frame_ui"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/three_coolant" />
 
-</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

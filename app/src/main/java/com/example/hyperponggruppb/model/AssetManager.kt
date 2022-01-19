@@ -45,6 +45,8 @@ object AssetManager {
     lateinit var powerUpAssetMultiBall: Bitmap
     lateinit var powerUpAssetHealthPlus: Bitmap
     lateinit var powerUpAssetGem: Bitmap
+    lateinit var powerUpAssetGun: Bitmap
+    lateinit var assetGunProjectile: Bitmap
 
     lateinit var comboCounterZero: Bitmap
     lateinit var comboCounterOne: Bitmap
@@ -122,6 +124,8 @@ object AssetManager {
         powerUpAssetMultiBall = BitmapFactory.decodeResource(context.resources, R.drawable.multiball_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetHealthPlus = BitmapFactory.decodeResource(context.resources, R.drawable.hp_plus_simple).scale(powerUpWidth, powerUpHeight,true)
         powerUpAssetGem = BitmapFactory.decodeResource(context.resources, R.drawable.gem).scale(powerUpWidth, powerUpHeight,true)
+        powerUpAssetGun = BitmapFactory.decodeResource(context.resources, R.drawable.gun_powerup).scale(powerUpWidth, powerUpHeight,true)
+        assetGunProjectile = BitmapFactory.decodeResource(context.resources, R.drawable.gun_shot_projectile).scale(powerUpWidth, powerUpHeight,true)
 
         comboCounterZero = BitmapFactory.decodeResource(context.resources, R.drawable.x_zero).scale(counterWidth, counterHeight, true)
         comboCounterOne = BitmapFactory.decodeResource(context.resources, R.drawable.x_one).scale(counterWidth, counterHeight, true)
