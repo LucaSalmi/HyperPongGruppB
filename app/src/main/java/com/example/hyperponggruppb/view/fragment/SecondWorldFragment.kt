@@ -123,10 +123,8 @@ class SecondWorldFragment : Fragment() {
 
     private fun toaster() {
 
-
         Toast.makeText(super.getContext(), "Level not yet unlocked", Toast.LENGTH_SHORT)
             .show()
-
 
     }
 }

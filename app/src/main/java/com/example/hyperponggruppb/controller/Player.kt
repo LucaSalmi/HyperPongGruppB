@@ -20,6 +20,7 @@ class Player() {
     var playerHeight = bottom
     var playerRect: Rect = Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
+
     init {
         paint.color = Color.TRANSPARENT
     }

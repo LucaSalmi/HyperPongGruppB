@@ -4,21 +4,27 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.View
+import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+import android.graphics.BitmapFactory
+
+import android.graphics.Bitmap
+import android.util.Base64
+import androidx.core.graphics.scale
+import java.io.ByteArrayInputStream
+import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 
@@ -279,6 +285,15 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.ball.ballTop = (storyMode.player.top - storyMode.ball.ballsize).toInt()
             storyMode.ball.ballBottom = (storyMode.player.top).toInt()
             storyMode.ball.update()
+        }
+
+        if (event?.action == MotionEvent.ACTION_DOWN) {
+            storyMode.player.playerRect.top -= 10
+            storyMode.player.playerRect.bottom -= 10
+        }
+        if (event?.action == MotionEvent.ACTION_UP) {
+            storyMode.player.playerRect.top += 10
+            storyMode.player.playerRect.bottom += 10
         }
 
         if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
