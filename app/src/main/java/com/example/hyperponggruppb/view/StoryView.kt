@@ -168,6 +168,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             if (storyMode.isGunLive && storyMode.shotCount > 0) {
                 storyMode.drawProjectile(canvas)
             }
+            if (storyMode.isShieldActive){
+                storyMode.drawShield(canvas)
+            }
 
             mHolder!!.unlockCanvasAndPost(canvas)
 

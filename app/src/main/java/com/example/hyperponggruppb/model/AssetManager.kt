@@ -48,6 +48,7 @@ object AssetManager {
     lateinit var powerUpAssetGun: Bitmap
     lateinit var assetGunProjectile: Bitmap
     lateinit var powerUpAssetShield: Bitmap
+    lateinit var activeShieldAsset: Bitmap
 
     lateinit var darkRectangleDeathZone: Bitmap
     val bGHeight = getScreenHeight()
@@ -117,6 +118,7 @@ object AssetManager {
         powerUpAssetShield = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_shield_drop).scale(powerUpWidth, powerUpHeight,true)
 
         darkRectangleDeathZone = BitmapFactory.decodeResource(context.resources, R.drawable.dangerzone).scale(bGWidth, dangerZoneHeight, true)
+        activeShieldAsset = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_shield_effect).scale(bGWidth, dangerZoneHeight, true)
     }
 
     fun randomAsset(id: Int): Bitmap {

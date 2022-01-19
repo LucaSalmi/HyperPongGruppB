@@ -241,6 +241,9 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 infiniteMode.drawProjectile(canvas)
             }
 
+            if (infiniteMode.isShieldActive){
+                infiniteMode.drawShield(canvas)
+            }
             mHolder!!.unlockCanvasAndPost(canvas)
 
         } catch (e: Exception) {

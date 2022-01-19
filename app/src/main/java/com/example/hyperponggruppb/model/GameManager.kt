@@ -217,6 +217,10 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         projectile.draw(canvas)
     }
 
+    fun drawShield(canvas: Canvas){
+        canvas.drawBitmap(AssetManager.activeShieldAsset, 0f, player.bottom, null)
+    }
+
     fun clearArrays() {
 
         ballsArray.clear()
