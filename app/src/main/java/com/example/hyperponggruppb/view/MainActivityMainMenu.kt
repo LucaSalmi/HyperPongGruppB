@@ -188,6 +188,7 @@ class MainActivityMainMenu : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnChangeAccount.alpha = 1f
 
+                SoundEffectManager.stopMusic()
                 mainDialog.changeAccount()
 
             }
