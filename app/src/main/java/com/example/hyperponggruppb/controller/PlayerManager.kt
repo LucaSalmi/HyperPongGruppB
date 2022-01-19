@@ -39,6 +39,8 @@ object PlayerManager {
     var levelPowerups = 0
     var levelGems = 0
 
+    var textIsOn = false
+
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()

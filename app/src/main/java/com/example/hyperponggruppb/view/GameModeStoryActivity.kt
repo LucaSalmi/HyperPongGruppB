@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.commit
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -97,6 +98,34 @@ class GameModeStoryActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "updateText: caught")
+            }
+        })
+    }
+
+    fun updateComboCounter(){
+
+        runOnUiThread(Runnable {
+            try {
+
+                val comboMeter = findViewById<TextView>(R.id.tv_combo_meter)
+                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message)
+
+                if (PlayerManager.comboPoints > 0){
+                    val comboString = PlayerManager.comboPoints.toString() + "X"
+                    comboMeter.text = comboString
+
+                    if (PlayerManager.textIsOn){
+                        comboText.text = getString(R.string.hyper_combo_msg)
+                    }else{
+                        comboText.text = ""
+                    }
+
+                }else{
+                    comboMeter.text = ""
+                }
+
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "updateCombo: caught")
             }
         })
     }

@@ -55,6 +55,10 @@ object PsyduckEngine {
 
             PlayerManager.comboPoints ++
 
+            if (PlayerManager.comboPoints == 3){
+                PlayerManager.textIsOn = true
+            }
+
             for (brick in brickRow) {
 
                 var brickRect =

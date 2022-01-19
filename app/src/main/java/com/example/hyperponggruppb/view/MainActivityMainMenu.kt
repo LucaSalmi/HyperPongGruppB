@@ -60,7 +60,6 @@ class MainActivityMainMenu : AppCompatActivity() {
             mainDialog.nameInput(sp)
         }
 
-
         setAccount()
         onClick()
         startMenuAnimations()

@@ -48,4 +48,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_combo_meter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#994DCF17"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_powerup_belt_ui"
+        tools:text="5x" />
+
+    <TextView
+        android:id="@+id/tv_hyper_combo_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#994DCF17"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/score_fragment_container_story"
+        tools:text="@string/hyper_combo_msg" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
