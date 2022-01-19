@@ -5,14 +5,16 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
 
             <LinearLayout
+                android:id="@+id/shop_dialog_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -20,37 +22,70 @@
                 <TextView
                     android:id="@+id/shop_dialog_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/led_profile_frame"
+                    android:paddingTop="30dp"
                     android:text="@string/shop_dialog_text_part_1"
                     android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"/>
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/shop_dialog_layout"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:weightSum="2">
 
-                <Button
+                <ImageButton
                     android:id="@+id/shop_yes_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Yes"/>
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/led_item_frame" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/shop_no_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="No"/>
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/led_item_frame" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/shop_dialog_layout"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

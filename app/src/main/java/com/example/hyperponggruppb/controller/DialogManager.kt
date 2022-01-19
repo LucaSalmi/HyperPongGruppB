@@ -258,7 +258,9 @@ class DialogManager(val context: Context) {
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
-
+    /**
+     *shows the user the settings menu with the option to activate and deactivate music and/or sound effects and crate a new user profile
+     */
     fun settingsDialog(sp: SharedPreferences) {
 
         val settingsDialog = Dialog(context)
@@ -605,14 +607,17 @@ class DialogManager(val context: Context) {
         }
     }
 
+    /**
+     * gives the user the option to buy power-ups before starting a level to use inside the level
+     */
     fun shopDialog(){
         val shopDialog = Dialog(context)
         shopDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         shopDialog.setContentView(R.layout.shop_dialog_layout)
 
         val shopText = shopDialog.findViewById<TextView>(R.id.shop_dialog_text)
-        val yesButton = shopDialog.findViewById<Button>(R.id.shop_yes_btn)
-        val noButton = shopDialog.findViewById<Button>(R.id.shop_no_btn)
+        val yesButton = shopDialog.findViewById<ImageButton>(R.id.shop_yes_btn)
+        val noButton = shopDialog.findViewById<ImageButton>(R.id.shop_no_btn)
 
         val shopStringOne = context.getString(R.string.shop_dialog_text_part_1)
         val shopStringTwo = context.getString(R.string.shop_dialog_string_part_2)

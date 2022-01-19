@@ -32,7 +32,7 @@
     <string name="new_account">Create New Account</string>
     <string name="switch_label_music">Background Music</string>
     <string name="switch_label_effects">Sound Effects</string>
-    <string name="shop_dialog_text_part_1">"Do you want to buy this power-up for: "</string>
+    <string name="shop_dialog_text_part_1">"Buy this power-up for: "</string>
     <string name="shop_dialog_string_part_2">\?</string>
 
 
