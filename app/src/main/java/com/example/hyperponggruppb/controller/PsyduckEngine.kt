@@ -117,7 +117,7 @@ object PsyduckEngine {
     private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
 
         powerUp = PowerUp(
-            //RandomNumberGenerator.rNG(2, 4),
+            //RandomNumberGenerator.rNG(2, 7),
             10,
             brickHit.left,
             brickHit.top,
@@ -133,9 +133,9 @@ object PsyduckEngine {
         if (RandomNumberGenerator.rNG(1, 8) == 2) {
 
             val rngLimit = if (PlayerManager.lives >= 3) {
-                4
+                7
             } else {
-                5
+                8
             }
             powerUp = PowerUp(
                 RandomNumberGenerator.rNG(0, rngLimit),

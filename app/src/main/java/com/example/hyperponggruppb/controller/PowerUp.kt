@@ -32,9 +32,7 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             this.bottom.toFloat(),
             powerUpColor
         )
-
     }
-
 
     fun assignAsset(): Bitmap {
 
@@ -45,10 +43,11 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             2 -> AssetManager.powerUpAssetBigPaddle
             3 -> AssetManager.powerUpAssetSmallPaddle
             4 -> AssetManager.powerUpAssetMultiBall
-            5 -> AssetManager.powerUpAssetHealthPlus
-            9 -> AssetManager.powerUpAssetGem
-            10 -> AssetManager.powerUpAssetGun
-            else -> AssetManager.powerUpAssetBigPaddle
+            5 -> AssetManager.powerUpAssetGem
+            6 -> AssetManager.powerUpAssetGun
+            7 -> AssetManager.powerUpAssetBigPaddle //Shield
+            8 -> AssetManager.powerUpAssetHealthPlus
+            else -> AssetManager.powerUpAssetGem
         }
     }
 
@@ -81,7 +80,6 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
 
             player.bigPaddle = true
         }
-
     }
 
     //typeID 3
@@ -98,9 +96,34 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
     }
     //TypeID 4 Multiball handled in PsyduckEngine
 
-    //TypeID 5 Gain Life handled in Player Manager
+    //TypeID 5
+    fun addGems(){
 
-    //TypeID 6
+        PlayerManager.gems += 5
+    }
+
+    //TypeID 6 Gun handled in GameManager
+
+    //TypeID 7 Shield handled in game Manager
+
+    //TypeID 8 Gain Life handled in Player Manager
+
+    //TypeID 9
+    fun addTime(levelTimeLimit: Long): Long{
+
+        // makes the countdown 5 seconds shorter
+        return levelTimeLimit - 5000
+    }
+
+    //TypeID 10
+    fun removeTime(levelTimeLimit: Long): Long{
+
+        //makes the countdown 5 seconds longer
+        return levelTimeLimit + 5000
+
+    }
+
+    //TypeID 11
     fun losePoints(){
 
         if (PlayerManager.playerPoints > 0){
@@ -111,33 +134,4 @@ class PowerUp(var typeID: Int, var left: Int, var top: Int, var right: Int, var 
             }
         }
     }
-
-    //TypeID 7
-    fun addTime(levelTimeLimit: Long): Long{
-
-        // makes the countdown 5 seconds shorter
-        return levelTimeLimit - 5000
-    }
-
-    //TypeID 8
-    fun removeTime(levelTimeLimit: Long): Long{
-
-        //makes the countdown 5 seconds longer
-        return levelTimeLimit + 5000
-
-    }
-
-    //TypeID 9
-    fun addGems(){
-
-        PlayerManager.gems += 5
-    }
-
-    //TypeID 10 Gun handled in GameManager
-
-
-    //TypeID 11 Shield handled in game Manager
-
-
-
 }

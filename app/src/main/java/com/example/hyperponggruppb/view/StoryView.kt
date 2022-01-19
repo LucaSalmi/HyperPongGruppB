@@ -233,7 +233,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             if (storyMode.isGunLive && storyMode.shotCount > 0) {
                 storyMode.projectile.draw(canvas)
             }
-            //drawComboCounter(canvas)
+
             mHolder!!.unlockCanvasAndPost(canvas)
 
         } catch (e: Exception) {
@@ -344,20 +344,17 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         for (powerUp in storyMode.powerUpArray) {
 
             if (powerUp.isCatched) {
-                if (powerUp.typeID != 9){
+                if (powerUp.typeID != 5){
+
                     PlayerManager.levelPowerups++
+
                 }else{
+
                     PlayerManager.levelGems += 5
                 }
 
                 when (powerUp.typeID) {
 
-                    0 -> {
-
-                    }
-                    1 -> {
-
-                    }
                     2 -> {
                         powerUp.bigPaddle(storyMode.player)
                         SoundEffectManager.jukebox(context, 2)
@@ -372,14 +369,18 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                         storyMode.spawnExtraBall()
                         SoundEffectManager.jukebox(context, 2)
                     }
-                    9 -> {
+                    5 -> {
                         powerUp.addGems()
                         SoundEffectManager.jukebox(context, 2)
                     }
-                    10 -> {
+                    6 -> {
                         storyMode.shotCount = 3
                         storyMode.gunPowerUp()
                         SoundEffectManager.jukebox(context, 2)
+                    }
+                    7 ->{
+                        SoundEffectManager.jukebox(context, 2)
+                        storyMode.activateShield()
                     }
                 }
             }
@@ -388,7 +389,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
                 powerUpToErase = storyMode.powerUpArray.indexOf(powerUp)
             }
-
         }
 
         if (powerUpToErase != null) {

@@ -288,6 +288,10 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 )
             }
 
+            if (infiniteMode.isGunLive && infiniteMode.shotCount > 0) {
+                infiniteMode.projectile.draw(canvas)
+            }
+
             mHolder!!.unlockCanvasAndPost(canvas)
 
         } catch (e: Exception) {
@@ -351,7 +355,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
                     ballInteractions()
                     checkDamage()
-
                     playerAndBrickInteractions()
 
                     var size = infiniteMode.brickRow.size - 1
@@ -363,6 +366,20 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                     }
 
                     powerUpInteractions()
+
+                    if (infiniteMode.isGunLive) {
+
+                        if (PsyduckEngine.gunPhysics(infiniteMode.projectile, infiniteMode.brickRow, context)){
+
+                            infiniteMode.shotCount --
+
+                            if (infiniteMode.shotCount == 0) {
+                                infiniteMode.isGunLive = false
+                            }else{
+                                infiniteMode.gunPowerUp()
+                            }
+                        }
+                    }
                 }
 
                 draw()
@@ -405,6 +422,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             AssetManager.bgRectTwo.top = AssetManager.bgRectTwo.bottom - AssetManager.bGHeight
 
             when(backgroundIdTwo){
+
                 1-> {
                     backgroundIdTwo = 3
                     transBackgroundIdTwo= 3
@@ -475,14 +493,11 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                 when (powerUp.typeID) {
 
                     0 -> {
-
-                        /*timeTicks = powerUp.speedDown(timeTicks)*/
                         powerUp.forceBrickDown(infiniteMode.brickRow)
                         restartSpawnTimer()
                         SoundEffectManager.jukebox(context, 3)
                     }
                     1 -> {
-                        /*timeTicks = powerUp.speedUp(timeTicks)*/
                         powerUp.forceBrickUp(infiniteMode.brickRow)
                         restartSpawnTimer()
                         SoundEffectManager.jukebox(context, 2)
@@ -503,7 +518,20 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                         infiniteMode.spawnExtraBall()
                         SoundEffectManager.jukebox(context, 2)
                     }
-                    5 -> {
+                    5->{
+                        powerUp.addGems()
+                        SoundEffectManager.jukebox(context, 2)
+                    }
+                    6 ->{
+                        infiniteMode.shotCount = 3
+                        infiniteMode.gunPowerUp()
+                        SoundEffectManager.jukebox(context, 2)
+                    }
+                    7 -> {
+                        SoundEffectManager.jukebox(context, 2)
+                        infiniteMode.activateShield()
+                    }
+                    8 -> {
                         PlayerManager.gainLife()
                         SoundEffectManager.jukebox(context, 2)
                         myActivity.updateText()
