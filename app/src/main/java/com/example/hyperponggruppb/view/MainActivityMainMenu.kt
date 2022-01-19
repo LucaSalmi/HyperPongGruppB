@@ -1,11 +1,15 @@
 package com.example.hyperponggruppb.view
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -16,6 +20,12 @@ import com.example.hyperponggruppb.controller.GameModeOneActivity
 import com.example.hyperponggruppb.databinding.ActivityMainBinding
 import com.example.hyperponggruppb.model.AssetManager
 import kotlinx.coroutines.delay
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+
+
+
 
 
 class MainActivityMainMenu : AppCompatActivity() {
@@ -40,11 +50,6 @@ class MainActivityMainMenu : AppCompatActivity() {
         setContentView(binding.root)
         AssetManager.prepareAssets(this)
         mainDialog = DialogManager(this)
-        var menuPlayerProp = findViewById<ImageView>(R.id.iv_menu_player)
-        var transUpX = 50f
-        var transdownX = -50f
-
-
 
         sp = getSharedPreferences("com.example.hyperponggruppb.MyPrefs", MODE_PRIVATE)
         PlayerManager.readSave(sp)
