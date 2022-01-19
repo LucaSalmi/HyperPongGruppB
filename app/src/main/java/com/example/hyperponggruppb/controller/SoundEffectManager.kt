@@ -93,6 +93,14 @@ object SoundEffectManager {
         backgroundPlayer?.release()
     }
 
+    fun pauseMusic(){
+        backgroundPlayer?.pause()
+    }
+
+    fun resumeMusic(){
+        backgroundPlayer?.start()
+    }
+
     fun jukebox(context: Context, id: Int) {
 
         soundEffectPlayer?.stop()

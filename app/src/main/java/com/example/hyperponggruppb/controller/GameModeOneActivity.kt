@@ -50,7 +50,12 @@ class GameModeOneActivity : AppCompatActivity() {
     override fun onBackPressed() {
         PsyduckEngine.gameStart = false
         AssetManager.resetBackGround()
-        SoundEffectManager.stopMusic()
         super.onBackPressed()
+    }
+
+    override fun onPause() {
+
+        SoundEffectManager.stopMusic()
+        super.onPause()
     }
 }

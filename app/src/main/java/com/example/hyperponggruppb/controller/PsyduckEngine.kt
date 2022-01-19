@@ -53,9 +53,9 @@ object PsyduckEngine {
 
         if (ball.brickCollision) {
 
-            PlayerManager.comboPoints ++
+            PlayerManager.comboPoints++
 
-            if (PlayerManager.comboPoints == 3){
+            if (PlayerManager.comboPoints == 3) {
                 PlayerManager.textIsOn = true
             }
 
@@ -117,7 +117,7 @@ object PsyduckEngine {
     private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
 
         powerUp = PowerUp(
-            //RandomNumberGenerator.rNG(2, 4),
+            //RandomNumberGenerator.rNG(2, 7),
             10,
             brickHit.left,
             brickHit.top,
@@ -133,9 +133,9 @@ object PsyduckEngine {
         if (RandomNumberGenerator.rNG(1, 8) == 2) {
 
             val rngLimit = if (PlayerManager.lives >= 3) {
-                4
+                7
             } else {
-                5
+                8
             }
             powerUp = PowerUp(
                 RandomNumberGenerator.rNG(0, rngLimit),
@@ -151,18 +151,13 @@ object PsyduckEngine {
 
     fun playerCollision(ball: Ball, player: Player, context: Context) {
 
-        if (ball.ballTop < canvasHeight * 0.6) {
-            isCollisionDetected = false
-        }
-
         if (ball.ballRect.intersect(player.playerRect)) {
 
-            if (!isCollisionDetected) {
-                PlayerManager.comboPoints = 0
-                ball.playerCollision = true
-                isCollisionDetected = true
-                SoundEffectManager.jukebox(context, 0)
-            }
+            PlayerManager.comboPoints = 0
+            ball.playerCollision = true
+            isCollisionDetected = true
+            SoundEffectManager.jukebox(context, 0)
+
         }
     }
 
@@ -170,9 +165,9 @@ object PsyduckEngine {
 
         for (ball in ballsArray) {
 
-            var ballIsBottomOfScreen = if (gameManager.isShieldActive){
+            var ballIsBottomOfScreen = if (gameManager.isShieldActive) {
                 ball.ballBottom >= player.bottom
-            }else{
+            } else {
                 ball.ballBottom >= canvasHeight
             }
             val ballIsOutsideTopOfScreen = ball.ballBottom < 0f
@@ -188,7 +183,7 @@ object PsyduckEngine {
                     damageTaken = true
                     ballToEliminate = ballsArray.indexOf(ball)
 
-                }else{
+                } else {
 
                     gameManager.isShieldActive = false
                     ball.ballBottom = player.bottom.toInt()
