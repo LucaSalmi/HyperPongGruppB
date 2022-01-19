@@ -32,10 +32,14 @@ object PlayerManager {
     val gunPrice = 20
     val shieldPrice = 20
 
+    var levelSeconds = 0
+    var levelMinutes = 0
+    var levelCountdown = ""
+
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()
-    var powerUpInventory: MutableList<Int> = mutableListOf(0,1,0,1)
+    var powerUpInventory: MutableList<Int> = mutableListOf(0, 1, 0, 1)
     var isMusicActive = true
     var isSoundEffectsActive = true
     var gems = 0
@@ -44,26 +48,37 @@ object PlayerManager {
     var nextLevel = 1
     var comboPoints = 0
 
-    fun cleanArrays(){
+    fun cleanArrays() {
 
         levelScoresArray.clear()
         levelStarsArray.clear()
-        powerUpInventory = mutableListOf(0,1,0,1)
+        powerUpInventory = mutableListOf(0, 1, 0, 1)
         gems = 0
         highScore = 0
         currentLevel = 0
     }
 
-    fun createUser(): Boolean{
+    fun createUser(): Boolean {
 
-        for (user in usersArray){
+        for (user in usersArray) {
 
-            if (user.name == name){
+            if (user.name == name) {
                 return false
             }
         }
 
-        activeUser = PlayerData(name, levelScoresArray, levelStarsArray, powerUpInventory, isMusicActive, isSoundEffectsActive, gems, highScore, currentLevel, nextLevel)
+        activeUser = PlayerData(
+            name,
+            levelScoresArray,
+            levelStarsArray,
+            powerUpInventory,
+            isMusicActive,
+            isSoundEffectsActive,
+            gems,
+            highScore,
+            currentLevel,
+            nextLevel
+        )
         return true
     }
 
@@ -71,7 +86,7 @@ object PlayerManager {
 
         playerPoints += newPoints
 
-        if (isInfiniteMode){
+        if (isInfiniteMode) {
 
             if (playerPoints > activeUser?.highScore!!) {
 
@@ -89,10 +104,21 @@ object PlayerManager {
 
     fun saveUserData(sp: SharedPreferences?) {
 
-        var save = PlayerData(name, levelScoresArray, levelStarsArray, powerUpInventory, isMusicActive, isSoundEffectsActive, gems, highScore, currentLevel, nextLevel)
+        var save = PlayerData(
+            name,
+            levelScoresArray,
+            levelStarsArray,
+            powerUpInventory,
+            isMusicActive,
+            isSoundEffectsActive,
+            gems,
+            highScore,
+            currentLevel,
+            nextLevel
+        )
         var position = -1
 
-        if (usersArray.size > 0){
+        if (usersArray.size > 0) {
 
             for (obj in usersArray) {
 
@@ -104,7 +130,7 @@ object PlayerManager {
             }
         }
 
-        if (position >= 0){
+        if (position >= 0) {
             usersArray.removeAt(position)
         }
 
@@ -220,7 +246,7 @@ object PlayerManager {
 
         } else {
 
-            if (levelScoresArray[currentLevel-1] < playerPoints) {
+            if (levelScoresArray[currentLevel - 1] < playerPoints) {
                 levelScoresArray.removeAt(currentLevel - 1)
                 levelScoresArray.add(currentLevel - 1, playerPoints)
             }
@@ -241,12 +267,12 @@ object PlayerManager {
         }
     }
 
-    fun addStarsToUser(){
+    fun addStarsToUser() {
 
-        if (levelStarsArray.size < currentLevel){
+        if (levelStarsArray.size < currentLevel) {
             levelStarsArray.add(starCounter)
 
-        }else{
+        } else {
 
             if (levelStarsArray[currentLevel - 1] < starCounter) {
                 levelStarsArray.removeAt(currentLevel - 1)
@@ -255,12 +281,12 @@ object PlayerManager {
         }
     }
 
-    fun buyPowerUp(price: Int): Boolean{
+    fun buyPowerUp(price: Int): Boolean {
 
-        return if (price < gems){
+        return if (price < gems) {
             gems -= price
             true
-        }else{
+        } else {
             false
         }
     }

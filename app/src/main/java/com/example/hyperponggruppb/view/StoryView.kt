@@ -2,6 +2,7 @@ package com.example.hyperponggruppb.view
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -12,12 +13,14 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
+import java.util.concurrent.TimeUnit
 
 
 class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(myContext),
@@ -38,9 +41,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     val deltaTime = 0L
     var timeToUpdate = System.currentTimeMillis()
 
-    var levelSeconds = 0
-    var levelMinutes = 0
-
     private var levelTimeLimit = 0L
 
     var backgroundCode = 1
@@ -58,6 +58,10 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             backgroundCode = 3
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
+        PlayerManager.levelCountdown = context.getString(R.string.formatted_time,
+            TimeUnit.MILLISECONDS.toMinutes(levelTimeLimit) % 60,
+            TimeUnit.MILLISECONDS.toSeconds(levelTimeLimit) % 60)
+
         myActivity.checkSelectedPowerup()
 
     }
@@ -65,11 +69,13 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
 
         override fun onTick(p0: Long) {
-            levelSeconds++
+            Log.d(TAG, "onTick: ${p0 / 1000f}")
+            PlayerManager.levelCountdown = context.getString(R.string.formatted_time, TimeUnit.MILLISECONDS.toMinutes(p0) % 60, TimeUnit.MILLISECONDS.toSeconds(p0) % 60)
+            PlayerManager.levelSeconds++
 
-            if (levelSeconds == 60) {
-                levelSeconds = 0
-                levelMinutes++
+            if (PlayerManager.levelSeconds == 60) {
+                PlayerManager.levelSeconds = 0
+                PlayerManager.levelMinutes++
             }
         }
 

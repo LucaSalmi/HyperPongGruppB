@@ -34,6 +34,7 @@
     <string name="switch_label_effects">Sound Effects</string>
     <string name="shop_dialog_text_part_1">"Buy this power-up for: "</string>
     <string name="shop_dialog_string_part_2">\?</string>
+    <string name="formatted_time">%02d:%02d</string>
 
 
 </resources>

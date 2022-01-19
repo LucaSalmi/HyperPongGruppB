@@ -30,12 +30,17 @@ class PointFragmentStoryMode : Fragment() {
          val lives = view?.findViewById<ImageView>(R.id.iv_story_lives)
          val starBar = view?.findViewById<ProgressBar>(R.id.pb_starbar)
          val score = view?.findViewById<TextView>(R.id.tv_story_score)
+        val countdownClock = view?.findViewById<TextView>(R.id.clock_tv)
          val starOne = view?.findViewById<ImageView>(R.id.iv_star_one)
          val starTwo = view?.findViewById<ImageView>(R.id.iv_star_two)
         val starThree = view?.findViewById<ImageView>(R.id.iv_star_three)
 
+
+
         starBar?.max = PlayerManager.currentMaxScore
         starBar?.progress = 0
+
+        countdownClock?.text = PlayerManager.levelCountdown
 
         val refScore = 0
         val currentScore = PlayerManager.playerPoints
