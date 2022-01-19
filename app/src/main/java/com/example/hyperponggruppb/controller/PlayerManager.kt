@@ -28,13 +28,16 @@ object PlayerManager {
     var selectedPowerUp = -1
     var activatePowerUp = false
 
-    val multiBallPrice = 20
-    val gunPrice = 20
+    val multiBallPrice = 30
+    val gunPrice = 40
     val shieldPrice = 20
 
-    var levelSeconds = 0
-    var levelMinutes = 0
+    var levelTime = 0L
+    var levelTimeString = ""
     var levelCountdown = ""
+
+    var levelPowerups = 0
+    var levelGems = 0
 
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
@@ -197,7 +200,11 @@ object PlayerManager {
     }
 
     fun resetPoints() {
+
         playerPoints = 0
+        levelPowerups = 0
+        levelGems = 0
+
     }
 
     fun loseLife() {

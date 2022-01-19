@@ -16,7 +16,6 @@ import android.view.SurfaceView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.controller.PlayerManager
-import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.SoundEffectManager
 import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.GameManager
@@ -58,6 +57,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             backgroundCode = 3
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
+
         PlayerManager.levelCountdown = context.getString(R.string.formatted_time,
             TimeUnit.MILLISECONDS.toMinutes(levelTimeLimit) % 60,
             TimeUnit.MILLISECONDS.toSeconds(levelTimeLimit) % 60)
@@ -68,25 +68,17 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
 
-        override fun onTick(p0: Long) {
-            Log.d(TAG, "onTick: ${p0 / 1000f}")
-            PlayerManager.levelCountdown = context.getString(R.string.formatted_time, TimeUnit.MILLISECONDS.toMinutes(p0) % 60, TimeUnit.MILLISECONDS.toSeconds(p0) % 60)
-            PlayerManager.levelSeconds++
+        override fun onTick(millisUntilFinished: Long) {
+            PlayerManager.levelCountdown = context.getString(R.string.formatted_time,
+                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60)
 
-            if (PlayerManager.levelSeconds == 60) {
-                PlayerManager.levelSeconds = 0
-                PlayerManager.levelMinutes++
-            }
+            PlayerManager.levelTime = millisUntilFinished
         }
 
         override fun onFinish() {
-            //something when time finishes
-        }
-    }
 
-    private fun restartLevelTimer() {
-        levelTimer.cancel()
-        levelTimer.start()
+        }
     }
 
     override fun run() {
@@ -301,7 +293,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
 
-            restartLevelTimer()
+            levelTimer.start()
             storyMode.ball.ballSpeedX = 7f
             storyMode.ball.ballSpeedY = -13f
             PsyduckEngine.gameStart = true
@@ -350,6 +342,11 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         for (powerUp in storyMode.powerUpArray) {
 
             if (powerUp.isCatched) {
+                if (powerUp.typeID != 9){
+                    PlayerManager.levelPowerups++
+                }else{
+                    PlayerManager.levelGems += 5
+                }
 
                 when (powerUp.typeID) {
 
@@ -380,6 +377,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     10 -> {
                         storyMode.shotCount = 3
                         storyMode.gunPowerUp()
+                        SoundEffectManager.jukebox(context, 2)
                     }
                 }
             }
@@ -411,6 +409,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.clearArrays()
             PlayerManager.isGameEnded = true
             PlayerManager.comboPoints = 0
+            calculateTime()
             myActivity.finish()
 
         }
@@ -439,6 +438,14 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.comboPoints = 0
             myActivity.finish()
         }
+    }
+
+    private fun calculateTime(){
+
+        val time = levelTimeLimit - PlayerManager.levelTime
+        PlayerManager.levelTimeString = context.getString(R.string.formatted_time,
+            TimeUnit.MILLISECONDS.toMinutes(time) % 60,
+            TimeUnit.MILLISECONDS.toSeconds(time) % 60)
     }
 
     private fun starSound() {

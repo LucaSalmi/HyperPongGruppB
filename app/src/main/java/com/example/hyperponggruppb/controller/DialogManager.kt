@@ -188,9 +188,16 @@ class DialogManager(val context: Context) {
         val resultPowerUpsLooted =
             scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
 
+        val resultTime = scoreBoardDialog.findViewById<TextView>(R.id.tv_sm_time_result)
+
         val currentScore = PlayerManager.playerPoints
 
         resultScore.text = PlayerManager.playerPoints.toString()
+        resultGemsLooted.text = PlayerManager.levelGems.toString()
+        resultPowerUpsLooted.text = PlayerManager.levelPowerups.toString()
+        resultTime.text = PlayerManager.levelTimeString
+
+
 
         var stars = 0
         starBar.progress = 0
@@ -633,7 +640,7 @@ class DialogManager(val context: Context) {
 
         yesButton.setOnClickListener {
 
-            if (PlayerManager.buyPowerUp(20)){
+            if (PlayerManager.buyPowerUp(price.toInt())){
                 PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] =+ 1
                 enterLevelScreen(backupLevelId)
                 shopDialog.dismiss()
