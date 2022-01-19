@@ -1,51 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/frame">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your Name"
-        android:layout_marginTop="@dimen/margin_5"
-        android:layout_marginLeft="@dimen/margin_5"
-        android:layout_marginRight="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5">
+        android:textColorHint="@color/white"
+        android:hint="Your Name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_enter_name_field"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="3"
-            android:inputType="textCapCharacters"/>
+            android:layout_height="80dp"
+            android:inputType="textCapCharacters"
+            android:background="@drawable/led_profile_frame"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:maxLength="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="80dp"
         android:layout_below="@id/text_frame"
         android:gravity="center"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
         android:weightSum="2">
 
-        <Button
+        <ImageButton
             android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_5"
-            android:text="Save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:background="@drawable/led_item_frame"
             android:layout_weight="1"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/cancel_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_5"
-            android:text="return"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:background="@drawable/led_item_frame"
             android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/text_frame"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_save_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="Save" />
+
+        <TextView
+            android:id="@+id/tv_cancel_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="return" />
     </LinearLayout>
 
 

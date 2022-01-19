@@ -57,8 +57,8 @@ class DialogManager(val context: Context) {
         nameInputDialog.setCancelable(false)
         nameInputDialog.setContentView(R.layout.enter_name_dialog)
         val nameField = nameInputDialog.findViewById<EditText>(R.id.et_enter_name_field)
-        val saveBtn = nameInputDialog.findViewById<Button>(R.id.save_btn)
-        val cancelBtn = nameInputDialog.findViewById<Button>(R.id.cancel_btn)
+        val saveBtn = nameInputDialog.findViewById<ImageView>(R.id.save_btn)
+        val cancelBtn = nameInputDialog.findViewById<ImageView>(R.id.cancel_btn)
 
         saveBtn.setOnClickListener {
 
@@ -79,13 +79,14 @@ class DialogManager(val context: Context) {
 
         cancelBtn.setOnClickListener {
             if (PlayerManager.isFirstAccount){
-                cancelBtn.error = "create an account"
+                toaster(1)
             }else{
                 nameInputDialog.dismiss()
             }
         }
 
         nameInputDialog.show()
+        nameInputDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
     /**
@@ -654,7 +655,7 @@ class DialogManager(val context: Context) {
         when(id){
             0-> Toast.makeText(context, "Level not yet unlocked", Toast.LENGTH_SHORT)
                 .show()
-            1-> Toast.makeText(context, "pressed a button", Toast.LENGTH_SHORT)
+            1-> Toast.makeText(context, "create an account", Toast.LENGTH_SHORT)
                 .show()
             2-> Toast.makeText(context, "not enough gems", Toast.LENGTH_SHORT)
                 .show()
