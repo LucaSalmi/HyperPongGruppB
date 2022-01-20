@@ -10,6 +10,8 @@ object SoundEffectManager {
     var backgroundPlayer: MediaPlayer? = null
     var starSoundPlayer: MediaPlayer? = null
     var brickHitPlayer: MediaPlayer? = null
+    var comboAnnouncer: MediaPlayer? = null
+    var powerUpSoundEffectPlayer: MediaPlayer? = null
 
     fun musicSetup(context: Context, trackId: Int) {
         setupBGMusic(context, trackId)
@@ -93,11 +95,11 @@ object SoundEffectManager {
         backgroundPlayer?.release()
     }
 
-    fun pauseMusic(){
+    fun pauseMusic() {
         backgroundPlayer?.pause()
     }
 
-    fun resumeMusic(){
+    fun resumeMusic() {
         backgroundPlayer?.start()
     }
 
@@ -119,19 +121,7 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-            2 -> context.resources.getIdentifier(
-                "classic_arcade_billow_power_up_custom",
-                "raw",
-                context.packageName
-            )
-            3 -> context.resources.getIdentifier(
-                "robotic_power_down_2",
-                "raw",
-                context.packageName
-            )
-
             else -> {
-
                 context.resources.getIdentifier(
                     "menu_error_8bit_sound_effect_short",
                     "raw",
@@ -147,6 +137,45 @@ object SoundEffectManager {
         }
     }
 
+    fun playPowerUpSounds(context: Context, id: Int) {
+
+        powerUpSoundEffectPlayer?.stop()
+        powerUpSoundEffectPlayer?.release()
+
+
+        var resID: Int = when (id) {
+
+            0 -> context.resources.getIdentifier(
+                "classic_arcade_billow_power_up_custom",
+                "raw",
+                context.packageName
+            )
+            1 -> context.resources.getIdentifier(
+                "robotic_power_down_2",
+                "raw",
+                context.packageName
+            )
+            2 -> context.resources.getIdentifier(
+                "gem_pickup_two",
+                "raw",
+                context.packageName
+            )
+            else -> {
+                context.resources.getIdentifier(
+                    "classic_arcade_billow_power_up_custom",
+                    "raw",
+                    context.packageName
+                )
+            }
+        }
+
+        powerUpSoundEffectPlayer = MediaPlayer.create(context, resID)
+
+        if (PlayerManager.isSoundEffectsActive) {
+            powerUpSoundEffectPlayer?.start()
+        }
+    }
+
     fun playStarSound(context: Context) {
 
         starSoundPlayer = MediaPlayer.create(
@@ -159,6 +188,36 @@ object SoundEffectManager {
 
         if (PlayerManager.isSoundEffectsActive) {
             starSoundPlayer?.start()
+        }
+    }
+
+    fun playComboAnnouncer(context: Context, id: Int) {
+
+        comboAnnouncer?.stop()
+        comboAnnouncer?.release()
+
+
+        var resID: Int = when (id) {
+
+            0 -> context.resources.getIdentifier(
+                "hyper_combo_ultra_version_two",
+                "raw",
+                context.packageName
+            )
+
+            else -> {
+
+                context.resources.getIdentifier(
+                    "hyper_combo_delay",
+                    "raw",
+                    context.packageName
+                )
+            }
+        }
+        comboAnnouncer = MediaPlayer.create(context, resID)
+
+        if (PlayerManager.isSoundEffectsActive) {
+            comboAnnouncer?.start()
         }
     }
 

@@ -138,7 +138,8 @@ object PsyduckEngine {
             }
             powerUp = PowerUp(
 
-                RandomNumberGenerator.rNG(0, rngLimit),
+                //RandomNumberGenerator.rNG(0, rngLimit),
+                5,
                 brickHit.left,
                 brickHit.top,
                 brickHit.right,

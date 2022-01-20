@@ -294,30 +294,30 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 when (powerUp.typeID) {
 
                     2 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         powerUp.bigPaddle(storyMode.player)
-                        SoundEffectManager.jukebox(context, 2)
                         storyMode.player.update()
                     }
                     3 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 1)
                         powerUp.smallPaddle(storyMode.player)
-                        SoundEffectManager.jukebox(context, 3)
                         storyMode.player.update()
                     }
                     4 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.spawnExtraBall()
-                        SoundEffectManager.jukebox(context, 2)
                     }
                     5 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 2)
                         powerUp.addGems()
-                        SoundEffectManager.jukebox(context, 2)
                     }
                     6 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.shotCount = 3
                         storyMode.gunPowerUp()
-                        SoundEffectManager.jukebox(context, 2)
                     }
                     7 ->{
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.activateShield()
                     }
                 }

@@ -455,45 +455,45 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                     0 -> {
                         powerUp.forceBrickDown(infiniteMode.brickRow)
                         restartSpawnTimer()
-                        SoundEffectManager.jukebox(context, 3)
+                        SoundEffectManager.playPowerUpSounds(context, 1)
                     }
                     1 -> {
                         powerUp.forceBrickUp(infiniteMode.brickRow)
                         restartSpawnTimer()
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                     }
                     2 -> {
                         powerUp.bigPaddle(infiniteMode.player)
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         restartPowerUpTimer()
                         infiniteMode.player.update()
                     }
                     3 -> {
                         powerUp.smallPaddle(infiniteMode.player)
-                        SoundEffectManager.jukebox(context, 3)
+                        SoundEffectManager.playPowerUpSounds(context, 1)
                         restartPowerUpTimer()
                         infiniteMode.player.update()
                     }
                     4 -> {
                         infiniteMode.spawnExtraBall()
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                     }
                     5->{
                         powerUp.addGems()
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 2)
                     }
                     6 ->{
                         infiniteMode.shotCount = 3
                         infiniteMode.gunPowerUp()
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                     }
                     7 -> {
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         infiniteMode.activateShield()
                     }
                     8 -> {
                         PlayerManager.gainLife()
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         myActivity.updateText()
                     }
                 }
