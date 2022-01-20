@@ -466,7 +466,6 @@ class DialogManager(val context: Context) {
                     enterLevelDialog.dismiss()
                 }
 
-
                 if (PlayerManager.powerUpActivated >= 0) {
 
                     if (PlayerManager.powerUpInventory[0] > 0) { //multiball powerup

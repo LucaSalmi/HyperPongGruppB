@@ -69,15 +69,16 @@ object SoundEffectManager {
                 context.packageName
             )
             7 -> context.resources.getIdentifier(  // DwtD blood moon
-                "blood_moon",
+                "blood_moon_mixed_down",
                 "raw",
                 context.packageName
             )
             8 -> context.resources.getIdentifier(  // DwtD that house
-                "that_house",
+                "that_house_mixed_down",
                 "raw",
                 context.packageName
             )
+
             else -> context.resources.getIdentifier(
                 "hyper_pong_main_theme_3",
                 "raw",
@@ -121,6 +122,11 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
+            2 -> context.resources.getIdentifier(  // Menu Select sound
+                "short_select_nice_for_menu",
+                "raw",
+                context.packageName
+            )
             else -> {
                 context.resources.getIdentifier(
                     "menu_error_8bit_sound_effect_short",
@@ -156,7 +162,7 @@ object SoundEffectManager {
                 context.packageName
             )
             2 -> context.resources.getIdentifier(
-                "gem_pickup_two",
+                "gem_updated_sound_one",
                 "raw",
                 context.packageName
             )
@@ -204,9 +210,7 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-
             else -> {
-
                 context.resources.getIdentifier(
                     "hyper_combo_delay",
                     "raw",
@@ -215,7 +219,6 @@ object SoundEffectManager {
             }
         }
         comboAnnouncer = MediaPlayer.create(context, resID)
-
         if (PlayerManager.isSoundEffectsActive) {
             comboAnnouncer?.start()
         }

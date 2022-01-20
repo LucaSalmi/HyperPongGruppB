@@ -2,8 +2,9 @@ package com.example.hyperponggruppb.view
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.graphics.Color
+import android.content.Context
+//import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -107,7 +108,10 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
 
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_story)
-                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_story)
+                //val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_story)
+
+                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text)
+                comboTextGif.alpha = 0f
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
@@ -115,6 +119,7 @@ class GameModeStoryActivity : AppCompatActivity() {
 
                     if(PlayerManager.comboPoints > 5){
                         comboMeter.setTextColor(Color.YELLOW)
+                        comboTextGif.alpha = 1f
                     }
                     if(PlayerManager.comboPoints > 10){
                         comboMeter.setTextColor(Color.RED)
@@ -123,10 +128,10 @@ class GameModeStoryActivity : AppCompatActivity() {
                     if (PlayerManager.textIsOn){
 
                         SoundEffectManager.playComboAnnouncer(context = applicationContext, 2)
-                        comboText.text = getString(R.string.hyper_combo_msg)
+                        //comboText.text = getString(R.string.hyper_combo_msg)
 
                     }else{
-                        comboText.text = ""
+                       // comboText.text = ""
                     }
 
                 }else{
