@@ -580,8 +580,11 @@ class DialogManager(val context: Context) {
 
         startLevelBtn.setOnClickListener {
 
-            PlayerManager.starCounter = 0
             enterLevelDialog.dismiss()
+
+            if (PlayerManager.powerUpActivated >= 0){
+                PlayerManager.powerUpInventory[PlayerManager.powerUpActivated] -= 1
+            }
 
             val overWorldActivity = context as OverWorldActivity
             overWorldActivity.startLevel()
