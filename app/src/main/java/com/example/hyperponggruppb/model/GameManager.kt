@@ -133,7 +133,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
             PlayerManager.currentLevel - 1
         }
 
-        brickRow = BrickStructure.createPattern(brickRow, patternId)
+        brickRow = BrickStructure.createPattern(brickRow, patternId, isStoryMode)
 
         if (!isStoryMode) {
             makeOOBBricks()
