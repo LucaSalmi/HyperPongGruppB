@@ -190,20 +190,25 @@ class DialogManager(val context: Context) {
         var bonusTimeScore = 0
 
         resultGemsLooted.text = PlayerManager.levelGems.toString()
-        Log.d(TAG, "scoreBoardStoryMode: timeForLevel = ${PlayerManager.levelTimeLimit / 1000}")
-        Log.d(TAG, "scoreBoardStoryMode: Leveltime = ${PlayerManager.levelTime / 1000}")
-
-        // resultTime.text = PlayerManager.levelTimeString
 
         resultScore.text = currentScore.toString()
 
-        if (PlayerManager.lives > 0) {
-            bonusTimeScore = (PlayerManager.levelTime.toInt()/1000) * 5
+        bonusTimeScore = when (PlayerManager.lives) {
+
+            3 -> {
+                (PlayerManager.levelTime.toInt()/1000) * 5
+            }
+            2 -> {
+                (PlayerManager.levelTime.toInt()/1000) * 4
+            }
+            else -> {
+                (PlayerManager.levelTime.toInt()/1000) * 3
+            }
         }
+
         val totalScore = currentScore + bonusTimeScore
         BonusTime.text = bonusTimeScore.toString()
         resultTotalScore.text = totalScore.toString()
-
 
         val currentLevelMaxScore = PlayerManager.currentTotalBrickScore * 2
         starBar.max = currentLevelMaxScore
@@ -222,17 +227,6 @@ class DialogManager(val context: Context) {
         }
         starBar.progress = totalScore
 
-        Log.d(TAG, "scoreBoardStoryMode: totalscore = $totalScore")
-        Log.d(TAG, "scoreBoardStoryMode: starbar.Max = ${starBar.max}")
-        Log.d(TAG, "scoreBoardStoryMode: bonustimeScore = $bonusTimeScore")
-
-
-
-        //while (starBar.progress < (totalScore)) {
-          //  starBar.progress += 5
-        //Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
-
-
         if (starBar.progress >= (currentLevelMaxScore / 2) && !isOneStar) {
             starOne.setImageResource(R.drawable.star)
             Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
@@ -250,8 +244,6 @@ class DialogManager(val context: Context) {
             Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
 
         }
-
-
 
         returnBtn.setOnClickListener {
 
@@ -367,7 +359,6 @@ class DialogManager(val context: Context) {
         if (PlayerManager.powerUpInventory[2] < 1) { //shield powerup
             screenLevelLoadoutThree.setImageResource(R.drawable.locked_shield_button)
         }
-
 
         val starContainerOne = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
         val starContainerTwo = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)

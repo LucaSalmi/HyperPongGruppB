@@ -145,7 +145,6 @@ object PlayerManager {
 
         usersArray.add(save)
         activeUser = save
-        Log.d(TAG, "saved: ${activeUser!!.levelStarsArray}")
 
         orderArray()
 
@@ -252,8 +251,6 @@ object PlayerManager {
     }
 
     fun setLevelHIghScore() {
-
-        Log.d(TAG, "setLevelHIghScore: $currentLevel")
 
         if (levelScoresArray.size < currentLevel) {
             levelScoresArray.add(playerPoints)

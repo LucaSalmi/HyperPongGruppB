@@ -81,8 +81,6 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
                 val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))
                 activatedPowerup.setOnClickListener {
-                    Log.d(TAG, "activatePowerup: clicked")
-                    Log.d(TAG, "activatePowerup: selected =  ${PlayerManager.selectedPowerUp}")
                     if (PlayerManager.selectedPowerUp == 0) { //multiball powerup
                         activatedPowerup.setImageResource(R.drawable.multiball_button)
                     } else if (PlayerManager.selectedPowerUp == 1) {

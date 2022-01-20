@@ -55,18 +55,14 @@ class PointFragmentStoryMode : Fragment() {
             starBar?.progress = (currentScore)
         }
         if (starBar?.progress!! >= currentLevelMaxScore/2  && PlayerManager.starCounter == 0) {
-            Log.d(TAG, "storyModeUI: star reach")
             PlayerManager.starCounter = 1
-            Log.d(TAG, "onCreateView: starcounter = ${PlayerManager.starCounter}")
 
         }
         if (starBar.progress >= ((currentLevelMaxScore / 4) * 3) && PlayerManager.starCounter == 1) {
-            Log.d(TAG, "storyModeUI:: 2 star reach")
             PlayerManager.starCounter = 2
 
         }
         if (starBar.progress >= PlayerManager.currentTotalBrickScore && PlayerManager.starCounter == 2) {
-            Log.d(TAG, "storyModeUI: 3 star reach")
             PlayerManager.starCounter = 3
         }
         if (PlayerManager.starCounter == 1){
@@ -108,7 +104,6 @@ class PointFragmentStoryMode : Fragment() {
             0 ->  BrickStructure.brickScoreValue = 10
 
             5 ->  {
-                Log.d(TAG, "comboPointEditor: combo5 active")
                 BrickStructure.brickScoreValue = 15
             }
 

@@ -277,7 +277,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             restartSpawnTimer()
 
         }
-        Log.d(TAG, "onTouchEvent: $gameStart")
         return true
     }
 
@@ -290,7 +289,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
     }
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
-        Log.d(TAG, "surfaceDestroyed: we here")
         gameStart = false
         stop()
     }
