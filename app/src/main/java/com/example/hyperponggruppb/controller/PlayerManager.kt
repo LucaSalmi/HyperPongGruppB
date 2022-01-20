@@ -15,7 +15,7 @@ object PlayerManager {
     var activeUser: PlayerData? = null
     var lives = 0
     var playerPoints = 0
-    var playTime = 0
+    var ticksToSpeed = 0
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
     var isGameEnded = false
@@ -212,13 +212,13 @@ object PlayerManager {
 
     }
 
-    fun loseLife(gameManager: GameManager) {
-        PlayerManager.lives--
+    fun loseLife() {
+        lives--
     }
 
-    fun gainLife(gameManager: GameManager) {
-        if (PlayerManager.lives < 3) {
-            PlayerManager.lives++
+    fun gainLife() {
+        if (lives < 3) {
+            lives++
         } else playerPoints += 10
 
     }

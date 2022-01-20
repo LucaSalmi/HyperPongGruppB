@@ -259,7 +259,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PsyduckEngine.damageTaken) {
 
             PsyduckEngine.damageTaken = false
-            PlayerManager.loseLife(storyMode)
+            PlayerManager.loseLife()
             gameEnd()
         }
     }

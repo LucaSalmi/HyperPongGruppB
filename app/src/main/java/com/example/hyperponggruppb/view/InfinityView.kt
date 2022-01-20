@@ -95,7 +95,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             changeSpawnTimerLength()
         }
 
-        PlayerManager.playTime = timeTicks
+        PlayerManager.ticksToSpeed = timeTicks
         myActivity.updateText()
         spawnTimer.start()
     }
@@ -410,7 +410,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         if (PsyduckEngine.damageTaken) {
 
             PsyduckEngine.damageTaken = false
-            PlayerManager.loseLife(infiniteMode)
+            PlayerManager.loseLife()
             gameEnd()
         }
     }
@@ -493,7 +493,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                         infiniteMode.activateShield()
                     }
                     8 -> {
-                        PlayerManager.gainLife(infiniteMode)
+                        PlayerManager.gainLife()
                         SoundEffectManager.playPowerUpSounds(context, 0)
                         myActivity.updateText()
                     }

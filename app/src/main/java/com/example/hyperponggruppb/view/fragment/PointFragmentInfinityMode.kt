@@ -45,7 +45,7 @@ class PointFragmentInfinityMode : Fragment() {
             }
         }
 
-        when (PlayerManager.playTime) {
+        when (PlayerManager.ticksToSpeed) {
 
             0 -> {
                 speedMeterView?.setImageResource(R.drawable.speed_one)
