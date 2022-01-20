@@ -160,7 +160,7 @@ object SoundEffectManager {
                 context.packageName
             )
             2 -> context.resources.getIdentifier(
-                "gem_pickup_two",
+                "gem_updated_sound_one",
                 "raw",
                 context.packageName
             )
