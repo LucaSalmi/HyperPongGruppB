@@ -70,6 +70,7 @@
              android:src="@drawable/hypercombo"
              android:id="@+id/gif_combo_text"
              android:layoutDirection="locale"
+             android:alpha="0"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              app:layout_constraintTop_toTopOf="parent"

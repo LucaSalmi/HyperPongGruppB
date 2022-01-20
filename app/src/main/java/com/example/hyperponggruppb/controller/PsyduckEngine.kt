@@ -54,7 +54,7 @@ object PsyduckEngine {
 
             PlayerManager.comboPoints++
 
-            if (PlayerManager.comboPoints == 3) {
+            if (PlayerManager.comboPoints == 5 || PlayerManager.comboPoints == 10) {
                 PlayerManager.textIsOn = true
             }
 
