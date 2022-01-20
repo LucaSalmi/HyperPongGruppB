@@ -222,14 +222,17 @@ object BrickStructure {
                 }
                 'Z' -> {
                     brickRow[index].asset = AssetManager.brickAsset(6)
+                    brickRow[index].hasPowerUp = true
                     temBricks.add(brickRow[index])
                 }
                 'X' -> {
                     brickRow[index].asset = AssetManager.brickAsset(7)
+                    brickRow[index].hasPowerUp = true
                     temBricks.add(brickRow[index])
                 }
                 'Y' -> {
                     brickRow[index].asset = AssetManager.brickAsset(8)
+                    brickRow[index].hasPowerUp = true
                     temBricks.add(brickRow[index])
                 }
                 '1' ->{
