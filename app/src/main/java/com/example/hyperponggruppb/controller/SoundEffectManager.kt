@@ -5,6 +5,7 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.util.Log
 import com.example.hyperponggruppb.model.RandomNumberGenerator
+import java.lang.IllegalStateException
 
 object SoundEffectManager {
 
@@ -33,9 +34,12 @@ object SoundEffectManager {
     }
 
     fun checkIfPlaying(): Boolean{
-
-        if (backgroundPlayer != null){
-            return backgroundPlayer?.isPlaying!!
+        try {
+            if (backgroundPlayer != null){
+                return backgroundPlayer!!.isPlaying
+            } 
+        }catch (e: IllegalStateException){
+            Log.e(TAG, "checkIfPlaying: caught MF", )
         }
         return false
     }

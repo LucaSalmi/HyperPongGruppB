@@ -29,7 +29,6 @@ class MainActivityMainMenu : AppCompatActivity() {
     private var isStoryMode = true
     private lateinit var sp: SharedPreferences
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -169,6 +168,10 @@ class MainActivityMainMenu : AppCompatActivity() {
 
                 SoundEffectManager.jukebox(this, 2)
                 val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
+
+                if (PlayerManager.isMusicActive) {
+                    SoundEffectManager.stopMusic()
+                }
                 startActivity(toLeaderboard)
             }
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -261,5 +264,13 @@ class MainActivityMainMenu : AppCompatActivity() {
    fun loadUser() {
        PlayerManager.loadUserData()
    }
+
+    override fun onBackPressed() {
+
+        if (PlayerManager.isMusicActive){
+            SoundEffectManager.stopMusic()
+        }
+        super.onBackPressed()
+    }
 
 }
