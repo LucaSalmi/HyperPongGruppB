@@ -2,6 +2,7 @@ package com.example.hyperponggruppb.view
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.graphics.Color
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -106,23 +107,22 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
 
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_story)
-                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_story)
+                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text_story)
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
-                    if (PlayerManager.textIsOn){
-                        comboText.text = getString(R.string.hyper_combo_msg)
+                    if(PlayerManager.textIsOn){
+
+                        comboTextGif.alpha = 1f
+                        SoundEffectManager.playComboAnnouncer(this, 2)
 
                     }else{
-                        comboText.text = ""
+
+                        comboTextGif.alpha = 0f
                     }
-
-                }else{
-                    comboMeter.text = ""
                 }
-
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "updateCombo: caught")
             }

@@ -54,7 +54,7 @@ object PsyduckEngine {
 
             PlayerManager.comboPoints++
 
-            if (PlayerManager.comboPoints == 5) {
+            if (PlayerManager.comboPoints == 5 || PlayerManager.comboPoints == 10) {
                 PlayerManager.textIsOn = true
             }
 
@@ -224,7 +224,6 @@ object PsyduckEngine {
                     }
 
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
-                        Log.d(TAG, "comboCounter = ${PlayerManager.comboPoints}")
 
                         //val ballLeftIsInsideOfBrick = ball.ballLeft + ball.ballsize/2 > brickHit.left
                         //val ballRightIsInsideOfBrick = ball.ballRight - ball.ballsize/2 < brickHit.right

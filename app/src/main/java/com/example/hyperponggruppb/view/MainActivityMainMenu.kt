@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -142,7 +143,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
             }
             if (event.action == MotionEvent.ACTION_DOWN) {
-
+                SoundEffectManager.jukebox(this, 2)
                 isStoryMode = !isStoryMode
                 changeButtonText()
 
@@ -163,6 +164,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
                 isStoryMode = !isStoryMode
                 changeButtonText()
+                SoundEffectManager.jukebox(this, 2)
                 binding.btnModeBack.alpha = 0.3f
                 true
             } else false

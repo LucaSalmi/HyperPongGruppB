@@ -10,6 +10,7 @@ import com.example.hyperponggruppb.view.fragment.PointFragmentInfinityMode
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.databinding.ActivityGameModeOneBinding
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.hyperponggruppb.model.AssetManager
 import java.lang.Exception
@@ -55,20 +56,21 @@ class GameModeOneActivity : AppCompatActivity() {
             try {
 
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_infinity)
-                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_infinity)
+                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text_infinity)
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
-                    if (PlayerManager.textIsOn){
-                        comboText.text = getString(R.string.hyper_combo_msg)
-                    }else{
-                        comboText.text = ""
-                    }
+                    if(PlayerManager.textIsOn){
 
-                }else{
-                    comboMeter.text = ""
+                        comboTextGif.alpha = 1f
+                        SoundEffectManager.playComboAnnouncer(this, 2)
+
+                    }else{
+
+                        comboTextGif.alpha = 0f
+                    }
                 }
 
             } catch (e: Exception) {

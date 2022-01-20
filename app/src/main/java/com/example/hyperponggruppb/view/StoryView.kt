@@ -84,7 +84,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private val comboMsgTimer = object : CountDownTimer(1500L, 1000L) {
+    private val comboMsgTimer = object : CountDownTimer(2000L, 1000L){
         override fun onTick(p0: Long) {
 
         }
@@ -279,8 +279,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (PlayerManager.textIsOn && !isCounting) {
 
-            SoundEffectManager.playComboAnnouncer(context)
-            Log.d(TAG, "playerAndBrickInteractions: we here")
             isCounting = true
             comboMsgTimer.start()
         }
