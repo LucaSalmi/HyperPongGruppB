@@ -12,8 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <LinearLayout
+                android:layout_marginTop="80dp"
                 android:id="@+id/shop_dialog_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,6 +30,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout

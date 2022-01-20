@@ -12,4 +12,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical"/>
 
+    <LinearLayout
+        android:id="@+id/linear_layout_gem_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="@drawable/character_black_bg_fade"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/iv_gem_symbol_two"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/gem"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_gem_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/aldrich"
+            android:gravity="center"
+            android:hint=": 5"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toRightOf="@id/iv_gem_symbol_two"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
 </RelativeLayout>

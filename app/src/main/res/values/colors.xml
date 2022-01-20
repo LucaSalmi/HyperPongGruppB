@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00F44336</color>
 
-    <color name="faded_black">#1A000000</color>
+    <color name="faded_black">#66000000</color>
     <color name="trans">#00000000</color>
     <color name="gold">#c59508</color>
     <color name="star">#FFC313</color>
@@ -20,4 +20,6 @@
     <color name="green">#4CFF00</color>
     <color name="pink">#FF00FB</color>
     <color name="blue">#00FFB7</color>
+
+
 </resources>

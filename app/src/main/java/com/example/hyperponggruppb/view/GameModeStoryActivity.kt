@@ -20,12 +20,16 @@ import com.example.hyperponggruppb.view.fragment.PointFragmentStoryMode
 
 class GameModeStoryActivity : AppCompatActivity() {
 
+
+
     private lateinit var binding: ActivityGameModeStoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameModeStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setFragments()
+
+
 
     }
 
