@@ -116,7 +116,6 @@ class GameModeStoryActivity : AppCompatActivity() {
                     if(PlayerManager.textIsOn){
 
                         comboTextGif.alpha = 1f
-                        SoundEffectManager.playComboAnnouncer(this, 2)
 
                     }else{
 

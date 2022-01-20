@@ -55,6 +55,7 @@ object PsyduckEngine {
             PlayerManager.comboPoints++
 
             if (PlayerManager.comboPoints == 5 || PlayerManager.comboPoints == 10) {
+                SoundEffectManager.playComboAnnouncer(context)
                 PlayerManager.textIsOn = true
             }
 
