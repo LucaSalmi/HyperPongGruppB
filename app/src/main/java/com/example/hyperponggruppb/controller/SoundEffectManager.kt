@@ -199,33 +199,18 @@ object SoundEffectManager {
         var resID: Int = when (id) {
 
             0 -> context.resources.getIdentifier(
-                "rock_hit_1",
+                "rock_hit_final_extra",
                 "raw",
                 context.packageName
             )
             1 -> context.resources.getIdentifier(
-                "rock_hit_2",
-                "raw",
-                context.packageName
-            )
-            2 -> context.resources.getIdentifier(
-                "rock_hit_3",
-                "raw",
-                context.packageName
-            )
-            3 -> context.resources.getIdentifier(
-                "rock_hit_4",
-                "raw",
-                context.packageName
-            )
-            4 -> context.resources.getIdentifier(
-                "rock_hit_5",
+                "rock_hit_final_standard",
                 "raw",
                 context.packageName
             )
             else -> {
                 context.resources.getIdentifier(
-                    "rock_hit_6",
+                    "rock_hit_final_standard",
                     "raw",
                     context.packageName
                 )
