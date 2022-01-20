@@ -35,6 +35,7 @@ object SoundEffectManager {
     private fun setupBGMusic(context: Context, trackId: Int) {
 
         var resID = when (trackId) {
+
             0 -> context.resources.getIdentifier(
                 "hyper_pong_main_theme_3",
                 "raw",
@@ -45,42 +46,11 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-            2 -> context.resources.getIdentifier(
-                "theme_part_1",
-                "raw",
-                context.packageName
-            )
-            3 -> context.resources.getIdentifier(
-                "theme_part_2",
-                "raw",
-                context.packageName
-            )
-            4 -> context.resources.getIdentifier(
-                "theme_part_3",
-                "raw",
-                context.packageName
-            )
-            5 -> context.resources.getIdentifier(
-                "theme_part_4",
-                "raw",
-                context.packageName
-            )
-            6 -> context.resources.getIdentifier(   // New Theme try
+            2 -> context.resources.getIdentifier(   // New Theme try
                 "hyper_pong_theme_v5_infinity_mode",
                 "raw",
                 context.packageName
             )
-            7 -> context.resources.getIdentifier(  // DwtD blood moon
-                "blood_moon_mixed_down",
-                "raw",
-                context.packageName
-            )
-            8 -> context.resources.getIdentifier(  // DwtD that house
-                "that_house_mixed_down",
-                "raw",
-                context.packageName
-            )
-
             else -> context.resources.getIdentifier(
                 "hyper_pong_main_theme_3",
                 "raw",

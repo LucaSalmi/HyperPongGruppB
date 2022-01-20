@@ -93,9 +93,9 @@ object PlayerManager {
 
         if (isInfiniteMode) {
 
-            if (playerPoints > activeUser?.highScore!!) {
+            if (playerPoints > highScore) {
 
-                activeUser?.highScore = playerPoints
+                highScore = playerPoints
             }
         }
 

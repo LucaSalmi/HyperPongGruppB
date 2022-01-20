@@ -381,8 +381,10 @@ object PsyduckEngine {
                     }
 
                     if (ball.playerCollision) {
+
                         ball.ballBottom = player.top.toInt()
                         ball.ballTop = (player.top + ball.ballsize).toInt()
+                        PlayerManager.comboPoints = 0
 
                         when {
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.1 * player.playerWidth -> { // 0% --> 10% of the pad

@@ -70,6 +70,9 @@ class GameModeOneActivity : AppCompatActivity() {
 
                         comboTextGif.alpha = 0f
                     }
+                }else{
+
+                    comboMeter.text = ""
                 }
 
             } catch (e: Exception) {

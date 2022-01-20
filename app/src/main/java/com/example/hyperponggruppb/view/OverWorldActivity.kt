@@ -25,7 +25,7 @@ class OverWorldActivity : AppCompatActivity() {
         storyModeDialog = DialogManager(this)
 
         if (PlayerManager.isMusicActive){
-            SoundEffectManager.musicSetup(this, 7)
+            SoundEffectManager.musicSetup(this, 2)
         }
 
         adapter = ViewPagerAdapter(this)

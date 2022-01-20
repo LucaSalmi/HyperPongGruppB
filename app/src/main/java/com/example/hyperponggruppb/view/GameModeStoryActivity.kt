@@ -27,10 +27,6 @@ class GameModeStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         setFragments()
 
-        if (PlayerManager.isMusicActive){
-            SoundEffectManager.musicSetup(this, 8)
-        }
-
     }
 
     private fun setFragments() {
@@ -121,6 +117,8 @@ class GameModeStoryActivity : AppCompatActivity() {
 
                         comboTextGif.alpha = 0f
                     }
+                }else{
+                    comboMeter.text = ""
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "updateCombo: caught")
