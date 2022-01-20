@@ -103,9 +103,9 @@ object PsyduckEngine {
 
             infiniteModePowerUpSpawn(powerUpArray)
 
-        } else if (ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp) {
+        } else if (ball.brickCollision && gameManager.isStoryMode && infoBrick.hasPowerUp > 0) {
 
-            storyModePowerUpSpawn(powerUpArray)
+            storyModePowerUpSpawn(powerUpArray, infoBrick.hasPowerUp)
         }
 
         if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks + 1) {
@@ -114,11 +114,10 @@ object PsyduckEngine {
         }
     }
 
-    private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
+    private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>, id: Int) {
 
         powerUp = PowerUp(
-            //RandomNumberGenerator.rNG(2, 7),
-            10,
+            id,
             brickHit.left,
             brickHit.top,
             brickHit.right,
@@ -139,8 +138,7 @@ object PsyduckEngine {
             }
             powerUp = PowerUp(
 
-                //RandomNumberGenerator.rNG(0, rngLimit),
-                5,
+                RandomNumberGenerator.rNG(0, rngLimit),
                 brickHit.left,
                 brickHit.top,
                 brickHit.right,

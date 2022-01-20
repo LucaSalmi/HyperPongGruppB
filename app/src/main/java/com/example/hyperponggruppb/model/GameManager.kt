@@ -166,6 +166,10 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         isShieldActive = true
     }
 
+    /**
+     * all the following functions draw objects on the canvas
+     */
+
     fun drawBricks(canvas: Canvas){
 
         for (brick in brickRow) {

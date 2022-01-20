@@ -67,6 +67,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
     }
 
+    /**
+     * usig a total time based on the number of bricks, it counts down from that
+     */
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
 
         override fun onTick(millisUntilFinished: Long) {
@@ -84,6 +87,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
+    /**
+     * checks that the message coming up when the player scores a combo of 5 or 10 hit disappears after 2 seconds
+     */
     private val comboMsgTimer = object : CountDownTimer(2000L, 1000L){
         override fun onTick(p0: Long) {
 
@@ -402,6 +408,9 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         )
     }
 
+    /**
+     * plays a sound when the player obtains a star
+     */
     private fun starSound() {
 
         if (PlayerManager.starCounter == 1 && soundCode == 0) {

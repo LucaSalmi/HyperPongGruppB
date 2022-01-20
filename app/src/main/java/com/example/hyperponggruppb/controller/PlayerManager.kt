@@ -29,7 +29,7 @@ object PlayerManager {
     var powerUpActivated: Int = 0
     var selectedPowerUp = -1
     var activatePowerUp = false
-
+//prices for powerUps
     val multiBallPrice = 30
     val gunPrice = 40
     val shieldPrice = 20
@@ -43,7 +43,7 @@ object PlayerManager {
     var levelGems = 0
 
     var textIsOn = false
-
+// var bound to the user
     var name = "null"
     var levelScoresArray: MutableList<Int> = mutableListOf()
     var levelStarsArray: MutableList<Int> = mutableListOf()
