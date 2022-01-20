@@ -141,11 +141,11 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     }
 
     fun makeOOBBricks() {
-
         var tempArray = mutableListOf<Bricks>()
         tempArray = BrickStructure.makeOOBBricks(tempArray)
         tempArray = BrickStructure.createOOBBPattern(tempArray, RandomNumberGenerator.rNG(0, 13))
         brickRow.addAll(tempArray)
+
     }
 
 

@@ -35,9 +35,7 @@ class MainActivityMainMenu : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         Handler(Looper.myLooper()!!).postDelayed({
-
             setTheme(R.style.Theme_HyperPongGruppB)
-
         }, 2000)
 
         setContentView(binding.root)
@@ -131,7 +129,6 @@ class MainActivityMainMenu : AppCompatActivity() {
                 } else {
                     startInfinityMode()
                 }
-
                 true
             } else false
 
@@ -140,15 +137,13 @@ class MainActivityMainMenu : AppCompatActivity() {
         binding.btnModeForward.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnModeForward.alpha = 1f
+                SoundEffectManager.jukebox(this, 2)
 
             }
             if (event.action == MotionEvent.ACTION_DOWN) {
-                SoundEffectManager.jukebox(this, 2)
                 isStoryMode = !isStoryMode
                 changeButtonText()
-
                 binding.btnModeForward.alpha = 0.3f
-
                 true
             } else false
 
@@ -157,14 +152,12 @@ class MainActivityMainMenu : AppCompatActivity() {
         binding.btnModeBack.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnModeBack.alpha = 1f
-
+                SoundEffectManager.jukebox(this, 2)
             }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
-
                 isStoryMode = !isStoryMode
                 changeButtonText()
-                SoundEffectManager.jukebox(this, 2)
                 binding.btnModeBack.alpha = 0.3f
                 true
             } else false
@@ -174,13 +167,11 @@ class MainActivityMainMenu : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.ivLeaderboard.alpha = 1f
 
+                SoundEffectManager.jukebox(this, 2)
                 val toLeaderboard = Intent(this, LeaderBoardActivity::class.java)
                 startActivity(toLeaderboard)
-
             }
-
             if (event.action == MotionEvent.ACTION_DOWN) {
-
                 binding.ivLeaderboard.alpha = 0.3f
                 true
             } else false
@@ -189,14 +180,10 @@ class MainActivityMainMenu : AppCompatActivity() {
         binding.btnChangeAccount.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnChangeAccount.alpha = 1f
-
-                //SoundEffectManager.stopMusic()
+                SoundEffectManager.jukebox(this, 2)
                 mainDialog.changeAccount()
-
             }
-
             if (event.action == MotionEvent.ACTION_DOWN) {
-
                 binding.btnChangeAccount.alpha = 0.3f
                 true
             } else false
@@ -205,13 +192,11 @@ class MainActivityMainMenu : AppCompatActivity() {
         binding.ivSettings.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.ivSettings.alpha = 1f
-
                 mainDialog.settingsDialog(sp)
-
+                SoundEffectManager.jukebox(this, 2)
             }
 
             if (event.action == MotionEvent.ACTION_DOWN) {
-
                 binding.ivSettings.alpha = 0.3f
                 true
             } else false

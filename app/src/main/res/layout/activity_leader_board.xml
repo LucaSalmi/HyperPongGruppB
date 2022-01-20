@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LeaderBoardActivity"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/title"
+        android:fontFamily="@font/aldrich"
         android:text="LEADERBOARD"
         android:textColor="@color/white"
         android:background="@color/black"
