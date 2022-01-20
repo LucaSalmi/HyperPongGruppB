@@ -254,6 +254,8 @@ class MainActivityMainMenu : AppCompatActivity() {
 
    }
 
+
+
    override fun onResume() {
 
        binding.ivGameMode.alpha = 1f
