@@ -580,6 +580,8 @@ class DialogManager(val context: Context) {
 
         startLevelBtn.setOnClickListener {
 
+            SoundEffectManager.stopMusic() //To pause music when entering level
+
             PlayerManager.starCounter = 0
             enterLevelDialog.dismiss()
 

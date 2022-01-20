@@ -10,6 +10,8 @@ object SoundEffectManager {
     var backgroundPlayer: MediaPlayer? = null
     var starSoundPlayer: MediaPlayer? = null
     var brickHitPlayer: MediaPlayer? = null
+    var comboAnnouncer: MediaPlayer? = null
+    var gemSoundEffectPlayer: MediaPlayer? = null
 
     fun musicSetup(context: Context, trackId: Int) {
         setupBGMusic(context, trackId)
@@ -129,7 +131,6 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-
             else -> {
 
                 context.resources.getIdentifier(
@@ -159,6 +160,65 @@ object SoundEffectManager {
 
         if (PlayerManager.isSoundEffectsActive) {
             starSoundPlayer?.start()
+        }
+    }
+
+    fun playGemPickupSound(context: Context) {
+
+        gemSoundEffectPlayer = MediaPlayer.create(
+            context, context.resources.getIdentifier(
+                "gem_pickup_two",
+                "raw",
+                context.packageName
+            )
+        )
+        if (PlayerManager.isSoundEffectsActive) {
+            gemSoundEffectPlayer?.start()
+        }
+    }
+
+/*
+    fun playComboAnnouncer(context: Context) {
+
+        comboAnnouncer = MediaPlayer.create(
+            context, context.resources.getIdentifier(
+                "hyper_combo_ultra_instinct",
+                "raw",
+                context.packageName
+            )
+        )
+        if (PlayerManager.isSoundEffectsActive) {
+            comboAnnouncer?.start()
+        }
+    }
+*/
+    fun playComboAnnouncer(context: Context, id: Int) {
+
+        comboAnnouncer?.stop()
+        comboAnnouncer?.release()
+
+
+        var resID: Int = when (id) {
+
+            0 -> context.resources.getIdentifier(
+                "hyper_combo_ultra_version_two",
+                "raw",
+                context.packageName
+            )
+
+            else -> {
+
+                context.resources.getIdentifier(
+                    "hyper_combo_delay",
+                    "raw",
+                    context.packageName
+                )
+            }
+        }
+        comboAnnouncer = MediaPlayer.create(context, resID)
+
+        if (PlayerManager.isSoundEffectsActive) {
+            comboAnnouncer?.start()
         }
     }
 
