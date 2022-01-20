@@ -312,6 +312,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     5 -> {
                         powerUp.addGems()
                         isGemCatched = true
+                        Log.d(TAG, "isGemCatched = $isGemCatched")
+                        SoundEffectManager.jukebox(context, 5)
                         //SoundEffectManager.playGemPickupSound(context)
                     }
                     6 -> {
@@ -411,6 +413,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             SoundEffectManager.playGemPickupSound(context)
             isGemCatched = false
         }
+
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {

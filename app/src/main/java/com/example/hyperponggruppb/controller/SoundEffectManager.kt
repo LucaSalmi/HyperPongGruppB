@@ -131,8 +131,12 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
+            5 -> context.resources.getIdentifier(
+                "gem_pickup_two",
+                "raw",
+                context.packageName
+            )
             else -> {
-
                 context.resources.getIdentifier(
                     "menu_error_8bit_sound_effect_short",
                     "raw",
@@ -177,21 +181,7 @@ object SoundEffectManager {
         }
     }
 
-/*
-    fun playComboAnnouncer(context: Context) {
 
-        comboAnnouncer = MediaPlayer.create(
-            context, context.resources.getIdentifier(
-                "hyper_combo_ultra_instinct",
-                "raw",
-                context.packageName
-            )
-        )
-        if (PlayerManager.isSoundEffectsActive) {
-            comboAnnouncer?.start()
-        }
-    }
-*/
     fun playComboAnnouncer(context: Context, id: Int) {
 
         comboAnnouncer?.stop()
