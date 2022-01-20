@@ -22,7 +22,7 @@ object PlayerManager {
     var isInfiniteMode = false
     var isReplaying = false
     var isFirstAccount = false
-    var currentMaxScore = 1000
+    var currentTotalBrickScore = 1000
     var starCounter = 0
     var powerUpActivated: Int = 0
     var selectedPowerUp = -1
@@ -299,5 +299,6 @@ object PlayerManager {
             false
         }
     }
+
 
 }

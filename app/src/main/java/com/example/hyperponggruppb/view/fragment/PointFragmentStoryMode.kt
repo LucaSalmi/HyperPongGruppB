@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.hyperponggruppb.R
+import com.example.hyperponggruppb.controller.BrickStructure
 import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.model.GameManager
@@ -34,10 +35,9 @@ class PointFragmentStoryMode : Fragment() {
          val starOne = view?.findViewById<ImageView>(R.id.iv_star_one)
          val starTwo = view?.findViewById<ImageView>(R.id.iv_star_two)
         val starThree = view?.findViewById<ImageView>(R.id.iv_star_three)
+        val currentLevelMaxScore = PlayerManager.currentTotalBrickScore*2
 
-
-
-        starBar?.max = PlayerManager.currentMaxScore
+        starBar?.max = currentLevelMaxScore
         starBar?.progress = 0
 
         countdownClock?.text = PlayerManager.levelCountdown
@@ -48,18 +48,18 @@ class PointFragmentStoryMode : Fragment() {
         if (currentScore > refScore) {
             starBar?.progress = (currentScore)
         }
-        if (starBar?.progress!! >= PlayerManager.currentMaxScore / 3 && PlayerManager.starCounter == 0) {
+        if (starBar?.progress!! >= currentLevelMaxScore/2  && PlayerManager.starCounter == 0) {
             Log.d(TAG, "storyModeUI: star reach")
             PlayerManager.starCounter = 1
             Log.d(TAG, "onCreateView: starcounter = ${PlayerManager.starCounter}")
 
         }
-        if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && PlayerManager.starCounter == 1) {
+        if (starBar.progress >= ((currentLevelMaxScore / 4) * 3) && PlayerManager.starCounter == 1) {
             Log.d(TAG, "storyModeUI:: 2 star reach")
             PlayerManager.starCounter = 2
 
         }
-        if (starBar.progress >= PlayerManager.currentMaxScore && PlayerManager.starCounter == 2) {
+        if (starBar.progress >= PlayerManager.currentTotalBrickScore && PlayerManager.starCounter == 2) {
             Log.d(TAG, "storyModeUI: 3 star reach")
             PlayerManager.starCounter = 3
         }
@@ -93,6 +93,21 @@ class PointFragmentStoryMode : Fragment() {
                 lives?.setImageResource(R.drawable.one_coolant)
             }
 
+        }
+
+
+        when (PlayerManager.comboPoints){
+
+
+            0 ->  BrickStructure.brickScoreValue = 10
+
+            5 ->  {
+                Log.d(TAG, "comboPointEditor: combo5 active")
+                BrickStructure.brickScoreValue = 15
+            }
+
+
+            10 ->  BrickStructure.brickScoreValue = 20
         }
 
         return view

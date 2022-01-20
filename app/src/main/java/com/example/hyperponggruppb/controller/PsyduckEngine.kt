@@ -54,7 +54,7 @@ object PsyduckEngine {
 
             PlayerManager.comboPoints++
 
-            if (PlayerManager.comboPoints == 3) {
+            if (PlayerManager.comboPoints == 5) {
                 PlayerManager.textIsOn = true
             }
 
@@ -224,6 +224,7 @@ object PsyduckEngine {
                     }
 
                     if (ball.brickCollision) { // kollar om bollen har kolliderat med en brick.
+                        Log.d(TAG, "comboCounter = ${PlayerManager.comboPoints}")
 
                         //val ballLeftIsInsideOfBrick = ball.ballLeft + ball.ballsize/2 > brickHit.left
                         //val ballRightIsInsideOfBrick = ball.ballRight - ball.ballsize/2 < brickHit.right
@@ -250,36 +251,33 @@ object PsyduckEngine {
 
                         }
 
-                        Log.d(
-                            TAG,
-                            "top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied"
-                        )
-                        Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
-                        Log.d(TAG, "ballspeed X = ${ball.ballSpeedX} ")
+                        // Log.d(TAG,"top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied" )
+                        // Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
+                        // Log.d(TAG, "ballspeed X = ${ball.ballSpeedX} ")
 
                         if (!ball.ballGoesRight() && !ball.ballGoesDown()) {
 
                             if (isBottomOccupied) {
-                                Log.d(TAG, "ballPhysics: right hit 1")
+                                //Log.d(TAG, "ballPhysics: right hit 1")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
                                 ball.ballRight = brickHit.right + ball.ballsize.toInt()
 
                             } else if (isRightOccupied) {
-                                Log.d(TAG, "ballPhysics: bot hit 1")
+                                //Log.d(TAG, "ballPhysics: bot hit 1")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
                             } else if (ball.ballTop + ball.ballsize * 0.75 > brickHit.bottom) {
                                 // ball is inside of brick's sides & outside of brick top n Bottom
-                                Log.d(TAG, "ballPhysics: bot hit 1 - v2")
+                                //Log.d(TAG, "ballPhysics: bot hit 1 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
                             } else {                                             // ball is outside of brick's sides
-                                Log.d(TAG, "ballPhysics: right hit 1 - v2")
+                               // Log.d(TAG, "ballPhysics: right hit 1 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
                                 ball.ballRight = brickHit.right + ball.ballsize.toInt()
@@ -288,26 +286,26 @@ object PsyduckEngine {
                         } else if (ball.ballGoesRight() && !ball.ballGoesDown()) {
 
                             if (isBottomOccupied) {
-                                Log.d(TAG, "ballPhysics: left hit 1")
+                               // Log.d(TAG, "ballPhysics: left hit 1")
                                 ball.ballSpeedX *= -1
                                 ball.ballRight = brickHit.left
                                 ball.ballLeft = brickHit.left - ball.ballsize.toInt()
 
                             } else if (isLeftOccupied) {
-                                Log.d(TAG, "ballPhysics: bot hit 2")
+                                //Log.d(TAG, "ballPhysics: bot hit 2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
                             } else if (ball.ballTop + ball.ballsize * 0.75 > brickHit.bottom) {
-                                // ball is inside of brick's sides & outside of brick top n Bottom
-                                Log.d(TAG, "ballPhysics: bot hit 2 - v2")
+                               // ball is inside of brick's sides & outside of brick top n Bottom
+                                // Log.d(TAG, "ballPhysics: bot hit 2 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballTop = brickHit.bottom
                                 ball.ballBottom = brickHit.bottom + ball.ballsize.toInt()
 
                             } else {                                         // ball is outside of brick's sides
-                                Log.d(TAG, "ballPhysics: left hit 1 - v2")
+                               // Log.d(TAG, "ballPhysics: left hit 1 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballRight = brickHit.left
                                 ball.ballLeft = brickHit.left - ball.ballsize.toInt()
@@ -316,26 +314,26 @@ object PsyduckEngine {
                         } else if (!ball.ballGoesRight() && ball.ballGoesDown()) {
 
                             if (isTopOccupied) {
-                                Log.d(TAG, "ballPhysics: right hit 2")
+                              //  Log.d(TAG, "ballPhysics: right hit 2")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
                                 ball.ballRight = brickHit.right + ball.ballsize.toInt()
 
                             } else if (isRightOccupied) {
-                                Log.d(TAG, "ballPhysics: top hit 1")
+                              //  Log.d(TAG, "ballPhysics: top hit 1")
                                 ball.ballSpeedY *= -1
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
                             } else if (ball.ballBottom - ball.ballsize * 0.75 < brickHit.top) {
                                 // ball is inside of brick's sides & outside of brick top n Bottom
-                                Log.d(TAG, "ballPhysics: top hit 1 - v2")
+                               // Log.d(TAG, "ballPhysics: top hit 1 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
                             } else {                                             // ball is outside of brick's sides
-                                Log.d(TAG, "ballPhysics: right hit 2 - v2")
+                                //Log.d(TAG, "ballPhysics: right hit 2 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballLeft = brickHit.right
                                 ball.ballRight = brickHit.right + ball.ballsize.toInt()
@@ -344,26 +342,26 @@ object PsyduckEngine {
                         } else if (ball.ballGoesRight() && ball.ballGoesDown()) {
 
                             if (isTopOccupied) {
-                                Log.d(TAG, "ballPhysics: Left hit 2")
+                               // Log.d(TAG, "ballPhysics: Left hit 2")
                                 ball.ballSpeedX *= -1
                                 ball.ballRight = brickHit.left
                                 ball.ballLeft = brickHit.left - ball.ballsize.toInt()
 
                             } else if (isLeftOccupied) {
-                                Log.d(TAG, "ballPhysics: top hit 2")
+                                // Log.d(TAG, "ballPhysics: top hit 2")
                                 ball.ballSpeedY *= -1
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
                             } else if (ball.ballBottom - ball.ballsize * 0.75 < brickHit.top) {
                                 // ball is inside of brick's sides & outside of brick top n Bottom
-                                Log.d(TAG, "ballPhysics: top hit 2 - v2")
+                                // Log.d(TAG, "ballPhysics: top hit 2 - v2")
                                 ball.ballSpeedY *= -1
                                 ball.ballBottom = brickHit.top
                                 ball.ballTop = brickHit.top - ball.ballsize.toInt()
 
                             } else {                                             // ball is outside of brick's sides
-                                Log.d(TAG, "ballPhysics: left hit 2 - v2")
+                                // Log.d(TAG, "ballPhysics: left hit 2 - v2")
                                 ball.ballSpeedX *= -1
                                 ball.ballRight = brickHit.left
                                 ball.ballLeft = brickHit.left - ball.ballsize.toInt()
@@ -376,8 +374,8 @@ object PsyduckEngine {
                         isTopOccupied = false
                         isDone = false
 
-                        Log.d(TAG, "ballspeed Y efter upd = ${ball.ballSpeedY} ")
-                        Log.d(TAG, "ballspeed X efter upd = ${ball.ballSpeedX} ")
+                        //Log.d(TAG, "ballspeed Y efter upd = ${ball.ballSpeedY} ")
+                        // Log.d(TAG, "ballspeed X efter upd = ${ball.ballSpeedX} ")
 
 
                     }
