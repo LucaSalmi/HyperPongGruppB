@@ -32,13 +32,13 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         makeBricks()
 
         if (isStoryMode) {
-            calculateMaxScore()
+            calculateTotalBrickScore()
         }
     }
 
-    private fun calculateMaxScore() {
+    private fun calculateTotalBrickScore() {
         var totalBricks = brickRow.size
-        PlayerManager.currentMaxScore = totalBricks * BrickStructure.brickScoreValue
+        PlayerManager.currentTotalBrickScore = totalBricks * BrickStructure.brickScoreValue
 
     }
 
