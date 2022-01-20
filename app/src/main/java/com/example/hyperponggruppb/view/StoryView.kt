@@ -43,7 +43,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var soundCode = 0
 
     var isCounting = false
-    var isGemCatched = false
 
     init {
 
@@ -142,7 +141,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 }
 
                 starSound()
-                playGemSound()
                 draw()
             }
         }
@@ -296,33 +294,30 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 when (powerUp.typeID) {
 
                     2 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         powerUp.bigPaddle(storyMode.player)
-                        SoundEffectManager.jukebox(context, 2)
                         storyMode.player.update()
                     }
                     3 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 1)
                         powerUp.smallPaddle(storyMode.player)
-                        SoundEffectManager.jukebox(context, 3)
                         storyMode.player.update()
                     }
                     4 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.spawnExtraBall()
-                        SoundEffectManager.jukebox(context, 2)
                     }
                     5 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 2)
                         powerUp.addGems()
-                        isGemCatched = true
-                        Log.d(TAG, "isGemCatched = $isGemCatched")
-                        SoundEffectManager.jukebox(context, 5)
-                        //SoundEffectManager.playGemPickupSound(context)
                     }
                     6 -> {
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.shotCount = 3
                         storyMode.gunPowerUp()
-                        SoundEffectManager.jukebox(context, 2)
                     }
                     7 ->{
-                        SoundEffectManager.jukebox(context, 2)
+                        SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.activateShield()
                     }
                 }
@@ -405,15 +400,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             SoundEffectManager.playStarSound(context)
             soundCode++
         }
-    }
-
-    private fun playGemSound(){
-
-        if(isGemCatched){
-            SoundEffectManager.playGemPickupSound(context)
-            isGemCatched = false
-        }
-
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
