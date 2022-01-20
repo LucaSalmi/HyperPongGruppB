@@ -197,8 +197,6 @@ class DialogManager(val context: Context) {
         resultPowerUpsLooted.text = PlayerManager.levelPowerups.toString()
         resultTime.text = PlayerManager.levelTimeString
 
-
-
         var stars = 0
         starBar.progress = 0
         starBar.max = PlayerManager.currentTotalBrickScore
@@ -246,6 +244,12 @@ class DialogManager(val context: Context) {
 
         returnBtn.setOnClickListener {
 
+            PlayerManager.starCounter = 0
+
+            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
+                PlayerManager.isLevelCompleted = false
+                PlayerManager.currentLevel ++
+            }
             scoreBoardDialog.dismiss()
         }
 

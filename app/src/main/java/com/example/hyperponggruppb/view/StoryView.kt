@@ -291,6 +291,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         for (powerUp in storyMode.powerUpArray) {
 
             if (powerUp.isCatched) {
+
                 if (powerUp.typeID != 5) {
 
                     PlayerManager.levelPowerups++
