@@ -57,9 +57,11 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
         levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
 
-        PlayerManager.levelCountdown = context.getString(R.string.formatted_time,
+        PlayerManager.levelCountdown = context.getString(
+            R.string.formatted_time,
             TimeUnit.MILLISECONDS.toMinutes(levelTimeLimit) % 60,
-            TimeUnit.MILLISECONDS.toSeconds(levelTimeLimit) % 60)
+            TimeUnit.MILLISECONDS.toSeconds(levelTimeLimit) % 60
+        )
 
         myActivity.checkSelectedPowerup()
 
@@ -68,9 +70,11 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     private val levelTimer = object : CountDownTimer(levelTimeLimit, 1000) {
 
         override fun onTick(millisUntilFinished: Long) {
-            PlayerManager.levelCountdown = context.getString(R.string.formatted_time,
+            PlayerManager.levelCountdown = context.getString(
+                R.string.formatted_time,
                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
-                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60)
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
+            )
 
             PlayerManager.levelTime = millisUntilFinished
         }
@@ -80,7 +84,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private val comboMsgTimer = object : CountDownTimer(1500L, 1000L){
+    private val comboMsgTimer = object : CountDownTimer(1500L, 1000L) {
         override fun onTick(p0: Long) {
 
         }
@@ -109,13 +113,18 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
                     if (storyMode.isGunLive) {
 
-                        if (PsyduckEngine.gunPhysics(storyMode.projectile, storyMode.brickRow, context)){
+                        if (PsyduckEngine.gunPhysics(
+                                storyMode.projectile,
+                                storyMode.brickRow,
+                                context
+                            )
+                        ) {
 
-                            storyMode.shotCount --
+                            storyMode.shotCount--
 
                             if (storyMode.shotCount == 0) {
                                 storyMode.isGunLive = false
-                            }else{
+                            } else {
                                 storyMode.gunPowerUp()
                             }
                         }
@@ -125,7 +134,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                     myActivity.updateComboCounter()
 
                     if (PlayerManager.activatePowerUp) {
-                        when(PlayerManager.selectedPowerUp){
+                        when (PlayerManager.selectedPowerUp) {
 
                             0 -> storyMode.multiBall()
                             1 -> {
@@ -163,12 +172,12 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             storyMode.drawBricks(canvas)
 
-           storyMode.drawPowerUp(canvas)
+            storyMode.drawPowerUp(canvas)
 
             if (storyMode.isGunLive && storyMode.shotCount > 0) {
                 storyMode.drawProjectile(canvas)
             }
-            if (storyMode.isShieldActive){
+            if (storyMode.isShieldActive) {
                 storyMode.drawShield(canvas)
             }
 
@@ -268,8 +277,10 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             )
         }
 
-        if(PlayerManager.textIsOn && !isCounting){
+        if (PlayerManager.textIsOn && !isCounting) {
 
+            SoundEffectManager.playComboAnnouncer(context)
+            Log.d(TAG, "playerAndBrickInteractions: we here")
             isCounting = true
             comboMsgTimer.start()
         }
@@ -282,11 +293,11 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         for (powerUp in storyMode.powerUpArray) {
 
             if (powerUp.isCatched) {
-                if (powerUp.typeID != 5){
+                if (powerUp.typeID != 5) {
 
                     PlayerManager.levelPowerups++
 
-                }else{
+                } else {
 
                     PlayerManager.levelGems += 5
                 }
@@ -316,7 +327,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                         storyMode.shotCount = 3
                         storyMode.gunPowerUp()
                     }
-                    7 ->{
+                    7 -> {
                         SoundEffectManager.playPowerUpSounds(context, 0)
                         storyMode.activateShield()
                     }
@@ -380,12 +391,14 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private fun calculateTime(){
+    private fun calculateTime() {
 
         val time = levelTimeLimit - PlayerManager.levelTime
-        PlayerManager.levelTimeString = context.getString(R.string.formatted_time,
+        PlayerManager.levelTimeString = context.getString(
+            R.string.formatted_time,
             TimeUnit.MILLISECONDS.toMinutes(time) % 60,
-            TimeUnit.MILLISECONDS.toSeconds(time) % 60)
+            TimeUnit.MILLISECONDS.toSeconds(time) % 60
+        )
     }
 
     private fun starSound() {

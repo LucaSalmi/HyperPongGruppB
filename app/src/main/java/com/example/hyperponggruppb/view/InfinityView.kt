@@ -432,6 +432,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
         if(PlayerManager.textIsOn && !isCounting){
 
+            SoundEffectManager.playComboAnnouncer(context)
             isCounting = true
             comboMsgTimer.start()
         }

@@ -1,7 +1,9 @@
 package com.example.hyperponggruppb.controller
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.media.MediaPlayer
+import android.util.Log
 import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object SoundEffectManager {
@@ -90,9 +92,11 @@ object SoundEffectManager {
 
     fun stopMusic() {
 
+        if(PlayerManager.isMusicActive){
+            backgroundPlayer?.stop()
+            backgroundPlayer?.release()
+        }
 
-        backgroundPlayer?.stop()
-        backgroundPlayer?.release()
     }
 
     fun pauseMusic() {
@@ -191,29 +195,12 @@ object SoundEffectManager {
         }
     }
 
-    fun playComboAnnouncer(context: Context, id: Int) {
+    fun playComboAnnouncer(context: Context) {
 
-        comboAnnouncer?.stop()
-        comboAnnouncer?.release()
+        Log.d(TAG, "playComboAnnouncer: we here")
 
+        var resID = context.resources.getIdentifier("hyper_combo_ultra_version_two", "raw", context.packageName)
 
-        var resID: Int = when (id) {
-
-            0 -> context.resources.getIdentifier(
-                "hyper_combo_ultra_version_two",
-                "raw",
-                context.packageName
-            )
-
-            else -> {
-
-                context.resources.getIdentifier(
-                    "hyper_combo_delay",
-                    "raw",
-                    context.packageName
-                )
-            }
-        }
         comboAnnouncer = MediaPlayer.create(context, resID)
 
         if (PlayerManager.isSoundEffectsActive) {

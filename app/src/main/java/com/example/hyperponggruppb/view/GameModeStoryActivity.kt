@@ -114,7 +114,6 @@ class GameModeStoryActivity : AppCompatActivity() {
 
                     if (PlayerManager.textIsOn){
                         comboText.text = getString(R.string.hyper_combo_msg)
-                        SoundEffectManager.playComboAnnouncer(context = applicationContext, 2)
 
                     }else{
                         comboText.text = ""
