@@ -3,6 +3,7 @@ package com.example.hyperponggruppb.view
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -112,9 +113,17 @@ class GameModeStoryActivity : AppCompatActivity() {
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
+                    if(PlayerManager.comboPoints > 5){
+                        comboMeter.setTextColor(Color.YELLOW)
+                    }
+                    if(PlayerManager.comboPoints > 10){
+                        comboMeter.setTextColor(Color.RED)
+                    }
+
                     if (PlayerManager.textIsOn){
-                        comboText.text = getString(R.string.hyper_combo_msg)
+
                         SoundEffectManager.playComboAnnouncer(context = applicationContext, 2)
+                        comboText.text = getString(R.string.hyper_combo_msg)
 
                     }else{
                         comboText.text = ""
