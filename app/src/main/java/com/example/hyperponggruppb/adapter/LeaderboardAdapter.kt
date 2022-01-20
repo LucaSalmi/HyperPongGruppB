@@ -31,6 +31,7 @@ class LeaderboardAdapter(private val highScoreArray: MutableList<PlayerData>): R
             0 -> holder.trophyImage.setImageResource(R.drawable.gold_trophy)
             1 -> holder.trophyImage.setImageResource(R.drawable.silver_trophy)
             2 -> holder.trophyImage.setImageResource(R.drawable.bronze_trophy)
+            else -> holder.trophyImage.setImageResource(R.drawable.gem)
         }
 
     }
