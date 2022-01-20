@@ -244,8 +244,6 @@ class DialogManager(val context: Context) {
 
         returnBtn.setOnClickListener {
 
-            PlayerManager.starCounter = 0
-
             if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
                 PlayerManager.isLevelCompleted = false
                 PlayerManager.currentLevel ++
@@ -254,8 +252,6 @@ class DialogManager(val context: Context) {
         }
 
         retryBtn.setOnClickListener {
-
-            PlayerManager.starCounter = 0
 
             if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
                 PlayerManager.isLevelCompleted = false
@@ -583,8 +579,6 @@ class DialogManager(val context: Context) {
         }
 
         startLevelBtn.setOnClickListener {
-
-            SoundEffectManager.stopMusic() //To pause music when entering level
 
             PlayerManager.starCounter = 0
             enterLevelDialog.dismiss()

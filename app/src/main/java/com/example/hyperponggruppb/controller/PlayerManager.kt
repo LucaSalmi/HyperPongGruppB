@@ -206,6 +206,7 @@ object PlayerManager {
         playerPoints = 0
         levelPowerups = 0
         levelGems = 0
+        starCounter = 0
 
     }
 

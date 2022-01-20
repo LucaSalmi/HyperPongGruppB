@@ -93,7 +93,8 @@ object SoundEffectManager {
 
     fun stopMusic() {
 
-        if(PlayerManager.isMusicActive){
+        if (backgroundPlayer?.isPlaying!!){
+
             backgroundPlayer?.stop()
             backgroundPlayer?.release()
         }
@@ -200,7 +201,11 @@ object SoundEffectManager {
     fun playComboAnnouncer(context: Context) {
 
 
-        var resID = context.resources.getIdentifier("hyper_combo_ultra_version_two", "raw", context.packageName)
+        var resID = context.resources.getIdentifier(
+            "hyper_combo_ultra_version_two",
+            "raw",
+            context.packageName
+        )
 
         comboAnnouncer = MediaPlayer.create(context, resID)
         if (PlayerManager.isSoundEffectsActive) {
