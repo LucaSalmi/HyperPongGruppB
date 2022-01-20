@@ -2,7 +2,9 @@ package com.example.hyperponggruppb.controller
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.Bricks
+import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object BrickStructure {
 
@@ -38,29 +40,21 @@ object BrickStructure {
         var topInBounds = top
         var rightInBounds = right
         var bottomInBounds = bottom
-        var powerUpPresent = false
-        var counter = 0
 
         for (i in 0..(totalSumOfBricks)) {
-
-            if (isStoryMode) {
-                if (counter == 10) {
-                    powerUpPresent = true
-                    counter = 0
-                } else{
-                    counter++
-                    powerUpPresent = false
-                }
-            }
 
             var brick = Bricks(
                 leftInBounds,
                 topInBounds,
                 rightInBounds,
                 bottomInBounds,
-                powerUpPresent,
                 10
             )
+
+            if (!isStoryMode){
+                brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
+            }
+
             brickRow.add(brick)
             leftInBounds += right - left + 4
             rightInBounds += right - left + 4
@@ -93,7 +87,8 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom, false, 10)
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10)
+            brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
             brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
@@ -116,11 +111,11 @@ object BrickStructure {
     private fun storyModePattern(id: Int): String{
         return when (id) {
             //world 1
-            0 -> "0110110011110010011010011011001001100110110011011001100100110110011001001101100101100100111100110110"//flames-level
-            1 -> "1110110111101011010111101101111010000101111011011110101101011110110111101000010111000000111000000001"//hellgate returns
-            2 -> "0001001000001111110011111111110101111010010011001001111111101011001101001111110001001100101000000001"//fireball demon level
-            3 -> "1100101011110011100101010101010101101111011100010000110001000011010110011111111001111111101100010011"//dabbing goblin level
-            4 -> "1011001101111111111101011110100100110010111111111110011110011101001011010000001001110011100001111000"//evil pumpkin level
+            0 -> "ACA0CC0ACAAXA0AA0AXAACA0CC0ACAA0A0YY0A0AACA0CC0ACAA0A0AA0A0AACA0CC0ACAA0A0000A0AAC000000CAA00000000A"//hellgate returns
+            1 -> "0EC0EC00ECYC00C00EC0E00EY0EC00C00EC00EY0EC00EC0EC00EC00C00EC0EC00EC00E00EC0EC00E0EC00C00ECEC00EC0EC0"//flames-level
+            2 -> "000Y00Y00000CCCCCC00DAACCCCAAD0C0ACCA0C00C00AA00C00CDDAADDC0D0CD00DC0D00CCEECC000D00CC00D0D00000000D"//fireball demon level
+            3 -> "BBB0ACA0BB0A00CAA00A0A0AXAXA0A0A0DC0AAAA0AAC000A0000CA0C0A0000CACDCAA00ACADADCA00BDADAADB0BB000A00BB" //dabbing goblin level
+            4 -> "Z0AA00AA0ZABDBAABDBA0D0DBBD0D00D00BB00D0BDDBBBBDDBB00CCCC00BBC0E00E0CB0CE0000EC00BCC00CCB0000BBBB000"//evil pumpkin level
             //world 2
             5 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader
             6 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader??
@@ -161,6 +156,28 @@ object BrickStructure {
         }
     }
 
+    private fun oOBPattern(id: Int): String{
+
+        return when (id) {
+
+            0 -> "1000000001100000000110000000011000110001100011000110001100011011111101111011011110001100011111111111" // HellGate-level
+            1 -> "1000100001100011000110001111111000111101100111100110111110011000011001100000100110000000011111111111" // Shuriken-Level
+            2 -> "0000110000000111100000111111000001111000000011000000001100000000110000001111110011101101111000110001" // HangingDroplet-level
+            3 -> "0000110000000111100000111111000000110000001011010010111111011111111111111000011110000000010000000000" // Alien Pedestal
+            4 -> "1000000001101000010110101101011010110101101011010110101101011010110101101011010110100001011000000001" // Straight Row-level
+            5 -> "0011001100001000010010100001011101111011100100100111101101111111111111011011011000000000000000000000" // Alien Invader
+            6 -> "0011001100001000010010100001011101111011100100100111101101111111111111011011011000000000000000000000" // Alien Invader??
+            7 -> "0000000000111111111100000000000010000100011100111011111111110111001110001000010000000000001111111111" // TwoStar-level
+            8 -> "0110000110001011010000101101000010110100001111110000101101000011111100110000001111000000110000000000" // Hjälm-level
+            9 -> "0111111110111111111111111111110111111111011111111000111111000111111000111110001001100001100011000011" // Eld-level
+            10 -> "0000000000111111111100001100000001111000001011010011110011110100110010101011010101001100101111111111" // Shield-level
+            11 -> "1111111111000011000000010010000010000100011111111000100001000001001000000011000011111111110000000000" // BigBall-level
+            12 -> "1000000001010111101000100001000101001010010011001001001100100101001010001000010001011110101000000001" // CrissCross-Level
+            13 -> "1100000011010100101001010010100101001010010100101001010010100101001010010100101001010010101100000011" // Allmän Rows-Level
+            else -> "Invalid"
+        }
+    }
+
     /**
      * by eliminating some bricks from the array this function creates a recognizable pattern
      */
@@ -181,10 +198,43 @@ object BrickStructure {
 
         for (element in pattern) {
 
-            if (element == '1') {
+            when(element){
 
-                temBricks.add(brickRow[index])
-
+                'A' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(1)
+                    temBricks.add(brickRow[index])
+                }
+                'B' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(2)
+                    temBricks.add(brickRow[index])
+                }
+                'C' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(3)
+                    temBricks.add(brickRow[index])
+                }
+                'D' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(4)
+                    temBricks.add(brickRow[index])
+                }
+                'E' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(5)
+                    temBricks.add(brickRow[index])
+                }
+                'Z' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(6)
+                    temBricks.add(brickRow[index])
+                }
+                'X' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(7)
+                    temBricks.add(brickRow[index])
+                }
+                'Y' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(8)
+                    temBricks.add(brickRow[index])
+                }
+                '1' ->{
+                    temBricks.add(brickRow[index])
+                }
             }
             index++
         }
@@ -194,7 +244,7 @@ object BrickStructure {
 
     fun createOOBBPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks> {
 
-        val pattern = infinityModePattern(id)
+        val pattern = oOBPattern(id)
 
         var temOOBBricks = mutableListOf<Bricks>()
         var index = 0
