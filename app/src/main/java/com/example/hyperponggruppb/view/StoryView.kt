@@ -31,7 +31,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         context?.getSharedPreferences("com.example.hyperponggruppb.MyPrefs", Context.MODE_PRIVATE)
 
     private var storyMode: GameManager
-    var isGameOver = false
 
     private val frameRate = 30
     val deltaTime = 0L
@@ -43,6 +42,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     var soundCode = 0
 
     var isCounting = false
+    var countdownIsOn = false
 
     init {
 
@@ -118,7 +118,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                                 context
                             )
                         ) {
-
                             storyMode.shotCount--
 
                             if (storyMode.shotCount == 0) {
@@ -235,7 +234,11 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
 
-            levelTimer.start()
+            if (!countdownIsOn){
+                countdownIsOn = true
+                levelTimer.start()
+            }
+
             storyMode.ball.ballSpeedX = 7f
             storyMode.ball.ballSpeedY = -13f
             PsyduckEngine.gameStart = true
@@ -349,7 +352,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
      */
     private fun gameEnd() {
 
-        if (isGameOver || PlayerManager.lives <= 0) {
+        if (PlayerManager.lives <= 0) {
 
             levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
