@@ -53,4 +53,9 @@ class OverWorldActivity : AppCompatActivity() {
         startActivity(toLevel)
     }
 
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+    }
+
 }

@@ -105,7 +105,7 @@ class MainActivityMainMenu : AppCompatActivity() {
 
         if (!PlayerManager.isMusicActive) {
             SoundEffectManager.stopMusic()
-        } else {
+        } else if (!SoundEffectManager.checkIfPlaying()) {
             SoundEffectManager.musicSetup(this, 0)
         }
 
@@ -190,7 +190,7 @@ class MainActivityMainMenu : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 binding.btnChangeAccount.alpha = 1f
 
-                SoundEffectManager.stopMusic()
+                //SoundEffectManager.stopMusic()
                 mainDialog.changeAccount()
 
             }
