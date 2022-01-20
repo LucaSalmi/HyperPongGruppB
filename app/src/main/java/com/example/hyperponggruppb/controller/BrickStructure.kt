@@ -136,28 +136,7 @@ object BrickStructure {
             2 -> "000Y00Y00000CCCCCC00DAACCCCAAD0C0ACCA0C00C00AA00C00CDDAADDC0D0CD00DC0D00CCEECC000D00CC00D0D00000000D"//fireball demon level
             3 -> "BBB0ACA0BB0A00CAA00A0A0AXAXA0A0A0DC0AAAA0AAC000A0000CA0C0A0000CACDCAA00ACADADCA00BDADAADB0BB000A00BB" //dabbing goblin level
             4 -> "Z0AA00AA0ZABDBAABDBA0D0DBBD0D00D00BB00D0BDDBBBBDDBB00CCCC00BBC0E00E0CB0CE0000EC00BCC00CCB0000BBBB000"//evil pumpkin level
-/*
-            0 -> "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001" // HellGate-level
-            1 -> "1111111111100000000110000010011000011001101111100110011110011000111101100011111110001100011000100001" // Shuriken-Level
-            2 -> "1000110001111011011100111111000000110000000011000000001100000001111000001111110000011110000000110000" // HangingDroplet-level
-            3 -> "0000000000100000000111100001111111111111101111110100101101000000110000001111110000011110000000110000" // Alien Pedestal
-            4 -> "1000000001101000010110101101011010110101101011010110101101011010110101101011010110100001011000000001" // Straight Row-level
-            5 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader
-            6 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader??
-            7 -> "1111111111000000000000100001000111001110111111111101110011100010000100000000000011111111110000000000" // TwoStar-level
-            8 -> "0000000000110000001111000000110011111100001011010000111111000010110100001011010000101101000110000110" // Hjälm-level
-            9 -> "0011000011011000011011111000100111111000001111110001111111100111111111111111111111111111110111111110" // Eld-level
-            10 -> "1111111111010011001010101101010100110010111100111100101101000001111000000011000011111111110000000000" // Shield-level
-            11 -> "1111111111000011000000010010000010000100011111111000100001000001001000000011000011111111110000000000" // BigBall-level
-            12 -> "1000000001010111101000100001000101001010010011001001001100100101001010001000010001011110101000000001" // CrissCross-Level
-            13 -> "1100000011010100101001010010100101001010010100101001010010100101001010010100101001010010101100000011" // Allmän Rows-Level
-            //new levels
-            14 -> "0110110011110010011010011011001001100110110011011001100100110110011001001101100101100100111100110110"//flames-level
-            15 -> "1110110111101011010111101101111010000101111011011110101101011110110111101000010111000000111000000001"//hellgate returns
-            16 -> "0001001000001111110011111111110101111010010011001001111111101011001101001111110001001100101000000001"//fireball demon level
-            17 -> "1100101011110011100101010101010101101111011100010000110001000011010110011111111001111111101100010011"//dabbing goblin level
-            18 -> "1011001101111111111101011110100100110010111111111110011110011101001011010000001001110011100001111000"//evil pumpkin level
-                */
+
             else -> "Invalid"
 
         }
@@ -172,22 +151,7 @@ object BrickStructure {
             2 -> "D00000000D0D00CC00D000CCEECC00D0CD00DC0D0CDDAADDC00C00AA00C00C0ACCA0C0DAACCCCAAD 00CCCCCC00000Y00Y000"//fireball demon level
             3 -> "BB000A00BB0BDADAADB00ACADADCA000CACDCAA000CA0C0A000AAC000A000A0DC0AAAA0A0AXAXA0A0A00CAA00ABBB0ACA0BB" //dabbing goblin level
             4 -> "000BBBB0000BCC00CCB00CE0000EC0BC0E00E0CBB00CCCC00BBDDBBBBDDB0D00BB00D00D0DBBD0D0ABDBAABDBAZ0AA00AA0Z"//evil pumpkin level
-            /*
-            0 -> "1000000001100000000110000000011000110001100011000110001100011011111101111011011110001100011111111111" // HellGate-level
-            1 -> "1000100001100011000110001111111000111101100111100110111110011000011001100000100110000000011111111111" // Shuriken-Level
-            2 -> "0000110000000111100000111111000001111000000011000000001100000000110000001111110011101101111000110001" // HangingDroplet-level
-            3 -> "0000110000000111100000111111000000110000001011010010111111011111111111111000011110000000010000000000" // Alien Pedestal
-            4 -> "1000000001101000010110101101011010110101101011010110101101011010110101101011010110100001011000000001" // Straight Row-level
-            5 -> "0011001100001000010010100001011101111011100100100111101101111111111111011011011000000000000000000000" // Alien Invader
-            6 -> "0011001100001000010010100001011101111011100100100111101101111111111111011011011000000000000000000000" // Alien Invader??
-            7 -> "0000000000111111111100000000000010000100011100111011111111110111001110001000010000000000001111111111" // TwoStar-level
-            8 -> "0110000110001011010000101101000010110100001111110000101101000011111100110000001111000000110000000000" // Hjälm-level
-            9 -> "0111111110111111111111111111110111111111011111111000111111000111111000111110001001100001100011000011" // Eld-level
-            10 -> "0000000000111111111100001100000001111000001011010011110011110100110010101011010101001100101111111111" // Shield-level
-            11 -> "1111111111000011000000010010000010000100011111111000100001000001001000000011000011111111110000000000" // BigBall-level
-            12 -> "1000000001010111101000100001000101001010010011001001001100100101001010001000010001011110101000000001" // CrissCross-Level
-            13 -> "1100000011010100101001010010100101001010010100101001010010100101001010010100101001010010101100000011" // Allmän Rows-Level
-             */
+
             else -> "Invalid"
         }
     }
@@ -216,37 +180,52 @@ object BrickStructure {
 
                 'A' -> {
                     brickRow[index].asset = AssetManager.brickAsset(1)
+                    brickRow[index].hasPowerUp = if (RandomNumberGenerator.rNG(1,20) == 1){
+                        5
+                    }else 0
                     temBricks.add(brickRow[index])
                 }
                 'B' -> {
                     brickRow[index].asset = AssetManager.brickAsset(2)
+                    brickRow[index].hasPowerUp = if (RandomNumberGenerator.rNG(1,20) == 1){
+                        5
+                    }else 0
                     temBricks.add(brickRow[index])
                 }
                 'C' -> {
                     brickRow[index].asset = AssetManager.brickAsset(3)
+                    brickRow[index].hasPowerUp = if (RandomNumberGenerator.rNG(1,20) == 1){
+                        5
+                    }else 0
                     temBricks.add(brickRow[index])
                 }
                 'D' -> {
                     brickRow[index].asset = AssetManager.brickAsset(4)
+                    brickRow[index].hasPowerUp = if (RandomNumberGenerator.rNG(1,20) == 1){
+                        5
+                    }else 0
                     temBricks.add(brickRow[index])
                 }
                 'E' -> {
                     brickRow[index].asset = AssetManager.brickAsset(5)
+                    brickRow[index].hasPowerUp = if (RandomNumberGenerator.rNG(1,20) == 1){
+                        5
+                    }else 0
                     temBricks.add(brickRow[index])
                 }
                 'Z' -> {
                     brickRow[index].asset = AssetManager.brickAsset(6)
-                    brickRow[index].hasPowerUp = true
+                    brickRow[index].hasPowerUp = 4 //Multiball
                     temBricks.add(brickRow[index])
                 }
                 'X' -> {
                     brickRow[index].asset = AssetManager.brickAsset(7)
-                    brickRow[index].hasPowerUp = true
+                    brickRow[index].hasPowerUp = 6 // Gun
                     temBricks.add(brickRow[index])
                 }
                 'Y' -> {
                     brickRow[index].asset = AssetManager.brickAsset(8)
-                    brickRow[index].hasPowerUp = true
+                    brickRow[index].hasPowerUp = 7 // Shield
                     temBricks.add(brickRow[index])
                 }
                 '1' ->{
@@ -297,17 +276,14 @@ object BrickStructure {
                 }
                 'Z' -> {
                     brickRow[index].asset = AssetManager.brickAsset(6)
-                    brickRow[index].hasPowerUp = true
                     temOOBBricks.add(brickRow[index])
                 }
                 'X' -> {
                     brickRow[index].asset = AssetManager.brickAsset(7)
-                    brickRow[index].hasPowerUp = true
                     temOOBBricks.add(brickRow[index])
                 }
                 'Y' -> {
                     brickRow[index].asset = AssetManager.brickAsset(8)
-                    brickRow[index].hasPowerUp = true
                     temOOBBricks.add(brickRow[index])
                 }
                 '1' ->{
