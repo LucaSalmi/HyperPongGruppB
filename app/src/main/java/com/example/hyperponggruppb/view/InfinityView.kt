@@ -58,7 +58,6 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         backgroundIdTwo = 2
         transBackroundIdOne = 1
         transBackgroundIdTwo = 2
-        PlayerManager.lives = 1
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context, false)
@@ -183,7 +182,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
      */
     private fun gameEnd() {
 
-        if (isGameOver || PlayerManager.lives <= 0) {
+        if (isGameOver || infiniteMode.lives <= 0) {
 
             PlayerManager.saveUserData(sp)
             PlayerManager.setPlacement()
@@ -199,7 +198,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             myActivity.finish()
         }
 
-        if (PlayerManager.lives > 0 && gameStart) {
+        if (infiniteMode.lives > 0 && gameStart) {
 
             gameStart = false
             PlayerManager.comboPoints = 0
@@ -410,7 +409,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         if (PsyduckEngine.damageTaken) {
 
             PsyduckEngine.damageTaken = false
-            PlayerManager.loseLife()
+            PlayerManager.loseLife(infiniteMode)
             gameEnd()
         }
     }
@@ -493,7 +492,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
                         infiniteMode.activateShield()
                     }
                     8 -> {
-                        PlayerManager.gainLife()
+                        PlayerManager.gainLife(infiniteMode)
                         SoundEffectManager.playPowerUpSounds(context, 0)
                         myActivity.updateText()
                     }
@@ -515,7 +514,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
     private fun checkDeath(){
 
-        if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
+        if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || infiniteMode.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
             isGameOver = true
             gameEnd()

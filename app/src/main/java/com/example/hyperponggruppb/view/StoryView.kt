@@ -47,7 +47,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     init {
 
         mHolder?.addCallback(this)
-        PlayerManager.lives = 1
         soundCode = 0
         PlayerManager.resetPoints()
         myActivity.updateText()
@@ -257,7 +256,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PsyduckEngine.damageTaken) {
 
             PsyduckEngine.damageTaken = false
-            PlayerManager.loseLife()
+            PlayerManager.loseLife(storyMode)
             gameEnd()
         }
     }
@@ -350,7 +349,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
      */
     private fun gameEnd() {
 
-        if (isGameOver || PlayerManager.lives <= 0) {
+        if (isGameOver || storyMode.lives <= 0) {
 
             levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
@@ -364,7 +363,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         }
 
-        if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
+        if (storyMode.lives > 0 && PsyduckEngine.gameStart) {
 
             PsyduckEngine.gameStart = false
             PlayerManager.comboPoints = 0
