@@ -104,9 +104,11 @@
 
     <LinearLayout
         android:id="@+id/score_layout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:gravity="center"
         android:background="@drawable/character_black_bg_fade"
         android:layout_marginTop="10dp"
@@ -118,6 +120,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
+            android:padding="5dp"
             android:src="@drawable/gem"/>
 
         <TextView
@@ -158,9 +161,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_layout">
@@ -171,7 +176,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+            app:srcCompat="@drawable/arrow_led_left" />
 
         <ImageView
             android:id="@+id/iv_level_character"
@@ -186,7 +191,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+            app:srcCompat="@drawable/arrow_led" />
     </LinearLayout>
 
     <LinearLayout
