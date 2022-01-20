@@ -5,8 +5,6 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.Window
 import android.widget.*
@@ -15,13 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.adapter.UserSelectionAdapter
-import com.example.hyperponggruppb.view.GameModeStoryActivity
 import com.example.hyperponggruppb.view.LeaderBoardActivity
 import com.example.hyperponggruppb.view.MainActivityMainMenu
 import com.example.hyperponggruppb.view.OverWorldActivity
-import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.android.material.switchmaterial.SwitchMaterial
-import kotlinx.coroutines.delay
+import kotlin.math.log
 
 class DialogManager(val context: Context) {
 
@@ -66,21 +62,21 @@ class DialogManager(val context: Context) {
 
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
-                if (PlayerManager.createUser()){
+                if (PlayerManager.createUser()) {
                     PlayerManager.cleanArrays()
                     PlayerManager.saveUserData(sp)
                     getMainActivity().setAccount()
                     nameInputDialog.dismiss()
-                }else{
+                } else {
                     nameField.error = "Name already in use"
                 }
             }
         }
 
         cancelBtn.setOnClickListener {
-            if (PlayerManager.isFirstAccount){
+            if (PlayerManager.isFirstAccount) {
                 toaster(1)
-            }else{
+            } else {
                 nameInputDialog.dismiss()
             }
         }
@@ -185,77 +181,92 @@ class DialogManager(val context: Context) {
         val resultGemsLooted =
             scoreBoardDialog.findViewById(R.id.tv_sm_total_gem_looted) as TextView
 
-        val resultPowerUpsLooted =
-            scoreBoardDialog.findViewById(R.id.tv_sm_total_powerups_looted2) as TextView
+        val resultTotalScore =
+            scoreBoardDialog.findViewById(R.id.tv_sm_total_score) as TextView
 
-        val resultTime = scoreBoardDialog.findViewById<TextView>(R.id.tv_sm_time_result)
+        val BonusTime = scoreBoardDialog.findViewById<TextView>(R.id.tv_sm_bonustime_result)
 
         val currentScore = PlayerManager.playerPoints
+        var bonusTimeScore = 0
 
-        resultScore.text = PlayerManager.playerPoints.toString()
         resultGemsLooted.text = PlayerManager.levelGems.toString()
-        resultPowerUpsLooted.text = PlayerManager.levelPowerups.toString()
-        resultTime.text = PlayerManager.levelTimeString
+        Log.d(TAG, "scoreBoardStoryMode: timeForLevel = ${PlayerManager.levelTimeLimit / 1000}")
+        Log.d(TAG, "scoreBoardStoryMode: Leveltime = ${PlayerManager.levelTime / 1000}")
 
-        var stars = 0
-        starBar.progress = 0
-        starBar.max = PlayerManager.currentTotalBrickScore
+        // resultTime.text = PlayerManager.levelTimeString
+
+        resultScore.text = currentScore.toString()
+
+        if (PlayerManager.lives > 0) {
+            bonusTimeScore = (PlayerManager.levelTime.toInt()/1000) * 5
+        }
+        val totalScore = currentScore + bonusTimeScore
+        BonusTime.text = bonusTimeScore.toString()
+        resultTotalScore.text = totalScore.toString()
+
+
+        val currentLevelMaxScore = PlayerManager.currentTotalBrickScore * 2
+        starBar.max = currentLevelMaxScore
 
         val refScore = 0
-        starBar.max = PlayerManager.currentTotalBrickScore
         starBar.progress = 0
         var isOneStar = false
         var isTwoStar = false
-        var levelString = "Level " + "${PlayerManager.currentLevel}"
-        val currentMaxScore = PlayerManager.currentTotalBrickScore*2
+        val levelString = "Level " + "${PlayerManager.currentLevel}"
 
         levelText.text = levelString
 
-        if (currentScore > refScore) {
+        if (totalScore > currentLevelMaxScore) {
 
-                while (starBar.progress < currentScore) {
-                    starBar.progress + 5
-                    Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
-
-                    starBar.progress = (currentScore)
-
-                    if (starBar.progress >= (currentMaxScore / 2) && !isOneStar) {
-                        starOne.setImageResource(R.drawable.star)
-                        Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
-                        isOneStar = true
-
-                        stars = 1
-                    }
-                    if (starBar.progress >= ((currentMaxScore / 4) * 3) && isOneStar) {
-                        starTwo.setImageResource(R.drawable.star)
-                        Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
-                        isTwoStar = true
-
-                        stars = 2
-                    }
-                    if (starBar.progress >= currentMaxScore && isTwoStar) {
-                        starThree.setImageResource(R.drawable.star)
-                        Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
-
-                        stars = 3
-                    }
-                }
+            starBar.max = totalScore
         }
+        starBar.progress = totalScore
+
+        Log.d(TAG, "scoreBoardStoryMode: totalscore = $totalScore")
+        Log.d(TAG, "scoreBoardStoryMode: starbar.Max = ${starBar.max}")
+        Log.d(TAG, "scoreBoardStoryMode: bonustimeScore = $bonusTimeScore")
+
+
+
+        //while (starBar.progress < (totalScore)) {
+          //  starBar.progress += 5
+        //Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
+
+
+        if (starBar.progress >= (currentLevelMaxScore / 2) && !isOneStar) {
+            starOne.setImageResource(R.drawable.star)
+            Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
+            isOneStar = true
+
+        }
+        if (starBar.progress >= ((currentLevelMaxScore / 4) * 3) && isOneStar) {
+            starTwo.setImageResource(R.drawable.star)
+            Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
+            isTwoStar = true
+
+        }
+        if (starBar.progress >= currentLevelMaxScore && isTwoStar) {
+            starThree.setImageResource(R.drawable.star)
+            Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
+
+        }
+
+
 
         returnBtn.setOnClickListener {
 
-            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
+            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying) {
                 PlayerManager.isLevelCompleted = false
-                PlayerManager.currentLevel ++
+                PlayerManager.currentLevel++
             }
             scoreBoardDialog.dismiss()
         }
 
         retryBtn.setOnClickListener {
 
-            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying){
+            if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying) {
                 PlayerManager.isLevelCompleted = false
-                PlayerManager.currentLevel ++
+                PlayerManager.currentLevel++
             }
             getOverWorldActivity().startLevel()
             scoreBoardDialog.dismiss()
@@ -316,19 +327,28 @@ class DialogManager(val context: Context) {
         val startLevelBtn = enterLevelDialog.findViewById(R.id.iv_level_start) as ImageView
         var screenLevelID = enterLevelDialog.findViewById(R.id.tv_level_id) as TextView
 
-        val starProgressResult = enterLevelDialog.findViewById(R.id.iv_star_progress_holder) as ImageView
+        val starProgressResult =
+            enterLevelDialog.findViewById(R.id.iv_star_progress_holder) as ImageView
         val screenLevelScore = enterLevelDialog.findViewById(R.id.tv_level_score) as TextView
-        val screenLevelScoreResult = enterLevelDialog.findViewById(R.id.tv_level_score_result) as TextView
+        val screenLevelScoreResult =
+            enterLevelDialog.findViewById(R.id.tv_level_score_result) as TextView
         val playerGemBalance = enterLevelDialog.findViewById<TextView>(R.id.tv_level_gem_amount)
 
-        val leftArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_left_arrow) as ImageView
-        val screenLevelCharacter = enterLevelDialog.findViewById(R.id.iv_level_character) as ImageView
-        val rightArrowCharacter = enterLevelDialog.findViewById(R.id.iv_level_right_arrow) as ImageView
+        val leftArrowCharacter =
+            enterLevelDialog.findViewById(R.id.iv_level_left_arrow) as ImageView
+        val screenLevelCharacter =
+            enterLevelDialog.findViewById(R.id.iv_level_character) as ImageView
+        val rightArrowCharacter =
+            enterLevelDialog.findViewById(R.id.iv_level_right_arrow) as ImageView
 
-        val screenLevelLoadoutOne = enterLevelDialog.findViewById(R.id.iv_level_loadout_1) as ImageView
-        val screenLevelLoadoutTwo = enterLevelDialog.findViewById(R.id.iv_level_loadout_2) as ImageView
-        val screenLevelLoadoutThree = enterLevelDialog.findViewById(R.id.iv_level_loadout_3) as ImageView
-        val screenLevelLoadoutFour = enterLevelDialog.findViewById(R.id.iv_level_loadout_4) as ImageView
+        val screenLevelLoadoutOne =
+            enterLevelDialog.findViewById(R.id.iv_level_loadout_1) as ImageView
+        val screenLevelLoadoutTwo =
+            enterLevelDialog.findViewById(R.id.iv_level_loadout_2) as ImageView
+        val screenLevelLoadoutThree =
+            enterLevelDialog.findViewById(R.id.iv_level_loadout_3) as ImageView
+        val screenLevelLoadoutFour =
+            enterLevelDialog.findViewById(R.id.iv_level_loadout_4) as ImageView
         PlayerManager.powerUpActivated = -1
 
         backupLevelId = PlayerManager.currentLevel
@@ -351,7 +371,8 @@ class DialogManager(val context: Context) {
 
         val starContainerOne = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_one)
         val starContainerTwo = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_two)
-        val starContainerThree = enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
+        val starContainerThree =
+            enterLevelDialog.findViewById<ImageView>(R.id.iv_pre_level_star_three)
 
         // HÄR ÄR JAG HUEHUEHUEHUEHUEH// JAG MED MUHAHAHAAHAHAHAHAH
 
@@ -463,7 +484,7 @@ class DialogManager(val context: Context) {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                if (!checkIfPowerUpAvailable()){
+                if (!checkIfPowerUpAvailable()) {
                     enterLevelDialog.dismiss()
                 }
 
@@ -498,7 +519,7 @@ class DialogManager(val context: Context) {
             PlayerManager.selectedPowerUp = 1
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                if (!checkIfPowerUpAvailable()){
+                if (!checkIfPowerUpAvailable()) {
                     enterLevelDialog.dismiss()
                 }
 
@@ -534,7 +555,7 @@ class DialogManager(val context: Context) {
 
             if (PlayerManager.powerUpActivated != PlayerManager.selectedPowerUp) {
 
-                if (!checkIfPowerUpAvailable()){
+                if (!checkIfPowerUpAvailable()) {
                     enterLevelDialog.dismiss()
                 }
 
@@ -582,7 +603,7 @@ class DialogManager(val context: Context) {
 
             enterLevelDialog.dismiss()
 
-            if (PlayerManager.powerUpActivated >= 0){
+            if (PlayerManager.powerUpActivated >= 0) {
                 PlayerManager.powerUpInventory[PlayerManager.powerUpActivated] -= 1
             }
 
@@ -620,7 +641,7 @@ class DialogManager(val context: Context) {
     /**
      * gives the user the option to buy power-ups before starting a level to use inside the level
      */
-    fun shopDialog(){
+    fun shopDialog() {
         val shopDialog = Dialog(context)
         shopDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         shopDialog.setContentView(R.layout.shop_dialog_layout)
@@ -631,10 +652,10 @@ class DialogManager(val context: Context) {
 
         val shopStringOne = context.getString(R.string.shop_dialog_text_part_1)
         val shopStringTwo = context.getString(R.string.shop_dialog_string_part_2)
-        var price = when(PlayerManager.selectedPowerUp){
-            0-> PlayerManager.multiBallPrice.toString()
-            1-> PlayerManager.gunPrice.toString()
-            2-> PlayerManager.shieldPrice.toString()
+        var price = when (PlayerManager.selectedPowerUp) {
+            0 -> PlayerManager.multiBallPrice.toString()
+            1 -> PlayerManager.gunPrice.toString()
+            2 -> PlayerManager.shieldPrice.toString()
             else -> PlayerManager.multiBallPrice.toString()
         }
         var shopStringFinal = shopStringOne + price + shopStringTwo
@@ -643,11 +664,11 @@ class DialogManager(val context: Context) {
 
         yesButton.setOnClickListener {
 
-            if (PlayerManager.buyPowerUp(price.toInt())){
-                PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] =+ 1
+            if (PlayerManager.buyPowerUp(price.toInt())) {
+                PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] = +1
                 enterLevelScreen(backupLevelId)
                 shopDialog.dismiss()
-            }else{
+            } else {
                 toaster(2)
             }
         }
@@ -661,19 +682,19 @@ class DialogManager(val context: Context) {
         shopDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
 
-    private fun setUserPreferences(){
+    private fun setUserPreferences() {
 
         PlayerManager.activeUser!!.isMusicActive = PlayerManager.isMusicActive
         PlayerManager.activeUser!!.isSoundEffectsActive = PlayerManager.isSoundEffectsActive
     }
 
     private fun toaster(id: Int) {
-        when(id){
-            0-> Toast.makeText(context, "Level not yet unlocked", Toast.LENGTH_SHORT)
+        when (id) {
+            0 -> Toast.makeText(context, "Level not yet unlocked", Toast.LENGTH_SHORT)
                 .show()
-            1-> Toast.makeText(context, "create an account", Toast.LENGTH_SHORT)
+            1 -> Toast.makeText(context, "create an account", Toast.LENGTH_SHORT)
                 .show()
-            2-> Toast.makeText(context, "not enough gems", Toast.LENGTH_SHORT)
+            2 -> Toast.makeText(context, "not enough gems", Toast.LENGTH_SHORT)
                 .show()
         }
 

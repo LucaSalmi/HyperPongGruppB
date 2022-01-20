@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.PlayerData
+import com.example.hyperponggruppb.view.StoryView
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -36,6 +37,7 @@ object PlayerManager {
     var levelTime = 0L
     var levelTimeString = ""
     var levelCountdown = ""
+    var levelTimeLimit = 1
 
     var levelPowerups = 0
     var levelGems = 0

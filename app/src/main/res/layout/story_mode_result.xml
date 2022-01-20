@@ -135,12 +135,14 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Score:" />
+                android:text="Game score:" />
 
             <TextView
                 android:id="@+id/tv_sm_score_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
                 android:text="999" />
         </TableRow>
@@ -152,17 +154,22 @@
             android:textColor="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/iv_time_symbol"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/tv_sm_time_header"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="Time bonus:"
+                android:textColor="@color/white"
                 app:srcCompat="@drawable/play_symbol" />
 
             <TextView
-                android:id="@+id/tv_sm_time_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tv_sm_bonustime_result"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
                 android:text="999" />
         </TableRow>
@@ -178,12 +185,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
-                app:srcCompat="@drawable/hyper_ball" />
+                app:srcCompat="@drawable/gem" />
 
             <TextView
                 android:id="@+id/tv_sm_total_gem_looted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
                 android:text="999" />
         </TableRow>
@@ -194,17 +203,22 @@
             android:layout_height="50dp"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/iv_loot_symbol"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/tv_sm_total_header"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
-                app:srcCompat="@drawable/multiball_button" />
+                android:text="Total Score:"
+                />
 
             <TextView
-                android:id="@+id/tv_sm_total_powerups_looted2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tv_sm_total_score"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
                 android:text="999" />
         </TableRow>

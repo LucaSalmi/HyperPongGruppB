@@ -16,6 +16,7 @@ import com.example.hyperponggruppb.controller.PlayerManager
 import com.example.hyperponggruppb.controller.PsyduckEngine
 import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.controller.SoundEffectManager
+import com.example.hyperponggruppb.view.StoryView
 
 class PointFragmentStoryMode : Fragment() {
 
@@ -35,6 +36,7 @@ class PointFragmentStoryMode : Fragment() {
          val starOne = view?.findViewById<ImageView>(R.id.iv_star_one)
          val starTwo = view?.findViewById<ImageView>(R.id.iv_star_two)
         val starThree = view?.findViewById<ImageView>(R.id.iv_star_three)
+
         val currentLevelMaxScore = PlayerManager.currentTotalBrickScore*2
 
         starBar?.max = currentLevelMaxScore
@@ -45,6 +47,10 @@ class PointFragmentStoryMode : Fragment() {
         val refScore = 0
         val currentScore = PlayerManager.playerPoints
         score?.text = PlayerManager.playerPoints.toString()
+
+        if (PlayerManager.levelTimeLimit - PlayerManager.levelTime <= 60)
+            countdownClock?.setTextColor(resources.getColor(R.color.red))
+
         if (currentScore > refScore) {
             starBar?.progress = (currentScore)
         }

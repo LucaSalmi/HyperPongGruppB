@@ -54,7 +54,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.currentLevel > 5) {
             backgroundCode = 3
         }
-        levelTimeLimit = (storyMode.brickRow.size * 1000).toLong()
+        levelTimeLimit = (storyMode.brickRow.size * 5000).toLong()
+        PlayerManager.levelTimeLimit = levelTimeLimit.toInt()
 
         PlayerManager.levelCountdown = context.getString(
             R.string.formatted_time,
