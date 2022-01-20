@@ -201,40 +201,41 @@ class DialogManager(val context: Context) {
 
         var stars = 0
         starBar.progress = 0
-        starBar.max = PlayerManager.currentMaxScore
+        starBar.max = PlayerManager.currentTotalBrickScore
 
         val refScore = 0
-        starBar.max = PlayerManager.currentMaxScore
+        starBar.max = PlayerManager.currentTotalBrickScore
         starBar.progress = 0
         var isOneStar = false
         var isTwoStar = false
         var levelString = "Level " + "${PlayerManager.currentLevel}"
+        val currentMaxScore = PlayerManager.currentTotalBrickScore*2
 
         levelText.text = levelString
 
         if (currentScore > refScore) {
 
                 while (starBar.progress < currentScore) {
-                    starBar.progress + 10
+                    starBar.progress + 5
                     Log.d(TAG, "scoreBoardStoryMode: starbar =${starBar.progress}")
 
                     starBar.progress = (currentScore)
 
-                    if (starBar.progress >= (PlayerManager.currentMaxScore / 3) && !isOneStar) {
+                    if (starBar.progress >= (currentMaxScore / 2) && !isOneStar) {
                         starOne.setImageResource(R.drawable.star)
                         Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
                         isOneStar = true
 
                         stars = 1
                     }
-                    if (starBar.progress >= ((PlayerManager.currentMaxScore / 3) * 2) && isOneStar) {
+                    if (starBar.progress >= ((currentMaxScore / 4) * 3) && isOneStar) {
                         starTwo.setImageResource(R.drawable.star)
                         Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
                         isTwoStar = true
 
                         stars = 2
                     }
-                    if (starBar.progress >= PlayerManager.currentMaxScore && isTwoStar) {
+                    if (starBar.progress >= currentMaxScore && isTwoStar) {
                         starThree.setImageResource(R.drawable.star)
                         Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
 

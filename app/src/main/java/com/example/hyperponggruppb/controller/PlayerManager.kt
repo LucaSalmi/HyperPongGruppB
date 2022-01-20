@@ -22,7 +22,7 @@ object PlayerManager {
     var isInfiniteMode = false
     var isReplaying = false
     var isFirstAccount = false
-    var currentMaxScore = 1000
+    var currentTotalBrickScore = 1000
     var starCounter = 0
     var powerUpActivated: Int = 0
     var selectedPowerUp = -1
@@ -299,25 +299,6 @@ object PlayerManager {
             false
         }
     }
-    fun comboPointEditor(){
-        when (comboPoints){
 
-
-            0 ->  BrickStructure.brickScoreValue *=1
-            1 ->  BrickStructure.brickScoreValue *=1
-            2 ->  BrickStructure.brickScoreValue *=1
-            3 ->  BrickStructure.brickScoreValue *=1
-            4 ->  BrickStructure.brickScoreValue *=1
-
-            5 ->  BrickStructure.brickScoreValue = (BrickStructure.brickScoreValue/2) *3
-            6 ->  BrickStructure.brickScoreValue = (BrickStructure.brickScoreValue/2) *3
-            7 ->  BrickStructure.brickScoreValue = (BrickStructure.brickScoreValue/2) *3
-            8 ->  BrickStructure.brickScoreValue = (BrickStructure.brickScoreValue/2) *3
-            9 ->  BrickStructure.brickScoreValue = (BrickStructure.brickScoreValue/2) *3
-
-            else ->  BrickStructure.brickScoreValue *=2
-        }
-
-    }
 
 }
