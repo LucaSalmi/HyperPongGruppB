@@ -56,22 +56,21 @@ class GameModeOneActivity : AppCompatActivity() {
             try {
 
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_infinity)
-                val comboText = findViewById<TextView>(R.id.tv_hyper_combo_message_infinity)
-
+                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text_infinity)
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
-                    if (PlayerManager.textIsOn){
+                    if(PlayerManager.textIsOn){
 
-                       comboText.text = getString(R.string.hyper_combo_msg)
+                        comboTextGif.alpha = 1f
+                        SoundEffectManager.playComboAnnouncer(this, 2)
+
                     }else{
-                        comboText.text = ""
-                    }
 
-                }else{
-                    comboMeter.text = ""
+                        comboTextGif.alpha = 0f
+                    }
                 }
 
             } catch (e: Exception) {

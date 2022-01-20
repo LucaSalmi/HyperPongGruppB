@@ -145,10 +145,6 @@ object SoundEffectManager {
 
     fun playPowerUpSounds(context: Context, id: Int) {
 
-        powerUpSoundEffectPlayer?.stop()
-        powerUpSoundEffectPlayer?.release()
-
-
         var resID: Int = when (id) {
 
             0 -> context.resources.getIdentifier(

@@ -108,30 +108,22 @@ class GameModeStoryActivity : AppCompatActivity() {
             try {
 
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_story)
-
-                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text)
+                val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text_story)
 
                 if (PlayerManager.comboPoints > 0){
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
-                    if(PlayerManager.comboPoints == 5){
+                    if(PlayerManager.textIsOn){
 
-                        comboMeter.setTextColor(Color.YELLOW)
                         comboTextGif.alpha = 1f
-
-                    }else if(PlayerManager.comboPoints == 10){
-
-                        comboMeter.setTextColor(Color.RED)
-                        comboTextGif.alpha = 1f
-                    }
-
-                    if (PlayerManager.textIsOn){
-
                         SoundEffectManager.playComboAnnouncer(this, 2)
+
+                    }else{
+
+                        comboTextGif.alpha = 0f
                     }
                 }
-
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "updateCombo: caught")
             }

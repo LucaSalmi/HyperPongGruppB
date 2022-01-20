@@ -80,7 +80,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         }
     }
 
-    private val comboMsgTimer = object : CountDownTimer(1500L, 1000L){
+    private val comboMsgTimer = object : CountDownTimer(2000L, 1000L){
         override fun onTick(p0: Long) {
 
         }

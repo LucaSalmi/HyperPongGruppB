@@ -61,14 +61,9 @@
         app:layout_constraintStart_toStartOf="@+id/iv_powerup_belt_ui"
         tools:text="5x" />
 
-         <androidx.constraintlayout.widget.ConstraintLayout
-             android:id="@+id/constaint_layout_gif"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"/>
-
          <pl.droidsonroids.gif.GifImageView
              android:src="@drawable/hypercombo"
-             android:id="@+id/gif_combo_text"
+             android:id="@+id/gif_combo_text_story"
              android:layoutDirection="locale"
              android:alpha="0"
              android:layout_width="match_parent"
