@@ -131,6 +131,12 @@ object BrickStructure {
 
         return when (id) {
 
+            0 -> "ACA0CC0ACAAXA0AA0AXAACA0CC0ACAA0A0YY0A0AACA0CC0ACAA0A0AA0A0AACA0CC0ACAA0A0000A0AAC000000CAA00000000A"//hellgate returns
+            1 -> "0EC0EC00ECYC00C00EC0E00EY0EC00C00EC00EY0EC00EC0EC00EC00C00EC0EC00EC00E00EC0EC00E0EC00C00ECEC00EC0EC0"//flames-level
+            2 -> "000Y00Y00000CCCCCC00DAACCCCAAD0C0ACCA0C00C00AA00C00CDDAADDC0D0CD00DC0D00CCEECC000D00CC00D0D00000000D"//fireball demon level
+            3 -> "BBB0ACA0BB0A00CAA00A0A0AXAXA0A0A0DC0AAAA0AAC000A0000CA0C0A0000CACDCAA00ACADADCA00BDADAADB0BB000A00BB" //dabbing goblin level
+            4 -> "Z0AA00AA0ZABDBAABDBA0D0DBBD0D00D00BB00D0BDDBBBBDDBB00CCCC00BBC0E00E0CB0CE0000EC00BCC00CCB0000BBBB000"//evil pumpkin level
+/*
             0 -> "1111111111100011000111101101111011111101100011000110001100011000110001100000000110000000011000000001" // HellGate-level
             1 -> "1111111111100000000110000010011000011001101111100110011110011000111101100011111110001100011000100001" // Shuriken-Level
             2 -> "1000110001111011011100111111000000110000000011000000001100000001111000001111110000011110000000110000" // HangingDroplet-level
@@ -151,6 +157,7 @@ object BrickStructure {
             16 -> "0001001000001111110011111111110101111010010011001001111111101011001101001111110001001100101000000001"//fireball demon level
             17 -> "1100101011110011100101010101010101101111011100010000110001000011010110011111111001111111101100010011"//dabbing goblin level
             18 -> "1011001101111111111101011110100100110010111111111110011110011101001011010000001001110011100001111000"//evil pumpkin level
+                */
             else -> "Invalid"
 
         }
@@ -160,6 +167,12 @@ object BrickStructure {
 
         return when (id) {
 
+            0 -> "ACA0CC0ACAAXA0AA0AXAACA0CC0ACAA0A0YY0A0AACA0CC0ACAA0A0AA0A0AACA0CC0ACAA0A0000A0AAC000000CAA00000000A"//hellgate returns
+            1 -> "EC00EC0EC00EC00C00EC00EC0EC00E0EC00EC00E0EC00C00ECEC00EC0EC0C00EC00EY0E00EY0EC00YC00C00EC00EC0EC00EC"//flames-level
+            2 -> "D00000000D0D00CC00D000CCEECC00D0CD00DC0D0CDDAADDC00C00AA00C00C0ACCA0C0DAACCCCAAD 00CCCCCC00000Y00Y000"//fireball demon level
+            3 -> "BB000A00BB0BDADAADB00ACADADCA000CACDCAA000CA0C0A000AAC000A000A0DC0AAAA0A0AXAXA0A0A00CAA00ABBB0ACA0BB" //dabbing goblin level
+            4 -> "000BBBB0000BCC00CCB00CE0000EC0BC0E00E0CBB00CCCC00BBDDBBBBDDB0D00BB00D00D0DBBD0D0ABDBAABDBAZ0AA00AA0Z"//evil pumpkin level
+            /*
             0 -> "1000000001100000000110000000011000110001100011000110001100011011111101111011011110001100011111111111" // HellGate-level
             1 -> "1000100001100011000110001111111000111101100111100110111110011000011001100000100110000000011111111111" // Shuriken-Level
             2 -> "0000110000000111100000111111000001111000000011000000001100000000110000001111110011101101111000110001" // HangingDroplet-level
@@ -174,6 +187,7 @@ object BrickStructure {
             11 -> "1111111111000011000000010010000010000100011111111000100001000001001000000011000011111111110000000000" // BigBall-level
             12 -> "1000000001010111101000100001000101001010010011001001001100100101001010001000010001011110101000000001" // CrissCross-Level
             13 -> "1100000011010100101001010010100101001010010100101001010010100101001010010100101001010010101100000011" // Allmän Rows-Level
+             */
             else -> "Invalid"
         }
     }
@@ -259,14 +273,49 @@ object BrickStructure {
 
         for (element in pattern) {
 
-            if (element == '1') {
+            when(element){
 
-                temOOBBricks.add(brickRow[index])
-
+                'A' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(1)
+                    temOOBBricks.add(brickRow[index])
+                }
+                'B' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(2)
+                    temOOBBricks.add(brickRow[index])
+                }
+                'C' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(3)
+                    temOOBBricks.add(brickRow[index])
+                }
+                'D' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(4)
+                    temOOBBricks.add(brickRow[index])
+                }
+                'E' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(5)
+                    temOOBBricks.add(brickRow[index])
+                }
+                'Z' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(6)
+                    brickRow[index].hasPowerUp = true
+                    temOOBBricks.add(brickRow[index])
+                }
+                'X' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(7)
+                    brickRow[index].hasPowerUp = true
+                    temOOBBricks.add(brickRow[index])
+                }
+                'Y' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(8)
+                    brickRow[index].hasPowerUp = true
+                    temOOBBricks.add(brickRow[index])
+                }
+                '1' ->{
+                    temOOBBricks.add(brickRow[index])
+                }
             }
             index++
         }
-
         return temOOBBricks
     }
 

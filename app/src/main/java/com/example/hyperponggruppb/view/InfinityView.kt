@@ -518,6 +518,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
             isGameOver = true
+            SoundEffectManager.stopMusic()
             gameEnd()
         }
     }
