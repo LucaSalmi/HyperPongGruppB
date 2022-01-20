@@ -653,6 +653,7 @@ class DialogManager(val context: Context) {
 
         noButton.setOnClickListener {
             shopDialog.dismiss()
+            enterLevelScreen(backupLevelId)
         }
 
         shopDialog.show()
