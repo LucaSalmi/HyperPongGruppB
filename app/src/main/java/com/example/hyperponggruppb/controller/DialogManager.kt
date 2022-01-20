@@ -628,7 +628,7 @@ class DialogManager(val context: Context) {
 
         val shopStringOne = context.getString(R.string.shop_dialog_text_part_1)
         val shopStringTwo = context.getString(R.string.shop_dialog_string_part_2)
-        val price = when(PlayerManager.selectedPowerUp){
+        var price = when(PlayerManager.selectedPowerUp){
             0-> PlayerManager.multiBallPrice.toString()
             1-> PlayerManager.gunPrice.toString()
             2-> PlayerManager.shieldPrice.toString()
