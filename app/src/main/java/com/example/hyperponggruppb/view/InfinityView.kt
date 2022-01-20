@@ -61,6 +61,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         PlayerManager.resetPoints()
         myActivity.updateText()
         infiniteMode = GameManager(context, false)
+        PlayerManager.lives = 3
 
         if (PlayerManager.isMusicActive){
             SoundEffectManager.musicSetup(context!!,2)
@@ -182,7 +183,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
      */
     private fun gameEnd() {
 
-        if (isGameOver || infiniteMode.lives <= 0) {
+        if (isGameOver || PlayerManager.lives <= 0) {
 
             PlayerManager.saveUserData(sp)
             PlayerManager.setPlacement()
@@ -198,7 +199,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             myActivity.finish()
         }
 
-        if (infiniteMode.lives > 0 && gameStart) {
+        if (PlayerManager.lives > 0 && gameStart) {
 
             gameStart = false
             PlayerManager.comboPoints = 0
@@ -514,7 +515,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
 
     private fun checkDeath(){
 
-        if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || infiniteMode.lives <= 0) {   // BrickDeathZone + 0 Lives condition
+        if (PsyduckEngine.brickDeathZone(infiniteMode.brickRow) || PlayerManager.lives <= 0) {   // BrickDeathZone + 0 Lives condition
 
             isGameOver = true
             gameEnd()

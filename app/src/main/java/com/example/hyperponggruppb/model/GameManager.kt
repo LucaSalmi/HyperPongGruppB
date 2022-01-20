@@ -21,7 +21,6 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     var isGunLive = false
     var shotCount = 0
     var patternId = 0
-    var lives = 3
 
     var isShieldActive = false
 

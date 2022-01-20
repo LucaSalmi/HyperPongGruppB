@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken
 object PlayerManager {
 
     var activeUser: PlayerData? = null
+    var lives = 0
     var playerPoints = 0
     var playTime = 0
     var usersArray = mutableListOf<PlayerData>()
@@ -52,6 +53,7 @@ object PlayerManager {
     var currentLevel = 0
     var nextLevel = 1
     var comboPoints = 0
+
 
     fun cleanArrays() {
 
@@ -211,12 +213,12 @@ object PlayerManager {
     }
 
     fun loseLife(gameManager: GameManager) {
-        gameManager.lives--
+        PlayerManager.lives--
     }
 
     fun gainLife(gameManager: GameManager) {
-        if (gameManager.lives < 3) {
-            gameManager.lives++
+        if (PlayerManager.lives < 3) {
+            PlayerManager.lives++
         } else playerPoints += 10
 
     }

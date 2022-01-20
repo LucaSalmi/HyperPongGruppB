@@ -61,7 +61,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             TimeUnit.MILLISECONDS.toMinutes(levelTimeLimit) % 60,
             TimeUnit.MILLISECONDS.toSeconds(levelTimeLimit) % 60
         )
-
+        PlayerManager.lives = 3
         myActivity.checkSelectedPowerup()
 
     }
@@ -349,7 +349,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
      */
     private fun gameEnd() {
 
-        if (isGameOver || storyMode.lives <= 0) {
+        if (isGameOver || PlayerManager.lives <= 0) {
 
             levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
@@ -363,7 +363,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
         }
 
-        if (storyMode.lives > 0 && PsyduckEngine.gameStart) {
+        if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
 
             PsyduckEngine.gameStart = false
             PlayerManager.comboPoints = 0
