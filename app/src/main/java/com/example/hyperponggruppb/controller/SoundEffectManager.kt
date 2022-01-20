@@ -32,6 +32,14 @@ object SoundEffectManager {
         }
     }
 
+    fun checkIfPlaying(): Boolean{
+
+        if (backgroundPlayer != null){
+            return backgroundPlayer?.isPlaying!!
+        }
+        return false
+    }
+
     private fun setupBGMusic(context: Context, trackId: Int) {
 
         var resID = when (trackId) {

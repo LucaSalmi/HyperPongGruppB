@@ -87,9 +87,4 @@ class GameModeOneActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    override fun onPause() {
-
-        SoundEffectManager.stopMusic()
-        super.onPause()
-    }
 }

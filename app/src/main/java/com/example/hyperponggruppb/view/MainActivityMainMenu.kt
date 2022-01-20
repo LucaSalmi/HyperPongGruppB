@@ -264,7 +264,7 @@ class MainActivityMainMenu : AppCompatActivity() {
            mainDialog.scoreBoardInfinityMode()
        }
 
-       if (PlayerManager.isMusicActive) {
+       if (PlayerManager.isMusicActive && !SoundEffectManager.checkIfPlaying()) {
            SoundEffectManager.musicSetup(this, 0)
        }
 
