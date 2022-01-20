@@ -128,7 +128,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         BrickStructure.makeInboundsBricks(brickRow, this.isStoryMode)
 
         patternId = if (!isStoryMode) {
-            RandomNumberGenerator.rNG(0, 13)
+            RandomNumberGenerator.rNG(0, 4)
         } else {
             PlayerManager.currentLevel - 1
         }
@@ -143,7 +143,7 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
     fun makeOOBBricks() {
         var tempArray = mutableListOf<Bricks>()
         tempArray = BrickStructure.makeOOBBricks(tempArray)
-        tempArray = BrickStructure.createOOBBPattern(tempArray, RandomNumberGenerator.rNG(0, 13))
+        tempArray = BrickStructure.createOOBBPattern(tempArray, RandomNumberGenerator.rNG(0, 4))
         brickRow.addAll(tempArray)
 
     }
