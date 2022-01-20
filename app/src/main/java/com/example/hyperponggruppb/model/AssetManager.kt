@@ -121,7 +121,7 @@ object AssetManager {
         activeShieldAsset = BitmapFactory.decodeResource(context.resources, R.drawable.powerup_shield_effect).scale(bGWidth, dangerZoneHeight, true)
     }
 
-    fun randomAsset(id: Int): Bitmap {
+    fun brickAsset(id: Int): Bitmap {
 
         return when (id) {
 

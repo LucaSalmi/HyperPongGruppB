@@ -40,32 +40,19 @@ object BrickStructure {
         var topInBounds = top
         var rightInBounds = right
         var bottomInBounds = bottom
-        var powerUpPresent = false
-        var counter = 0
 
         for (i in 0..(totalSumOfBricks)) {
-
-            if (isStoryMode) {
-                if (counter == 10) {
-                    powerUpPresent = true
-                    counter = 0
-                } else{
-                    counter++
-                    powerUpPresent = false
-                }
-            }
 
             var brick = Bricks(
                 leftInBounds,
                 topInBounds,
                 rightInBounds,
                 bottomInBounds,
-                10,
-                powerUpPresent
+                10
             )
 
             if (!isStoryMode){
-                brick.asset = AssetManager.randomAsset(RandomNumberGenerator.rNG(1,8))
+                brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
             }
 
             brickRow.add(brick)
@@ -100,8 +87,8 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10, false)
-            brick.asset = AssetManager.randomAsset(RandomNumberGenerator.rNG(1,8))
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10)
+            brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
             brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
@@ -124,11 +111,11 @@ object BrickStructure {
     private fun storyModePattern(id: Int): String{
         return when (id) {
             //world 1
-            0 -> "1110110111101011010111101101111010000101111011011110101101011110110111101000010111000000111000000001"//hellgate returns
-            1 -> "0110110011110010011010011011001001100110110011011001100100110110011001001101100101100100111100110110"//flames-level
-            2 -> "0001001000001111110011111111110101111010010011001001111111101011001101001111110001001100101000000001"//fireball demon level
-            3 -> "1100101011110011100101010101010101101111011100010000110001000011010110011111111001111111101100010011"//dabbing goblin level
-            4 -> "1011001101111111111101011110100100110010111111111110011110011101001011010000001001110011100001111000"//evil pumpkin level
+            0 -> "ACA0CC0ACAAXA0AA0AXAACA0CC0ACAA0A0YY0A0AACA0CC0ACAA0A0AA0A0AACA0CC0ACAA0A0000A0AAC000000CAA00000000A"//hellgate returns
+            1 -> "0EC0EC00ECYC00C00EC0E00EY0EC00C00EC00EY0EC00EC0EC00EC00C00EC0EC00EC00E00EC0EC00E0EC00C00ECEC00EC0EC0"//flames-level
+            2 -> "000Y00Y00000CCCCCC00DAACCCCAAD0C0ACCA0C00C00AA00C00CDDAADDC0D0CD00DC0D00CCEECC000D00CC00D0D00000000D"//fireball demon level
+            3 -> "BBB0ACA0BB0A00CAA00A0A0AXAXA0A0A0DC0AAAA0AAC000A0000CA0C0A0000CACDCAA00ACADADCA00BDADAADB0BB000A00BB" //dabbing goblin level
+            4 -> "Z0AA00AA0ZABDBAABDBA0D0DBBD0D00D00BB00D0BDDBBBBDDBB00CCCC00BBC0E00E0CB0CE0000EC00BCC00CCB0000BBBB000"//evil pumpkin level
             //world 2
             5 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader
             6 -> "0000000000000000000001101101101111111111111011011110010010011101111011101000010100100001000011001100" // Alien Invader??
@@ -211,10 +198,43 @@ object BrickStructure {
 
         for (element in pattern) {
 
-            if (element == '1') {
+            when(element){
 
-                temBricks.add(brickRow[index])
-
+                'A' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(1)
+                    temBricks.add(brickRow[index])
+                }
+                'B' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(2)
+                    temBricks.add(brickRow[index])
+                }
+                'C' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(3)
+                    temBricks.add(brickRow[index])
+                }
+                'D' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(4)
+                    temBricks.add(brickRow[index])
+                }
+                'E' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(5)
+                    temBricks.add(brickRow[index])
+                }
+                'Z' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(6)
+                    temBricks.add(brickRow[index])
+                }
+                'X' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(7)
+                    temBricks.add(brickRow[index])
+                }
+                'Y' -> {
+                    brickRow[index].asset = AssetManager.brickAsset(8)
+                    temBricks.add(brickRow[index])
+                }
+                '1' ->{
+                    temBricks.add(brickRow[index])
+                }
             }
             index++
         }
