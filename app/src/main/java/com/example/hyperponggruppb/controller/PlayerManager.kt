@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.PlayerData
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.gson.Gson
@@ -13,7 +14,6 @@ object PlayerManager {
 
     var activeUser: PlayerData? = null
     var playerPoints = 0
-    var lives = 0
     var playTime = 0
     var usersArray = mutableListOf<PlayerData>()
     private val gson = Gson()
@@ -210,13 +210,13 @@ object PlayerManager {
 
     }
 
-    fun loseLife() {
-        lives--
+    fun loseLife(gameManager: GameManager) {
+        gameManager.lives--
     }
 
-    fun gainLife() {
-        if (lives < 3) {
-            lives++
+    fun gainLife(gameManager: GameManager) {
+        if (gameManager.lives < 3) {
+            gameManager.lives++
         } else playerPoints += 10
 
     }
