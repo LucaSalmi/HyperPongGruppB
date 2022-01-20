@@ -11,7 +11,7 @@ object SoundEffectManager {
     var starSoundPlayer: MediaPlayer? = null
     var brickHitPlayer: MediaPlayer? = null
     var comboAnnouncer: MediaPlayer? = null
-    var gemSoundEffectPlayer: MediaPlayer? = null
+    var powerUpSoundEffectPlayer: MediaPlayer? = null
 
     fun musicSetup(context: Context, trackId: Int) {
         setupBGMusic(context, trackId)
@@ -95,11 +95,11 @@ object SoundEffectManager {
         backgroundPlayer?.release()
     }
 
-    fun pauseMusic(){
+    fun pauseMusic() {
         backgroundPlayer?.pause()
     }
 
-    fun resumeMusic(){
+    fun resumeMusic() {
         backgroundPlayer?.start()
     }
 
@@ -121,21 +121,6 @@ object SoundEffectManager {
                 "raw",
                 context.packageName
             )
-            2 -> context.resources.getIdentifier(
-                "classic_arcade_billow_power_up_custom",
-                "raw",
-                context.packageName
-            )
-            3 -> context.resources.getIdentifier(
-                "robotic_power_down_2",
-                "raw",
-                context.packageName
-            )
-            5 -> context.resources.getIdentifier(
-                "gem_pickup_two",
-                "raw",
-                context.packageName
-            )
             else -> {
                 context.resources.getIdentifier(
                     "menu_error_8bit_sound_effect_short",
@@ -149,6 +134,45 @@ object SoundEffectManager {
 
         if (PlayerManager.isSoundEffectsActive) {
             soundEffectPlayer?.start()
+        }
+    }
+
+    fun playPowerUpSounds(context: Context, id: Int) {
+
+        powerUpSoundEffectPlayer?.stop()
+        powerUpSoundEffectPlayer?.release()
+
+
+        var resID: Int = when (id) {
+
+            0 -> context.resources.getIdentifier(
+                "classic_arcade_billow_power_up_custom",
+                "raw",
+                context.packageName
+            )
+            1 -> context.resources.getIdentifier(
+                "robotic_power_down_2",
+                "raw",
+                context.packageName
+            )
+            2 -> context.resources.getIdentifier(
+                "gem_pickup_two",
+                "raw",
+                context.packageName
+            )
+            else -> {
+                context.resources.getIdentifier(
+                    "classic_arcade_billow_power_up_custom",
+                    "raw",
+                    context.packageName
+                )
+            }
+        }
+
+        powerUpSoundEffectPlayer = MediaPlayer.create(context, resID)
+
+        if (PlayerManager.isSoundEffectsActive) {
+            powerUpSoundEffectPlayer?.start()
         }
     }
 
@@ -166,21 +190,6 @@ object SoundEffectManager {
             starSoundPlayer?.start()
         }
     }
-
-    fun playGemPickupSound(context: Context) {
-
-        gemSoundEffectPlayer = MediaPlayer.create(
-            context, context.resources.getIdentifier(
-                "gem_pickup_two",
-                "raw",
-                context.packageName
-            )
-        )
-        if (PlayerManager.isSoundEffectsActive) {
-            gemSoundEffectPlayer?.start()
-        }
-    }
-
 
     fun playComboAnnouncer(context: Context, id: Int) {
 
