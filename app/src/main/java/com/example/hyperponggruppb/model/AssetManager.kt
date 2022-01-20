@@ -125,14 +125,14 @@ object AssetManager {
 
         return when (id) {
 
-            1 -> brickAssetV1
-            2 -> brickAssetV2
-            3 -> brickAssetV3
-            4 -> brickAssetV4
-            5 -> brickAssetV5
-            6 -> brickAssetBlue
-            7 -> brickAssetGreen
-            8 -> brickAssetYellow
+            1 -> brickAssetV1 //A
+            2 -> brickAssetV2 //B
+            3 -> brickAssetV3 //C
+            4 -> brickAssetV4 //D
+            5 -> brickAssetV5 //E
+            6 -> brickAssetBlue //Z
+            7 -> brickAssetGreen //X
+            8 -> brickAssetYellow //Y
             9 -> brickAssetHardFullHP
             10 -> brickAssetHardHalfHP
 

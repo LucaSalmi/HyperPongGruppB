@@ -2,7 +2,9 @@ package com.example.hyperponggruppb.controller
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.hyperponggruppb.model.AssetManager
 import com.example.hyperponggruppb.model.Bricks
+import com.example.hyperponggruppb.model.RandomNumberGenerator
 
 object BrickStructure {
 
@@ -58,9 +60,14 @@ object BrickStructure {
                 topInBounds,
                 rightInBounds,
                 bottomInBounds,
-                powerUpPresent,
-                10
+                10,
+                powerUpPresent
             )
+
+            if (!isStoryMode){
+                brick.asset = AssetManager.randomAsset(RandomNumberGenerator.rNG(1,8))
+            }
+
             brickRow.add(brick)
             leftInBounds += right - left + 4
             rightInBounds += right - left + 4
@@ -93,7 +100,8 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom, false, 10)
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10, false)
+            brick.asset = AssetManager.randomAsset(RandomNumberGenerator.rNG(1,8))
             brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
@@ -116,8 +124,8 @@ object BrickStructure {
     private fun storyModePattern(id: Int): String{
         return when (id) {
             //world 1
-            0 -> "0110110011110010011010011011001001100110110011011001100100110110011001001101100101100100111100110110"//flames-level
-            1 -> "1110110111101011010111101101111010000101111011011110101101011110110111101000010111000000111000000001"//hellgate returns
+            0 -> "1110110111101011010111101101111010000101111011011110101101011110110111101000010111000000111000000001"//hellgate returns
+            1 -> "0110110011110010011010011011001001100110110011011001100100110110011001001101100101100100111100110110"//flames-level
             2 -> "0001001000001111110011111111110101111010010011001001111111101011001101001111110001001100101000000001"//fireball demon level
             3 -> "1100101011110011100101010101010101101111011100010000110001000011010110011111111001111111101100010011"//dabbing goblin level
             4 -> "1011001101111111111101011110100100110010111111111110011110011101001011010000001001110011100001111000"//evil pumpkin level
