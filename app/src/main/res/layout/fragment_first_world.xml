@@ -13,6 +13,7 @@
         android:background="@drawable/lava_story_bg">
 
         <ImageView
+
             android:id="@+id/iv_level_one"
             android:layout_width="60dp"
             android:layout_height="120dp"
