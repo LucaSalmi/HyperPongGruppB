@@ -54,7 +54,9 @@ class OverWorldActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
+        if (PlayerManager.isMusicActive){
+            SoundEffectManager.stopMusic()
+        }
         super.onBackPressed()
     }
 

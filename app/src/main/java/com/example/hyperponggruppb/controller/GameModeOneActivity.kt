@@ -31,7 +31,7 @@ class GameModeOneActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.commit {
-            add(R.id.overworld_container, InfinityFragment())
+            add(R.id.infinity_container, InfinityFragment())
         }
     }
 
@@ -43,14 +43,14 @@ class GameModeOneActivity : AppCompatActivity() {
                 supportFragmentManager.commit {
                     replace(R.id.frame_layout, PointFragmentInfinityMode())
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(TAG, "updateText: caught")
             }
 
         })
     }
 
-    fun updateComboCounter(){
+    fun updateComboCounter() {
 
         runOnUiThread(Runnable {
             try {
@@ -58,19 +58,19 @@ class GameModeOneActivity : AppCompatActivity() {
                 val comboMeter = findViewById<TextView>(R.id.tv_combo_meter_infinity)
                 val comboTextGif = findViewById<ImageView>(R.id.gif_combo_text_infinity)
 
-                if (PlayerManager.comboPoints > 0){
+                if (PlayerManager.comboPoints > 0) {
                     val comboString = PlayerManager.comboPoints.toString() + "X"
                     comboMeter.text = comboString
 
-                    if(PlayerManager.textIsOn){
+                    if (PlayerManager.textIsOn) {
 
                         comboTextGif.alpha = 1f
 
-                    }else{
+                    } else {
 
                         comboTextGif.alpha = 0f
                     }
-                }else{
+                } else {
 
                     comboMeter.text = ""
                 }
@@ -84,6 +84,11 @@ class GameModeOneActivity : AppCompatActivity() {
     override fun onBackPressed() {
         PsyduckEngine.gameStart = false
         AssetManager.resetBackGround()
+        if (PlayerManager.isMusicActive) {
+            SoundEffectManager.stopMusic()
+        }
+        super.onBackPressed()
+
         super.onBackPressed()
     }
 
