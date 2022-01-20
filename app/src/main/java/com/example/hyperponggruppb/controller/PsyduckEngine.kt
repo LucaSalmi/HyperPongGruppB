@@ -109,7 +109,7 @@ object PsyduckEngine {
 
         if (ball.brickCollision && toRemove < BrickStructure.totalSumOfBricks + 1) {
             brickRow.removeAt(toRemove)
-            PlayerManager.addPoints(BrickStructure.brickScoreValue)
+            PlayerManager.addPoints(infoBrick.pointValue)
         }
     }
 

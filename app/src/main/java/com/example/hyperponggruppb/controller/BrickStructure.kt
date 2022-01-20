@@ -59,7 +59,7 @@ object BrickStructure {
                 rightInBounds,
                 bottomInBounds,
                 powerUpPresent,
-                1
+                10
             )
             brickRow.add(brick)
             leftInBounds += right - left + 4
@@ -93,7 +93,7 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom, false, 1)
+            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom, false, 10)
             brickRow.add(brick)
             oOBLeft += right - left + 4
             oOBright += right - left + 4
