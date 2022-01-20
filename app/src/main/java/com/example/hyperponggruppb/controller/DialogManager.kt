@@ -632,8 +632,19 @@ class DialogManager(val context: Context) {
             return true
 
         } else {
-            PlayerManager.powerUpActivated = -1
-            shopDialog()
+            val price = when (PlayerManager.selectedPowerUp) {
+                0 -> PlayerManager.multiBallPrice.toString()
+                1 -> PlayerManager.gunPrice.toString()
+                2 -> PlayerManager.shieldPrice.toString()
+                else -> PlayerManager.multiBallPrice.toString()
+            }
+
+            if (PlayerManager.buyPowerUp(price.toInt())) {
+                PlayerManager.powerUpActivated = -1
+                shopDialog()
+            } else {
+                toaster(2)
+            }
             return false
         }
     }
@@ -652,7 +663,7 @@ class DialogManager(val context: Context) {
 
         val shopStringOne = context.getString(R.string.shop_dialog_text_part_1)
         val shopStringTwo = context.getString(R.string.shop_dialog_string_part_2)
-        var price = when (PlayerManager.selectedPowerUp) {
+        val price = when (PlayerManager.selectedPowerUp) {
             0 -> PlayerManager.multiBallPrice.toString()
             1 -> PlayerManager.gunPrice.toString()
             2 -> PlayerManager.shieldPrice.toString()
