@@ -349,50 +349,45 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
             AssetManager.bgRectOne.top = AssetManager.bgRectOne.bottom - AssetManager.bGHeight
 
             when (backgroundIdOne){
-                1 -> {
-                    backgroundIdOne = 3
-                    transBackroundIdOne = 3
-                }
-                2 -> {
-                    backgroundIdOne = 1
-                    transBackroundIdOne = 1
-                }
-                3 -> {
-                    backgroundIdOne = 2
-                    transBackroundIdOne = 2
-                }
+                1 -> backgroundIdOne = 3
+                2 -> backgroundIdOne = 1
+                3 -> backgroundIdOne = 2
+
             }
 
         }
         if (AssetManager.bgRectTransOne.top > AssetManager.bGHeight){
             AssetManager.bgRectTransOne.bottom = AssetManager.bgRectOne.top
             AssetManager.bgRectTransOne.top = AssetManager.bgRectOne.top - AssetManager.transHeight
+
+            when (transBackroundIdOne){
+                1 -> transBackroundIdOne = 3
+                2 -> transBackroundIdOne = 1
+                3 -> transBackroundIdOne = 2
+            }
         }
         if (AssetManager.bgRectTwo.top > AssetManager.bGHeight){
 
             AssetManager.bgRectTwo.bottom = AssetManager.bgRectTransOne.top
             AssetManager.bgRectTwo.top = AssetManager.bgRectTwo.bottom - AssetManager.bGHeight
 
-            when(backgroundIdTwo){
+            when (backgroundIdTwo){
+                1 -> backgroundIdTwo = 3
+                2 -> backgroundIdTwo = 1
+                3 -> backgroundIdTwo = 2
 
-                1-> {
-                    backgroundIdTwo = 3
-                    transBackgroundIdTwo= 3
-                }
-                2-> {
-                    backgroundIdTwo = 1
-                    transBackgroundIdTwo= 1
-                }
-                3-> {
-                    backgroundIdTwo = 2
-                    transBackgroundIdTwo= 2
-                }
             }
 
         }
         if (AssetManager.bgRectTransTwo.top > AssetManager.bGHeight){
             AssetManager.bgRectTransTwo.bottom = AssetManager.bgRectTwo.top
             AssetManager.bgRectTransTwo.top = AssetManager.bgRectTwo.top - AssetManager.transHeight
+
+            when (transBackgroundIdTwo){
+                1 -> transBackgroundIdTwo = 3
+                2 -> transBackgroundIdTwo = 1
+                3 -> transBackgroundIdTwo = 2
+            }
         }
     }
 

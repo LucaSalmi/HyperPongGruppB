@@ -195,15 +195,10 @@ class DialogManager(val context: Context) {
 
         bonusTimeScore = when (PlayerManager.lives) {
 
-            3 -> {
-                (PlayerManager.levelTime.toInt()/1000) * 5
-            }
-            2 -> {
-                (PlayerManager.levelTime.toInt()/1000) * 4
-            }
-            else -> {
-                (PlayerManager.levelTime.toInt()/1000) * 3
-            }
+            3 -> (PlayerManager.levelTime.toInt()/1000) * 5
+            2 -> (PlayerManager.levelTime.toInt()/1000) * 4
+            1 -> (PlayerManager.levelTime.toInt()/1000) * 3
+            else ->  0
         }
 
         val totalScore = currentScore + bonusTimeScore
