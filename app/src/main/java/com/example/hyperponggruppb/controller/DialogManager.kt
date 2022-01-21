@@ -587,7 +587,7 @@ class DialogManager(val context: Context) {
             overWorldActivity.startLevel()
 
         }
-
+        getOverWorldActivity().gemsCounterText()
         enterLevelDialog.show()
         enterLevelDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
@@ -643,6 +643,7 @@ class DialogManager(val context: Context) {
             if (PlayerManager.buyPowerUp(price.toInt())) {
                 PlayerManager.powerUpInventory[PlayerManager.selectedPowerUp] = +1
                 enterLevelScreen(backupLevelId)
+                getOverWorldActivity().gemsCounterText()
                 shopDialog.dismiss()
             } else {
                 toaster(2)

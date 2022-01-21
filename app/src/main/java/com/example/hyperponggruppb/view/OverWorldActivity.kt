@@ -1,10 +1,8 @@
 package com.example.hyperponggruppb.view
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.adapter.ViewPagerAdapter
@@ -24,9 +22,6 @@ class OverWorldActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        tvGemCounter = findViewById(R.id.tv_gem_counter)
-        tvGemCounter.text = ": " + PlayerManager.gems
 
         storyModeDialog = DialogManager(this)
 
@@ -52,6 +47,12 @@ class OverWorldActivity : AppCompatActivity() {
         }
 
         super.onResume()
+    }
+
+    fun gemsCounterText(){
+        var x = ": ${PlayerManager.gems}"
+        tvGemCounter = findViewById(R.id.tv_gem_counter)
+        tvGemCounter.text = x
     }
 
     fun startLevel(){
