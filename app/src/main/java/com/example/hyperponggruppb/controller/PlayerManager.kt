@@ -300,7 +300,7 @@ object PlayerManager {
 
     fun buyPowerUp(price: Int): Boolean {
 
-        return if (price < gems) {
+        return if (price <= gems) {
             gems -= price
             true
         } else {
