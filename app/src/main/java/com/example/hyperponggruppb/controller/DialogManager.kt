@@ -241,11 +241,13 @@ class DialogManager(val context: Context) {
         }
 
         returnBtn.setOnClickListener {
-
+/*
             if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying) {
                 PlayerManager.isLevelCompleted = false
                 PlayerManager.currentLevel++
             }
+
+ */
             scoreBoardDialog.dismiss()
         }
 
@@ -371,13 +373,7 @@ class DialogManager(val context: Context) {
                     starContainerOne!!.setImageResource(R.drawable.star)
                     starContainerTwo!!.setImageResource(R.drawable.star)
                 }
-
                 3 -> {
-                    starContainerOne!!.setImageResource(R.drawable.star)
-                    starContainerTwo!!.setImageResource(R.drawable.star)
-                    starContainerThree!!.setImageResource(R.drawable.star)
-                }
-                else -> {
                     starContainerOne!!.setImageResource(R.drawable.star)
                     starContainerTwo!!.setImageResource(R.drawable.star)
                     starContainerThree!!.setImageResource(R.drawable.star)

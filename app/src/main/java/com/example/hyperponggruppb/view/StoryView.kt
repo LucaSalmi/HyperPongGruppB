@@ -363,6 +363,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             levelTimer.cancel()
             PlayerManager.setLevelHIghScore()
+            PlayerManager.starCounter = 0
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
             storyMode.clearArrays()
