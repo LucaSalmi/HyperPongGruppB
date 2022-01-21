@@ -255,7 +255,7 @@ class DialogManager(val context: Context) {
             scoreBoardDialog.dismiss()
 
         }
-
+        getOverWorldActivity().gemsCounterText()
         scoreBoardDialog.show()
         scoreBoardDialog.window?.setBackgroundDrawableResource(R.color.trans)
     }
