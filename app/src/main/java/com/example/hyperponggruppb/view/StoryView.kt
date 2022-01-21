@@ -229,7 +229,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.ball.ballBottom = (storyMode.player.top).toInt()
             storyMode.ball.update()
         }
-
+/*
         if (event?.action == MotionEvent.ACTION_DOWN) {
             storyMode.player.playerRect.top -= 10
             storyMode.player.playerRect.bottom -= 10
@@ -239,6 +239,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             storyMode.player.playerRect.bottom += 10
         }
 
+ */
+
         if (event?.action == MotionEvent.ACTION_UP && !PsyduckEngine.gameStart) {
 
             if (!countdownIsOn){
@@ -246,8 +248,8 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
                 levelTimer.start()
             }
 
-            storyMode.ball.ballSpeedX = 7f
-            storyMode.ball.ballSpeedY = -13f
+            storyMode.ball.ballSpeedX = 0f
+            storyMode.ball.ballSpeedY = -20f
             PsyduckEngine.gameStart = true
 
         }

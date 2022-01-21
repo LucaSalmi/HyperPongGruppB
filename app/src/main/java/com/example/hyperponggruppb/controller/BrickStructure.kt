@@ -90,7 +90,6 @@ object BrickStructure {
         for (i in 0..(totalSumOfBricks)) {
 
             val brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10)
-            //brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
             brickRow.add(brick)
             oOBLeft += right - left
             oOBright += right - left

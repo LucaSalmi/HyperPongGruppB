@@ -392,8 +392,8 @@ object PsyduckEngine {
 
                     if (ball.playerCollision) {
 
-                        ball.ballBottom = player.top.toInt()
-                        ball.ballTop = (player.top + ball.ballsize).toInt()
+                        ball.ballRect.bottom = player.top.toInt()
+                        ball.ballRect.top = (player.top + ball.ballsize).toInt()
                         PlayerManager.comboPoints = 0
 
                         when {

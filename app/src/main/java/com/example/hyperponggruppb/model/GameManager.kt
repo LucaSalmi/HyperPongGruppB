@@ -194,12 +194,14 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
             var brickRect =
                 Rect(brick.brickLeft, brick.brickTop, brick.brickRight, brick.brickBottom)
             canvas.drawRect(brickRect, brickColor)
+
             canvas.drawBitmap(
                 brick.asset,
                 brick.brickLeft.toFloat() - 5,
                 brick.brickTop.toFloat() - 5,
                 null
             )
+
         }
     }
 
@@ -225,8 +227,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
             canvas.drawBitmap(
                 AssetManager.ballAsset,
-                ballObj.ballRect.left.toFloat() - ballObj.ballsize / 2,
-                ballObj.ballRect.top.toFloat() - ballObj.ballsize / 2,
+                ballObj.ballRect.left.toFloat() - ballObj.ballsize / 3,
+                ballObj.ballRect.top.toFloat() - ballObj.ballsize / 3,
                 null
             )
         }

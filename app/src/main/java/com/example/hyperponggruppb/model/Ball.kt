@@ -9,7 +9,7 @@ class Ball() {
     var paint = Paint()
     var ballSpeedX = 0f
     var ballSpeedY = 0f
-    var ballsize = 20f
+    var ballsize = 26f
     var ballLeft = 0
     var ballTop = 0
     var ballRight = 0
