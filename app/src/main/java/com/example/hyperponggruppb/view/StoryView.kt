@@ -362,7 +362,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
         if (PlayerManager.lives <= 0) {
 
             levelTimer.cancel()
-            //PlayerManager.setLevelHIghScore()
             PlayerManager.starCounter = 0
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
@@ -386,9 +385,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
 
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()
-            //PlayerManager.setLevelHIghScore()
-            PlayerManager.addStarsToUser()
-            PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
             PlayerManager.isLevelCompleted = true
             PlayerManager.comboPoints = 0

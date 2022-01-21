@@ -225,21 +225,28 @@ class DialogManager(val context: Context) {
         }
         starBar.progress = totalScore
 
-        if (starBar.progress >= (currentLevelMaxScore / 2) && !isOneStar) {
-            starOne.setImageResource(R.drawable.star)
-            Log.d(TAG, "scoreBoardStoryMode: 1 star reach")
-            isOneStar = true
+        if (PlayerManager.lives > 0){
 
-        }
-        if (starBar.progress >= ((currentLevelMaxScore / 4) * 3) && isOneStar) {
-            starTwo.setImageResource(R.drawable.star)
-            Log.d(TAG, "scoreBoardStoryMode: 2 star reach")
-            isTwoStar = true
+            if (starBar.progress >= (currentLevelMaxScore / 2) && !isOneStar) {
+                starOne.setImageResource(R.drawable.star)
+                isOneStar = true
+                PlayerManager.starCounter = 1
 
-        }
-        if (starBar.progress >= currentLevelMaxScore && isTwoStar) {
-            starThree.setImageResource(R.drawable.star)
-            Log.d(TAG, "scoreBoardStoryMode: 3 star reach")
+            }
+            if (starBar.progress >= ((currentLevelMaxScore / 4) * 3) && isOneStar) {
+                starTwo.setImageResource(R.drawable.star)
+                isTwoStar = true
+                PlayerManager.starCounter = 2
+
+            }
+            if (starBar.progress >= currentLevelMaxScore && isTwoStar) {
+                starThree.setImageResource(R.drawable.star)
+                PlayerManager.starCounter = 3
+
+            }
+            PlayerManager.addStarsToUser()
+            val sp = getOverWorldActivity().getSharedPreferences("com.example.hyperponggruppb.MyPrefs", AppCompatActivity.MODE_PRIVATE)
+            PlayerManager.saveUserData(sp)
 
         }
 

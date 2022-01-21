@@ -260,11 +260,6 @@ object PlayerManager {
      */
     fun setLevelHIghScore(pointsAmount: Int) {
 
-        Log.d(TAG, "points amount: $pointsAmount")
-        Log.d(TAG, "currentLevel: $currentLevel ")
-        Log.d(TAG, "level scores before: $levelScoresArray")
-        Log.d(TAG, "star Counter: $starCounter")
-
         if (levelScoresArray.size < currentLevel) {
             levelScoresArray.add(pointsAmount)
 
@@ -275,7 +270,6 @@ object PlayerManager {
                 levelScoresArray.add(currentLevel - 1, pointsAmount)
             }
         }
-        Log.d(TAG, "level scores after: $levelScoresArray")
     }
 
     fun unlockNextLevel() {
