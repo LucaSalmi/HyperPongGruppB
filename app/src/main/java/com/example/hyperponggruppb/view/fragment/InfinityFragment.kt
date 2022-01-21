@@ -10,6 +10,8 @@ import com.example.hyperponggruppb.view.InfinityView
 
 class InfinityFragment : Fragment() {
 
+    //Contains points board and game View for infinity mode
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -9,6 +9,8 @@ import com.example.hyperponggruppb.view.StoryView
 
 class StoryLevelFragment : Fragment() {
 
+    //Contains points board and game View for story mode
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

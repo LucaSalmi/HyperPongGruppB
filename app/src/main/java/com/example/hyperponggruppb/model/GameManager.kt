@@ -64,6 +64,9 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         ballsArray.add(ball)
     }
 
+    /**
+     * respawns the ball on the player position
+     */
     fun respawnBall() {
 
         ball = Ball()
@@ -78,6 +81,9 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         ball.ballSpeedY = 0f
     }
 
+    /**
+     * spawns only one extra ball, droppable powerUp
+     */
     fun spawnExtraBall() {
         extraBall = Ball()
         extraBall.ballLeft = ((player.right - player.playerWidth / 2) - ball.ballsize / 2).toInt()
@@ -90,6 +96,9 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         ballsArray.add(extraBall)
     }
 
+    /**
+     * spawns two extra balls going in opposite directions, only possible when activating it before starting the level and pressing the button on the layout
+     */
     fun multiBall() {
         extraBall = Ball()
         extraBall.ballLeft = ((player.right - player.playerWidth / 2) - ball.ballsize / 2).toInt()
@@ -148,7 +157,9 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
     }
 
-
+    /**
+     * starts a gun that shoots 3 projectiles one after the other
+     */
     fun gunPowerUp() {
 
         projectile = Gun(
@@ -162,6 +173,9 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         isGunLive = true
     }
 
+    /**
+     * activates a shield that stops the ball from falling in the bottom of the screen
+     */
     fun activateShield(){
         isShieldActive = true
     }

@@ -40,7 +40,9 @@ class FirstWorldFragment : Fragment() {
         val currentLevelFive = view?.findViewById<ImageView>(R.id.iv_current_level_five)
         val worldOneBackground = view?.findViewById<ConstraintLayout>(R.id.layout_world_one)
 
-
+        /**
+         * shows the banners indicating the level and the obtained stars
+         */
         when (PlayerManager.nextLevel) {
 
             1 -> {

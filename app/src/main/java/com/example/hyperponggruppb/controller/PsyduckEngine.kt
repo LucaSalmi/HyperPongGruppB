@@ -24,7 +24,9 @@ object PsyduckEngine {
     var isBottomOccupied = false
     var isDone = false
 
-
+    /**
+     * checks if a brick has been hit
+     */
     fun brickCollision(
         brickRow: MutableList<Bricks>,
         ball: Ball,
@@ -113,7 +115,9 @@ object PsyduckEngine {
             PlayerManager.addPoints(BrickStructure.brickScoreValue)
         }
     }
-
+    /**
+     * spawns powerups and manages the fall in story mode
+     */
     private fun storyModePowerUpSpawn(powerUpArray: MutableList<PowerUp>, id: Int) {
 
         powerUp = PowerUp(
@@ -127,6 +131,9 @@ object PsyduckEngine {
 
     }
 
+    /**
+     * spawns powerups and manages the fall in infinite mode
+     */
     private fun infiniteModePowerUpSpawn(powerUpArray: MutableList<PowerUp>) {
 
         if (RandomNumberGenerator.rNG(1, 8) == 2) {
@@ -148,7 +155,9 @@ object PsyduckEngine {
         }
     }
 
-
+    /**
+     * starts if the ball meets the player
+     */
     fun playerCollision(ball: Ball, player: Player, context: Context) {
 
         if (ball.ballRect.intersect(player.playerRect)) {
@@ -161,6 +170,9 @@ object PsyduckEngine {
         }
     }
 
+    /**
+     * handles balls movement, position and collisions
+     */
     fun ballPhysics(ballsArray: MutableList<Ball>, player: Player, gameManager: GameManager) {
 
         for (ball in ballsArray) {
@@ -447,6 +459,9 @@ object PsyduckEngine {
         }
     }
 
+    /**
+     * checks if bricks have touched the death zone
+     */
     fun brickDeathZone(brickRow: MutableList<Bricks>): Boolean {
 
         for (brick in brickRow) {
@@ -462,6 +477,9 @@ object PsyduckEngine {
         return false
     }
 
+    /**
+     * checks if the powerup has been catched or has fallen outside the screen
+     */
     fun powerUpPhysics(powerUpArray: MutableList<PowerUp>, player: Player) {
 
         for (powerUp in powerUpArray) {
@@ -479,6 +497,9 @@ object PsyduckEngine {
         }
     }
 
+    /**
+     * manages the physics of the projectiles
+     */
     fun gunPhysics(projectile: Gun, brickRow: MutableList<Bricks>, context: Context): Boolean {
 
         var toRemove = BrickStructure.totalSumOfBricks + 1

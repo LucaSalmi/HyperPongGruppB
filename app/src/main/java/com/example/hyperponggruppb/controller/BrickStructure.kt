@@ -238,6 +238,9 @@ object BrickStructure {
         return temBricks
     }
 
+    /**
+     * creates more out of bounds bricks when needed
+     */
     fun createOOBBPattern(brickRow: MutableList<Bricks>, id: Int): MutableList<Bricks> {
 
         val pattern = oOBPattern(id)

@@ -20,13 +20,14 @@ import com.example.hyperponggruppb.view.StoryView
 
 class PointFragmentStoryMode : Fragment() {
 
-
+    /**
+     * points board for story mode, with time, stars, starbar, points and lives
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         val view = inflater.inflate(R.layout.fragment_point_story_mode, container, false)
 
          val lives = view?.findViewById<ImageView>(R.id.iv_story_lives)

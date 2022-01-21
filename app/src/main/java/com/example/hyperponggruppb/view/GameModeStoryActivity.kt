@@ -21,7 +21,6 @@ import com.example.hyperponggruppb.view.fragment.PointFragmentStoryMode
 class GameModeStoryActivity : AppCompatActivity() {
 
 
-
     private lateinit var binding: ActivityGameModeStoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +58,9 @@ class GameModeStoryActivity : AppCompatActivity() {
     }
 
 
-
+    /**
+     * checks if the user has selected a power-Up before starting the level
+     */
     fun checkSelectedPowerup() {
         val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))
 
@@ -75,8 +76,11 @@ class GameModeStoryActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * makes the button inside the level to activate the powerup clickable
+     */
     fun activatePowerup() {
+
         runOnUiThread(Runnable {
             try {
                 val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))

@@ -230,6 +230,9 @@ object PlayerManager {
         usersArray.reverse()
     }
 
+    /**
+     *
+     */
     fun setLevel(levelId: Int): Boolean {
 
         return if (levelId > nextLevel) {
@@ -250,6 +253,9 @@ object PlayerManager {
         }
     }
 
+    /**
+     * saves the high score for the specific level
+     */
     fun setLevelHIghScore() {
 
         if (levelScoresArray.size < currentLevel) {

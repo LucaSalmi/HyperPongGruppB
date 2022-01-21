@@ -13,6 +13,9 @@ import com.example.hyperponggruppb.controller.PlayerManager
 
 class PointFragmentInfinityMode : Fragment() {
 
+    /**
+     * points board for infinity mode, shows points, highscore, lives and speed of the falling bricks
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

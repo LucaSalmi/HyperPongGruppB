@@ -34,6 +34,9 @@ class SecondWorldFragment : Fragment() {
         val levelNine = view?.findViewById<ImageView>(R.id.iv_level_nine)
         val levelTen = view?.findViewById<ImageView>(R.id.iv_level_ten)
 
+        /**
+         * shows the banners indicating the level and the obtained stars
+         */
         if (PlayerManager.levelStarsArray.size > 5) {
             when (PlayerManager.levelStarsArray[5]) {
                 0 -> levelSix!!.setImageResource(R.drawable.flag_two_one_no_star)

@@ -10,7 +10,7 @@ import com.example.hyperponggruppb.R
 import com.example.hyperponggruppb.controller.BrickStructure
 
 object AssetManager {
-
+//Backgrounds
     lateinit var lavaBackground: Bitmap
     lateinit var lavaBackgroundTrans: Bitmap
     lateinit var transLavaToStone: Bitmap
@@ -18,13 +18,13 @@ object AssetManager {
     lateinit var transIceToLava: Bitmap
     lateinit var iceBackground: Bitmap
     lateinit var stoneBackground: Bitmap
-
+//Player
     lateinit var playerAsset: Bitmap
     lateinit var bigPlayerAsset: Bitmap
     lateinit var smallPlayerAsset: Bitmap
-
+//Ball
     lateinit var ballAsset: Bitmap
-
+//Bricks
     lateinit var brickAssetV1: Bitmap
     lateinit var brickAssetV2: Bitmap
     lateinit var brickAssetV3: Bitmap
@@ -35,7 +35,7 @@ object AssetManager {
     lateinit var brickAssetYellow: Bitmap
     lateinit var brickAssetHardFullHP: Bitmap
     lateinit var brickAssetHardHalfHP: Bitmap
-
+//Powerups
     lateinit var powerUpAssetSpeedUp: Bitmap
     lateinit var powerUpAssetSpeedDown: Bitmap
     lateinit var powerUpAssetForceUp: Bitmap
@@ -49,8 +49,10 @@ object AssetManager {
     lateinit var assetGunProjectile: Bitmap
     lateinit var powerUpAssetShield: Bitmap
     lateinit var activeShieldAsset: Bitmap
-
+//Deathzone
     lateinit var darkRectangleDeathZone: Bitmap
+
+    //various measures
     val bGHeight = getScreenHeight()
     val bGWidth = getScreenWidth()
     val transHeight = getScreenHeight()/3
