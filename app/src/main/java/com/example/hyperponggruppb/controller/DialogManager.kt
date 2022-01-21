@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.view.Window
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -201,8 +202,11 @@ class DialogManager(val context: Context) {
         }
 
         val totalScore = currentScore + bonusTimeScore
+
         BonusTime.text = bonusTimeScore.toString()
         resultTotalScore.text = totalScore.toString()
+
+        PlayerManager.setLevelHIghScore(totalScore)
 
         val currentLevelMaxScore = PlayerManager.currentTotalBrickScore * 2
         starBar.max = currentLevelMaxScore

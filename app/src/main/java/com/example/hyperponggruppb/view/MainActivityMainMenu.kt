@@ -1,6 +1,7 @@
 package com.example.hyperponggruppb.view
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.example.hyperponggruppb.controller.PlayerManager
@@ -53,6 +55,7 @@ class MainActivityMainMenu : AppCompatActivity() {
         setAccount()
         setupOnTouchInputs()
         startMenuAnimations()
+        Log.d(ContentValues.TAG, "scoreBoardStoryMode: ${PlayerManager.levelScoresArray}")
 
         val greenPlanet = findViewById<ImageView>(R.id.iv_menu_green_planet)
         greenPlanet.setOnClickListener {

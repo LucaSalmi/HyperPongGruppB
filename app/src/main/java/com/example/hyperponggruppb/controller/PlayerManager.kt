@@ -258,31 +258,28 @@ object PlayerManager {
     /**
      * saves the high score for the specific level
      */
-    fun setLevelHIghScore() {
+    fun setLevelHIghScore(pointsAmount: Int) {
+
+        Log.d(TAG, "points amount: $pointsAmount")
+        Log.d(TAG, "currentLevel: $currentLevel ")
+        Log.d(TAG, "level scores before: $levelScoresArray")
+        Log.d(TAG, "star Counter: $starCounter")
 
         if (levelScoresArray.size < currentLevel) {
-            levelScoresArray.add(playerPoints)
+            levelScoresArray.add(pointsAmount)
 
         } else {
 
-            if (levelScoresArray[currentLevel - 1] < playerPoints) {
+            if (levelScoresArray[currentLevel - 1] < pointsAmount) {
                 levelScoresArray.removeAt(currentLevel - 1)
-                levelScoresArray.add(currentLevel - 1, playerPoints)
+                levelScoresArray.add(currentLevel - 1, pointsAmount)
             }
         }
+        Log.d(TAG, "level scores after: $levelScoresArray")
     }
 
     fun unlockNextLevel() {
 
-        //Log.d(TAG, "unlockNextLevel: $isReplaying")
-
-        //if (isReplaying) {
-
-          //  isReplaying = false
-
-        //} else {
-
-          //  nextLevel += 1
         if (currentLevel == nextLevel) {
             nextLevel++
         }
