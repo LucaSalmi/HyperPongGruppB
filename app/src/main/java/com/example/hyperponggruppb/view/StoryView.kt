@@ -366,7 +366,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.starCounter = 0
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
-            storyMode.clearArrays()
             PlayerManager.isGameEnded = true
             PlayerManager.comboPoints = 0
             calculateTime()
@@ -385,7 +384,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     private fun checkLevelCompleted() {
 
         if (storyMode.brickRow.isEmpty()) {
-
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()
@@ -393,7 +391,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.saveUserData(sp)
             PsyduckEngine.gameStart = false
             PlayerManager.isLevelCompleted = true
-            storyMode.clearArrays()
             PlayerManager.comboPoints = 0
             myActivity.finish()
         }
