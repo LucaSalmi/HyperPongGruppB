@@ -22,7 +22,6 @@ object PsyduckEngine {
     var isRightOccupied = false
     var isTopOccupied = false
     var isBottomOccupied = false
-    var isDone = false
 
     /**
      * checks if a brick has been hit
@@ -242,24 +241,10 @@ object PsyduckEngine {
                         //var ballIsOutsideOfBrickTop = ball.ballTop + ball.ballsize < brickHit.top
                         //var ballIsOutsideOfBrickTBottom = ball.ballBottom - ball.ballsize > brickHit.bottom
 
-                        if (!ball.ballGoesRight()) {
-                            ball.ballLeft -= ball.ballSpeedX.toInt()
-                            ball.ballRight -= ball.ballSpeedX.toInt()
-
-                        } else {
-                            ball.ballLeft -= ball.ballSpeedX.toInt()
-                            ball.ballRight -= ball.ballSpeedX.toInt()
-
-                        }
-                        if (!ball.ballGoesDown()) {
-                            ball.ballTop -= ball.ballSpeedY.toInt()
-                            ball.ballBottom -= ball.ballSpeedY.toInt()
-
-                        } else {
-                            ball.ballTop -= ball.ballSpeedY.toInt()
-                            ball.ballBottom -= ball.ballSpeedY.toInt()
-
-                        }
+                        ball.ballLeft -= ball.ballSpeedX.toInt()
+                        ball.ballRight -= ball.ballSpeedX.toInt()
+                        ball.ballTop -= ball.ballSpeedY.toInt()
+                        ball.ballBottom -= ball.ballSpeedY.toInt()
 
                         // Log.d(TAG,"top: $isTopOccupied, bottom: $isBottomOccupied, left: $isLeftOccupied, right: $isRightOccupied" )
                         // Log.d(TAG, "ballspeed Y = ${ball.ballSpeedY} ")
@@ -382,7 +367,6 @@ object PsyduckEngine {
                         isLeftOccupied = false
                         isBottomOccupied = false
                         isTopOccupied = false
-                        isDone = false
 
                         //Log.d(TAG, "ballspeed Y efter upd = ${ball.ballSpeedY} ")
                         // Log.d(TAG, "ballspeed X efter upd = ${ball.ballSpeedX} ")
@@ -392,8 +376,9 @@ object PsyduckEngine {
 
                     if (ball.playerCollision) {
 
-                        ball.ballRect.bottom = player.top.toInt()
-                        ball.ballRect.top = (player.top + ball.ballsize).toInt()
+
+                        //ball.ballRect.bottom = player.top.toInt()
+                        //ball.ballRect.top = (player.top + ball.ballsize).toInt()
                         PlayerManager.comboPoints = 0
 
                         when {
@@ -438,6 +423,7 @@ object PsyduckEngine {
                                 ball.ballSpeedY = -5f
                                 ball.ballSpeedX = +15f
                             }
+
                         }
                     }
                 }
@@ -445,7 +431,6 @@ object PsyduckEngine {
 
             ball.brickCollision = false
             ball.playerCollision = false
-            isDone = false
             ball.ballTop += ball.ballSpeedY.toInt()
             ball.ballBottom += ball.ballSpeedY.toInt()
             ball.ballLeft += ball.ballSpeedX.toInt()
