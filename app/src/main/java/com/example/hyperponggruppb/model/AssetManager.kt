@@ -71,8 +71,8 @@ object AssetManager {
     var ballwidth = 40
     var ballheight = 40
 
-    var brickwidth = 110
-    var brickheight = 70
+    var brickwidth = 100
+    var brickheight = 60
 
     var powerUpHeight = 70
     var powerUpWidth = 70
