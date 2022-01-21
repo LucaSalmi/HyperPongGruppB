@@ -247,7 +247,6 @@ class DialogManager(val context: Context) {
                 PlayerManager.currentLevel++
             }
 
-
             scoreBoardDialog.dismiss()
         }
 

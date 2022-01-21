@@ -370,7 +370,6 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             PlayerManager.comboPoints = 0
             calculateTime()
             myActivity.finish()
-
         }
 
         if (PlayerManager.lives > 0 && PsyduckEngine.gameStart) {
@@ -384,6 +383,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
     private fun checkLevelCompleted() {
 
         if (storyMode.brickRow.isEmpty()) {
+
             levelTimer.cancel()
             PlayerManager.unlockNextLevel()
             PlayerManager.setLevelHIghScore()

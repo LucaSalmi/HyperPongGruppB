@@ -181,7 +181,7 @@ object PlayerManager {
                 gems = user.gems
                 highScore = user.highScore
                 currentLevel = user.currentLevel
-                nextLevel = currentLevel + 1
+                nextLevel = user.nextLevel
                 isMusicActive = user.isMusicActive
                 isSoundEffectsActive = user.isSoundEffectsActive
             }
