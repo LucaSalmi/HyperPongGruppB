@@ -58,7 +58,7 @@ object PlayerManager {
     var comboPoints = 0
 
 
-    fun cleanArrays() {
+    fun cleanData() {
 
         levelScoresArray.clear()
         levelStarsArray.clear()
@@ -66,6 +66,7 @@ object PlayerManager {
         gems = 0
         highScore = 0
         currentLevel = 0
+        nextLevel = 1
     }
 
     fun createUser(): Boolean {

@@ -119,7 +119,6 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
             android:padding="5dp"
             android:src="@drawable/gem"/>
 
@@ -129,9 +128,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text= "3"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="15sp" />
+
         <ImageView
             android:layout_width="5dp"
             android:layout_height="50dp"
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:text="Highscore:"
             android:textColor="@color/white"
             android:textSize="15sp" />
@@ -151,10 +151,9 @@
         <TextView
             android:id="@+id/tv_level_score_result"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:gravity="center"
             tools:text= "999P"
-            android:layout_marginEnd="60dp"
             android:textColor="@color/white"
             android:textSize="15sp" />
     </LinearLayout>

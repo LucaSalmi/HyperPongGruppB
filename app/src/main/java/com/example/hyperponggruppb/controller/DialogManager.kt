@@ -17,7 +17,6 @@ import com.example.hyperponggruppb.view.LeaderBoardActivity
 import com.example.hyperponggruppb.view.MainActivityMainMenu
 import com.example.hyperponggruppb.view.OverWorldActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
-import kotlin.math.log
 
 class DialogManager(val context: Context) {
 
@@ -63,7 +62,7 @@ class DialogManager(val context: Context) {
                 PlayerManager.name = nameField.text.toString()
                 SoundEffectManager.jukebox(context, 1)
                 if (PlayerManager.createUser()) {
-                    PlayerManager.cleanArrays()
+                    PlayerManager.cleanData()
                     PlayerManager.saveUserData(sp)
                     getMainActivity().setAccount()
                     nameInputDialog.dismiss()
@@ -312,7 +311,6 @@ class DialogManager(val context: Context) {
 
         val starProgressResult =
             enterLevelDialog.findViewById(R.id.iv_star_progress_holder) as ImageView
-        val screenLevelScore = enterLevelDialog.findViewById(R.id.tv_level_score) as TextView
         val screenLevelScoreResult =
             enterLevelDialog.findViewById(R.id.tv_level_score_result) as TextView
         val playerGemBalance = enterLevelDialog.findViewById<TextView>(R.id.tv_level_gem_amount)
@@ -337,6 +335,8 @@ class DialogManager(val context: Context) {
         backupLevelId = PlayerManager.currentLevel
 
         playerGemBalance.text = PlayerManager.gems.toString()
+
+        screenLevelScoreResult.text = checkPoints(levelId)
 
 
         if (PlayerManager.powerUpInventory[0] < 1) { //multiball powerup
@@ -380,62 +380,42 @@ class DialogManager(val context: Context) {
         when (levelId) {
             1 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             2 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             3 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             4 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             5 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             6 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             7 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             8 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             9 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
             10 -> {
                 screenLevelID.text = levelString
-                screenLevelScoreResult.text =
-                    checkPoints(levelId)
                 enterLevelDialog.dismiss()
             }
         }
