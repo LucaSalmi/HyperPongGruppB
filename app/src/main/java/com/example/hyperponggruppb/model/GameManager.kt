@@ -2,6 +2,7 @@ package com.example.hyperponggruppb.model
 
 import android.content.Context
 import android.graphics.*
+import android.service.voice.VoiceInteractionSession
 import com.example.hyperponggruppb.controller.Player
 import com.example.hyperponggruppb.controller.PowerUp
 import com.example.hyperponggruppb.controller.BrickStructure
@@ -124,15 +125,15 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
 
     private fun makeBricks() {
 
-        val brickwidth = (AssetManager.bGWidth / 10) - 4
-        val brickheight = (brickwidth * 0.6).toInt()
-        BrickStructure.left = 7
-        BrickStructure.top = 5
-        BrickStructure.right = brickwidth + BrickStructure.left
-        BrickStructure.bottom = brickheight + BrickStructure.top
+        val brickWidth = (AssetManager.bGWidth / 10)
+        val brickHeight = (brickWidth * 0.6).toInt()
+        BrickStructure.left =0
+        BrickStructure.top = 0
+        BrickStructure.right = brickWidth
+        BrickStructure.bottom = brickHeight
 
-        AssetManager.brickwidth = brickwidth
-        AssetManager.brickheight = brickheight
+        AssetManager.brickWidth = brickWidth
+        AssetManager.brickHeight = brickHeight
 
         BrickStructure.makeInboundsBricks(brickRow, this.isStoryMode)
 

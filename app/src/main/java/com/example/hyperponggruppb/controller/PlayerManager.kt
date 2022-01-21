@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.hyperponggruppb.model.GameManager
 import com.example.hyperponggruppb.model.PlayerData
+import com.example.hyperponggruppb.view.OverWorldActivity
 import com.example.hyperponggruppb.view.StoryView
 import com.example.hyperponggruppb.view.fragment.FirstWorldFragment
 import com.google.gson.Gson
@@ -272,15 +273,17 @@ object PlayerManager {
 
     fun unlockNextLevel() {
 
-        Log.d(TAG, "unlockNextLevel: $isReplaying")
+        //Log.d(TAG, "unlockNextLevel: $isReplaying")
 
-        if (isReplaying) {
+        //if (isReplaying) {
 
-            isReplaying = false
+          //  isReplaying = false
 
-        } else {
+        //} else {
 
-            nextLevel += 1
+          //  nextLevel += 1
+        if (currentLevel == nextLevel) {
+            nextLevel++
         }
     }
 

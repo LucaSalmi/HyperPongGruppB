@@ -16,12 +16,14 @@ object BrickStructure {
 
 //brick base positions
 
-    var left = 15
-    var top = 5
-    var right = 115
-    var bottom = 65
-    var brickHeight = bottom - top
-    var brickWidth = right - left
+    var brickWidth = AssetManager.bGWidth/10
+    var brickHeight = (brickWidth *0.6).toInt()
+
+    var left = 0
+    var top = 0
+    var right = brickWidth
+    var bottom = brickHeight
+    //var brickWidth = right - left
 
 // the amount of tempo the bricks is falling AKA playerSpeed illusion
 
@@ -56,8 +58,8 @@ object BrickStructure {
             }
 
             brickRow.add(brick)
-            leftInBounds += right - left + 4
-            rightInBounds += right - left + 4
+            leftInBounds += right - left
+            rightInBounds += right - left
 
             if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
                 || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
@@ -87,11 +89,11 @@ object BrickStructure {
 
         for (i in 0..(totalSumOfBricks)) {
 
-            var brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10)
-            brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
+            val brick = Bricks(oOBLeft, oOBTop, oOBright, oOBBottom,10)
+            //brick.asset = AssetManager.brickAsset(RandomNumberGenerator.rNG(1,8))
             brickRow.add(brick)
-            oOBLeft += right - left + 4
-            oOBright += right - left + 4
+            oOBLeft += right - left
+            oOBright += right - left
 
             if (i == firstBrickRow || i == firstBrickRow + rowOfBricks || i == firstBrickRow + rowOfBricks * 2
                 || i == firstBrickRow + rowOfBricks * 3 || i == firstBrickRow + rowOfBricks * 4 || i == firstBrickRow + rowOfBricks * 5
