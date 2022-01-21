@@ -241,13 +241,13 @@ class DialogManager(val context: Context) {
         }
 
         returnBtn.setOnClickListener {
-/*
+
             if (PlayerManager.isLevelCompleted && !PlayerManager.isReplaying) {
                 PlayerManager.isLevelCompleted = false
                 PlayerManager.currentLevel++
             }
 
- */
+
             scoreBoardDialog.dismiss()
         }
 
