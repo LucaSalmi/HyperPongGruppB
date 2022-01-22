@@ -206,6 +206,7 @@ class DialogManager(val context: Context) {
         BonusTime.text = bonusTimeScore.toString()
         resultTotalScore.text = totalScore.toString()
 
+
         PlayerManager.setLevelHIghScore(totalScore)
 
         val currentLevelMaxScore = PlayerManager.currentTotalBrickScore * 2
