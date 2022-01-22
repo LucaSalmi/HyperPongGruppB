@@ -32,6 +32,8 @@ class OverWorldActivity : AppCompatActivity() {
         adapter = ViewPagerAdapter(this)
         binding.overworldContainer.adapter = adapter
         binding.overworldContainer.currentItem = 1
+
+        gemsCounterText()
     }
 
     override fun onResume() {
