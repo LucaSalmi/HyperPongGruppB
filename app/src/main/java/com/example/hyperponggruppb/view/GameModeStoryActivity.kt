@@ -59,7 +59,7 @@ class GameModeStoryActivity : AppCompatActivity() {
 
 
     /**
-     * checks if the user has selected a power-Up before starting the level
+     * checks if the user has selected a power-Up before starting the level and sets the right image in the UI
      */
     fun checkSelectedPowerup() {
         val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))

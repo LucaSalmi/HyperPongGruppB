@@ -48,10 +48,18 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         player = Player()
         player.left = AssetManager.bGWidth / 2 - player.playerWidth / 2
         player.right = AssetManager.bGWidth / 2 + player.playerWidth / 2
-        player.top =
+
+        player.top = if (isStoryMode){
+            AssetManager.getScreenHeight() - (AssetManager.getScreenHeight() * 0.2).toFloat() - player.playerHeight / 2 - 50
+        }else{
             AssetManager.getScreenHeight() - (AssetManager.getScreenHeight() * 0.2).toFloat() - player.playerHeight / 2 - 100
-        player.bottom =
+        }
+
+        player.bottom = if (isStoryMode){
+            AssetManager.getScreenHeight() - (AssetManager.getScreenHeight() * 0.2).toFloat() + player.playerHeight / 2 - 50
+        }else{
             AssetManager.getScreenHeight() - (AssetManager.getScreenHeight() * 0.2).toFloat() + player.playerHeight / 2 - 100
+        }
         player.update()
     }
 
@@ -92,8 +100,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         extraBall.ballTop = (player.top - ball.ballsize).toInt()
         extraBall.ballBottom = (player.top).toInt()
         extraBall.update()
-        extraBall.ballSpeedX = 7f
-        extraBall.ballSpeedY = -13f
+        extraBall.ballSpeedX = 0f
+        extraBall.ballSpeedY = -24f
         ballsArray.add(extraBall)
     }
 
@@ -107,8 +115,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         extraBall.ballTop = (player.top - ball.ballsize).toInt()
         extraBall.ballBottom = (player.top).toInt()
         extraBall.update()
-        extraBall.ballSpeedX = 7f
-        extraBall.ballSpeedY = -13f
+        extraBall.ballSpeedX = 9f
+        extraBall.ballSpeedY = -15f
         ballsArray.add(extraBall)
         extraBall = Ball()
 
@@ -117,8 +125,8 @@ class GameManager(var context: Context?, var isStoryMode: Boolean) {
         extraBall.ballTop = (player.top - ball.ballsize).toInt()
         extraBall.ballBottom = (player.top).toInt()
         extraBall.update()
-        extraBall.ballSpeedX = -7f
-        extraBall.ballSpeedY = -13f
+        extraBall.ballSpeedX = -9f
+        extraBall.ballSpeedY = -15f
         ballsArray.add(extraBall)
 
     }

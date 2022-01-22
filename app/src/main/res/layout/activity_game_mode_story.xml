@@ -72,20 +72,4 @@
              app:layout_constraintLeft_toLeftOf="parent"
              app:layout_constraintRight_toRightOf="parent"/>
 
-<!--
-    <TextView
-        android:id="@+id/tv_hyper_combo_message_story"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/aldrich"
-        android:gravity="center"
-        android:textColor="@drawable/glow_test_border"
-        android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/score_fragment_container_story"
-        tools:text="@string/hyper_combo_msg" />
-    -->
 </androidx.constraintlayout.widget.ConstraintLayout>
