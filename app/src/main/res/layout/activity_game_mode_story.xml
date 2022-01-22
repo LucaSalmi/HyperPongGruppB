@@ -33,7 +33,7 @@
         android:id="@+id/iv_current_powerup_activated"
         android:layout_width="22sp"
         android:layout_height="22sp"
-        android:background="@drawable/multiball_button"
+        android:background="@drawable/faded_multiball_button"
         app:layout_constraintBottom_toBottomOf="@+id/iv_powerup_holder_ui"
         app:layout_constraintEnd_toEndOf="@id/iv_powerup_holder_ui"
         app:layout_constraintStart_toStartOf="@+id/iv_powerup_holder_ui"

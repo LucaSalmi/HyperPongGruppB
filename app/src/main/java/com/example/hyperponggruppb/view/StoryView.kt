@@ -249,7 +249,7 @@ class StoryView(var myContext: Context?, var activity: Activity) : SurfaceView(m
             }
 
             storyMode.ball.ballSpeedX = 0f
-            storyMode.ball.ballSpeedY = -20f
+            storyMode.ball.ballSpeedY = -24f
             PsyduckEngine.gameStart = true
 
         }

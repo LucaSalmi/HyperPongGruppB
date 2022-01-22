@@ -384,44 +384,44 @@ object PsyduckEngine {
                         when {
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.1 * player.playerWidth -> { // 0% --> 10% of the pad
 
-                                ball.ballSpeedY = -5f //  1  - 3
-                                ball.ballSpeedX = -15f // 3  - 9
+                                ball.ballSpeedY = -10f //  1  - 3
+                                ball.ballSpeedX = -20f // 3  - 9
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.2 * player.playerWidth -> { // 10% --> 20% of the pad
-                                ball.ballSpeedY = -7f // 1 -    4,8f
-                                ball.ballSpeedX = -13f// 1,86 - 9f
+                                ball.ballSpeedY = -12f // 1 -    4,8f
+                                ball.ballSpeedX = -18f// 1,86 - 9f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.3 * player.playerWidth -> { // 20% --> 30% of the pad
-                                ball.ballSpeedY = -9f // 1 -    7,4f
-                                ball.ballSpeedX = -11f // 1,22 - 9f
+                                ball.ballSpeedY = -14f // 1 -    7,4f
+                                ball.ballSpeedX = -16f // 1,22 - 9f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.4 * player.playerWidth -> { // 30% --> 40% of the pad
-                                ball.ballSpeedY = -11f //1,22 - 11f
-                                ball.ballSpeedX = -9f // 1 - 9f
+                                ball.ballSpeedY = -16f //1,22 - 11f
+                                ball.ballSpeedX = -14f // 1 - 9f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.5 * player.playerWidth -> { // 40% --> 50% of the pad
-                                ball.ballSpeedY = -13f //  1,86 - 16,74f
-                                ball.ballSpeedX = -7f // 1 - 9f
+                                ball.ballSpeedY = -18f //  1,86 - 16,74f
+                                ball.ballSpeedX = -12f // 1 - 9f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.6 * player.playerWidth -> { // 50% --> 60% of the pad
-                                ball.ballSpeedY = -13f
-                                ball.ballSpeedX = +7f
+                                ball.ballSpeedY = -18f
+                                ball.ballSpeedX = +12f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.7 * player.playerWidth -> { // 60% --> 70% of the pad
-                                ball.ballSpeedY = -11f
-                                ball.ballSpeedX = +9f
+                                ball.ballSpeedY = -16f
+                                ball.ballSpeedX = +14f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.8 * player.playerWidth -> { // 70% --> 80% of the pad
-                                ball.ballSpeedY = -9f
-                                ball.ballSpeedX = +11f
+                                ball.ballSpeedY = -14f
+                                ball.ballSpeedX = +16f
                             }
                             player.playerWidth - (player.right - (ball.ballRight - ball.ballsize / 2)) <= 0.9 * player.playerWidth -> { // 80% --> 90% of the pad
-                                ball.ballSpeedY = -7f
-                                ball.ballSpeedX = +13f
+                                ball.ballSpeedY = -12f
+                                ball.ballSpeedX = +18f
                             }
                             else -> { // 90 --> 100% of the pad
-                                ball.ballSpeedY = -5f
-                                ball.ballSpeedX = +15f
+                                ball.ballSpeedY = -10f
+                                ball.ballSpeedX = +20f
                             }
 
                         }

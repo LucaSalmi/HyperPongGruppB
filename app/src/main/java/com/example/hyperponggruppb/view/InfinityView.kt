@@ -272,7 +272,7 @@ class InfinityView(context: Context?, var activity: Activity) : SurfaceView(cont
         if (event?.action == MotionEvent.ACTION_UP && !gameStart) {
 
             infiniteMode.ball.ballSpeedX = 0f
-            infiniteMode.ball.ballSpeedY = -20f
+            infiniteMode.ball.ballSpeedY = -24f
             gameStart = true
             restartSpawnTimer()
 

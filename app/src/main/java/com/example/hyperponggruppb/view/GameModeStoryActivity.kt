@@ -86,11 +86,11 @@ class GameModeStoryActivity : AppCompatActivity() {
                 val activatedPowerup = (findViewById<ImageView>(R.id.iv_current_powerup_activated))
                 activatedPowerup.setOnClickListener {
                     if (PlayerManager.selectedPowerUp == 0) { //multiball powerup
-                        activatedPowerup.setImageResource(R.drawable.multiball_button)
+                        activatedPowerup.setImageResource(R.drawable.faded_multiball_button)
                     } else if (PlayerManager.selectedPowerUp == 1) {
-                        activatedPowerup.setImageResource(R.drawable.gun_button)
+                        activatedPowerup.setImageResource(R.drawable.faded_gun_button)
                     } else if (PlayerManager.selectedPowerUp == 2) {
-                        activatedPowerup.setImageResource(R.drawable.shield_button)
+                        activatedPowerup.setImageResource(R.drawable.faded_shield_button)
                     }
                     if (PlayerManager.selectedPowerUp >= 0) {
                         PlayerManager.activatePowerUp = true
