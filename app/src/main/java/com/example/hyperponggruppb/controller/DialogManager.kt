@@ -252,6 +252,9 @@ class DialogManager(val context: Context) {
 
         returnBtn.setOnClickListener {
 
+            if (PlayerManager.isLevelCompleted){
+                PlayerManager.isLevelCompleted = false
+            }
             scoreBoardDialog.dismiss()
         }
 
