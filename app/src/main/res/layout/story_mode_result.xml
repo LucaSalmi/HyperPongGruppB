@@ -33,7 +33,7 @@
             android:layout_weight="4"
             android:gravity="center_horizontal"
             android:paddingTop="33dp"
-            android:text="Level 1"
+            tools:text="Level 1"
             android:textColor="@color/white"
             android:textSize="40sp" />
 
@@ -135,7 +135,7 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Game score:" />
+                android:text="@string/game_score_string" />
 
             <TextView
                 android:id="@+id/tv_sm_score_result"
@@ -144,7 +144,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
-                android:text="999" />
+                tools:text="999" />
         </TableRow>
 
         <TableRow
@@ -160,7 +160,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
-                android:text="Time bonus:"
+                android:text="@string/time_bonus_string"
                 android:textColor="@color/white"
                 app:srcCompat="@drawable/play_symbol" />
 
@@ -171,7 +171,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
-                android:text="999" />
+                tools:text="999" />
         </TableRow>
 
         <TableRow
@@ -194,7 +194,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
-                android:text="999" />
+                tools:text="999" />
         </TableRow>
 
         <TableRow
@@ -210,7 +210,7 @@
                 android:textColor="@color/white"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
-                android:text="Total Score:"
+                android:text="@string/total_score_string"
                 />
 
             <TextView
@@ -220,7 +220,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/character_black_bg_fade"
                 android:textColor="@color/white"
-                android:text="999" />
+                tools:text="999" />
         </TableRow>
 
     </TableLayout>

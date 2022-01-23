@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.GameModeStoryActivity">
-
+    <!-- score board Fragment container-->
     <FrameLayout
         android:id="@+id/score_fragment_container_story"
         android:layout_width="match_parent"
@@ -14,13 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Game view Fragment container-->
     <FrameLayout
         android:id="@+id/story_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/score_fragment_container_story" />
 
-
+    <!-- activate powerup UI container-->
     <ImageView
         android:id="@+id/iv_powerup_holder_ui"
         android:layout_width="33dp"
@@ -47,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+    <!-- combo meter text container-->
     <TextView
         android:id="@+id/tv_combo_meter_story"
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_powerup_belt_ui"
         tools:text="5x" />
-
+    <!-- combo message gif image container-->
          <pl.droidsonroids.gif.GifImageView
              android:src="@drawable/hypercombo"
              android:id="@+id/gif_combo_text_story"

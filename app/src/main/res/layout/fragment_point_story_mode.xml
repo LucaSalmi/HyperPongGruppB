@@ -6,7 +6,7 @@
     android:layout_height="80dp"
     android:padding="5dp"
     android:background="@drawable/story_mode_ui_bg">
-
+    <!-- clock block-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_clock"
         android:layout_width="100dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toEndOf="@+id/layout_clock"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!-- star counter block-->
     <LinearLayout
         android:id="@+id/layout_star_bar"
         android:layout_width="0dp"
@@ -148,7 +148,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
+    <!-- lives indicator block-->
     <ImageView
         android:id="@+id/iv_story_lives"
         android:layout_width="100dp"

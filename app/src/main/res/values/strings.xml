@@ -36,6 +36,17 @@
     <string name="shop_dialog_string_part_2">\?</string>
     <string name="formatted_time">%02d:%02d</string>
     <string name="hyper_combo_msg">HYPER COMBO!!!</string>
+    <string name="leaderboard_title">LEADERBOARD</string>
+    <string name="overwiew_string">Overview</string>
+    <string name="back_string">back</string>
+    <string name="retry_string">retry</string>
+    <string name="congrats_string">CONGRATULATION!!!</string>
+    <string name="total_score_string">Total Score:</string>
+    <string name="time_bonus_string">Time bonus:</string>
+    <string name="game_score_string">Game score:</string>
+    <string name="name_string_user">"Name: "</string>
+    <string name="highscore_string_user">"HighScore: "</string>
+    <string name="current_level_string_user">"Current Level: "</string>
 
 
 </resources>

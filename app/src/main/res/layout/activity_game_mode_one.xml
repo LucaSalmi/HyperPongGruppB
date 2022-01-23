@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.GameModeOneActivity">
-
+<!-- Score board Fragment container-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,12 +14,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/infinity_container"/>
 
+    <!-- Game view Fragment container-->
     <FrameLayout
         android:id="@+id/infinity_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/frame_layout"/>
-
+    <!-- combo meter text-->
     <TextView
         android:id="@+id/tv_combo_meter_infinity"
         android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="5x" />
-
+    <!-- combo message gif image-->
     <pl.droidsonroids.gif.GifImageView
         android:src="@drawable/hypercombo"
         android:id="@+id/gif_combo_text_infinity"

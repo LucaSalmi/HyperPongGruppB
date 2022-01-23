@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/lava_story_bg">
 
+        <!-- level banners containers-->
         <ImageView
 
             android:id="@+id/iv_level_one"
@@ -90,6 +91,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.285" />
 
+        <!-- space for current level indicator-->
         <ImageView
             android:id="@+id/iv_current_level_one"
             android:layout_width="60dp"
