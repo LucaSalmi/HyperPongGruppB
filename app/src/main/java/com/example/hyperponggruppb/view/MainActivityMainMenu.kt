@@ -22,6 +22,10 @@ import com.example.hyperponggruppb.model.AssetManager
 import android.view.MotionEvent
 import android.view.View
 
+//Group B
+//Luca Salmi
+//Hampus Brandtman
+//Andreas Jonasson
 
 class MainActivityMainMenu : AppCompatActivity() {
 
