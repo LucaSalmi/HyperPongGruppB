@@ -27,6 +27,9 @@ import android.view.View
 //Hampus Brandtman
 //Andreas Jonasson
 
+//Github Repo: https://github.com/LucaSalmi/HyperPongGruppB
+//Trello Board: https://trello.com/b/7veIfQqh/pingpong4show
+
 class MainActivityMainMenu : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
